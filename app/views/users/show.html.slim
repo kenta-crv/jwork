@@ -1,0 +1,206 @@
+.tops-wrapper
+
+  table.list[width="90%"  class="header-table space"]
+      colgroup
+        col[width="40%"]
+        col[width="60%"]
+        |  　
+      tr
+        th
+          案件情報の参照
+        td
+          = link_to "案件一覧を閲覧", customers_path, class:"btn btn-primary"
+  h2.headline
+    | ユーザーアカウント情報
+  br
+  table.list[width="90%"  class="header-table space"]
+      colgroup
+        col[width="40%"]
+        col[width="60%"]
+        |  　
+      tr
+        th
+          | ユーザーネーム
+        td
+          = @user.user_name
+      tr
+        th
+          | ログインアドレス
+        td
+          = @user.email
+  br/
+  br/
+  = link_to '編集する', edit_user_registration_path, class: 'btn btn-primary'
+  = link_to '削除する', user_registration_path(@user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger'
+  
+  h2.headline
+    | 登録情報  
+    = link_to "編集", edit_worker_path(@worker), class: "btn btn-primary"
+
+  br
+  table.list
+     colgroup
+      col width="10%"
+      col width="20%"
+      col width="70%"
+     tbody
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | お名前（フルネーム）
+        td = @worker.name
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 年齢
+        td
+          = @worker.age
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 電話番号
+        td
+          = @worker.tel
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | メールアドレス
+        td
+          = @worker.email
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 経験則
+        td
+          = @worker.experience
+      tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 経験年数
+          td
+            = @worker.year
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 経験商材
+        td
+          = @worker.commodity
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 希望勤務日数
+        td
+          = @worker.hope
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 希望期間
+        td
+          = @worker.period
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | パソコンは保有していますか？
+        td
+          = @worker.pc
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 音声データ貼り付け
+        td
+          = @worker.voice_data
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 勤務開始希望日
+        td
+          = @worker.start
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          = @worker.agree_1
+        td
+          | 動画を確認頂き、最低勤務日数・時間についてはご理解頂けましたか？
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 雇用約款をご確認頂き同意頂けましたか？
+        td
+          = @worker.agree_2
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 緊急連絡者名
+        td
+          = @worker.emergency_name
+
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 続柄
+        td
+          = @worker.emergency_relationship
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 緊急連絡者電話番号
+        td
+          = @worker.emergency_tel
+      tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 振込先口座
+          td
+            = @worker.bank
+
+      tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 振込先支店
+          td
+            = @worker.branch
+
+      tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 口座番号
+          td
+            = @worker.bank_number
+
+      tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 口座名義
+          td
+            = @worker.bank_name
+
+      tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 本人確認書類
+          td
+            - if @worker.identification?
+             = link_to "View Image", @worker.identification.url, target: "_blank", class: "btn btn-success"
+        

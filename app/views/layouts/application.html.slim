@@ -8,13 +8,20 @@ html
            = link_to "/"
             =image_tag "rogo.webp", width: "170px", class:"header-image", alt:"株式会社Ri-Plus『アポ匠ロゴ』"
         .col-xs-8
+        .col-xs-2.set-devise
+            - if admin_signed_in?
+              = link_to "管理者マイページ", admin_path(current_admin), class: "btn btn-primary"
+            - elsif user_signed_in?
+              = link_to "ユーザーマイページ", user_path(current_user), class: "btn btn-primary"
+            - elsif client_signed_in?
+              = link_to "企業様マイページ", client_path(current_client), class: "btn btn-primary"
       .row.navi
        .col-xs-12.center
+           p.notice
+            = notice
+           p.alert
+            = alert
   body
-    p.notice
-      = notice
-    p.alert
-      = alert
     main
       .bread
         = render_breadcrumbs separator: ' > '

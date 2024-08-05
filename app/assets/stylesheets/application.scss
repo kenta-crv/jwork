@@ -17,7 +17,7 @@
 
 
  $main_color: #0058A6;
- $sub_color: #0058A6;
+ $sub_color: #e6ecf0;;
  $asort_color: #0058A6;
  /*ヘッダーのベース設定*/
 header {
@@ -33,12 +33,11 @@ z-index:10;
     background-color:$main_color;
     line-height:middle;
     height:40px;
-    a {
+    p {
       text-decoration: none;
       color:white;
       text-shadow: 1px 1px 1px #000;
-      margin-top:auto;
-      margin-top:8px;
+      margin-top:-22px;
       a:hover {
         background-color: rgba(255,255,255,0.1);
       }
@@ -164,7 +163,7 @@ footer {
 .back-image-index {
   text-align:center;
   .index-3 {
-      font-size:3.6vw;
+      font-size:3.4vw;
       font-weight:bold;
       line-height:7vw;
       color:var(--main-color);
@@ -231,8 +230,10 @@ table.company {
   margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0px 15px;
-  font-size: 1.3vw;
+  font-size: 1.5vw;
+
   th, td { padding: 10px; }
+
   th {
      background: $main_color;
      vertical-align: middle;
@@ -240,7 +241,9 @@ table.company {
      overflow: visible;
      position: relative;
      color: #fff;
-     font-weight: bold;
+     font-weight: normal;
+     font-size: 1.7vw;
+
      :after {
         left: 100%;
         top: 50%;
@@ -259,47 +262,46 @@ table.company {
 
   td {
      background: #f4f4f4;
+
      }
-     
+
+ .harf {
+   width:45%;
+ }
 }
 
 
 
-@media screen and (max-width: 767px) {
- table.company {
-   width: 100%;
- }
-
- .label-cell,
- .arrow-box-cell {
-   display: inline-block;
-   font-size:21px;
-   box-sizing: border-box;
- }
-
- .company-cell{
-  background-color:$main_color;
-  display: inline-block;
-  font-size:21px;
-  width:100%;
+/* firefox */
+@-moz-document url-prefix() {
+  table.company th::after {
+     float: right;
+     padding: 0;
+     left: 30px;
+     top: 10px;
+     content: " ";
+     height: 0;
+     width: 0;
+     position: relative;
+     pointer-events: none;
+     border: 10px solid transparent;
+     border-left: $main_color 10px solid;
+     margin-top: -10px;
+     }
+}
+input {
+  width:90%;
+}
+textarea {
+  width:90%;
+  line-height: 1.5em;
 }
 
- .label-cell {
-  font-size:21px;
-   background-color: #f0f0f0 !important; /* 任意の背景色に変更 */
- }
 
- .responsive-cell {
-   display: block;
-   font-size:21px;
-   width: 100%;
-   background-color: #e0e0e0 !important; /* 任意の背景色に変更 */
- }
-
- .input-container {
-   display: block;
-   width: 100%;
- }
+.price {
+  color:red;
+  font-size:2.5vw;
+  font-weight:bold;
 }
 
 
@@ -438,7 +440,7 @@ table.company {
 		padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
 		color: #494949;/*文字色*/
 		background: #f4f4f4;/*背景色*/
-		border-left: solid 5px $main_color;/*左線*/
+		border-left: solid 5px #7db4e6;/*左線*/
 		border-bottom: solid 3px #d7d7d7;/*下線*/
 		text-align:left;
 		padding-left:30px;
@@ -453,6 +455,18 @@ table.company {
 		text-align:left;
 		margin:50px;
 	    }
+
+
+  h3 {
+    background: linear-gradient(transparent 70%, #a7d6ff 70%);
+    margin:50px 30px 40px;
+    text-align:left;
+    font-weight:bold;
+    padding-left:20px;
+    @media screen and ( max-width:479px ){
+      font-size: 14px;
+    }
+  }
 
 	bold {
 		font-weight:bold;
@@ -626,13 +640,38 @@ table.company {
   margin:0 30px;
 }
 
-.label {
-  background: red;
-}
-
-.label-blue {
-  background: blue;
-}
+/* ボックス */
+.mybox{
+  border: 3px solid $main_color;	/* 線の太さ・種類・色 */
+  border-radius: 8px;
+  padding: 45px 10px 10px 10px;	/* 内側の余白 上・右・左・下 */
+  position: relative;
+  margin-bottom:40px;
+ .title{
+  background-color: $main_color;	/* タイトル部分背景色 */
+  border-radius: 5px 5px 0px 0px;
+  color: #fff;	/* タイトル部分文字色 */
+  height: 25px;	/* タイトル部分高さ */
+  padding: 5px 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+ }
+ }
+ 
+ .red {
+   color: red;
+   font-weight:bold;
+ }
+ 
+ .label {
+   background: red;
+ }
+ 
+ .label-blue {
+   background: blue;
+ }
 
 
 .call-flow {
@@ -1162,10 +1201,73 @@ dd {
 
 
 .block-image {
-  width: 65%; // 通常の場合は65%
+  width: 50%; // 通常の場合は65%
 }
 @media only screen and (max-width: 599px) { 
   .block-image {
       width: 100%; // スマホの場合（575px以下）は90%
   }
+}
+
+.organize {
+  text-align:left;
+  margin:15px 0 ;
+
+  a {
+    text-decoration: none;
+    color:white;
+    text-shadow: 1px 1px 1px #000;
+    margin-top:auto;
+    margin-top:8px;
+    a:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+}
+
+  a {
+    text-decoration: none;
+    color:white;
+    text-shadow: 1px 1px 1px #000;
+    margin-top:auto;
+    margin-top:8px;
+    a:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+  }
+
+
+}
+
+
+/*テーブル共通*/
+table.list {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0px 5px;
+  font-size: 1.0vw;
+
+  th { padding: 10px; }
+  td { padding: 8px; }
+
+  th {
+     background: $main_color;
+     vertical-align: middle;
+     text-align: left;
+     overflow: visible;
+     position: relative;
+     color: #fff;
+     font-weight: normal;
+     font-size: 1.0vw;
+     }
+  td {
+     background: #f4f4f4;
+     }
+
+}
+
+
+.set-devise {
+  padding-top:20px;
+  padding-right:35px;
 }

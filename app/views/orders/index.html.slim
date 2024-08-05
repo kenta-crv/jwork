@@ -1,0 +1,17 @@
+.tops-wrapper
+h2.headline 【User→Client】提案一覧
+
+table.list
+  thead
+    tr
+      th ユーザーネーム
+      th クライアント案件
+      th Message
+      th colspan="3"
+  tbody
+    - @orders.each do |order|
+      tr
+        td = order.client.user_name
+        td 
+        td = order.customer.period
+        td = link_to '一覧を見る', order

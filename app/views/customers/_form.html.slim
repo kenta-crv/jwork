@@ -1,105 +1,76 @@
-- set_meta_tags noindex: true
-= form_for @customer do |f|
-  table.company[width="90%"]
-    col[width="20%"]
-    col[width="30%"]
-    col[width="20%"]
-    col[width="30%"]
-    tbody
-      tr
-        th
-          | 会社名
-        td
-          =text_field :customer, :company
-        th
-          | メールアドレス
-        td
-          =text_field :customer, :mail
-      tr
-        th
-          | 担当者
-        td
-          =text_field :customer, :name
-        th
-          | 業種
-        td
-          =text_field :customer, :industry
-      tr
-        th
-          | 電話番号
-        td
-          =telephone_field :customer, :tel
-        th
-          | 携帯番号
-        td
-          =telephone_field :customer, :mobile
-      tr
-        th
-          | 郵便番号
-        td
-          | 〒
-          =number_field :customer, :postnumber
-        th
-          | 住所
-        td
-          =text_area :customer, :address
-      tr
-        th
-          | URL
-        td
-          =text_field :customer, :url
-        th
-          | 過去アポ利用履歴
-        td
-          = f.radio_button :history, "Yes"
-          | ある
-          = f.radio_button :history, "No"
-          | ない
-          = f.radio_button :history, "what"
-          | 不明
-      tr
-        th
-          | 取引商品
-        td
-          =text_field :customer, :item
-        th
-          | 希望オプション
-        td
-          =text_field :customer, :option
-      tr
-        th
-          | ターゲットエリア
-        td
-          =text_field :customer, :area
-        th
-          | ターゲット業種
-        td
-          =text_field :customer, :target
-      tr
-        th
-          | 料金
-        td
-          =number_field :customer, :price
-          | 円
-        th
-          | 件数
-        td
-          =number_field :customer, :number
-          | 件
-      tr
-        th
-          | 希望開始時期
-        td
-          =date_field :customer, :start
-        th
-          | 次回営業日
-        td
-          =date_field :customer, :next
-      tr
-        th
-          | 備考
-        td[colspan="4"]
-          = text_area :customer, :content
-      tr
-        td[colspan="4"]
-          = f.submit '登録する',class:"btn btn-danger"
+- if @customer.errors.any?
+  strong 入力内容にエラーがあります
+  ul
+    - @customer.errors.each do |attr, msg|
+      li= msg
+  br
+= form_with model: @customer, url: confirm_customers_path, method: :post, local: true do |f|
+  table.company.responsive-table
+    colgroup
+      col.col-1
+      col.col-2
+      col.col-3
+    tr
+      td.label-cell
+        strong.label 必須
+      td.arrow-box-cell
+        | 会社名
+      td.responsive-cell
+        .input-container
+          = f.text_field :company, placeholder:"（例）株式会社Ri-Plus"
+    tr
+      td.label-cell
+        strong.label 必須
+      td.arrow-box-cell
+        | ご担当者様名
+      td.responsive-cell
+        .input-container
+          = f.text_field :name, placeholder:"（例）山田　太郎"
+    tr
+      td.label-cell
+        strong.label 必須
+      td.arrow-box-cell
+        | 電話番号
+      td.responsive-cell
+        .input-container
+          = f.text_field :tel, placeholder:"（例）080-0000-0000"
+    tr
+      td.label-cell
+        strong.label 必須
+      td.arrow-box-cell
+        | 所在地
+      td.responsive-cell
+        .input-container
+          = f.text_field :address, placeholder:"（例）東京都中央区銀座1-22-11 2F"
+    tr
+      td.label-cell
+        strong.label 必須
+      td.arrow-box-cell
+        | メールアドレス
+      td.responsive-cell
+        .input-container
+          = f.email_field :email, placeholder:"（例）abc@def.jp"
+    tr
+      td.label-cell
+        strong.label 必須
+      td.arrow-box-cell
+        | 発注予定時期
+      td.responsive-cell
+        .input-container
+          = f.select(:period,[\
+            ["すぐにでも","すぐにでも"],\
+            ["1ヶ月以内","1ヶ月以内"],\
+            ["3ヶ月以内","3ヶ月以内"],\
+            ["6ヶ月以内","6ヶ月以内"],\
+           ], include_blank: "選択してください")
+    tr
+      td.label-cell
+        strong.label.label-blue 任意
+      td.arrow-box-cell
+        | 備考・要望
+      td.responsive-cell
+        .input-container
+          = f.text_area :message, placeholder:"（例）お問い合わせ内容"
+    tr
+      td colspan="3"
+        = f.submit "確認画面", class:"btn btn-primary"

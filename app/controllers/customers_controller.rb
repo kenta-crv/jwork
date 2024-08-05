@@ -1,118 +1,143 @@
 class CustomersController < ApplicationController
-  before_action :authenticate_admin!
-
+  before_action :authenticate_client!, only: [:index, :show]
   def index
-    last_call_customer_ids = nil
-    @last_call_params = {}
-    if params[:last_call] && !params[:last_call].values.all?(&:blank?)
-      @last_call_params = params[:last_call]
-      last_call = Call.joins_last_call
-      last_call = last_call.where(statu: @last_call_params[:statu]) if !@last_call_params[:statu].blank?
-      last_call = last_call.where("calls.time >= ?", @last_call_params[:time_from]) if !@last_call_params[:time_from].blank?
-      last_call = last_call.where("calls.time <= ?", @last_call_params[:time_to]) if !@last_call_params[:time_to].blank?
-      last_call = last_call.where("calls.created_at >= ?", @last_call_params[:created_at_from]) if !@last_call_params[:created_at_from].blank?
-      last_call = last_call.where("calls.created_at <= ?", @last_call_params[:created_at_to]) if !@last_call_params[:created_at_to].blank?
-      last_call_customer_ids = last_call.pluck(:customer_id)
-    end
-    @q = Customer.ransack(params[:q]) || Customer.ransack(params[:last_call])
-    @customers = @q.result || @q.result.includes(:last_call)
-    @customers = @customers.where( id: last_call_customer_ids )  if !last_call_customer_ids.nil?
-    @customers = @customers.page(params[:page]).per(30)
-    respond_to do |format|
-     format.html
-     format.csv{ send_data @customers.generate_csv, filename: "customers-#{Time.zone.now.strftime('%Y%m%d%S')}.csv" }
-    end
-    @all = @customers.all
+    @customers = Customer.order(created_at: "DESC").page(params[:page])
   end
 
   def show
-    last_call_customer_ids = nil
-    @last_call_params = {}
-    if params[:last_call] && !params[:last_call].values.all?(&:blank?)
-      @last_call_params = params[:last_call]
-      last_call = Call.joins_last_call
-      last_call = last_call.where(statu: @last_call_params[:statu]) if !@last_call_params[:statu].blank?
-      last_call = last_call.where("calls.time >= ?", @last_call_params[:time_from]) if !@last_call_params[:time_from].blank?
-      last_call = last_call.where("calls.time <= ?", @last_call_params[:time_to]) if !@last_call_params[:time_to].blank?
-      last_call = last_call.where("calls.created_at >= ?", @last_call_params[:created_at_from]) if !@last_call_params[:created_at_from].blank?
-      last_call = last_call.where("calls.created_at <= ?", @last_call_params[:created_at_to]) if !@last_call_params[:created_at_to].blank?
-      last_call_customer_ids = last_call.pluck(:customer_id)
+    @customer = Customer.find_by(id: params[:id])
+    @comment = Comment.new
+    if @customer
+      @offer = @customer.offers.new
+    else
+      redirect_to customers_path, alert: "Customer not found."
     end
-    @customer = Customer.find(params[:id])
-    @q = Customer.ransack(params[:q]) || Customer.ransack(params[:last_call])
-    @customers = @q.result || @q.result.includes(:last_call)
-    @customers = @customers.where( id: last_call_customer_ids )  if !last_call_customer_ids.nil?
-    @call = Call.new
-    @prev_customer = @customers.where("customers.id < ?", @customer.id).last
-    @next_customer = @customers.where("customers.id > ?", @customer.id).first
-    @is_auto_call = (params[:is_auto_call] == 'true')
   end
 
   def new
-    @customer = Customer.new
+    @customer = current_client.build_customer
+  end
+
+  def confirm
+    @customer = current_client.build_customer(customer_params)
+    if @customer.invalid?
+      render :new
+    else
+      render :confirm
+    end
+  end
+
+  def thanks
+    @customer = current_client.customer || current_client.build_customer(customer_params)
+    if @customer.save
+      CustomerMailer.received_email(@customer).deliver
+      CustomerMailer.send_email(@customer).deliver
+      flash[:notice] = "送信が完了しました。"
+      redirect_to root_path
+    else
+      flash[:alert] = "送信できませんでした。"
+      render :confirm
+    end
   end
 
   def create
-    @customer = Customer.new(customer_params)
-     if @customer.save
-       redirect_to customers_path
-     else
-       render 'new'
-     end
+    @customer = current_client.build_customer(customer_params)
+    if @customer.save
+      redirect_to customers_confirm_path
+    else
+      render 'new'
+    end
   end
 
   def edit
     @customer = Customer.find(params[:id])
   end
 
-  def update
-    @customers = Customer&.where(worker_id: current_worker.id)
-    @count_day = @customers.where('updated_at > ?', Time.current.beginning_of_day).where('updated_at < ?',Time.current.end_of_day).count
+  def info
     @customer = Customer.find(params[:id])
-      if @customer.update(customer_params)
-        flash[:notice] = "登録が完了しました。1日あたりの残り作業実施件数は#{30 - @count_day}件です。"
-        redirect_to customer_path
-      else
-        render 'edit'
-      end
+  end
+
+  def payment
+    @customer = Customer.find(params[:id])
+  end
+
+  def conclusion
+    @customer = Customer.find(params[:id])
+    today = Date.today.strftime("%Y-%m-%d")
+  end
+
+  def start
+    @customer = Customer.find(params[:id])
+    today = Date.today.strftime("%Y-%m-%d")
+  end
+
+  def calendar
   end
 
   def destroy
     @customer = Customer.find(params[:id])
     @customer.destroy
-    redirect_to customers_path
+    redirect_to customers_path, alert:"削除しました"
   end
 
-  def destroy_all
-    checked_data = params[:deletes].keys #checkデータを受け取る
-    if Customer.destroy(checked_data)
-      redirect_to customers_path
+  def update
+    @customer = Customer.find(params[:id])
+  
+    if @customer.update(customer_params)
+      # conclusion.html.slimからの送信で、かつ同意が得られた場合
+      if @customer.agree == "同意しました"
+          # メール送信処理
+          CustomerMailer.contract_received_email(@customer).deliver_now
+          CustomerMailer.contract_send_email(@customer).deliver_now
+          flash[:notice] = "契約が完了しました"
+          redirect_to info_customer_path(@customer)
+        # edit.html.slimからの送信、またはconclusion.html.slimからの送信でも同意が得られなかった場合
+      else
+        redirect_to info_customer_path(@customer)
+      end
     else
-      render action: 'index'
+      # 更新が失敗した場合の処理
+      render :edit
     end
+  end
+
+  def send_mail
+    @customer = Customer.find(params[:id])
+    CustomerMailer.received_first_email(@customer).deliver_now
+    CustomerMailer.send_first_email(@customer).deliver_now
+    redirect_to info_customer_path(@customer), notice: "#{@customer.company}へ契約依頼のメール送信を行いました。"
+  end
+
+  def send_mail_start
+    @customer = Customer.find(params[:id])
+    CustomerMailer.received_start_email(@customer).deliver_now
+    CustomerMailer.send_start_email(@customer).deliver_now
+    redirect_to info_customer_path(@customer), notice: "#{@customer.company}へ開始日のメール送信を行いました。"
   end
 
   private
-    def customer_params
-      params.require(:customer).permit(
-        :company, #会社名
-        :name, #代表者苗字
-        :tel, #電話番号
-        :mobile, #携帯番号
-        :mail, #メールアドレス
-        :postnumber, #郵便番号
-        :address, #住所
-        :url, #ビル名・号室
-        :industry, #ビル名・号室
-        :item, #取引商品
-        :price, #送信単価
-        :number, #件数
-        :history, #過去アポ利用履歴
-        :area, #ターゲットエリア
-        :option, #オプション
-        :target, #対象者
-        :next, #次回営業日
-        :content #サービス内容
-       )
-    end
+  def customer_params
+    params.require(:customer).permit(
+    #問い合わせ項目
+    :company, #会社名
+    :name, #担当者
+    :tel, #電話番号
+    :email, #メールアドレス
+    :address, #所在地
+    :period, #導入希望時期
+    :message, #備考
+    #自社入力
+    :service, #サービス内容
+    :contract_period, #契約期間
+    :unit_price, #単価
+    :maximum_hours, #最大時間数
+    :approach_area, #アプローチエリア
+    :approach_industry, #アプローチ業種
+    #契約情報
+    :post_title, #代表取締役
+    :president_name, #代表取締役
+    :agree, #契約同意
+    :contract_date, #契約日
+    )
+  end
 end

@@ -1,0 +1,8 @@
+.tops-wrapper
+  h2.headline オファーを開始する
+  - if user_signed_in?
+   = render 'user_form', offer: @offer
+  - elsif client_signed_in?
+   = render 'client_form', offer: @offer 
+  - else
+  = link_to 'Back', offers_path

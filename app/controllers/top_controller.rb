@@ -3,16 +3,6 @@ class TopController < ApplicationController
   def index
   end
 
-  def business
+  def appointer
   end
-
-  def company
-  end
-
-  def privacy
-  end
-
-  def question
-  end
-
 end

@@ -1,17 +1,24 @@
-br
-br
 .tops-wrapper
-    h2.headline
-      | アカウント情報
-    table.company
+  h2.headline
+    | ユーザーアカウント情報
+  br
+  table.list[width="90%"  class="header-table space"]
       colgroup
         col[width="40%"]
         col[width="60%"]
         |  　
       tr
         th
+          | ユーザーネーム
+        td
+          = @admin.user_name
+      tr
+        th
           | ログインアドレス
         td
           = @admin.email
-    br
-    = link_to "アカウント情報編集", edit_admin_registration_path, class:"btn btn-success"
+  br/
+  br/
+  = link_to '編集する', edit_admin_registration_path, class: 'btn btn-primary'
+  = link_to '削除する', admin_registration_path(@admin), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger'
+  

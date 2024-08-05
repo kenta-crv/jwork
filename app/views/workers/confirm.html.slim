@@ -1,0 +1,115 @@
+- set_meta_tags noindex: true
+
+.tops-wrapper
+  h2.headline 採用依頼ページ
+  =  form_for @worker, url: thanks_workers_path(@worker) do |f|
+    - if @worker.errors.any?
+      .alert.alert-warning.center
+        ul
+          - @worker.errors.full_messages.each do |message|
+            li = message
+    table.company
+      colgroup
+        col width="20%"
+        col width="20%"
+        col width="60%"
+      tbody
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | お名前（フルネーム）
+          td          
+           = f.hidden_field :name
+           = @worker.name
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 年齢
+          td 
+            = f.hidden_field :age
+            = @worker.age
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 電話番号
+          td 
+           = f.hidden_field :tel
+           = @worker.tel
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | メールアドレス
+          td 
+           = f.hidden_field :email
+           = @worker.email
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 経験則
+          td
+           = f.hidden_field :experience
+           = @worker.experience
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 経験年数
+          td 
+           = f.hidden_field :year
+           = @worker.year
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 経験商材
+          td 
+            = f.hidden_field :commodity
+            = @worker.commodity
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 希望勤務日数
+          td
+           = f.hidden_field :hope
+           = @worker.hope
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 希望期間
+          td
+           = f.hidden_field :period
+           = @worker.period
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | パソコンは保有していますか？
+          td
+           = f.hidden_field :pc
+           = @worker.pc
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 音声データ貼り付け
+          td 
+           = f.hidden_field :voice_data
+           = @worker.voice_data
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 勤務開始希望日
+          td 
+           = f.hidden_field :start
+           = @worker.start
+            br/
+        tr.center
+          td[colspan="3"] = f.submit '送信する'

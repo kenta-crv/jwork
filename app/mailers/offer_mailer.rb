@@ -1,0 +1,2 @@
+class OfferMailer < ApplicationMailer
+end

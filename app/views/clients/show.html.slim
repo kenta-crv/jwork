@@ -1,0 +1,30 @@
+.tops-wrapper
+  table.list[width="90%"  class="header-table space"]
+      colgroup
+        col[width="40%"]
+        col[width="60%"]
+        |  　
+      tr
+        th
+          案件情報の参照
+        td
+          = link_to "案件一覧を閲覧", workers_path, class:"btn btn-primary"
+  h2.headline
+    | クライアントアカウント情報
+  br
+  table.list[width="90%"  class="header-table space"]
+      colgroup
+        col[width="40%"]
+        col[width="60%"]
+        |  　
+      tr
+        th
+          | ユーザーネーム
+        td
+          = @client.user_name
+      tr
+        th
+          | ログインアドレス
+        td
+          = @client.email
+

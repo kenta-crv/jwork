@@ -1,0 +1,195 @@
+- set_meta_tags noindex: true
+.tops-wrapper
+ br
+ h2.headline  基本情報
+ table.company
+       colgroup
+         col width="10%"
+         col width="20%"
+         col width="70%"
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 会社名
+        td.responsive-cell
+         .input-container
+          = @customer.company
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | ご担当者様名
+        td.responsive-cell
+         .input-container
+          = @customer.name
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 電話番号
+        td.responsive-cell
+         .input-container
+          = @customer.tel
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 所在地
+        td.responsive-cell
+         .input-container
+          = @customer.address
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | メールアドレス
+        td.responsive-cell
+         .input-container
+          = @customer.email
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 発注予定時期
+        td.responsive-cell
+         .input-container
+          = @customer.period
+       tr
+        td.label-cell
+          strong.label.label-blue 任意
+        td.arrow-box-cell
+          | 備考・要望
+        td.responsive-cell
+         .input-container
+          = @customer.message
+       tr
+        td
+          strong.label 必須
+        td
+          |代表取締役
+        td
+          = @customer.president_name
+       tr
+        td
+          strong.label 必須
+        td
+          |役職
+        td
+          = @customer.post_title
+       tr
+        td
+          strong.label 必須
+        td
+          |契約の同意
+        td
+          = @customer.agree
+       tr
+        td
+          strong.label 必須
+        td
+          |契約日
+        td
+         - if @customer.contract_date.present?
+           - contract_date = Date.parse(@customer.contract_date)
+           = contract_date.strftime("%Y年%m月%d日")
+
+       - if admin_signed_in?
+        tr
+         td
+           strong.label 必須
+         td
+           |サービス内容
+         td
+           = @customer.service
+        tr
+         td
+           strong.label 必須
+         td
+           |契約期間
+         td
+           = @customer.contract_period
+        tr
+         td
+           strong.label 必須
+         td
+           |単価
+         td
+           = @customer.unit_price
+        tr
+         td
+           strong.label 必須
+         td
+           |希望時間数
+         td
+           = @customer.maximum_hours
+        tr
+         td
+           strong.label 必須
+         td
+           |アプローチエリア
+         td
+           = @customer.approach_area
+        tr
+         td
+           strong.label 必須
+         td
+           |アプローチ業種
+         td
+           = @customer.approach_industry
+
+- if client_signed_in?
+ .actions_container style="text-align: center; margin-bottom: 30px;"
+  = link_to "契約へ進む", info_customer_path(@customer), class: "btn btn-primary"
+- if admin_signed_in?
+ = link_to "削除する", customer_path(@customer), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
+ = link_to "一覧に戻る", customers_path, class: "btn btn-default"
+
+ = form_for [@customer, @customer.comments.build] do |f|
+  table.company[width="100%"]
+    col[width="25%"]
+    col[width="25%"]
+    col[width="25%"]
+    tbody
+      tr
+          th
+            | ステータス
+          th
+            | 次回営業日
+          th
+            | コメント
+
+      tr
+          td
+            = f.select(:status, [\
+            ["商談","商談"],\
+            ["見込低","見込低"],\
+            ["見込中","見込中"],\
+            ["見込高","見込高"],\
+            ["契約","契約"],\
+            ["NG","NG"]],include_blank: "選択してください")     
+          td
+            = f.datetime_field :next
+          td
+            = f.text_area :body
+      tr
+        th[colspan="3"]
+         .center
+          = f.submit "登録する", class:"btn btn-primary"
+ small 商談ステータスを入れる場合は商談日を入力。　不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
+ table.company[width="100%"]
+  - if @customer.comments.any?
+    tbody
+     - @customer.comments.each do |comment|
+       tr
+        td
+          = comment.status
+        td
+          = comment.next
+        td
+          = comment.body
+        td
+          = link_to "編集", edit_customer_comments_path(@customer, comment), _blank: "target"
+
+- if user_signed_in?  # ユーザーがサインインしている場合
+  = link_to "#{@customer.company}に取引打診", new_customer_offer_path(@customer), class: "btn btn-primary"

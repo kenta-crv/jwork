@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_14_125151) do
+ActiveRecord::Schema.define(version: 2024_07_31_141706) do
 
   create_table "admins", force: :cascade do |t|
+    t.string "user_name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -24,82 +25,132 @@ ActiveRecord::Schema.define(version: 2021_08_14_125151) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "calls", force: :cascade do |t|
-    t.integer "customer_id"
-    t.string "statu"
-    t.datetime "time"
-    t.string "comment"
+  create_table "clients", force: :cascade do |t|
+    t.string "user_name", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_calls_on_customer_id"
+    t.index ["email"], name: "index_clients_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
-  create_table "contacts", force: :cascade do |t|
-    t.string "company"
-    t.string "name"
-    t.string "tel"
-    t.string "email"
-    t.string "address"
-    t.string "industry"
-    t.string "number_of_people"
-    t.string "history"
-    t.string "period"
-    t.string "message"
+  create_table "comments", force: :cascade do |t|
+    t.string "status"
+    t.string "next"
+    t.string "body"
+    t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_comments_on_customer_id"
   end
 
   create_table "customers", force: :cascade do |t|
-    t.integer "admin_id"
-    t.string "company"
-    t.string "name"
-    t.string "tel"
-    t.string "mobile"
-    t.string "mail"
-    t.string "postnumber"
-    t.string "address"
-    t.string "industry"
-    t.string "url"
-    t.string "item"
-    t.string "price"
-    t.string "number"
-    t.string "history"
-    t.string "area"
-    t.string "option"
-    t.string "start"
-    t.string "target"
-    t.datetime "next"
-    t.string "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["admin_id"], name: "index_customers_on_admin_id"
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.string "file"
-    t.string "choice"
-    t.string "keyword"
-    t.string "description"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "trials", force: :cascade do |t|
     t.string "company"
     t.string "name"
     t.string "tel"
     t.string "email"
     t.string "address"
-    t.string "try"
-    t.string "list"
-    t.string "script"
-    t.string "contract"
-    t.string "remarks"
+    t.string "period"
+    t.string "message"
+    t.string "service"
+    t.string "contract_period"
+    t.string "unit_price"
+    t.string "maximum_hours"
+    t.string "approach_area"
+    t.string "approach_industry"
+    t.string "post_title"
+    t.string "president_name"
     t.string "agree"
+    t.string "contract_date"
+    t.integer "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_customers_on_client_id"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "user_id"
+    t.integer "customer_id"
+    t.integer "worker_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_offers_on_client_id"
+    t.index ["customer_id"], name: "index_offers_on_customer_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
+    t.index ["worker_id"], name: "index_offers_on_worker_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "user_id"
+    t.integer "customer_id"
+    t.integer "worker_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_orders_on_client_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["worker_id"], name: "index_orders_on_worker_id"
+  end
+
+  create_table "progresses", force: :cascade do |t|
+    t.string "status"
+    t.string "next"
+    t.string "body"
+    t.integer "worker_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["worker_id"], name: "index_progresses_on_worker_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "user_name", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "workers", force: :cascade do |t|
+    t.string "name"
+    t.string "age"
+    t.string "email"
+    t.string "experience"
+    t.string "voice_data"
+    t.string "year"
+    t.string "commodity"
+    t.string "hope"
+    t.string "period"
+    t.string "pc"
+    t.string "start"
+    t.string "tel"
+    t.string "agree_1"
+    t.string "agree_2"
+    t.string "emergency_name"
+    t.string "emergency_relationship"
+    t.string "emergency_tel"
+    t.string "identification"
+    t.string "bank"
+    t.string "branch"
+    t.string "bank_number"
+    t.string "bank_name"
+    t.string "status"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_workers_on_user_id"
   end
 
 end

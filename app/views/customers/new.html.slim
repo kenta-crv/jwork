@@ -1,7 +1,86 @@
-- set_meta_tags noindex: true
-br
-h2.headline
-    | 新規登録
-= render 'form', customer: @customer
-br
-br
+- set_meta_tags  title: ''
+- set_meta_tags  description: ''
+
+= form_with model: @customer, url: confirm_customers_path, method: :post, local: true do |f|
+  br
+  br
+  .tops-wrapper
+    h2.headline
+      | 企業登録内容確認
+  table.company.responsive-table
+      colgroup
+        col.col-1
+        col.col-2
+        col.col-3
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 会社名
+        td.responsive-cell
+         = f.text_field :company
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | お名前
+        td.responsive-cell
+         .input-container
+         = f.text_field :name
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 電話番号
+        td.responsive-cell
+         .input-container
+          = f.text_field :tel
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 所在地
+        td.responsive-cell
+         .input-container
+          = f.text_field :address
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | メールアドレス
+        td.responsive-cell
+         .input-container
+          = f.email_field :email
+      /tr
+        td.label-cell
+          strong.label.label-blue 任意
+        td.arrow-box-cell
+          | 相談したい範囲
+        td.responsive-cell
+         .input-container
+         = f.hidden_field :wide
+         = @customer.wide
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 発注予定時期
+        td.responsive-cell
+         .input-container
+          = f.select(:period,[\
+            ["すぐにでも","すぐにでも"],\
+            ["1ヶ月以内","1ヶ月以内"],\
+            ["3ヶ月以内","3ヶ月以内"],\
+            ["6ヶ月以内","6ヶ月以内"],\
+           ], include_blank: "選択してください")
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 備考・要望
+        td.responsive-cell
+         .input-container
+          = f.text_area :message
+      tr
+       td colspan="3"
+        = f.submit "確認画面", class:"btn btn-primary"

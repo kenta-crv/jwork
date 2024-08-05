@@ -1,0 +1,34 @@
+- set_meta_tags noindex: true
+
+.tops-wrapper
+  br/
+  br/
+  h2.headline
+   取引先ログイン
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    table.list
+      colgroup
+        col(width="40%")
+        col(width="60%")
+      tr
+        th
+          | ログインアドレス
+        td
+          = f.email_field :email, autofocus: true, autocomplete: "email"
+      tr
+        th
+          | パスワード
+        td
+          = f.password_field :password, autocomplete: "off"
+      tr
+        td(colspan="2")
+          - if devise_mapping.rememberable?
+            = f.check_box :remember_me
+            = f.label :remember_me
+      tr
+        th(colspan="2")
+          = f.submit "ログイン"
+    
+  br
+  .center
+    = render "clients/shared/links"

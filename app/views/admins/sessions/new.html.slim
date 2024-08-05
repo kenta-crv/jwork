@@ -1,35 +1,35 @@
-br
-br
-.top-wrapper.center
+- set_meta_tags noindex: true
+
+.tops-wrapper
+  br/
+  br/
   h2.headline
-      | 管理者ログイン
+   管理者ログイン
+  
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    table.company
+    table.list
       colgroup
-        col[width="40%"]
-        col[width="60%"]
-        |  　
+        col(width="40%")
+        col(width="60%")
       tr
-        th.arrow_box
+        th
           | ログインアドレス
-          .label
-            | 必須
         td
           = f.email_field :email, autofocus: true, autocomplete: "email"
       tr
-        th.arrow_box
+        th
           | パスワード
-          .label
-            | 必須
         td
           = f.password_field :password, autocomplete: "off"
       tr
-        td[colspan="2"]
+        td(colspan="2")
           - if devise_mapping.rememberable?
             = f.check_box :remember_me
             = f.label :remember_me
       tr
-        td[colspan="2"]
-          =f.submit "ログイン"
+        th(colspan="2")
+          = f.submit "ログイン"
+    
+  br
   .center
     = render "admins/shared/links"

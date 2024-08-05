@@ -18,10 +18,10 @@ module Bookkeeping
     # the framework and any gems in your application.
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-    address: 'smtp3.gmoserver.jp',
-    domain: 'factoru.jp',
+    address: 'smtp.lolipop.jp',
+    domain: 'ri-plus.jp',
     port: 587,
-    user_name: 'futurejobs@factoru.jp',
+    user_name: 'info@ri-plus.jp',
     password: ENV['EMAIL_PASSWORD'],
     authentication: 'plain',
     enable_starttls_auto: true

@@ -1,0 +1,64 @@
+.tops-wrapper 
+ br/
+ h2.headline オファー一覧
+ table.company.responsive-table
+      colgroup
+        col.col-1
+        col.col-2
+        col.col-3
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | アカウント名
+        td.responsive-cell
+         .input-container
+          = @order.client.user_name
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 経験則
+        td.responsive-cell
+         .input-container
+          = @order.customer.experience
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 経験年数
+        td.responsive-cell
+         .input-container
+          = @order.customer.year
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 経験商材
+        td.responsive-cell
+         .input-container
+          = @order.customer.commodity
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 希望勤務日数
+        td.responsive-cell
+         .input-container
+          = @order.customer.hope 
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 希望期間
+        td.responsive-cell
+         .input-container
+          = @order.customer.period
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 先方企業様に対して意気込み（50文字以上）
+        td.responsive-cell
+         .input-container
+          = @order.message

@@ -1,0 +1,60 @@
+- set_meta_tags noindex: true
+.tops-wrapper
+  h2.headline アカウント情報編集
+  p 登録するID/PASSを入力して下さい。
+
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = devise_error_messages!
+
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      div 現在の確認待ち: = resource.unconfirmed_email
+
+    table.list 
+      colgroup
+        col width="40%"
+        col width="60%"
+      tr
+        th
+          | ユーザーネーム
+          /span.label.label-blue 必須
+          br
+          small 山田太郎
+        td
+          = f.text_field :user_name
+
+      tr
+        th
+          | ログインアドレス
+          /span.label.label-blue 必須
+          br
+          small aaa@crold-valieat.jp
+        td
+          = f.email_field :email, autofocus: true, autocomplete: "email"
+
+      tr
+        th
+          | 現在のパスワード
+          /span.label.label-blue 必須
+          br
+        td
+          = f.password_field :current_password, autocomplete: "off"
+
+      tr
+        td[colspan="2"]
+          = f.submit "更新する", class: "btn btn-primary"
+
+  h2.headline  アカウント削除
+
+  table.list 
+    colgroup
+      col width="40%"
+      col width="60%"
+    tr
+      th アカウント削除
+      td
+        = button_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "本当に削除しますか？" }, method: :delete, class: "btn btn-danger"
+
+    tr
+      th マイページに戻る
+      td
+        = link_to "戻る", :back, class: "btn btn-primary"

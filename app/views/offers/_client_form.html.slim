@@ -1,0 +1,40 @@
+- if offer.errors.any?
+   strong 入力内容にエラーがあります
+   ul
+    - offer.errors.each do |attr, msg|
+      li= msg
+-if client_signed_in?
+  = form_with(model: [ @worker, @offer ]) do |f|
+   = f.hidden_field :worker_id, value: @worker.id
+   table.company.responsive-table
+      colgroup
+        col.col-1
+        col.col-2
+        col.col-3
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | アカウント名
+        td.responsive-cell
+         .input-container
+          = f.text_field :user_name, value: @client.present? ? @client.user_name : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 経験則
+        td.responsive-cell
+         .input-container
+          = f.text_field :id, value: @customer.present? ? @customer.id : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | テレフォンアポインターに対してコメント（50文字以上）
+        td.responsive-cell
+         .input-container
+          = f.text_area :message
+      tr
+        td colspan="3"
+          = f.submit "確認画面", class:"btn btn-primary"
