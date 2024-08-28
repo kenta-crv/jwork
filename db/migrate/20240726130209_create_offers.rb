@@ -3,8 +3,6 @@ class CreateOffers < ActiveRecord::Migration[5.2]
     create_table :offers do |t|
       t.references :client, foreign_key: true
       t.references :user, foreign_key: true
-      t.references :customer, foreign_key: true
-      t.references :worker, foreign_key: true
       t.text :message
       t.timestamps
     end

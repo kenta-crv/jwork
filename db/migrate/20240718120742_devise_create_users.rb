@@ -21,7 +21,29 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.datetime :last_sign_in_at
       # t.string   :current_sign_in_ip
       # t.string   :last_sign_in_ip
-
+      t.string  :name
+      t.string  :age
+      t.string  :email
+      t.string  :experience
+      t.string  :voice_data
+      t.string  :year
+      t.string  :commodity
+      t.string  :hope
+      t.string  :period
+      t.string  :pc
+      t.string  :start
+      t.string  :tel
+      t.string  :agree_1
+      t.string  :agree_2
+      t.string  :emergency_name
+      t.string  :emergency_relationship
+      t.string  :emergency_tel
+      t.string  :identification
+      t.string  :bank
+      t.string  :branch
+      t.string  :bank_number
+      t.string  :bank_name
+      t.string  :status
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at

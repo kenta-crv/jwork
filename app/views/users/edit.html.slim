@@ -1,0 +1,218 @@
+- set_meta_tags noindex: true
+br/
+br/
+.tops-wrapper
+  h2.headline 詳細情報入力
+  = form_for @user, html: { multipart: true } do |f|
+   - if @user.errors.any?
+    .alert.alert-warning.center
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
+   br/
+   table.company
+    colgroup
+     col width="20%"
+     col width="20%"
+     col width="60%"
+     tbody
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | お名前（フルネーム）
+        td = f.text_field :name
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 年齢
+        td
+          = f.number_field :age
+          br/
+          small  
+           |（当サービスは20~55歳迄がご利用可能なサービスとなります。）
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 電話番号
+        td
+          = f.text_field :tel
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | メールアドレス
+        td
+          = f.email_field :email
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 経験則
+        td
+          = f.select(:experience, [\
+          ["テレアポ発信経験","テレアポ発信経験"],\
+          ["テレアポ受信経験","テレアポ受信経験"],\
+          ["営業経験","営業経験"],\
+          ],include_blank: '選択してください')
+          br/
+          small  
+           |（未経験者は今回募集対象外となります。）
+      tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 経験年数
+          td
+            = f.text_field :year
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 経験商材（なるべく詳細に記載してください）
+        td
+          = f.text_area :commodity
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 希望勤務日数
+        td
+          = f.select(:hope, [\
+          ["週3・09:00~16:45（75分休憩）","週3・09:00~16:45（75分休憩）"],\
+          ["週4・09:00~16:45（75分休憩）","週4・09:00~16:45（75分休憩）"],\
+          ["週5・09:00~16:45（75分休憩）","週5・09:00~16:45（75分休憩）"],\
+          ["週4・09:00~15:00（60分休憩）","週4・09:00~15:00（60分休憩）"],\
+          ["週5・09:00~15:00（60分休憩）","週5・09:00~15:00（60分休憩）"],\
+          ["週5・09:00~12:00（0分休憩）","週5・09:00~12:00（0分休憩）"],\
+          ],include_blank: '選択してください')
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 希望期間
+        td
+          = f.select(:period, [\
+          ["長期希望","長期希望"],\
+          ["短期希望","短期希望"],\
+          ],include_blank: '選択してください')
+          br/
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | パソコンは保有していますか？
+        td
+          = f.select(:pc, [\
+          ["はい","はい"],\
+          ["いいえ","いいえ"],\
+          ],include_blank: '選択してください')
+          br/
+          small  
+           |（いいえは募集対象外となります。）
+      /tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 音声データ貼り付け
+        td
+          = f.file_field :voice_data
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 勤務開始希望日
+        td
+          = f.date_field :start
+      tr.center
+        td[colspan="3"] = f.submit '送信する'
+   /table.company
+    /colgroup
+     /col width="20%"
+     /col width="20%"
+     /col width="60%"
+     /tbody
+      /tr
+        td
+          strong.label 必須
+        td
+          = f.check_box :agree_1
+        td.arrow_box
+          | 動画を確認頂き、最低勤務日数・時間についてはご理解頂けましたか？
+      /tr
+        td
+          strong.label 必須
+        td
+          = f.check_box :agree_2
+        td.arrow_box
+          | 雇用約款をご確認頂き同意頂けましたか？
+          
+      /tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 緊急連絡者名
+          br/
+          small 
+           | (携帯貸与のため必須)
+        td
+          = f.text_field :emergency_name
+      /tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 続柄
+        td
+          = f.text_field :emergency_relationship
+      /tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 緊急連絡者電話番号
+            br/
+            small 
+             | (ご本人の連絡先は不可)
+          td
+            = f.text_field :emergency_tel
+      /tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 振込先口座
+          td
+            = f.text_field :bank
+      /tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 振込先支店
+          td
+            = f.text_field :branch
+      /tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 口座番号
+          td
+            = f.text_field :bank_number
+      /tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 口座名義
+          td
+            = f.text_field :bank_name
+      /tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 本人確認書類
+          td
+            = f.file_field :identification
+            br/
+            small 
+             | 免許証・運転免許証等、スマートフォン発送を行いますので、住所の一致しているもの
+
+

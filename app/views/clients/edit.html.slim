@@ -2,8 +2,8 @@
 
 .tops-wrapper
   br
-  h2.headline  見積もり編集
-  =  form_for @customer, url: customer_path(@customer) do |f|
+  h2.headline  企業情報の登録
+  =  form_for @client, url: client_path(@client) do |f|
    table.company.responsive-table
       colgroup
         col.col-1
@@ -59,8 +59,8 @@
           = f.select(:period,[\
             ["すぐにでも","すぐにでも"],\
             ["1ヶ月以内","1ヶ月以内"],\
+            ["2ヶ月以内","6ヶ月以内"],\
             ["3ヶ月以内","3ヶ月以内"],\
-            ["6ヶ月以内","6ヶ月以内"],\
            ],include_blank: "選択してください")
       tr
         td.label-cell
@@ -139,43 +139,45 @@
          td
            |サービス内容
          td
-           = @customer.service
+           = @client.service
         tr
          td
            strong.label 必須
          td
            |契約期間
          td
-           = @customer.contract_period
+           = @client.contract_period
         tr
          td
            strong.label 必須
          td
            |単価
          td
-           = @customer.unit_price
+           = @client.unit_price
         tr
          td
            strong.label 必須
          td
            |希望時間数
          td
-           = @customer.maximum_hours
+           = @client.maximum_hours
         tr
          td
            strong.label 必須
          td
            |アプローチエリア
          td
-           = @customer.approach_area
+           = @client.approach_area
         tr
          td
            strong.label 必須
          td
            |アプローチ業種
          td
-           = @customer.approach_industry
+           = @client.approach_industry
       tr
         td colspan="3"
           = f.submit "確認画面", class:"btn btn-primary"
      
+
+

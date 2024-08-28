@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_31_141706) do
+ActiveRecord::Schema.define(version: 2024_07_26_130209) do
 
   create_table "admins", force: :cascade do |t|
     t.string "user_name", default: "", null: false
@@ -27,32 +27,14 @@ ActiveRecord::Schema.define(version: 2024_07_31_141706) do
 
   create_table "clients", force: :cascade do |t|
     t.string "user_name", default: "", null: false
-    t.string "email", default: "", null: false
+    t.string "email"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_clients_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.string "status"
-    t.string "next"
-    t.string "body"
-    t.integer "customer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_comments_on_customer_id"
-  end
-
-  create_table "customers", force: :cascade do |t|
     t.string "company"
     t.string "name"
     t.string "tel"
-    t.string "email"
     t.string "address"
     t.string "period"
     t.string "message"
@@ -66,67 +48,43 @@ ActiveRecord::Schema.define(version: 2024_07_31_141706) do
     t.string "president_name"
     t.string "agree"
     t.string "contract_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_clients_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "status"
+    t.string "next"
+    t.string "body"
+    t.integer "user_id"
     t.integer "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_customers_on_client_id"
+    t.index ["client_id"], name: "index_comments_on_client_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "offers", force: :cascade do |t|
     t.integer "client_id"
     t.integer "user_id"
-    t.integer "customer_id"
-    t.integer "worker_id"
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_offers_on_client_id"
-    t.index ["customer_id"], name: "index_offers_on_customer_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
-    t.index ["worker_id"], name: "index_offers_on_worker_id"
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.integer "client_id"
-    t.integer "user_id"
-    t.integer "customer_id"
-    t.integer "worker_id"
-    t.text "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_orders_on_client_id"
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
-    t.index ["worker_id"], name: "index_orders_on_worker_id"
-  end
-
-  create_table "progresses", force: :cascade do |t|
-    t.string "status"
-    t.string "next"
-    t.string "body"
-    t.integer "worker_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["worker_id"], name: "index_progresses_on_worker_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "user_name", default: "", null: false
-    t.string "email", default: "", null: false
+    t.string "email"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "workers", force: :cascade do |t|
     t.string "name"
     t.string "age"
-    t.string "email"
     t.string "experience"
     t.string "voice_data"
     t.string "year"
@@ -147,10 +105,10 @@ ActiveRecord::Schema.define(version: 2024_07_31_141706) do
     t.string "bank_number"
     t.string "bank_name"
     t.string "status"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_workers_on_user_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

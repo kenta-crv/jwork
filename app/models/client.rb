@@ -3,14 +3,6 @@ class Client < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  has_one :customer, dependent: :destroy
-  after_create :create_customer
-  has_many :offers
-
-  private
-
-  def create_customer
-    Customer.create(client: self)
-  end
+  has_many :offers, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

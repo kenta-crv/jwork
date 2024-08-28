@@ -1,8 +1,168 @@
-.tops-wrapper
-  h2.headline オファーを開始する
-  - if user_signed_in?
-   = render 'user_form', offer: @offer
-  - elsif client_signed_in?
-   = render 'client_form', offer: @offer 
-  - else
-  = link_to 'Back', offers_path
+- if @offer.errors.any?
+  strong 入力内容にエラーがあります
+  ul
+    - @offer.errors.each do |attr, msg|
+      li= msg
+
+- if client_signed_in?
+  = form_with(model: [@user, @offer]) do |f|
+    = f.hidden_field :user_id, value: @user.id
+    = f.hidden_field :client_id, value: current_client.id
+    table.company.responsive-table
+      colgroup
+        col.col-1
+        col.col-2
+        col.col-3
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 企業名
+        td.responsive-cell
+          .input-container
+            = f.text_field :company, value: @client.present? ? @client.company : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | サービス内容
+        td.responsive-cell
+         .input-container
+          = f.text_field :service, value: @client.present? ? @client.service : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 契約期間
+        td.responsive-cell
+         .input-container
+          = f.text_field :contract_period, value: @client.present? ? @client.contract_priod : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 希望時間数
+        td.responsive-cell
+         .input-container
+          = f.text_field :maximum_hours, value: @client.present? ? @client.maximum_hours : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | アプローチエリア
+        td.responsive-cell
+         .input-container
+          = f.text_field :approach_area, value: @client.present? ? @client.approach_area : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          |アプローチ業種
+        td.responsive-cell
+         .input-container
+          = f.text_field :approach_industry, value: @client.present? ? @client.approach_industry : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | テレフォンアポインターに対してメッセージ（50文字以上）
+        td.responsive-cell
+         .input-container
+          = f.text_area :message
+      tr
+        td colspan="3"
+          = f.submit "確認画面", class:"btn btn-primary"
+
+- elsif user_signed_in?
+  = form_with(model: [@client, @offer]) do |f|
+    = f.hidden_field :client_id, value: @client.id
+    = f.hidden_field :user_id, value: current_user.id
+    table.company.responsive-table
+      colgroup
+        col.col-1
+        col.col-2
+        col.col-3
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | アカウント名
+        td.responsive-cell
+          .input-container
+            = f.text_field :user_name, value: @user.present? ? @user.user_name : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 年齢
+        td.responsive-cell
+         .input-container
+          = f.text_field :age, value: @user.present? ? @user.age : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 経験年数
+        td.responsive-cell
+         .input-container
+          = f.text_field :year, value: @user.present? ? @user.year : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 経験商材
+        td.responsive-cell
+         .input-container
+          = f.text_field :commodity, value: @user.present? ? @user.commodity : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 希望勤務日数
+        td.responsive-cell
+         .input-container
+          = f.text_field :hope, value: @user.present? ? @user.hope : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 希望期間
+        td.responsive-cell
+         .input-container
+          = f.text_field :period, value: @user.present? ? @user.period : ""
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 勤務開始希望日
+        td.responsive-cell
+         .input-container
+          = f.text_field :start, value: @user.present? ? @user.start : ""
+      tr
+        td.label-cell
+            strong.label 必須
+        td.arrow-box-cell
+            | 音声データ有無
+        td.responsive-cell
+            .input-container
+              = @user.present? && @user.voice_data.present? ? "有" : "無"
+
+      tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 本人確認済
+          td.responsive-cell
+            .input-container
+              = @user.present? && @user.identification.present? ? "有" : "無"
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 企業に対しての意気込み（50文字以上）
+        td.responsive-cell
+         .input-container
+          = f.text_area :message
+      tr
+        td colspan="3"
+          = f.submit "確認画面", class:"btn btn-primary"

@@ -1,83 +1,41 @@
 class OffersController < ApplicationController
   before_action :authenticate_user_or_client!
-  before_action :set_user_or_client_and_associated, only: [:new_customer, :create_customer] #from user to customer
-  before_action :set_client_or_user_and_associated, only: [:new_worker, :create_worker] #from client to worker
+  before_action :set_user_or_client_and_associated, only: [:new, :create]
 
-  def index 
+  def index
     @offers = Offer.all
-  end  
+  end
 
   def show
     @offer = Offer.find(params[:id])
   end
 
   def new
-   if user_signed_in? 
-    @customer = Customer.find(params[:customer_id])
-    @offer = @customer.offers.new
-   elsif client_signed_in?
-    @worker = Worker.find(params[:worker_id])
-    @offer = @worker.offers.new
-   else
-    redirect_to root_path, alert: "ログインが確認出来ませんでした。"
-   end
+    if user_signed_in?
+      @client = Client.find(params[:client_id])
+      @offer = @client.offers.new(user_id: current_user.id) # クライアントのIDを引き継ぐ
+    elsif client_signed_in?
+      @user = User.find(params[:user_id])
+      @offer = @user.offers.new(client_id: current_client.id) # クライアントのIDを引き継ぐ
+    else
+      redirect_to root_path, alert: 'サインインしてください'
+    end
   end
 
-  def create_customer
-   if user_signed_in?
-    @customer = Customer.find(params[:offer][:customer_id]) # customer_id をパラメータから取得
-    @offer = @customer.offers.new(offer_params)
-    @user = User.find_by(id: params[:offer][:user_id])
-    @worker = Worker.find_by(id: params[:offer][:worker_id])
-    if @user.nil?
-      redirect_to new_customer_offer_path(@customer), alert: "User not found."
-      return
-    end
-    if @worker.nil?
-      redirect_to new_customer_offer_path(@customer), alert: "Worker not found."
-      return
-    end
-    @offer.user = @user
-    @offer.worker = @worker
+  def create
+    @offer = Offer.new(offer_params)
     if @offer.save
-      redirect_to confirm_customer_offer_path(customer_id: @customer.id, id: @offer.id)
+      redirect_to offers_path, notice: 'オファーが作成されました'
     else
       render :new
     end
-   elsif client_signed_in?
-    @worker = Worker.find(params[:offer][:worker_id]) # worker_id をパラメータから取得
-    @offer = @worker.offers.new(offer_params)
-    @client = Client.find_by(id: params[:offer][:client_id])
-    @customer = Customer.find_by(id: params[:offer][:customer_id])
-    if @client.nil?
-      redirect_to new_worker_offer_path(@worker), alert: "User not found."
-      return
-    end
-    if @user.nil?
-      redirect_to new_worker_offer_path(@worker), alert: "Worker not found."
-      return
-    end
-    @offer.client = @client
-    @offer.customer = @wcustomer
-    if @offer.save
-      redirect_to confirm_worker_offer_path(worker_id: @worker.id, id: @offer.id)
-    else
-      render :new
-    end
-   else
-    redirect_to root_path, alert: "ログインが確認出来ませんでした。"
-   end
-  end
-
-  def confirm
-    @offer = Offer.find(params[:id])
   end
 
   def thanks
     @offer = Offer.find(params[:id])
     if @offer.update(confirmed: true) # 確認済みとしてマークするカラムがあれば
       flash[:notice] = "打診が完了しました。マッチングがありましたらご連絡が入ります。"
-      redirect_to customers_path
+      redirect_to clients_path
     else
       flash[:alert] = "登録が完了できませんでした。"
       redirect_to new_offer_path
@@ -106,29 +64,19 @@ class OffersController < ApplicationController
         redirect_to new_user_session_path, alert: "ログインしてください。"
       end
     end
-  
-    def set_user_or_client_and_associated
-      if current_user
-        @user = current_user
-        @worker = @user.worker
-      elsif current_client
-        @client = current_client
-        @worker = @user.worker
-      end
-    end
 
-    def set_client_or_user_and_associated
-      if current_client
-        @client = current_client
-        @customer = @client.customer
-      elsif current_user
+    def set_user_or_client_and_associated
+      if user_signed_in?
         @user = current_user
-        @customer = @client.customer
+      elsif client_signed_in?
+        @client = current_client
       end
     end
+  
+  
     
     def offer_params
-      params.require(:offer).permit(:client_id, :user_id, :customer_id, :worker_id, :message)
+      params.require(:offer).permit(:client_id, :user_id, :client_id, :user_id, :message)
     end
   end
   

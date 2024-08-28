@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "lstep@factoru.jp"
+  default from: "info@tele-match.net"
   layout 'mailer'
 end

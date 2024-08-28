@@ -7,7 +7,7 @@ class Clients::RegistrationsController < Devise::RegistrationsController
 
 
   def after_sign_up_path_for(resource)
-    "/clients/#{current_client.id}/customer/new"
+    "/clients/#{current_client.id}/edit"
   end
 
   private

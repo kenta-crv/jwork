@@ -1,7 +1,7 @@
 - set_meta_tags  title: ''
 - set_meta_tags  description: ''
 
-= form_with model: @customer, url: confirm_customers_path, method: :post, local: true do |f|
+= form_with model: @client, url: confirm_clients_path, method: :post, local: true do |f|
   br
   br
   .tops-wrapper
@@ -59,7 +59,7 @@
         td.responsive-cell
          .input-container
          = f.hidden_field :wide
-         = @customer.wide
+         = @client.wide
       tr
         td.label-cell
           strong.label 必須

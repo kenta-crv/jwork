@@ -1,4 +1,7 @@
-.tops-wrapper
+- if client_signed_in?
+ .tops-wrapper
+  h2.headline
+    | 稼働可能なユーザー情報を確認する
   table.list[width="90%"  class="header-table space"]
       colgroup
         col[width="40%"]
@@ -8,7 +11,7 @@
         th
           案件情報の参照
         td
-          = link_to "案件一覧を閲覧", workers_path, class:"btn btn-primary"
+          = link_to "案件一覧を閲覧", root_path, class:"btn btn-primary"
   h2.headline
     | クライアントアカウント情報
   br
@@ -27,4 +30,204 @@
           | ログインアドレス
         td
           = @client.email
+  br/
+  br/
+  = link_to '編集する', edit_client_registration_path, class: 'btn btn-primary'
+  = link_to "ログアウト", destroy_client_session_path, method: :delete, class:"btn btn-danger"
+  
+h2.headline
+    | 登録情報  
+    = link_to "編集", edit_client_path(@client), class: "btn btn-primary"
 
+br
+table.list
+       colgroup
+         col width="10%"
+         col width="20%"
+         col width="70%"
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 会社名
+        td.responsive-cell
+         .input-container
+          = @client.company
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | ご担当者様名
+        td.responsive-cell
+         .input-container
+          = @client.name
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 電話番号
+        td.responsive-cell
+         .input-container
+          = @client.tel
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 所在地
+        td.responsive-cell
+         .input-container
+          = @client.address
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | メールアドレス
+        td.responsive-cell
+         .input-container
+          = @client.email
+       tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 発注予定時期
+        td.responsive-cell
+         .input-container
+          = @client.period
+       tr
+        td.label-cell
+          strong.label.label-blue 任意
+        td.arrow-box-cell
+          | 備考・要望
+        td.responsive-cell
+         .input-container
+          = @client.message
+       tr
+        td
+          strong.label 必須
+        td
+          |代表取締役
+        td
+          = @client.president_name
+       tr
+        td
+          strong.label 必須
+        td
+          |役職
+        td
+          = @client.post_title
+       tr
+        td
+          strong.label 必須
+        td
+          |契約の同意
+        td
+          = @client.agree
+       tr
+        td
+          strong.label 必須
+        td
+          |契約日
+        td
+         - if @client.contract_date.present?
+           - contract_date = Date.parse(@client.contract_date)
+           = contract_date.strftime("%Y年%m月%d日")
+
+       - if admin_signed_in?
+        tr
+         td
+           strong.label 必須
+         td
+           |サービス内容
+         td
+           = @client.service
+        tr
+         td
+           strong.label 必須
+         td
+           |契約期間
+         td
+           = @client.contract_period
+        tr
+         td
+           strong.label 必須
+         td
+           |単価
+         td
+           = @client.unit_price
+        tr
+         td
+           strong.label 必須
+         td
+           |希望時間数
+         td
+           = @client.maximum_hours
+        tr
+         td
+           strong.label 必須
+         td
+           |アプローチエリア
+         td
+           = @client.approach_area
+        tr
+         td
+           strong.label 必須
+         td
+           |アプローチ業種
+         td
+           = @client.approach_industry
+br/
+- if client_signed_in?
+ .actions_container style="text-align: center; margin-bottom: 30px;"
+  = link_to "契約へ進む", info_client_path(@client), class: "btn btn-primary"
+- if admin_signed_in?
+ = link_to "削除する", client_path(@client), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
+ = link_to "一覧に戻る", clients_path, class: "btn btn-default"
+
+ = form_for [@client, @client.comments.build] do |f|
+  table.company[width="100%"]
+    col[width="25%"]
+    col[width="25%"]
+    col[width="25%"]
+    tbody
+      tr
+          th
+            | ステータス
+          th
+            | 次回営業日
+          th
+            | コメント
+
+      tr
+          td
+            = f.select(:status, [\
+            ["商談","商談"],\
+            ["見込低","見込低"],\
+            ["見込中","見込中"],\
+            ["見込高","見込高"],\
+            ["契約","契約"],\
+            ["NG","NG"]],include_blank: "選択してください")     
+          td
+            = f.datetime_field :next
+          td
+            = f.text_area :body
+      tr
+        th[colspan="3"]
+         .center
+          = f.submit "登録する", class:"btn btn-primary"
+ small 商談ステータスを入れる場合は商談日を入力。　不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
+ table.company[width="100%"]
+  - if @client.comments.any?
+    tbody
+     - @client.comments.each do |comment|
+       tr
+        td
+          = comment.status
+        td
+          = comment.next
+        td
+          = comment.body
+        td
+          = link_to "編集", edit_client_comments_path(@client, comment), _blank: "target"
+
+- if user_signed_in?  # ユーザーがサインインしている場合
+  = link_to "#{@client.company}に取引打診", new_client_offer_path(@client, user_id: current_user.id), class: "btn btn-primary"

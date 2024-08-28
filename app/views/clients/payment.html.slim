@@ -2,7 +2,7 @@
 - set_meta_tags  description: ''
 
 - set_meta_tags noindex: true
--if @customer.service == "トライアルプラン"
+-if @client.service == "トライアルプラン"
  .tops-wrapper
   br
   h2.headline  口座情報のご案内
@@ -27,9 +27,9 @@
    tr 
      th 金額
      td.red 
-       - if @customer.unit_price.present? && @customer.maximum_number.present?
-        - unit_price = @customer.unit_price.to_f
-        - maximum_number = @customer.maximum_number.to_f
+       - if @client.unit_price.present? && @client.maximum_number.present?
+        - unit_price = @client.unit_price.to_f
+        - maximum_number = @client.maximum_number.to_f
         - if unit_price > 0 && maximum_number > 0
          | ¥
          = unit_price * 5 * 1.1
@@ -38,7 +38,7 @@
        - else
          | -
 
--elsif @customer.service == "テストマーケティングプラン"
+-elsif @client.service == "テストマーケティングプラン"
  .tops-wrapper
   br
   h2.headline  口座情報のご案内

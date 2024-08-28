@@ -1,6 +1,68 @@
-.tops-wrapper 
- br/
- h2.headline オファー一覧
+h2.headline オファー一覧
+- if @offer.client.company != nil
+ table.company.responsive-table
+      colgroup
+        col.col-1
+        col.col-2
+        col.col-3
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 企業名
+        td.responsive-cell
+          .input-container
+            = @offer.client.company
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | サービス内容
+        td.responsive-cell
+         .input-container
+          = @offer.client.service
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 契約期間
+        td.responsive-cell
+         .input-container
+          = @offer.client.contract_period
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 希望時間数
+        td.responsive-cell
+         .input-container
+          = @offer.client.maximum_hours
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | アプローチエリア
+        td.responsive-cell
+         .input-container
+          = @offer.client.approach_area
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          |アプローチ業種
+        td.responsive-cell
+         .input-container
+          = @offer.client.approach_industry
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | テレフォンアポインターに対してメッセージ（50文字以上）
+        td.responsive-cell
+         .input-container
+          = @offer.message
+
+- if @offer.user.user_name != nil
  table.company.responsive-table
       colgroup
         col.col-1
@@ -12,16 +74,16 @@
         td.arrow-box-cell
           | アカウント名
         td.responsive-cell
-         .input-container
-          = @offer.user.user_name
+          .input-container
+            = @offer.user.user_name
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 経験則
+          | 年齢
         td.responsive-cell
          .input-container
-          = @offer.worker.experience
+          = @offer.user.age
       tr
         td.label-cell
           strong.label 必須
@@ -29,7 +91,7 @@
           | 経験年数
         td.responsive-cell
          .input-container
-          = @offer.worker.year
+          = @offer.user.year
       tr
         td.label-cell
           strong.label 必須
@@ -37,7 +99,7 @@
           | 経験商材
         td.responsive-cell
          .input-container
-          = @offer.worker.commodity
+          = @offer.user.commodity
       tr
         td.label-cell
           strong.label 必須
@@ -45,7 +107,7 @@
           | 希望勤務日数
         td.responsive-cell
          .input-container
-          = @offer.worker.hope 
+          = @offer.user.hope
       tr
         td.label-cell
           strong.label 必須
@@ -53,12 +115,37 @@
           | 希望期間
         td.responsive-cell
          .input-container
-          = @offer.worker.period
+          = @offer.user.period
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 先方企業様に対して意気込み（50文字以上）
+          | 勤務開始希望日
+        td.responsive-cell
+         .input-container
+          = @offer.user.start
+      tr
+        td.label-cell
+            strong.label 必須
+        td.arrow-box-cell
+            | 音声データ有無
+        td.responsive-cell
+            .input-container
+              = @offer.user.voice_data.present? ? "有" : "無"
+
+      tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 本人確認済
+          td.responsive-cell
+            .input-container
+              = @offer.user.identification.present? ? "有" : "無"
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 企業に対しての意気込み（50文字以上）
         td.responsive-cell
          .input-container
           = @offer.message

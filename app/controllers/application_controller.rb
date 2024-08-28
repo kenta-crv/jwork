@@ -4,11 +4,11 @@ private
  def after_sing_in_path_for(resource)
    case resource
    when Admin
-     root_path
+    admin_path
    when User
-    root_path
+    user_path
    when Client
-    root_path
+    client_path
    else
      super
    end

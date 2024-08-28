@@ -1,12 +1,12 @@
--if @customer.service == "トライアルプラン"
+-if @client.service == "トライアルプラン"
  .tops-wrapper
   br/
   h2.headline 契約締結
   br
    .red.small
     | ※契約ないようを必ずお読みの上、お進み下さい。
-  .customer
-   .text #{@customer.company}（以下、「甲」という。）と、株式会社Ri-Plus（以下、「乙」という。）とは、甲から乙への業務の委託に関し、次のとおり契約（以下、「本契約」という。）を締結する。
+  .client
+   .text #{@client.company}（以下、「甲」という。）と、株式会社Ri-Plus（以下、「乙」という。）とは、甲から乙への業務の委託に関し、次のとおり契約（以下、「本契約」という。）を締結する。
    h3.headline 第１条（目的）
    .text 本契約は甲乙相互間の信頼に基づく公正な取引関係を確立し、相互の利益と事業の発展をはかることを目的とする。なお、委託業務遂行に関する事務取扱の細目については、本契約の各条項で定めるほか、甲乙協議の上取り決めるものとする。
    h3.headline 第２条（業務委託）
@@ -25,8 +25,8 @@
    .text ３　甲は、訪問の場合は前確を、オンライン商談の場合、アポイント獲得後にオンラインURLの送信と商談前確を実行するものとする。
  
    h3.headline 第４条（契約期間と獲得件数）
-   .text １　本契約の獲得件数は、お試しプランを利用し#{@customer.maximum_number}件とする。
-   .text ２　本契約は取切型の契約とし、契約期間は、#{@customer.maximum_number}件を獲得するか、稼働開始日から６ヶ月とその月末までの早い方とする。
+   .text １　本契約の獲得件数は、お試しプランを利用し#{@client.maximum_number}件とする。
+   .text ２　本契約は取切型の契約とし、契約期間は、#{@client.maximum_number}件を獲得するか、稼働開始日から６ヶ月とその月末までの早い方とする。
    .text ３　お試しプランは、乙の業務の空き状況により稼働を行うものとする。そのため、獲得月が集中する場合や、架電を行わない時期があることを甲は理解し、当条項を理由としたクレームは行わないものとする。
    .text ４　甲は、本契約満了後、継続を希望する場合、１ヶ月以内に乙にslackもしくはメールのいずれかの方法で申請するものとする。尚、継続を行う場合、再開日も１ヶ月以内のいずれかとし、１ヶ月を超える場合、初期費用５００００円が別途発生する。
    .text ５　お試しプラン後に、契約を継続する場合、通常プランで契約を行う。
@@ -134,9 +134,9 @@
  
    h3.headline 契約名義
    .text 甲：
-   .text #{@customer.address}
-   .text #{@customer.company}
-   .text #{@customer.post_title}  #{@customer.president_name}
+   .text #{@client.address}
+   .text #{@client.company}
+   .text #{@client.post_title}  #{@client.president_name}
    br/
    .text 乙：
    .text 東京都中央区銀座6-13-16 ヒューリック銀座ウォールビル7F
@@ -156,16 +156,16 @@
        td 0円
      tr 
        th 成果報酬（税抜）
-       td #{@customer.unit_price}
+       td #{@client.unit_price}
           円
        th 獲得件数
-       td #{@customer.maximum_number}
+       td #{@client.maximum_number}
           件
      tr 
        th 対象エリア
-       td #{@customer.approach_area}
+       td #{@client.approach_area}
        th ターゲット
-       td #{@customer.approach_industry}
+       td #{@client.approach_industry}
  
    h3.headline 別紙2　アポイント獲得の認定基準
  
@@ -179,15 +179,15 @@
    .text ７□甲は、アポイントの発信業務の性質上、全ての商談が有効商談ではないことを十分に理解するものとする。
    .text 以上
 
-- elsif @customer.service == "テストマーケティングプラン"
+- elsif @client.service == "テストマーケティングプラン"
  .tops-wrapper
   br/
   h2.headline 契約締結
   br
    .red.small
     | ※契約ないようを必ずお読みの上、お進み下さい。
-  .customer
-   .text #{@customer.company}（以下、「甲」という。）と、株式会社Ri-Plus（以下、「乙」という。）とは、甲から乙への業務の委託に関し、次のとおり契約（以下、「本契約」という。）を締結する。
+  .client
+   .text #{@client.company}（以下、「甲」という。）と、株式会社Ri-Plus（以下、「乙」という。）とは、甲から乙への業務の委託に関し、次のとおり契約（以下、「本契約」という。）を締結する。
    h3.headline 第１条（目的）
    .text 本契約は甲乙相互間の信頼に基づく公正な取引関係を確立し、相互の利益と事業の発展をはかることを目的とする。なお、委託業務遂行に関する事務取扱の細目については、本契約の各条項で定めるほか、甲乙協議の上取り決めるものとする。
    h3.headline 第２条（業務委託）
@@ -290,9 +290,9 @@
  
    h3.headline 契約名義
    .text 甲：
-   .text #{@customer.address}
-   .text #{@customer.company}
-   .text #{@customer.post_title}  #{@customer.president_name}
+   .text #{@client.address}
+   .text #{@client.company}
+   .text #{@client.post_title}  #{@client.president_name}
    br/
    .text 乙：
    .text 東京都中央区銀座6-13-16 ヒューリック銀座ウォールビル7F
@@ -310,15 +310,15 @@
        td 100,000円
      tr 
        th 対象エリア
-       td #{@customer.approach_area}
+       td #{@client.approach_area}
      tr
        th ターゲット
-       td #{@customer.approach_industry}
+       td #{@client.approach_industry}
  
 
 h2.headline 約款に同意する
 br
-= form_with model: @customer, url: customer_path(@customer), local: true do |f|
+= form_with model: @client, url: client_path(@client), local: true do |f|
      table.company.responsive-table
        colgroup
          col.col-1
@@ -334,7 +334,7 @@ br
              ])
          td.label-cell
            | 契約日：
-           = f.date_field :contract_date, value: @customer.contract_date || Date.today, class: 'input'
+           = f.date_field :contract_date, value: @client.contract_date || Date.today, class: 'input'
        
        tr
          td colspan="3"

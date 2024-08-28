@@ -3,14 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  has_one :worker, dependent: :destroy
-  after_create :create_worker
-  has_many :offers
-
-  private
-
-  def create_worker
-    Worker.create(user: self)
-  end
+  has_many :offers, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end
