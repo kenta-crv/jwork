@@ -15,7 +15,7 @@ class DeviseCreateClients < ActiveRecord::Migration[5.2]
       ## Rememberable
       t.datetime :remember_created_at
 
-            #問い合わせ項目
+      #問い合わせ項目
       t.string :company #会社名
       t.string :name #担当者
       t.string :tel #電話番号
@@ -24,12 +24,11 @@ class DeviseCreateClients < ActiveRecord::Migration[5.2]
       t.string :period #導入希望時期
       t.string :message #備考
       #自社入力
-      t.string :service #サービス内容
-      t.string :contract_period #契約期間
-      t.string :unit_price #単価
-      t.string :maximum_hours #最大時間数
-      t.string :approach_area #アプローチエリア
-      t.string :approach_industry #アプローチ業種
+      t.string :business #募集業種
+      t.string :genre #募集業種
+      t.string :salary #給料
+      t.string :period #採用希望
+      t.string :remarks #備考
       #契約情報
       t.string :post_title #代表取締役
       t.string :president_name #代表取締役

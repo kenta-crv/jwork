@@ -51,23 +51,30 @@
         td.responsive-cell
          .input-container
           = f.email_field :email
-      /tr
+      tr
         td.label-cell
           strong.label.label-blue 任意
         td.arrow-box-cell
-          | 相談したい範囲
+          | 募集業種
         td.responsive-cell
          .input-container
-         = f.hidden_field :wide
-         = @client.wide
+          = f.text_field :business
+      tr
+        td.label-cell
+          strong.label.label-blue 任意
+        td.arrow-box-cell
+          | 給料
+        td.responsive-cell
+         .input-container
+          = f.text_field :salary
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 発注予定時期
+          | 採用希望時期
         td.responsive-cell
          .input-container
-          = f.select(:period,[\
+          = f.select(:period, [\
             ["すぐにでも","すぐにでも"],\
             ["1ヶ月以内","1ヶ月以内"],\
             ["3ヶ月以内","3ヶ月以内"],\
@@ -75,12 +82,12 @@
            ], include_blank: "選択してください")
       tr
         td.label-cell
-          strong.label 必須
+          strong.label 任意
         td.arrow-box-cell
           | 備考・要望
         td.responsive-cell
          .input-container
-          = f.text_area :message
+          = f.text_area :remarks
       tr
        td colspan="3"
         = f.submit "確認画面", class:"btn btn-primary"

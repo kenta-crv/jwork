@@ -40,171 +40,107 @@ h2.headline
 
 br
 table.list
-     colgroup
-      col width="10%"
-      col width="20%"
-      col width="70%"
-     tbody
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | お名前（フルネーム）
-        td = @user.name
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 年齢
-        td
-          = @user.age
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 電話番号
-        td
-          = @user.tel
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | メールアドレス
-        td
-          = @user.email
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 経験則
-        td
-          = @user.experience
-      tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 経験年数
-          td
-            = @user.year
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 経験商材
-        td
-          = @user.commodity
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 希望勤務日数
-        td
-          = @user.hope
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 希望期間
-        td
-          = @user.period
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | パソコンは保有していますか？
-        td
-          = @user.pc
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 音声データ貼り付け
-        td
-          = @user.voice_data
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 勤務開始希望日
-        td
-          = @user.start
-      /tr
-        td
-          strong.label 必須
-        td.arrow_box
-          = @user.agree_1
-        td
-          | 動画を確認頂き、最低勤務日数・時間についてはご理解頂けましたか？
-      /tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 雇用約款をご確認頂き同意頂けましたか？
-        td
-          = @user.agree_2
-      /tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 緊急連絡者名
-        td
-          = @user.emergency_name
-
-      /tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 続柄
-        td
-          = @user.emergency_relationship
-      /tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | 緊急連絡者電話番号
-        td
-          = @user.emergency_tel
-      /tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 振込先口座
-          td
-            = @user.bank
-
-      /tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 振込先支店
-          td
-            = @user.branch
-
-      /tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 口座番号
-          td
-            = @user.bank_number
-
-      /tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 口座名義
-          td
-            = @user.bank_name
-
-      /tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 本人確認書類
-          td
-            - if @user.identification?
-             = link_to "View Image", @user.identification.url, target: "_blank", class: "btn btn-success"
-
+  colgroup
+    col width="10%"
+    col width="20%"
+    col width="70%"
+  tbody
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | お名前（フルネーム）
+      td = @user.name
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 年齢
+      td = @user.age
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 電話番号
+      td = @user.tel
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | メールアドレス
+      td = @user.email
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 国籍
+      td = @user.nationality
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 業種
+      td = @user.past_business
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 職種
+      td = @user.past_genre
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 年数
+      td = @user.past_year
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 資格
+      td = @user.qualifications
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 働ける範囲
+      td = @user.work_range
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 希望職種
+      td = @user.hope_work
+    tr
+      td
+        strong.label 任意
+      td.arrow_box
+        | その他希望
+      td = @user.hope_other
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | ライン登録
+      td = @user.line
+    tr
+      td
+        strong.label 必須
+      td.arrow_box
+        | 何ヶ月以内
+      td = @user.period
+    tr
+      td
+        strong.label 任意
+      td.arrow_box
+        | オススメ度
+      td = @user.recommend
+    tr
+      td
+        strong.label 任意
+      td.arrow_box
+        | 備考
+      td = @user.remarks
 br/
 br/
 - if user_signed_in?

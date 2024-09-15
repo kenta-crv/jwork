@@ -4,6 +4,8 @@
   br
   h2.headline  企業情報の登録
   =  form_for @client, url: client_path(@client) do |f|
+   br
+   br
    table.company.responsive-table
       colgroup
         col.col-1
@@ -15,16 +17,15 @@
         td.arrow-box-cell
           | 会社名
         td.responsive-cell
-         .input-container
-          = f.text_field :company, placeholder:"（例）株式会社Ri-Plus"
+         = f.text_field :company
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | ご担当者様名
+          | 担当者名
         td.responsive-cell
          .input-container
-          = f.text_field :name, placeholder:"（例）山田　太郎"
+         = f.text_field :name
       tr
         td.label-cell
           strong.label 必須
@@ -32,7 +33,7 @@
           | 電話番号
         td.responsive-cell
          .input-container
-          = f.text_field :tel, placeholder:"（例）080-0000-0000"
+          = f.text_field :tel
       tr
         td.label-cell
           strong.label 必須
@@ -40,7 +41,7 @@
           | 所在地
         td.responsive-cell
          .input-container
-          = f.text_field :address, placeholder:"（例）東京都中央区銀座1-22-11 2F"
+          = f.text_field :address
       tr
         td.label-cell
           strong.label 必須
@@ -48,136 +49,54 @@
           | メールアドレス
         td.responsive-cell
          .input-container
-          = f.email_field :email, placeholder:"（例）abc@def.jp"
-      tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | 発注予定時期
-        td.responsive-cell
-         .input-container
-          = f.select(:period,[\
-            ["すぐにでも","すぐにでも"],\
-            ["1ヶ月以内","1ヶ月以内"],\
-            ["2ヶ月以内","6ヶ月以内"],\
-            ["3ヶ月以内","3ヶ月以内"],\
-           ],include_blank: "選択してください")
+          = f.email_field :email
       tr
         td.label-cell
           strong.label.label-blue 任意
         td.arrow-box-cell
+          | 募集業種
+        td.responsive-cell
+         .input-container
+          = f.text_field :business
+      tr
+        td.label-cell
+          strong.label.label-blue 任意
+        td.arrow-box-cell
+          | 募集職種
+        td.responsive-cell
+         .input-container
+          = f.text_field :genre
+      tr
+        td.label-cell
+          strong.label.label-blue 任意
+        td.arrow-box-cell
+          | 給料
+        td.responsive-cell
+         .input-container
+          = f.text_field :salary
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 採用希望時期
+        td.responsive-cell
+         .input-container
+          = f.select(:period, [\
+            ["すぐにでも","すぐにでも"],\
+            ["1ヶ月以内","1ヶ月以内"],\
+            ["3ヶ月以内","3ヶ月以内"],\
+            ["6ヶ月以内","6ヶ月以内"],\
+           ], include_blank: "選択してください")
+      tr
+        td.label-cell
+          strong.label 任意
+        td.arrow-box-cell
           | 備考・要望
         td.responsive-cell
          .input-container
-          = f.text_area :message, placeholder:"（例）お問い合わせ内容"
+          = f.text_area :remarks
       tr
-        td
-          strong.label 必須
-        td
-          |代表者名
-        td
-          = f.text_field :president_name
-      tr
-        td
-          strong.label 必須
-        td
-          |代表者役職
-        td
-          = f.text_field :post_title
-      - if admin_signed_in?
-       table.company
-        colgroup
-           col.col-1
-           col.col-2
-           col.col-3
-        tr
-         td
-           strong.label 必須
-         td
-           |サービス内容
-         td
-           = f.text_field :service
-           tr
-         td
-           strong.label 必須
-         td
-           |契約期間
-         td
-           = f.text_field :contract_period
-        tr
-         td
-           strong.label 必須
-         td
-           |単価
-         td
-           = f.text_field :unit_price
-        tr
-         td
-           strong.label 必須
-         td
-           |希望時間数
-         td
-           = f.text_field :maximum_hours
-        tr
-         td
-           strong.label 必須
-         td
-           |アプローチエリア
-         td
-           = f.text_field :approach_area
-        tr
-         td
-           strong.label 必須
-         td
-           |アプローチ業種
-         td
-           = f.text_field :approach_industry
-      - else
-        tr
-         td
-           strong.label 必須
-         td
-           |サービス内容
-         td
-           = @client.service
-        tr
-         td
-           strong.label 必須
-         td
-           |契約期間
-         td
-           = @client.contract_period
-        tr
-         td
-           strong.label 必須
-         td
-           |単価
-         td
-           = @client.unit_price
-        tr
-         td
-           strong.label 必須
-         td
-           |希望時間数
-         td
-           = @client.maximum_hours
-        tr
-         td
-           strong.label 必須
-         td
-           |アプローチエリア
-         td
-           = @client.approach_area
-        tr
-         td
-           strong.label 必須
-         td
-           |アプローチ業種
-         td
-           = @client.approach_industry
-      tr
-        td colspan="3"
-          = f.submit "確認画面", class:"btn btn-primary"
-     
+       td colspan="3"
+        = f.submit "確認画面", class:"btn btn-primary"
 
 

@@ -55,14 +55,12 @@ class ClientsController < ApplicationController
     :email, #メールアドレス
     :address, #所在地
     :period, #導入希望時期
-    :message, #備考
     #自社入力
-    :service, #サービス内容
-    :contract_period, #契約期間
-    :unit_price, #単価
-    :maximum_hours, #最大時間数
-    :approach_area, #アプローチエリア
-    :approach_industry, #アプローチ業種
+    :business, #募集業種
+    :genre, #募集業種
+    :salary, #給料
+    :period, #採用希望
+    :remarks, #備考
     #契約情報
     :post_title, #代表取締役
     :president_name, #代表取締役
