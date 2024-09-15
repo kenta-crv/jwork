@@ -49,27 +49,21 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:user_name, :email, :current_password, :password, :password_confirmation,
     :name,
+    :tel,
     :age,
     :email,
-    :experience,
-    :voice_data,
-    :year,
-    :commodity,
-    :hope,
-    :period,
-    :pc,
-    :start,
-    :tel,
-    :agree_1,
-    :agree_2,
-    :emergency_name,
-    :emergency_relationship,
-    :emergency_tel,
-    :identification,
-    :bank,
-    :branch,
-    :bank_number,
-    :bank_name,
-    :status)
+    :nationality, #国籍
+    :past_business, #業種
+    :past_genre, #職種
+    :past_year, #年数
+    :qualifications, #資格
+    :work_range, #働ける範囲
+    :hope_work, #希望職種
+    :hope_other, #その他希望
+    :line, #ライン登録
+    :period, #何ヶ月以内
+    :recommend, #オススメ度
+    :remarks, #備考
+    )
   end
 end

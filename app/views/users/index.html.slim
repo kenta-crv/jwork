@@ -1,40 +1,35 @@
 br
 br
-table.company
+table.list
   colgroup
-    col width="10%"
-    col width="10%"
-    col width="20%"
-    col width="20%"
-    col width="40%"
+
   thead
     tr
-      th お名前
+      th ユーザー名
       th 年齢
-      th 経験則
-      th 情報送信日
-      th 採用可否
+      th 現在の職種
+      th 現在の業種
+      th 転職時期
+      th 情報登録日
+      th 
   tbody
     - @users.each do |user|
       tr
         td
-          = link_to user.name, user_path(user)
+          = user.user_name
         td
           = user.age
         td
-          = user.experience
+          = user.past_business
         td
-          = user.created_at.strftime("%Y年%m月%d日")
+          = user.past_genre
         td
-          = link_to '採用', offer_email_user_path(user), method: :post, class: "btn btn-primary", data: { confirm: '送信を行いますか？' }
-          = link_to "不採用", reject_email_user_path(user), method: :post, class: "btn btn-primary", data: { confirm: "送信を行いますか？" }
-
+          = user.period
+        td
+          = user.updated_at.strftime("%Y年%m月%d日")
+        td
+         = link_to "詳細を見る", user_path(user), class: "btn btn-success"
+         -if admin_signed_in?
           = link_to "編集", edit_user_path(user), class: "btn btn-success"
           = link_to "削除", user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
           
-      tr
-        td[colspan="5"]
-          - if user.voice_data.present?
-            = audio_tag user.voice_data.url, controls: true
-
-/= paginate @users

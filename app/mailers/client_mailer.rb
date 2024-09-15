@@ -1,9 +1,9 @@
 class ClientMailer < ActionMailer::Base
-  default from: "info@tele-match.net"
+  default from: "info@j-work.jp"
   def received_email(client)
     @client = client
     mail from: client.email
-    mail to: "info@tele-match.net"
+    mail to: "info@j-work.jp"
     mail(subject: 'テレマッチに企業登録がありました') do |format|
       format.text
     end

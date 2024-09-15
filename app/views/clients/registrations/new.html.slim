@@ -1,43 +1,39 @@
 - set_meta_tags noindex: true
 .tops-wrapper
-  h2.headline クライアント新規登録
-  p 登録するID/PASSを入力して下さい。
+  h2.headline 新規登録ページ
+  small 登録するID/PASSを入力して下さい。
 
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = devise_error_messages!
-    table.list
-      colgroup
-        col width="40%"
-        col width="60%"
-      tr
-        th ユーザーネーム
-          span.label.label-blue 必須
-          br
-          small 山田太郎
-        td = f.text_field :user_name
-      tr
-        th ログインアドレス
-          span.label.label-blue 必須
-          br
-          small aaa@crold-valieat.jp
+    table.company
+     colgroup
+      col width="20%"
+      col width="20%"
+      col width="60%"
+     tbody
+       tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | メールアドレス
         td = f.email_field :email, autofocus: true, autocomplete: "email"
-      tr
-        th パスワード
-          span.label.label-blue 必須
-          br
-          small *******
+       tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | パスワード
         td
           - if @minimum_password_length
             em = "(#{@minimum_password_length} characters minimum)"
           = f.password_field :password, autocomplete: "off"
-      tr
-        th パスワード
-          span.label.label-blue 必須
-          br
-          small ******
+       tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | パスワード（確認）
         td = f.password_field :password_confirmation, autocomplete: "off"
-      tr
-        td.center colspan="2" = f.submit "同意して登録"
+       tr
+        td.center colspan="3" = f.submit "同意して登録"
   br
   .center
-    = render "clients/shared/links"
+    = render "users/shared/links"

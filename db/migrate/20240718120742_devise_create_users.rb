@@ -22,6 +22,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.string   :current_sign_in_ip
       # t.string   :last_sign_in_ip
       t.string  :name
+      t.string  :tel
       t.string  :age
       t.string  :email
       t.string  :nationality #国籍

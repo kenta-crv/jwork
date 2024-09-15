@@ -1,7 +1,7 @@
 - if client_signed_in?
  .tops-wrapper
   h2.headline
-    | 稼働可能なユーザー情報を確認する
+    | 求職者を参照
   table.list[width="90%"  class="header-table space"]
       colgroup
         col[width="40%"]
@@ -9,9 +9,9 @@
         |  　
       tr
         th
-          案件情報の参照
+          | 求職者情報の参照
         td
-          = link_to "案件一覧を閲覧", root_path, class:"btn btn-primary"
+          = link_to "案件一覧を閲覧", users_path(@user), class:"btn btn-primary"
   h2.headline
     | クライアントアカウント情報
   br
@@ -22,14 +22,14 @@
         |  　
       tr
         th
-          | ユーザーネーム
-        td
-          = @client.user_name
-      tr
-        th
           | ログインアドレス
         td
           = @client.email
+      tr
+        th
+          | パスワード
+        td
+          | *********
   br/
   br/
   = link_to '編集する', edit_client_registration_path, class: 'btn btn-primary'
@@ -40,67 +40,6 @@ h2.headline
     = link_to "編集", edit_client_path(@client), class: "btn btn-primary"
 
 br
-table.list
-       colgroup
-         col width="10%"
-         col width="20%"
-         col width="70%"
-       tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | 会社名
-        td.responsive-cell
-         .input-container
-          = @client.company
-       tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | ご担当者様名
-        td.responsive-cell
-         .input-container
-          = @client.name
-       tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | 電話番号
-        td.responsive-cell
-         .input-container
-          = @client.tel
-       tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | 所在地
-        td.responsive-cell
-         .input-container
-          = @client.address
-       tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | メールアドレス
-        td.responsive-cell
-         .input-container
-          = @client.email
-       tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | 発注予定時期
-        td.responsive-cell
-         .input-container
-          = @client.period
-       tr
-        td.label-cell
-          strong.label.label-blue 任意
-        td.arrow-box-cell
-          | 備考・要望
-        td.responsive-cell
-         .input-container
-          = @client.message
 table.list
    colgroup
      col width="10%"

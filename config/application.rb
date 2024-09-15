@@ -19,9 +19,9 @@ module Bookkeeping
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
     address: 'smtp.lolipop.jp',
-    domain: 'tele-match.net',
+    domain: 'j-work.jp',
     port: 587,
-    user_name: 'info@tele-match.net',
+    user_name: 'info@j-work.jp',
     password: ENV['EMAIL_PASSWORD'],
     authentication: 'plain',
     enable_starttls_auto: true

@@ -36,8 +36,6 @@
   
 h2.headline
     | 登録情報  
-    = link_to "編集", edit_user_path(@user), class: "btn btn-primary"
-
 br
 table.list
   colgroup
@@ -151,4 +149,4 @@ br/
  = link_to "一覧に戻る", users_path, class: "btn btn-default"
 
 - if client_signed_in?
-  = link_to "#{@user.user_name}に取引打診", new_user_offer_path(@user, client_id: current_client.id), class: "btn btn-primary"
+  = link_to "#{@user.user_name}に面接打診", new_user_offer_path(@user, client_id: current_client.id), class: "btn btn-primary"

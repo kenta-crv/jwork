@@ -1,9 +1,9 @@
 class UserMailer < ActionMailer::Base
-  default from: "info@tele-match.net"
+  default from: "info@j-work.jp"
   def received_email(user)
     @user = user
     mail from: user.email
-    mail to: "info@tele-match.net"
+    mail to: "info@j-work.jp"
     mail(subject: 'アポインターの登録がありました') do |format|
       format.text
     end
@@ -30,7 +30,7 @@ class UserMailer < ActionMailer::Base
 
   def second_received_email(user)
     @user = user
-    mail(to: "info@tele-match.net", subject: "#{@user.name}さんが契約に同意しました。")
+    mail(to: "info@j-work.jp", subject: "#{@user.name}さんが契約に同意しました。")
   end
 
   def second_send_email(user)
