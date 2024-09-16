@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      #UserMailer.second_received_email(@user).deliver
+      UserMailer.second_received_email(@user).deliver
       #UserMailer.second_send_email(@user).deliver
       redirect_to @user, notice: 'ご登録ありがとうございます。社内審査後、担当者よりご連絡差し上げます。'
     else

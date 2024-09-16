@@ -1,4 +1,6 @@
-『テレマッチ』にお問い合わせがありました。
+『J Work』にお問い合わせがありました。
+
+<%= client_url(@client) %>
 
 --------------------------
 会社名: <%= @client.company%>
@@ -6,6 +8,8 @@
 電話番号: <%= @client.tel%>
 所在地: <%= @client.address%>
 メールアドレス: <%= @client.email%>
-発注予定時期: <%= @client.period %>
-要望:<%= @client.message %>
+募集業種: <%= @client.business%>
+募集職種: <%= @client.genre%>
+採用希望時期: <%= @client.period %>
+備考・要望:<%= @client.remarks %>
 --------------------------

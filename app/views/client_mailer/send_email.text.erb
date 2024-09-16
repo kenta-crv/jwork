@@ -1,8 +1,10 @@
 <%= @client.company%> <%= @client.name%>様
 
-この度はテレマッチにお問い合わせ頂きありがとうございました。
+この度は外国人転職『J Work』をご利用頂きありがとうございます。
 
-以下の内容にて承りました。内容確認し、担当者よりご連絡差し上げます。
+新規（変更）登録が完了致しましたので、ご案内差し上げます。
+
+ログインURL：https://j-work.jp/clients/<%= @client.id %>
 
 何卒よろしくお願い致します。
 
@@ -12,11 +14,12 @@
 電話番号: <%= @client.tel%>
 所在地: <%= @client.address%>
 メールアドレス: <%= @client.email%>
-発注予定時期: <%= @client.period %>
-要望:<%= @client.message %>
+募集業種: <%= @client.business%>
+募集職種: <%= @client.genre%>
+採用希望時期: <%= @client.period %>
+備考・要望:<%= @client.remarks %>
 --------------------------
 
-株式会社Ri-Plus
-フリーランスアポインターと企業のマッチング『テレマッチ』
-東京都中央区銀座6-13-16 ヒューリック銀座ウォールビル7F
-https://ri-plus.jp/
+外国人転職『J Work』
+https://j-work.jp/
+info@j-work.jp

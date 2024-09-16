@@ -4,7 +4,7 @@ class ClientMailer < ActionMailer::Base
     @client = client
     mail from: client.email
     mail to: "info@j-work.jp"
-    mail(subject: 'テレマッチに企業登録がありました') do |format|
+    mail(subject: '#{client.company} がサイト登録しました。') do |format|
       format.text
     end
   end
@@ -12,7 +12,7 @@ class ClientMailer < ActionMailer::Base
   def send_email(client)
     @client = client
     mail to: client.email
-    mail(subject: 'テレマッチにご登録頂きありがとうございます｜株式会社Ri-Plus') do |format|
+    mail(subject: '外国人転職『J Work』にご登録頂きありがとうございます。') do |format|
       format.text
     end
   end

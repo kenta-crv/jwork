@@ -1,13 +1,10 @@
 - set_meta_tags  title: ''
 - set_meta_tags  description: ''
 
-= form_with model: @client, url: confirm_clients_path, method: :post, local: true do |f|
-  br
-  br
-  .tops-wrapper
-    h2.headline
-      | 企業登録内容確認
-  table.company.responsive-table
+= form_for @client do |f|
+   br
+   br
+   table.company.responsive-table
       colgroup
         col.col-1
         col.col-2
@@ -23,7 +20,7 @@
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | お名前
+          | 担当者名
         td.responsive-cell
          .input-container
          = f.text_field :name
@@ -63,6 +60,14 @@
         td.label-cell
           strong.label.label-blue 任意
         td.arrow-box-cell
+          | 募集職種
+        td.responsive-cell
+         .input-container
+          = f.text_field :genre
+      tr
+        td.label-cell
+          strong.label.label-blue 任意
+        td.arrow-box-cell
           | 給料
         td.responsive-cell
          .input-container
@@ -90,4 +95,4 @@
           = f.text_area :remarks
       tr
        td colspan="3"
-        = f.submit "確認画面", class:"btn btn-primary"
+        = f.submit "登録完了", class:"btn btn-primary"

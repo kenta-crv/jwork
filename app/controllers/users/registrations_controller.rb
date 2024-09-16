@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_up_path_for(resource)
-    "/users/#{current_user.id}/edit"
+    "/users/#{current_user.id}/new"
   end
 
   private
