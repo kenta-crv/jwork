@@ -26,8 +26,8 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     if @offer.save
       if client_signed_in?
-        ClientMailer.client_interview_received_email(@offer).deliver
-        ClientMailer.client_interview_admin_email(@offer).deliver
+        ClientMailer.client_interview_received_email(@offer, current_client).deliver
+        ClientMailer.client_interview_admin_email(@offer, current_client).deliver
         redirect_to client_path(current_client), notice: '打診が完了しました。面接進行がある場合、メールにて通知を差し上げます。'
       elsif user_signed_in?
         redirect_to user_path(current_user), notice: '打診が完了しました。面接進行がある場合、メールにて通知を差し上げます。'
