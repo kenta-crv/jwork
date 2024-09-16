@@ -68,7 +68,7 @@
           = f.text_area :message
       tr
         td colspan="3"
-          = f.submit "確認画面", class:"btn btn-primary"
+          = f.submit "面接打診を伝える", class:"btn btn-primary"
 
 - elsif user_signed_in?
   = form_with(model: [@client, @offer]) do |f|

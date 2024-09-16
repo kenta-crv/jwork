@@ -25,20 +25,17 @@ class OffersController < ApplicationController
   def create
     @offer = Offer.new(offer_params)
     if @offer.save
-      redirect_to offers_path, notice: 'オファーが作成されました'
+      if client_signed_in?
+        ClientMailer.client_interview_received_email(@offer).deliver
+        ClientMailer.client_interview_admin_email(@offer).deliver
+        redirect_to client_path(current_client), notice: '打診が完了しました。面接進行がある場合、メールにて通知を差し上げます。'
+      elsif user_signed_in?
+        redirect_to user_path(current_user), notice: '打診が完了しました。面接進行がある場合、メールにて通知を差し上げます。'
+      else
+        redirect_to root_path, alert: 'サインインしてください'
+      end
     else
       render :new
-    end
-  end
-
-  def thanks
-    @offer = Offer.find(params[:id])
-    if @offer.update(confirmed: true) # 確認済みとしてマークするカラムがあれば
-      flash[:notice] = "打診が完了しました。マッチングがありましたらご連絡が入ります。"
-      redirect_to clients_path
-    else
-      flash[:alert] = "登録が完了できませんでした。"
-      redirect_to new_offer_path
     end
   end
 
@@ -73,8 +70,6 @@ class OffersController < ApplicationController
       end
     end
   
-  
-    
     def offer_params
       params.require(:offer).permit(:client_id, :user_id, :client_id, :user_id, :message)
     end

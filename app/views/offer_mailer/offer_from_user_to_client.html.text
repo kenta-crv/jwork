@@ -1,5 +1,0 @@
-<%= @client.user_name %>様
-
-御社商材での稼働を希望します。
-
-<%= @user.user_name %>様

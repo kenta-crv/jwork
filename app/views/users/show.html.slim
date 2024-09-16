@@ -115,19 +115,20 @@ table.list
       td.arrow_box
         | その他希望
       td = @user.hope_other
-    tr
+    - if admin_signed_in?
+     tr
       td
         strong.label 必須
       td.arrow_box
         | ライン登録
       td = @user.line
-    tr
+     tr
       td
         strong.label 必須
       td.arrow_box
         | 何ヶ月以内
       td = @user.period
-    tr
+     tr
       td
         strong.label 任意
       td.arrow_box
@@ -148,5 +149,5 @@ br/
  = link_to "削除する", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
  = link_to "一覧に戻る", users_path, class: "btn btn-default"
 
-- if client_signed_in?
+/- if client_signed_in?
   = link_to "#{@user.user_name}に面接打診", new_user_offer_path(@user, client_id: current_client.id), class: "btn btn-primary"
