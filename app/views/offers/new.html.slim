@@ -25,47 +25,44 @@
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | サービス内容
+          | 募集業種
         td.responsive-cell
          .input-container
-          = f.text_field :service, value: @client.present? ? @client.service : ""
+          = f.text_field :business, value: @client.present? ? @client.business : ""
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 契約期間
+          | 募集職種
         td.responsive-cell
          .input-container
-          = f.text_field :contract_period, value: @client.present? ? @client.contract_priod : ""
+          = f.text_field :genre, value: @client.present? ? @client.genre : ""
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 希望時間数
+          | 提示給料
         td.responsive-cell
          .input-container
-          = f.text_field :maximum_hours, value: @client.present? ? @client.maximum_hours : ""
+          = f.text_field :salary, value: @client.present? ? @client.salary : ""
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | アプローチエリア
+          | 採用予定時期
         td.responsive-cell
          .input-container
-          = f.text_field :approach_area, value: @client.present? ? @client.approach_area : ""
+          = f.select(:period, [\
+            ["すぐにでも","すぐにでも"],\
+            ["1ヶ月以内","1ヶ月以内"],\
+            ["3ヶ月以内","3ヶ月以内"],\
+            ["6ヶ月以内","6ヶ月以内"],\
+           ], include_blank: "選択してください")
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          |アプローチ業種
-        td.responsive-cell
-         .input-container
-          = f.text_field :approach_industry, value: @client.present? ? @client.approach_industry : ""
-      tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | テレフォンアポインターに対してメッセージ（50文字以上）
+          | 求職者に対してメッセージ（50文字以上）
         td.responsive-cell
          .input-container
           = f.text_area :message
