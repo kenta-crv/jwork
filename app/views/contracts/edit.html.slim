@@ -1,0 +1,7 @@
+- set_meta_tags noindex: true
+
+.tops-wrapper
+  br
+  h2.headline 企業内容編集
+  = form_for @contract do |f|
+    = render 'form', f: f, btn_name: "送信"

@@ -1,0 +1,15 @@
+current directory: /Users/okuyamakenta/Program/lstep/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.11.1/ext/bootsnap
+/Users/okuyamakenta/.rbenv/versions/2.7.0/bin/ruby -I /Users/okuyamakenta/.rbenv/versions/2.7.0/lib/ruby/site_ruby/2.7.0 extconf.rb
+creating Makefile
+
+current directory: /Users/okuyamakenta/Program/lstep/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.11.1/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20221111-2767-1l3drh9 sitelibdir\=./.gem.20221111-2767-1l3drh9 clean
+
+current directory: /Users/okuyamakenta/Program/lstep/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.11.1/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20221111-2767-1l3drh9 sitelibdir\=./.gem.20221111-2767-1l3drh9
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/okuyamakenta/Program/lstep/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.11.1/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20221111-2767-1l3drh9 sitelibdir\=./.gem.20221111-2767-1l3drh9 install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20221111-2767-1l3drh9/bootsnap

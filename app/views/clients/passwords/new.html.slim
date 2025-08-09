@@ -1,0 +1,25 @@
+- set_meta_tags noindex: true
+
+.tops-wrapper
+  br/
+  br/
+  h2.headline
+    | パスワード再設定
+
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    = devise_error_messages!
+
+    table.company
+      colgroup
+      tbody
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | ログインアドレス
+          td.responsive-cell
+            .input-container
+              = f.email_field :email, autocomplete: "email"
+        tr
+          td[colspan="3"]
+            = f.submit "パスワード再設定", class: "btn btn-primary", data: { confirm: "送信してもよろしいですか？" }

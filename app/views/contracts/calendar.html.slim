@@ -1,0 +1,33 @@
+- set_meta_tags  title: ''
+- set_meta_tags  description: ''
+
+- set_meta_tags noindex: true
+.tops-wrapper
+  br
+  h2.headline  口座情報のご案内
+  p
+   |この度はご契約いただき、誠にありがとうございます。費用については前払いとなりますので、以下金額を３営業日以内に指定の口座までお振り込みくださいませ。
+   br/
+   |尚、特段の事情を除き、成功報酬において万一獲得ができずに契約を終了する場合、残額においてはご返金致します。
+
+  table.company
+   tr
+     th 金融機関
+     td.red 楽天銀行
+   tr
+     th 支店名
+     td.red 第二営業支店
+   tr 
+     th 種別
+     td.red 普通
+   tr 
+     th 口座番号
+     td.red 7960200
+   tr 
+     th 金額
+     td.red 
+       - if @contract.unit_price.nil? || @contract.maximum_number.nil?
+        | ¥0
+       - else
+        | ¥
+        = @contract.unit_price * @contract.maximum_number * 1.1

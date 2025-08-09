@@ -1,0 +1,40 @@
+- set_meta_tags noindex: true
+
+.tops-wrapper
+  br/
+  br/
+  h2.headline
+   | 取引先ログイン
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    table.company
+      colgroup
+      tbody
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | ログインアドレス
+        td.responsive-cell
+         .input-container
+          = f.email_field :email, autocomplete: "email"
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | パスワード
+        td.responsive-cell
+         .input-container
+          - if @minimum_password_length
+            em
+              | (
+              = @minimum_password_length
+              |  characters minimum)
+          = f.password_field :password, autocomplete: "off"
+      tr
+        td[colspan="3"]
+          = f.submit "ログイン", class: "btn btn-primary", data: { confirm: "送信してもよろしいですか？" }
+
+    
+  br
+  .center
+    = render "clients/shared/links"

@@ -1,0 +1,31 @@
+<%= @partner.company%> <%= @partner.representative_name%>様
+
+この度は外国人転職『J Work』にパートナー登録いただきありがとうございます。
+
+ご登録内容の控えを以下お送りさせて頂きます。以下ログインページより約款の締結にお進みください。
+
+ログインURL：https://j-work.jp/partners/<%= @partner.id %>
+
+締結完了後より、案件単位で最適な人材のご紹介を開始させて頂いております。
+
+何卒よろしくお願い致します。
+
+--------------------------
+会社名: <%= @partner.company %>
+代表取締役: <%= @partner.post_title %>
+代表者: <%= @partner.representative_name %>
+担当者: <%= @partner.contact_name %>
+携帯番号: <%= @partner.tel %>
+勤務所在地: <%= @partner.address %>
+企業URL: <%= @partner.url %>
+ログインアドレス: <%= @partner.email %>
+
+御社での毎月の人材紹介数: <%= @partner.question_people %>
+主な取引先の集客方法: <%= @partner.question_attractive %>
+想定される月間の人材照会打診数: <%= @partner.question_prediction %>
+解決したい課題: <%= @partner.message %>
+--------------------------
+
+株式会社セールスプロ
+外国人データベース『J Work』
+info@j-work.jp

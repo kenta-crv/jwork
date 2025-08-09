@@ -1,0 +1,7 @@
+{
+  "name": "bookkeeping",
+  "private": true,
+  "dependencies": {
+    "froala-editor": "^3.1.1-2"
+  }
+}

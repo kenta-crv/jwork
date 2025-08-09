@@ -1,0 +1,142 @@
+.tops-wrapper
+  h2.headline 詳細情報
+
+  table.company
+    colgroup
+      col width="20%"
+      col width="20%"
+      col width="60%"
+    tbody
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | お名前 [full_name]
+        td
+          = @user.name
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 年齢 [age]
+        td
+          = @user.age
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 性別 [gender]
+        td
+          = @user.gender
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 電話番号 [Tel]
+        td
+          = @user.tel
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | メールアドレス [Mail]
+        td
+          = @user.email
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | あなたの国籍はどこですか？ [what_is_your_nationality?]
+        td
+          = @user.nationality
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
+        td
+          = @user.work_range
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | あなたがもっているすべてのしかくをかいてください [pletell_us_all_the_qualifications_you_have]
+        td
+          = @user.qualifications
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
+        td
+          = @user.past_business
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | あなたのしょくしゅをおしえてください？[what_industry_are[were]_you_in?]
+        td
+          = @user.past_year
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 希望職種
+        td
+          = @user.hope_work
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
+        td
+          = @user.past_year
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | いつから働けますか？ [Since when can you job?]
+        td
+          = @user.hope_work
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 電話を出れる時間を教えてください。[Could you tell me the time you will come out.]
+        td
+          = @user.call_available
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 日本語で会話できますか？[Can you speak Japanese conversation?]
+        td
+          = @user.speak_japanese
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 転居はできますか？[Can I move to a different prefecture?]
+        td
+          = @user.change_the_address
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 備考
+        td
+          = @user.remarks
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | ライン登録
+        td
+          = @user.line
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | オススメ度
+        td
+          = @user.recommend

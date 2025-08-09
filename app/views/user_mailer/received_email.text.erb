@@ -1,0 +1,19 @@
+『J Work』にユーザー登録がありました。
+
+<%= user_url(@user) %>
+
+--------------------------
+お名前（フルネーム）: <%= @user.name %>
+年齢: <%= @user.age %>
+電話番号: <%= @user.tel %>
+メールアドレス: <%= @user.email %>
+国籍: <%= @user.nationality %>
+業種: <%= @user.past_business %>
+職種: <%= @user.past_genre %>
+年数: <%= @user.past_year %>
+資格: <%= @user.qualifications %>
+働ける範囲: <%= @user.work_range %>
+希望職種: <%= @user.hope_work %>
+その他希望: <%= @user.hope_other %>
+備考: <%= @user.remarks %>
+--------------------------

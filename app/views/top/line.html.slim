@@ -1,0 +1,23 @@
+br/
+h1.headline LINEに移動中です
+javascript:
+  fbq('track', 'Lead');
+script[async src="https://www.googletagmanager.com/gtag/js?id=AW-10998015402"]
+script
+  |
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-10998015402');
+
+    gtag('event', 'conversion', {
+      'send_to': 'AW-10998015402/TzzVCIjG_qQDEIzyn5cC',
+      'event_callback': function() {
+        window.location.href = "https://lin.ee/l5EzcZW";
+      }
+    });
+
+    // 念のため fallback（event_callbackが呼ばれないケースの保険）
+    setTimeout(function() {
+      window.location.href = "https://lin.ee/l5EzcZW";
+    }, 5000);

@@ -1,0 +1,19 @@
+.tops-wrapper
+  br/
+  h2.headline 契約締結
+  = form_with model: @contract, url: contract_path(@contract), local: true do |f|
+    table.company.responsive-table
+      colgroup
+        col.col-1
+        col.col-2
+        col.col-3
+      tr
+        td.label-cell
+          strong.label 必須
+        td.label-cell
+          | 開始日：
+          = f.date_field :start_day, value: @contract.start_day || Date.today, class: 'input'
+      
+      tr
+        td colspan="3"
+          = f.submit "開始日を通知する", class: "btn btn-danger"

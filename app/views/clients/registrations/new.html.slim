@@ -1,0 +1,238 @@
+- set_meta_tags noindex: true
+.tops-wrapper
+
+  h2.headline
+    | 求人申込フォーム
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = devise_error_messages!
+    table.company
+      colgroup
+
+      tbody
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 会社名
+          td.responsive-cell
+            .input-container
+              = f.text_field :company, placeholder: "株式会社ABC"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 代表取締役
+          td.responsive-cell
+            .input-container
+              = f.text_field :post_title, placeholder: "代表取締役"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 代表者
+          td.responsive-cell
+            .input-container
+              = f.text_field :representative_name, placeholder: "山田　太郎"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 担当者（同一の場合入力不要）
+          td.responsive-cell
+            .input-container
+              = f.text_field :contact_name, placeholder: "鈴木　次郎"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 携帯番号
+          td.responsive-cell
+            .input-container
+              = f.text_field :tel, placeholder: "080-0000-0000"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 勤務所在地
+          td.responsive-cell
+            .input-container
+              = f.text_field :address, placeholder: "東京都東京市東京町1-1-1"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 企業URL
+          td.responsive-cell
+            .input-container
+              = f.text_field :url, placeholder: "https://abc.com"
+
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | ログインアドレス
+        td.responsive-cell
+         .input-container
+          = f.email_field :email, autocomplete: "email"
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | パスワード
+        td.responsive-cell
+         .input-container
+          - if @minimum_password_length
+            em
+              | (
+              = @minimum_password_length
+              |  characters minimum)
+          = f.password_field :password, autocomplete: "off"
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | パスワード
+        td.responsive-cell
+         .input-container
+          = f.password_field :password_confirmation, autocomplete: "off"
+
+
+    h2.headline
+     | 求人申込フォーム
+    table.company
+      colgroup
+        / 自社入力
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 求人URL
+          td.responsive-cell
+            .input-container
+              = f.text_field :recruit_url, placeholder: "https://abc.com/recruit"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 採用したいビザの種類
+          td.responsive-cell
+            .input-container
+              = f.select :visa, ['特定技能ビザ', '永住ビザ', '技術人文国際ビザ'], {}, { multiple: true, class: 'form-control' }
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 特定技能外国人受け入れ申請を行ったことはありますか？
+          td.responsive-cell
+            .input-container
+              = f.select :message, ['はい', 'いいえ'], { prompt: '選択してください' }, class: 'form-control'
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 採用人数
+          td.responsive-cell
+            .input-container
+              = f.text_field :number
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 住居サポート内容
+          td.responsive-cell
+            .input-container
+              = f.text_area :house_support, placeholder: "外国人の場合、物件によっては住所契約ができない場合があるため必ず記載してください。ない場合『なし』と記載してください。", rows:"4"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 求職者の住居のフォロー可能ですか？
+          td.responsive-cell
+            .input-container
+              = f.select :house_agents, ['はい', 'いいえ'], { prompt: '選択してください' }, class: 'form-control'
+
+
+    h2.headline
+     | 以下は求人URLがない場合に記載してください。
+    
+    table.company
+      colgroup
+
+        tr
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 募集業種
+          td.responsive-cell
+            .input-container
+              = f.text_field :business
+
+        tr
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 募集職種
+          td.responsive-cell
+            .input-container
+              = f.text_field :genre
+
+        tr
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 給料条件
+          td.responsive-cell
+            .input-container
+              = f.text_area :salary
+
+        tr
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 勤務時間
+          td.responsive-cell
+            .input-container
+              = f.text_area :work_time
+
+        tr
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 休日
+          td.responsive-cell
+            .input-container
+              = f.text_area :day_off
+
+        tr
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 業務内容
+          td.responsive-cell
+            .input-container
+              = f.text_area :work_contents
+
+    h2.headline
+     | その他求人における特記事項がある場合、必ず事前に記載してください。
+    
+    table.company
+        tr 
+          td.responsive-cell
+            .input-container
+              = f.text_area :remarks, rows:"5"
+    table.company
+      tr
+        td[colspan="3"]
+          = f.submit "登録", class: "btn btn-primary", data: { confirm: "送信してもよろしいですか？" }
+

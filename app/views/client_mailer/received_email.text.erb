@@ -1,0 +1,27 @@
+『J Work』にお問い合わせがありました。
+
+<%= client_url(@client) %>
+
+--------------------------
+会社名: <%= @client.company %>
+代表取締役: <%= @client.post_title %>
+代表者: <%= @client.representative_name %>
+担当者: <%= @client.contact_name %>
+携帯番号: <%= @client.tel %>
+メールアドレス: <%= @client.email %>
+勤務所在地: <%= @client.address %>
+企業URL: <%= @client.url %>
+求人URL: <%= @client.recruit_url %>
+採用したいビザの種類: <%= @client.visa %>
+特定技能外国人受け入れ申請を行ったことはありますか？：<%= @client.message ? "はい" : "いいえ" %>
+採用人数: <%= @client.number %>
+住居サポート内容: <%= @client.house_support %>
+求職者の住居のフォロー: <%= @client.house_agents ? "はい" : "いいえ" %>
+募集業種: <%= @client.business %>
+募集職種: <%= @client.genre %>
+給料条件: <%= @client.salary %>
+勤務時間: <%= @client.work_time %>
+休日: <%= @client.day_off %>
+業務内容: <%= @client.work_contents %>
+特記事項: <%= @client.remarks %>
+--------------------------

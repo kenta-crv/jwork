@@ -1,0 +1,119 @@
+- set_meta_tags  title: ''
+- set_meta_tags  description: ''
+- set_meta_tags noindex: true
+.tops-wrapper
+ br
+ h2.headline  お申し込みフロー
+ br/
+ .row.organize
+  .col-xs-1 
+  .col-xs-3.btn.btn-primary.btn-lg
+   = link_to "⓪お客様情報の確認", edit_user_path(@user)
+  .col-xs-7
+   | ご契約における企業様情報の確認をお願いします。また費用や契約期間のご確認を行って頂くことができます。
+ br
+ hr.line
+ br
+
+ .row.organize
+  .col-xs-1 
+  .col-xs-3.btn.btn-primary.btn-lg
+   = link_to "①約款の締結", conclusion_user_path(@user)
+  .col-xs-7
+   | ⓪で内容の入力に問題が無ければ約款の締結に進んで下さい。完了した約款はインターネット上で確認することが出来ます。
+ br
+ hr.line
+ br
+
+ .row.organize
+   .col-xs-1 
+   .col-xs-3.btn.btn-primary.btn-lg
+    = link_to "②保証金入金", payment_user_path(@user)
+   .col-xs-7
+    | ご契約締結後、3営業日以内に保証金のご入金をお願い致します。ご入金情報はリンクをクリックして頂くと参照可能です。
+ br
+ hr.line
+ br
+
+ .row.organize
+   .col-xs-1 
+   .col-xs-3.btn.btn-primary.btn-lg
+    /= link_to "③スクリプト作成", edit_user_script_path(@user)
+   .col-xs-7
+    | トークスクリプトの作成をするにあたり必要な事前情報を入力してください。
+ br
+ hr.line
+ br
+
+ .row.organize 
+   .col-xs-1 
+   .col-xs-3.btn.btn-primary.btn-lg
+    = link_to "④googleカレンダー締結", "/uploads/pdf/calendar.pdf", target:"_blank"
+   .col-xs-7
+    | アポイントメントはgoogleカレンダーとDMにてご案内を差し上げます。リンクをクリック頂くと、設定方法のPDFをダウンロード頂けます。
+ br
+ hr.line
+ br/
+
+ .row.organize 
+   .col-xs-1 
+   .col-xs-3.btn.btn-primary.btn-lg
+    | 業務開始
+   .col-xs-7
+    | 弊社にてリストの制作が完了しましたら、架電をスタートします。当タイミングで業務のやりとりをさせて頂くslackにもご案内差し上げます。
+ br
+ hr.line
+ br
+
+
+
+- if admin_signed_in?
+ .tops-wrapper
+  br
+  h2.headline  管理者フロー
+  br/
+  .row.organize
+   .col-xs-1 
+   .col-xs-3.btn.btn-primary.btn-lg
+    = link_to "取引情報の入力", edit_user_path(@user)
+   .col-xs-7
+    | 今回の契約情報の入力を行なってください。
+    br/
+    .red 
+     | ※約款に同意した後に当作業は行わないでください。
+  br
+  hr.line
+  br
+
+  .row.organize
+    .col-xs-1 
+    .col-xs-3.btn.btn-primary.btn-lg
+     /- if @user.script.present?
+      /= link_to "作成済"
+     /- else
+      /= link_to "スクリプト作成", new_user_script_path(@user)
+    .col-xs-7
+     | トークスクリプトの作成をするにあたり必要な事前情報を入力してください。
+  br
+  hr.line
+  br
+
+  .row.organize 
+   .col-xs-1 
+   .col-xs-3.btn.btn-primary.btn-lg
+     = link_to "契約書を発行する", send_mail_user_path(@user), method: :post, data: { confirm: "企業様へ契約依頼のメールを送信しますか？" } 
+   .col-xs-7
+     | ①②の登録が完了したら、企業様へ契約依頼のメール送信を行います。
+  br
+  hr.line
+  br
+
+  .row.organize 
+   .col-xs-1 
+   .col-xs-3.btn.btn-primary.btn-lg
+     = link_to "契約日を連絡", start_user_path(@user)
+   .col-xs-7
+     | 契約締結・入金が完了しましたら、契約日を送信します。契約日を送信するタイミングでは⓪〜④までの情報が問題がないか必ず各種確認し、その後slackの招待を行います。
+  br
+  hr.line
+  br

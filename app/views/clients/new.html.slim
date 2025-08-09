@@ -1,0 +1,104 @@
+- set_meta_tags noindex: true
+.tops-wrapper
+
+  h2.headline
+    | 求人申込フォーム
+  = form_for @client, url: clients_path do |f|
+    table.company
+      colgroup
+
+      tbody
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 会社名
+          td.responsive-cell
+            .input-container
+              = f.text_field :company, placeholder: "株式会社ABC"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 担当者
+          td.responsive-cell
+            .input-container
+              = f.text_field :contact_name, placeholder: "鈴木　次郎"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 携帯番号
+          td.responsive-cell
+            .input-container
+              = f.text_field :tel, placeholder: "080-0000-0000"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 勤務所在地
+          td.responsive-cell
+            .input-container
+              = f.text_field :address, placeholder: "東京都東京市東京町1-1-1"
+
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 企業URL
+          td.responsive-cell
+            .input-container
+              = f.text_field :url, placeholder: "https://abc.com"
+
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | メールアドレス
+        td.responsive-cell
+         .input-container
+          = f.email_field :email, autocomplete: "email"
+      
+      tr
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 求人URL
+          td.responsive-cell
+            .input-container
+              = f.text_field :recruit_url, placeholder: "https://abc.com/recruit"
+
+      tr
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 採用したいビザの種類
+          td.responsive-cell
+            .input-container
+              = f.select :visa, ['特定技能ビザ', '永住ビザ', '技術人文国際ビザ'], { prompt: '選択してください' }, class: 'form-control'
+
+      tr
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 採用人数
+          td.responsive-cell
+            .input-container
+              = f.text_field :number
+
+      tr 
+          td.label-cell
+            strong.label.label-blue 任意
+          td.arrow-box-cell
+            | 備考
+          td.responsive-cell
+            .input-container
+              = f.text_area :remarks
+    table.company
+      tr
+        td[colspan="3"]
+          = f.submit "登録", class: "btn btn-primary", data: { confirm: "送信してもよろしいですか？" }
+

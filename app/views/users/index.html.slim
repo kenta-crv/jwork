@@ -1,0 +1,40 @@
+br
+br
+table.list
+  colgroup
+
+  thead
+    tr
+      th ユーザー名
+      th 電話番号
+      th ビザ種別
+      th 現在の職種
+      th 登録職種
+      th LINE
+      th 情報登録日
+      th 
+  tbody
+    - @users.each do |user|
+      tr
+        td
+          = user.name
+        td
+          = user.tel
+        td
+          = user.work_range
+        td
+          = user.work_range
+        td
+          = user.past_business
+        td 
+          = user.hope_work
+        td 
+          = user.line
+        td
+          = user.updated_at.strftime("%Y年%m月%d日")
+        td
+         = link_to "詳細を見る", user_path(user), class: "btn btn-success"
+         -if admin_signed_in?
+          = link_to "編集", edit_user_path(user), class: "btn btn-success"
+          = link_to "削除", user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
+          

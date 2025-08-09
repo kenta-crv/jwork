@@ -1,0 +1,100 @@
+- set_meta_tags  title: ''
+- set_meta_tags  description: ''
+
+=  form_for @contract, url: thanks_contracts_path(@contract) do |f|
+  br
+  br
+  .tops-wrapper
+    h2.headline
+      | お問い合わせ確認フォーム
+  table.company.responsive-table
+      colgroup
+        col.col-1
+        col.col-2
+        col.col-3
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 会社名
+        td.responsive-cell
+         .input-container
+         = f.hidden_field :co
+         = @contract.co
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 担当者名
+        td.responsive-cell
+         .input-container
+         = f.hidden_field :person_first
+         = f.hidden_field :person_last
+         = @contract.person_first
+         = @contract.person_last
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 電話番号
+        td.responsive-cell
+         .input-container
+          = f.hidden_field :tel
+          = @contract.tel
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 所在地
+        td.responsive-cell
+         .input-container
+          = f.hidden_field :address
+          = @contract.address
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | メールアドレス
+        td.responsive-cell
+         .input-container
+          = f.hidden_field :email
+          = @contract.email
+      tr
+        td.label-cell
+          strong.label.label-blue 任意
+        td.arrow-box-cell
+          | 採用したい職種
+        td.responsive-cell
+         .input-container
+         = f.hidden_field :work
+         = @contract.work
+      tr
+        td.label-cell
+          strong.label.label-blue 任意
+        td.arrow-box-cell
+          | 採用したい人数
+        td.responsive-cell
+         .input-container
+         = f.hidden_field :number
+         = @contract.number
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 発注予定時期
+        td.responsive-cell
+         .input-container
+          = f.hidden_field :period
+          = @contract.period
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 備考・要望
+        td.responsive-cell
+         .input-container
+          = f.hidden_field :remarks
+          = @contract.remarks
+      tr
+       td colspan="3"
+        = f.submit "送信", class:"btn btn-primary"

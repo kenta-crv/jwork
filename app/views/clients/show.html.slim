@@ -1,0 +1,185 @@
+br/
+- if @client.agree.blank?
+ .tops-wrapper
+  h2.headline
+    | 契約同意へお進みください。
+  .actions_container style="text-align: center; margin-bottom: 30px;"
+   = link_to "契約へ進む", conclusion_client_path(@client), class: "btn btn-primary"
+
+.tops-wrapper
+  h2.headline
+    | クライアントアカウント情報
+  br
+  table.company
+      tr
+        td.label-cell
+          | ログインアドレス
+        td
+          = @client.email
+      tr
+        td.label-cell
+          | パスワード
+        td
+          | *********
+  br/
+  br/
+  = link_to '編集する', edit_client_registration_path, class: 'btn btn-primary'
+  = link_to "ログアウト", destroy_client_session_path, method: :delete, class:"btn btn-danger"
+  
+
+
+h2.headline 
+ |求人申込内容の確認 
+ = link_to "編集", edit_client_path(@client), class: "btn btn-primary"
+table.company
+  tbody
+    tr
+      td.label-cell 会社名
+      td= @client.company
+
+    tr
+      td.label-cell 代表取締役
+      td= @client.post_title
+
+    tr
+      td.label-cell 代表者
+      td= @client.representative_name
+
+    tr
+      td.label-cell 担当者
+      td= @client.contact_name
+
+    tr
+      td.label-cell 携帯番号
+      td= @client.tel
+
+    tr
+      td.label-cell メールアドレス
+      td= @client.email
+
+    tr
+      td.label-cell 勤務所在地
+      td= @client.address
+
+    tr
+      td.label-cell 企業URL
+      td= @client.url
+
+h2.headline 自社入力
+
+table.company
+  tbody
+    tr
+      td.label-cell 求人URL
+      td= @client.recruit_url
+
+    tr
+      td.label-cell 採用したいビザの種類
+      td= @client.visa
+
+    tr
+      td.label-cell 特定技能外国人受け入れ申請を行ったことはありますか？
+      td= @client.message
+
+    tr
+      td.label-cell 採用人数
+      td= @client.number
+
+    tr
+      td.label-cell 住居サポート内容
+      td= simple_format(@client.house_support)
+
+    tr
+      td.label-cell 求職者の住居のフォロー
+      td= @client.house_agents
+
+h2.headline 求人URLがない場合の情報
+
+table.company
+  tbody
+    tr
+      td.label-cell 募集業種
+      td= @client.business
+
+    tr
+      td.label-cell 募集職種
+      td= @client.genre
+
+    tr
+      td.label-cell 給料条件
+      td= @client.salary
+
+    tr
+      td.label-cell 勤務時間
+      td= @client.work_time
+
+    tr
+      td.label-cell 休日
+      td= @client.day_off
+
+    tr
+      td.label-cell 業務内容
+      td= simple_format(@client.work_contents)
+
+- if admin_signed_in?
+ h2.headline 特記事項
+
+ table.company
+  tbody
+    tr
+      td= simple_format(@client.remarks)
+
+
+
+ = link_to "削除する", client_path(@client), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
+ = link_to "一覧に戻る", clients_path, class: "btn btn-default"
+
+ = form_for [@client, @client.comments.build] do |f|
+  table.company[width="100%"]
+    col[width="25%"]
+    col[width="25%"]
+    col[width="25%"]
+    tbody
+      tr
+        th
+          | ステータス
+        th
+          | 次回営業日
+        th
+          | コメント
+
+      tr
+        td
+          = f.select(:status, [\
+            ["商談","商談"],\
+            ["見込低","見込低"],\
+            ["見込中","見込中"],\
+            ["見込高","見込高"],\
+            ["契約","契約"],\
+            ["NG","NG"]], include_blank: "選択してください")     
+        td
+          = f.datetime_field :next
+        td
+          = f.text_area :body
+      tr
+        th[colspan="3"]
+         .center
+          = f.submit "登録する", class:"btn btn-primary"
+        small 商談ステータスを入れる場合は商談日を入力。　不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
+
+ table.company[width="100%"]
+  - if @client.comments.any?
+    tbody
+     - @client.comments.each do |comment|
+       tr
+        td
+          = comment.status
+        td
+          = comment.next
+        td
+          = comment.body
+        td
+          = link_to "編集", edit_client_comments_path(@client, comment), target: "_blank"
+
+- if user_signed_in?  # ユーザーがサインインしている場合
+  = link_to "#{@client.company}に取引打診", new_client_offer_path(@client, user_id: current_user.id), class: "btn btn-primary"
