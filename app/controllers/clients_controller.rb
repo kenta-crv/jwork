@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  #before_action :check_client
+  before_action :authenticate_any!, only: [:show]
   def index
     @clients = Client.all
   end
@@ -108,6 +108,12 @@ end
   end
 
   private
+    # client または admin のどちらかでログインしていればOK
+  def authenticate_any!
+    unless client_signed_in? || admin_signed_in?
+      redirect_to new_client_session_path, alert: "ログインが必要です"
+    end
+  end
 
   def client_params
     params.require(:client).permit(
