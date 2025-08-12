@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  before_action :authenticate_admin!, only: [:index, :destroy]  
   before_action :authenticate_any!, only: [:show]
   def index
     @clients = Client.all

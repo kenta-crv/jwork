@@ -9,17 +9,16 @@ class Clients::RegistrationsController < Devise::RegistrationsController
 def create
   @client = Client.new(sign_up_params)
 
-  if @client.save
-    # 管理者でない場合のみメール送信
-    unless admin_signed_in?
-      ClientMailer.received_email(@client).deliver
-      ClientMailer.send_email(@client).deliver
-    end
-
-    redirect_to client_path(id: @client.id), notice: '登録が完了しました。以下より契約へお進みください。'
-  else
-    render 'clients/registrations/new'
+if @client.save
+  sign_in(@client) # ← これを追加
+  unless admin_signed_in?
+    ClientMailer.received_email(@client).deliver
+    ClientMailer.send_email(@client).deliver
   end
+  redirect_to client_path(id: @client.id), notice: '登録が完了しました。以下より契約へお進みください。'
+else
+  render 'clients/registrations/new'
+end
 end
 
   def edit

@@ -130,11 +130,11 @@
             .input-container
               = f.select :house_agents, ['はい', 'いいえ'], { prompt: '選択してください' }, class: 'form-control'
 
-
-    h2.headline
+    -if @admin_signed_in
+     h2.headline
      | 以下は求人URLがない場合に記載してください。
     
-    table.company
+     table.company
       colgroup
 
         tr
@@ -191,7 +191,6 @@
             .input-container
               = f.text_area :work_contents
     
-    -if @admin_signed_in
      h2.headline
      | その他求人における特記事項がある場合、必ず事前に記載してください。
     
