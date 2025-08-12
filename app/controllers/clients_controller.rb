@@ -23,14 +23,12 @@ class ClientsController < ApplicationController
 def create
   @client = Client.new(client_params)
   @client.password = Devise.friendly_token.first(8)
-
   if @client.save
     # 管理者が登録していない場合のみメール送信
     unless admin_signed_in?
       ClientMailer.inquiry_send_email(@client).deliver_now
       ClientMailer.inquiry_received_email(@client).deliver_now
     end
-
     redirect_to thanks_clients_path
   else
     if Client.exists?(email: @client.email)
@@ -45,8 +43,9 @@ end
   end
 
   def show
-    @client = Client.find(params[:id])
-    #@estimates = current_client.estimates
+  @client = Client.find(params[:id])
+  @comments = @client.comments.order(created_at: :desc)
+  @comment = @client.comments.build # 新規用
   end
 
   def edit

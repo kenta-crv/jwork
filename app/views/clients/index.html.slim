@@ -2,31 +2,30 @@
 
 br
 br
-table.company
+table.list
   colgroup
-    col width="10%"
-    col width="10%"
-    col width="20%"
-    col width="20%"
-    col width="40%"
   thead
     tr
       th 会社名
-      th 
-      th 
-      th 情報送信日
+      th ステータス
+      th 次回連絡日
+      th コメント
+      th 最終更新日
       th 採用可否
   tbody
     - @clients.each do |client|
+      - latest_comment = client.comments.order(created_at: :desc).first
       tr
         td
           = link_to client.company, client_path(client.id)
         td
-          /= client.age
+          = latest_comment&.status
         td
-         / = client.experience
+          = latest_comment&.next
         td
-          = client.created_at.strftime("%Y年%m月%d日")
+          = latest_comment&.body
+        td
+          = latest_comment&.created_at ? latest_comment.created_at.strftime("%Y年%m月%d日") : ""
         td
             = link_to "編集", edit_client_path(client), class: "btn btn-success"
             = link_to "削除", client_path(client), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"

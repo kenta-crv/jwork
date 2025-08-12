@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   resources :admins, only: [:show]
 
   resources :contracts do
-    #resource :comments
     collection do
       post :confirm
       post :thanks
@@ -54,7 +53,7 @@ Rails.application.routes.draw do
         post 'thanks'
       end
     end
-    resource :comments
+    resources :comments 
     collection do
       post :confirm
       post :thanks

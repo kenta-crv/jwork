@@ -134,52 +134,49 @@ table.company
  = link_to "削除する", client_path(@client), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
  = link_to "一覧に戻る", clients_path, class: "btn btn-default"
 
- = form_for [@client, @client.comments.build] do |f|
+= form_for [@client, @client.comments.build] do |f|
   table.company[width="100%"]
     col[width="25%"]
     col[width="25%"]
     col[width="25%"]
     tbody
       tr
-        th
-          | ステータス
-        th
-          | 次回営業日
-        th
-          | コメント
-
+        th ステータス
+        th 次回営業日
+        th コメント
       tr
         td
           = f.select(:status, [\
-            ["商談","商談"],\
+            ["商談","商談"], \
             ["見込低","見込低"],\
             ["見込中","見込中"],\
             ["見込高","見込高"],\
             ["契約","契約"],\
-            ["NG","NG"]], include_blank: "選択してください")     
-        td
-          = f.datetime_field :next
-        td
-          = f.text_area :body
+            ["NG","NG"]\
+          ], include_blank: "選択してください")
+        td = f.datetime_field :next
+        td = f.text_area :body
       tr
         th[colspan="3"]
-         .center
-          = f.submit "登録する", class:"btn btn-primary"
-        small 商談ステータスを入れる場合は商談日を入力。　不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
+          .center
+            = f.submit "登録する", class:"btn btn-primary"
+        small 商談ステータスを入れる場合は商談日を入力。不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
 
- table.company[width="100%"]
+table.company[width="100%"]
   - if @client.comments.any?
     tbody
-     - @client.comments.each do |comment|
-       tr
-        td
-          = comment.status
-        td
-          = comment.next
-        td
-          = comment.body
-        td
-          = link_to "編集", edit_client_comments_path(@client, comment), target: "_blank"
+      - @client.comments.each do |comment|
+        - if comment.persisted?  # ← 保存済みだけリンクを出す
+          tr
+            td = comment.status
+            td = comment.next
+            td = comment.body
+            td
+              = link_to "編集", edit_client_comment_path(@client, comment), target: "_blank", class: "btn btn-primary"
+              = link_to '削除', client_comment_path(@client, comment),
+                  method: :delete,
+                  class: 'btn btn-danger',
+                  data: { confirm: '削除しますか？' }
 
-- if user_signed_in?  # ユーザーがサインインしている場合
+- if user_signed_in?
   = link_to "#{@client.company}に取引打診", new_client_offer_path(@client, user_id: current_user.id), class: "btn btn-primary"
