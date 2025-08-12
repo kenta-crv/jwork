@@ -130,7 +130,7 @@
             .input-container
               = f.select :house_agents, ['はい', 'いいえ'], { prompt: '選択してください' }, class: 'form-control'
 
-    -if @admin_signed_in
+    -if admin_signed_in?
      h2.headline
      | 以下は求人URLがない場合に記載してください。
     
