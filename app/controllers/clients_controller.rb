@@ -122,7 +122,7 @@ end
       :message, :agree, :contract_date, :question_people, :question_attractive, :question_open,
       :question_prediction, :agree_1, :agree_2, :agree_3, :agree_4, :agree_5, :agree_6, :agree_7,
       :user_name, :select, :recruit_url, :visa, :business, :genre, :salary, :work_time,
-      :day_off, :work_contents, :number, :house_agents, :house_support, :remarks
+      :day_off, :work_contents, :number, :house_agents, :house_support, :remarks, :plan1, :plan2
     )
   end
 end

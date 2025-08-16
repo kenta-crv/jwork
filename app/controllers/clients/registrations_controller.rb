@@ -48,7 +48,7 @@ end
       :company, :post_title, :representative_name, :contact_name, :tel, :email, :address, :url, :message,
       :recruit_url, :visa, :business, :genre, :salary, :work_time, :day_off, :work_contents, :number,
       :house_agents, :house_support, :remarks,
-      :agree, :contract_date
+      :agree, :contract_date, :plan1, :plan2
     ]
   
     devise_parameter_sanitizer.permit(:sign_up, keys: added_attrs)
