@@ -134,7 +134,7 @@ table.company
  = link_to "削除する", client_path(@client), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
  = link_to "一覧に戻る", clients_path, class: "btn btn-default"
 
-= form_for [@client, @client.comments.build] do |f|
+ = form_for [@client, @client.comments.build] do |f|
   table.company[width="100%"]
     col[width="25%"]
     col[width="25%"]
@@ -162,7 +162,7 @@ table.company
             = f.submit "登録する", class:"btn btn-primary"
         small 商談ステータスを入れる場合は商談日を入力。不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
 
-table.company[width="100%"]
+ table.company[width="100%"]
   - if @client.comments.any?
     tbody
       - @client.comments.each do |comment|
