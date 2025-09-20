@@ -3,6 +3,13 @@ class TopController < ApplicationController
   def index
   end
 
+  def recruit 
+  end
+  def recruit_jp
+  end
+  def recruit_en 
+  end
+
   def database 
   end 
 

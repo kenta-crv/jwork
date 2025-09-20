@@ -1,182 +1,243 @@
-br/
-- if @client.agree.blank?
- .tops-wrapper
-  h2.headline
-    | 契約同意へお進みください。
-  .actions_container style="text-align: center; margin-bottom: 30px;"
-   = link_to "契約へ進む", conclusion_client_path(@client), class: "btn btn-primary"
-
+- set_meta_tags noindex: true
 .tops-wrapper
-  h2.headline
-    | クライアントアカウント情報
-  br
+  h2.headline 基本情報
   table.company
+    colgroup
+      col width="10%"
+      col width="20%"
+      col width="70%"
+    tbody
       tr
         td.label-cell
-          | ログインアドレス
-        td
-          = @client.email
+          strong.label 必須
+        td.arrow-box-cell
+          | ご担当者様名
+        td.responsive-cell
+          = "#{@contract.person_first} #{@contract.person_last}"
       tr
         td.label-cell
-          | パスワード
-        td
-          | *********
-  br/
-  br/
-  = link_to '編集する', edit_client_registration_path, class: 'btn btn-primary'
-  = link_to "ログアウト", destroy_client_session_path, method: :delete, class:"btn btn-danger"
-  
+          strong.label 必須
+        td.arrow-box-cell
+          | 電話番号
+        td.responsive-cell
+          = @contract.tel
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 所在地
+        td.responsive-cell
+          = @contract.address
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | メールアドレス
+        td.responsive-cell
+          = @contract.email
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | メールアドレス（cc） 
+        td.responsive-cell
+          = @contract.cc
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 代表者名
+        td.responsive-cell
+          = "#{@contract.president_first} #{@contract.president_last}"
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 代表者役職
+        td.responsive-cell
+          = @contract.post_title
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 採用ページURL
+        td.responsive-cell
+          = link_to @contract.recruit_url, @contract.recruit_url, target: '_blank' if @contract.recruit_url.present?
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 採用ページURL2
+        td.responsive-cell
+          = link_to @contract.recruit_url_2, @contract.recruit_url_2, target: '_blank' if @contract.recruit_url_2.present?
 
+      - if admin_signed_in?
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 成果報酬単価
+          td.responsive-cell
+            = @contract.unit_price
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 返戻金条件
+          td.responsive-cell
+            = @contract.refund
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 支払日
+          td.responsive-cell
+            = @contract.payment
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 採用予定職種
+          td.responsive-cell
+            = @contract.work
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 希望在留資格
+          td.responsive-cell
+            = @contract.qualifications
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 採用予定人数
+          td.responsive-cell
+            = @contract.number
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 給与幅
+          td.responsive-cell
+            = @contract.salary
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 経験則
+          td.responsive-cell
+            = @contract.experience
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 年齢幅
+          td.responsive-cell
+            = @contract.age
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | ドライバーライセンス
+          td.responsive-cell
+            = @contract.driver_licence
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 書類申請代行
+          td.responsive-cell
+            = @contract.application
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 住居・寮
+          td.responsive-cell
+            = @contract.housing
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | その他の採用条件
+          td.responsive-cell
+            = @contract.employment_conditions
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 書類選考期間・面接回数
+          td.responsive-cell
+            = @contract.document_screening
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 採用率
+          td.responsive-cell
+            = @contract.conversion
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 備考・要望
+          td.responsive-cell
+            = @contract.remarks
 
-h2.headline 
- |求人申込内容の確認 
- = link_to "編集", edit_client_path(@client), class: "btn btn-primary"
-table.company
-  tbody
-    tr
-      td.label-cell 会社名
-      td= @client.company
+.actions_container style="text-align: center; margin-bottom: 30px;"
+  = link_to "契約へ進む", info_contract_path(@contract), class: "btn btn-primary"
+  - if admin_signed_in?
+    = link_to "削除する", contract_path(@contract), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
+  = link_to "一覧に戻る", contracts_path, class: "btn btn-default"
 
-    tr
-      td.label-cell 代表取締役
-      td= @client.post_title
-
-    tr
-      td.label-cell 代表者
-      td= @client.representative_name
-
-    tr
-      td.label-cell 担当者
-      td= @client.contact_name
-
-    tr
-      td.label-cell 携帯番号
-      td= @client.tel
-
-    tr
-      td.label-cell メールアドレス
-      td= @client.email
-
-    tr
-      td.label-cell 勤務所在地
-      td= @client.address
-
-    tr
-      td.label-cell 企業URL
-      td= @client.url
-
-h2.headline 自社入力
-
-table.company
-  tbody
-    tr
-      td.label-cell 求人URL
-      td= @client.recruit_url
-
-    tr
-      td.label-cell 採用したいビザの種類
-      td= @client.visa
-
-    tr
-      td.label-cell 特定技能外国人受け入れ申請を行ったことはありますか？
-      td= @client.message
-
-    tr
-      td.label-cell 採用人数
-      td= @client.number
-
-    tr
-      td.label-cell 住居サポート内容
-      td= simple_format(@client.house_support)
-
-    tr
-      td.label-cell 求職者の住居のフォロー
-      td= @client.house_agents
-
-h2.headline 求人URLがない場合の情報
-
-table.company
-  tbody
-    tr
-      td.label-cell 募集業種
-      td= @client.business
-
-    tr
-      td.label-cell 募集職種
-      td= @client.genre
-
-    tr
-      td.label-cell 給料条件
-      td= @client.salary
-
-    tr
-      td.label-cell 勤務時間
-      td= @client.work_time
-
-    tr
-      td.label-cell 休日
-      td= @client.day_off
-
-    tr
-      td.label-cell 業務内容
-      td= simple_format(@client.work_contents)
-
-- if admin_signed_in?
- h2.headline 特記事項
-
- table.company
-  tbody
-    tr
-      td= simple_format(@client.remarks)
-
-
-
- = link_to "削除する", client_path(@client), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
- = link_to "一覧に戻る", clients_path, class: "btn btn-default"
-
- = form_for [@client, @client.comments.build] do |f|
-  table.company[width="100%"]
+/- if admin_signed_in?
+ /= form_for [@contract, @contract.comments.build] do |f|
+ / table.company[width="100%"]
     col[width="25%"]
     col[width="25%"]
     col[width="25%"]
     tbody
       tr
-        th ステータス
-        th 次回営業日
-        th コメント
-      tr
-        td
-          = f.select(:status, [\
-            ["商談","商談"], \
+          th
+            | ステータス
+          th
+            | 次回営業日
+          th
+            | コメント
+
+  /    tr
+          td
+            = f.select(:status, [\
+            ["商談","商談"],\
             ["見込低","見込低"],\
             ["見込中","見込中"],\
             ["見込高","見込高"],\
             ["契約","契約"],\
-            ["NG","NG"]\
-          ], include_blank: "選択してください")
-        td = f.datetime_field :next
-        td = f.text_area :body
+            ["NG","NG"]],include_blank: "選択してください")     
+          td
+            = f.datetime_field :next
+          td
+            = f.text_area :body
       tr
         th[colspan="3"]
-          .center
-            = f.submit "登録する", class:"btn btn-primary"
-        small 商談ステータスを入れる場合は商談日を入力。不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
-
- table.company[width="100%"]
-  - if @client.comments.any?
+         .center
+          = f.submit "登録する", class:"btn btn-primary"
+ /small 商談ステータスを入れる場合は商談日を入力。　不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
+ /table.company[width="100%"]
+ / - if @contract.comments.any?
     tbody
-      - @client.comments.each do |comment|
-        - if comment.persisted?  # ← 保存済みだけリンクを出す
-          tr
-            td = comment.status
-            td = comment.next
-            td = comment.body
-            td
-              = link_to "編集", edit_client_comment_path(@client, comment), target: "_blank", class: "btn btn-primary"
-              = link_to '削除', client_comment_path(@client, comment),
-                  method: :delete,
-                  class: 'btn btn-danger',
-                  data: { confirm: '削除しますか？' }
+     - @contract.comments.each do |comment|
+       tr
+        td
+          = comment.status
+        td
+          = comment.next
+        td
+          = comment.body
+        - if comment.id.present?
+          td
+           /= link_to '編集', edit_contract_comments_path(@contract, comment)
+          td 
+            = link_to '削除', contract_comment_path(contract_id: @contract.id, id: comment.id), method: :delete, data: { confirm: '本当に削除しますか？' }        
 
-- if user_signed_in?
-  = link_to "#{@client.company}に取引打診", new_client_offer_path(@client, user_id: current_user.id), class: "btn btn-primary"

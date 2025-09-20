@@ -1441,3 +1441,238 @@ table.right {margin:5px 50px 5px 0px;}
   font-size:60px;
   font-size:bold;
 }
+
+
+/* 全体ラッパー */
+.category-wrapper {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: left;
+}
+
+/* 大見出し */
+.headline {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+}
+
+/* 求人カード */
+.job-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(5, 5, 238, 0.2);
+  padding: 24px;
+  margin-bottom: 24px;
+  transition: box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.job-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #2c3e50;
+}
+
+.job-card p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #555;
+}
+
+/* ボタン */
+.job-card .btn-detail {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.job-card .btn-detail:hover {
+  background-color: #2980b9;
+}
+
+/* 求人詳細ページ専用ラッパー */
+.job-detail-wrapper {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* 大見出し */
+.job-detail-wrapper h1.job-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* サブテキスト */
+.job-detail-wrapper p.job-subtitle {
+  font-size: 1.2rem;
+  color: #888;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* セクションタイトル */
+.job-detail-wrapper h2.section-title {
+  font-size: 1.6rem;
+  color: #34495e;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
+/* テーブル全体 */
+.job-detail-wrapper table.job-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 36px;
+}
+
+/* ラベルセル */
+.job-detail-wrapper table.job-table td.label-cell {
+  width: 30%;
+  font-weight: 600;
+  color: #2c3e50;
+  padding: 10px 12px;
+  background-color: #f4f7fa;
+  border: 1px solid #ddd;
+  vertical-align: top;
+}
+
+/* データセル */
+.job-detail-wrapper table.job-table td.data-cell {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  color: #555;
+  vertical-align: top;
+  white-space: pre-line;
+}
+
+/* ボタンラッパー */
+.job-detail-wrapper .action-buttons,
+.job-detail-wrapper .admin-actions {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* ボタン共通 */
+.job-detail-wrapper .btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 8px;
+}
+
+/* 青ボタン */
+.job-detail-wrapper .btn-primary {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.job-detail-wrapper .btn-primary:hover {
+  background-color: #2980b9;
+}
+
+/* 赤ボタン */
+.job-detail-wrapper .btn-danger {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.job-detail-wrapper .btn-danger:hover {
+  background-color: #c0392b;
+}
+
+/* グレーのセカンダリーボタン */
+.job-detail-wrapper .btn-secondary {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+  border: none;
+}
+
+.job-detail-wrapper .btn-secondary:hover {
+  background-color: #95a5a6;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .category-wrapper {
+    padding: 0 12px;
+  }
+
+  .headline {
+    font-size: 22px;
+  }
+
+  .job-card {
+    padding: 16px;
+  }
+
+  .job-card h3 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .job-card p {
+    font-size: 14px;
+  }
+
+  .job-detail-wrapper {
+    padding: 0 12px;
+  }
+
+  .job-detail-wrapper h1.job-title {
+    font-size: 1.8rem;
+  }
+
+  .job-detail-wrapper p.job-subtitle {
+    font-size: 1rem;
+  }
+
+  .job-detail-wrapper h2.section-title {
+    font-size: 1.4rem;
+  }
+
+  .job-detail-wrapper table.job-table td.label-cell,
+  .job-detail-wrapper table.job-table td.data-cell {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .job-detail-wrapper table.job-table td.label-cell {
+    background-color: #eef2f7;
+    border-bottom: none;
+  }
+
+  .job-detail-wrapper table.job-table td.data-cell {
+    border-top: none;
+    margin-bottom: 12px;
+  }
+}
