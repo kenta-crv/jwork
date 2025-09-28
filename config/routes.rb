@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "top/recruit" => 'top#recruit'  # クライアント側トップ
   get "top/recruit_jp" => 'top#recruit_jp'  # クライアント側トップ
   get "top/recruit_en" => 'top#recruit_en'  # クライアント側トップ
+  get "top/flow" => 'top#flow'  # クライアント側トップ
 
   get "/appointer" => 'top#appointer' # ユーザー側トップ
   get "/database" => 'top#database' # ユーザー側トップ

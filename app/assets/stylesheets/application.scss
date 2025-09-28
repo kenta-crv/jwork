@@ -508,6 +508,13 @@ textarea {
         text-decoration: underline;
         font-weight:bold;
         }
+  .red-text {
+    color: red;
+    font-size: inherit;       /* 親と同じサイズ */
+    font-weight: inherit;     /* 親と同じ太さ */
+    display: inline;          /* 改行させない */
+    text-decoration: none;    /* 下線を消す */
+}
 }
 /*hr*/
 .line {
@@ -1676,3 +1683,5 @@ table.right {margin:5px 50px 5px 0px;}
     margin-bottom: 12px;
   }
 }
+
+
