@@ -1685,3 +1685,136 @@ table.right {margin:5px 50px 5px 0px;}
 }
 
 
+
+
+
+
+/* ===============================
+   J Work 専用デザインスタイル
+   =============================== */
+
+.jwork-section {
+  background: #f9fafb;
+  padding: 60px 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.jwork-headline {
+  font-size: 2.5rem;
+  color: #222;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.jwork-headline::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #007aff;
+  margin: 12px auto 0;
+  border-radius: 3px;
+}
+
+.jwork-intro-text {
+  font-size: 1.05rem;
+  color: #333;
+  line-height: 1.9;
+  text-align: justify;
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+
+.jwork-intro-text p {
+  margin-bottom: 20px;
+}
+
+.jwork-rules-box {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  padding: 30px;
+  margin: 0 auto;
+  max-width: 900px;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.jwork-rules-box p {
+  margin-bottom: 12px;
+}
+
+.jwork-rules-box p::before {
+  content: "・";
+  color: #007aff;
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.jwork-image-area {
+  text-align: center;
+}
+
+.jwork-image-area img {
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.jwork-example-box {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  padding: 30px;
+}
+
+.jwork-example-box p {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.8;
+}
+
+.jwork-section h1 {
+  line-height: 1.8;
+  min-height: 120px; /* 高さを確保して詰まり防止 */
+}
+
+@media (max-width: 768px) {
+  .jwork-section h1 {
+    min-height: 160px; /* スマホ時はさらに余裕を確保 */
+  }
+}
+.jwork-container {
+  display: flex;
+  gap: 20px; /* ボックス間の隙間 */
+  justify-content: space-between;
+}
+
+.jwork-box {
+  border: 1px solid #ccc;
+  padding: 15px;
+  width: 30%; /* 3列に収めるため */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.jwork-example-box img,
+.jwork-example-box .image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.condition {
+  color: red;
+  font-weight: bold;
+}

@@ -9,6 +9,8 @@ class TopController < ApplicationController
   end
   def recruit_en 
   end
+  def policy
+  end
   def flow
   end
 
