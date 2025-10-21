@@ -44,6 +44,9 @@ class DeviseCreateClients < ActiveRecord::Migration[5.2]
 
       t.string :agree #契約同意
       t.string :contract_date #契約日
+
+      t.string :plan1 
+      t.string :plan2 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at
