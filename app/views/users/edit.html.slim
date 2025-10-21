@@ -1,13 +1,12 @@
 - set_meta_tags noindex: true
 br/
 br/
-.tops-wrapper
+= form_for @user do |f|
+ .tops-wrapper
   h2.headline 詳細情報入力
-  = form_for @user do |f|
-   - @user.errors.full_messages.each do |message|
-          li = message
-   br/
-   table.company
+  - @user.errors.full_messages.each do |message|
+    li = message
+  table.company
      colgroup
       col width="20%"
       col width="20%"
@@ -19,12 +18,12 @@ br/
           td.arrow_box
             | お名前 [full_name]
           td
-            = f.text_field :name, placeholder:"山田　太郎"
+            = f.text_field :name, placeholder:"Taro Yamada"
        tr
           td
             strong.label 必須
           td.arrow_box
-            | 年齢 [age]
+            | 生年月日 [age]
           td
             = f.text_field :age, placeholder:"25才"
        tr
@@ -33,7 +32,7 @@ br/
           td.arrow_box
             | 性別 [gender]
           td
-            = f.text_field :gender, placeholder:"25才"
+            = f.text_field :gender, placeholder:"Male"
        tr
           td
             strong.label 必須
@@ -48,14 +47,15 @@ br/
             | メールアドレス [Mail]
           td
             = f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"yamada@abc.com"
-       tr
+       - if admin_signed_in?
+        tr
           td
             strong.label 必須
           td.arrow_box
             | あなたの国籍はどこですか？ [what_is_your_nationality?]
           td
             = f.text_field :nationality, placeholder:"JAPAN"
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
@@ -66,14 +66,14 @@ br/
              ["技術・人文・国際ビザ[Engineer/Humanities/International Visa]","技術・人文・国際ビザ[Engineer/Humanities/International Visa]"],\
              ["永住ビザ [Permanent Resident Visa]","永住ビザ [Permanent Resident Visa]"],\
             ], include_blank: "選択してください[Please select]")       
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
             | あなたがもっているすべてのしかくをかいてください [pletell_us_all_the_qualifications_you_have]
           td
             = f.text_field :qualifications  
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
@@ -90,28 +90,28 @@ br/
              ["ドライバー[Driver]","ドライバー[Driver]"],\
              ["その他[Other]","その他[Other]"],\
             ], include_blank: "選択してください[Please select]")   
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
             | あなたのしょくしゅをおしえてください？[what_industry_are[were]_you_in?]
           td
             = f.text_field :past_year
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
             | 希望職種
           td
             = f.text_field :hope_work
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
             | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
           td
             = f.text_field :past_year
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
@@ -122,7 +122,7 @@ br/
              ["1ヶ月以内[Within 1 month]","1ヶ月以内[Within 1 month]"],\
              ["3ヶ月以内[Within 1 month]","3ヶ月以内[Within 1 month]"],\
             ], include_blank: "選択してください[Please select]")  
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
@@ -135,7 +135,7 @@ br/
              ["13:00~17:00",""],\
              ["17:00~20:00",""],\
             ], include_blank: "選択してください[Please select]")  
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
@@ -145,7 +145,7 @@ br/
              ["できます[Yes, I can.]","できます[Yes, I can.]"],\
              ["できません[No, I can't]","できません[No, I can't]"],\
             ], include_blank: "選択してください[Please select]")  
-       tr
+        tr
           td
             strong.label 必須
           td.arrow_box
@@ -155,37 +155,185 @@ br/
              ["できます[Yes, I can.]","できます[Yes, I can.]"],\
              ["できません[No, I can't]","できません[No, I can't]"],\
             ], include_blank: "選択してください[Please select]")  
-       tr
+
+  - if admin_signed_in?
+   h2.headline Interview
+
+   table.company
+    colgroup
+      col width="20%"
+      col width="20%"
+      col width="60%"
+    tbody
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 運転免許
+        td
+           = f.select(:drivers_lisence, [\
+            ["なし","なし"],\
+            ["あり","あり"],\
+           ], include_blank: "選択してください")
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 車所有有無
+        td
+          = f.text_field :car
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 転居可否
+        td
+          = f.text_field :change_the_address_check
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 現在のお仕事
+        td
+          = f.text_field :work_now
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 軽貨物経験
+        td
+           = f.select(:experience, [\
+            ["なし","なし"],\
+            ["あり","あり"],\
+           ], include_blank: "選択してください")
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | ビザの種類
+        td
+           = f.select(:which_visa, [\
+            ["会話が難しい","会話が難しい"],\
+            ["会話は可能","会話は可能"],\
+            ["ある程度流暢","ある程度流暢"],\
+            ["流暢","流暢"],\
+           ], include_blank: "選択してください")
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 日本語レベル
+        td
+           = f.select(:japanese_level, [\
+            ["会話が難しい","会話が難しい"],\
+            ["会話は可能","会話は可能"],\
+            ["ある程度流暢","ある程度流暢"],\
+            ["流暢","流暢"],\
+           ], include_blank: "選択してください")
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 日本在住期間
+        td
+           = f.select(:visiting_in_japan, [\
+            ["来たばかり","来たばかり"],\
+            ["1~5年","1~5年"],\
+            ["6~14年","6〜14年"],\
+            ["15年以上","15年以上"],\
+           ], include_blank: "選択してください")
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 漢字レベル
+        td
+           = f.select(:kanzi, [\
+            ["ネイティブ","ネイティブ"],\
+            ["ある程度読める","ある程度読める"],\
+            ["簡単な漢字なら読める","簡単な漢字なら読める"],\
+            ["ある程度イメージで把握","ある程度イメージで把握"],\
+            ["全く読めない","全く読めない"],\
+           ], include_blank: "選択してください")
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 勤務開始希望
+        td
+          = f.text_field :start
+      tr
           td
             strong.label 必須
           td.arrow_box
             | 備考
           td
-            = f.text_field :remarks
-
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | ライン登録
-          td
-           = f.select(:line, [\
-            ["SMS","SMS"],\
-            ["LINE","LINE"],\
-           ], include_blank: "選択してください")
-       tr
+            = f.text_area :remarks
+      tr
           td
             strong.label 必須
           td.arrow_box
             | オススメ度
           td
            = f.select(:recommend, [\
-            ["5","5"],\
-            ["4","4"],\
-            ["3","3"],\
-            ["2","2"],\
-            ["1","1"],\
+            ["100","100"],\
+            ["90","90"],\
+            ["80","80"],\
+            ["70","70"],\
+            ["0","0"],\
            ], include_blank: "選択してください")
-       tr.center
+
+  - if admin_signed_in?
+   h2.headline Work Information
+
+   table.company
+    colgroup
+      col width="20%"
+      col width="20%"
+      col width="60%"
+    tbody
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 報酬
+        td
+          = f.text_field :deliver
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 月休み
+        td
+          = f.text_field :day_off
+
+  table.company
+    colgroup
+      col width="20%"
+      col width="20%"
+      col width="60%"
+    tbody
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 緊急連絡先（名前）
+        td
+          = f.text_field :emergency_name, placeholder:"Yoko Yamada"
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 関連性
+        td
+          = f.text_field :emergency_relationships, placeholder:"Mother"
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 緊急連絡先電話番号
+        td
+          = f.text_field :tel, placeholder:"+818010101010"
+      tr.center
           td[colspan="3"]
             = f.submit '確認する'

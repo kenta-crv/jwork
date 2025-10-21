@@ -1,32 +1,30 @@
-<%= @worker.name %> 様
+<%= @user.company%> <%= @user.representative_name%>様
 
-お世話になっております。
+この度は外国人転職『J Work』にご登録いただきありがとうございます。
 
-外国人転職『J Work』でございます。
+担当者にて内容を確認し、求職者選定を開始致します。求職者より面接依頼が発生した場合、LINEにてご連絡を都度させていただきます。
 
-先日はご対応いただきありがとうございました。
+ログインURL：https://j-work.jp/users/<%= @user.id %>
 
-以下、弊社にて情報をまとめましたので、間違っている点がありましたらご連絡ください。
-
-https://j-work.jp/clients/<%= @client.id %>
+何卒よろしくお願い致します。
 
 --------------------------
-お名前（フルネーム）: <%= @user.name %>
-年齢: <%= @user.age %>
-電話番号: <%= @user.tel %>
+会社名: <%= @user.company %>
+代表取締役: <%= @user.post_title %>
+代表者: <%= @user.representative_name %>
+担当者: <%= @user.contact_name %>
+携帯番号: <%= @user.tel %>
 メールアドレス: <%= @user.email %>
-国籍: <%= @user.nationality %>
-業種: <%= @user.past_business %>
-職種: <%= @user.past_genre %>
-年数: <%= @user.past_year %>
-資格: <%= @user.qualifications %>
-働ける範囲: <%= @user.work_range %>
-希望職種: <%= @user.hope_work %>
-その他希望: <%= @user.hope_other %>
-備考: <%= @user.remarks %>
+勤務所在地: <%= @user.address %>
+企業URL: <%= @user.url %>
+求人URL: <%= @user.recruit_url %>
+採用したいビザの種類: <%= @user.visa %>
+特定技能外国人受け入れ申請を行ったことはありますか？：<%= @user.message %>
+採用人数: <%= @user.number %>
+住居サポート内容: <%= @user.house_support %>
+求職者の住居のフォロー: <%= @user.house_agents %>
 --------------------------
 
-よろしくお願い致します。
 
 外国人転職『J Work』
 https://j-work.jp/

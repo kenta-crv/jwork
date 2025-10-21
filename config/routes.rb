@@ -30,22 +30,6 @@ Rails.application.routes.draw do
   }
   resources :admins, only: [:show]
 
-  resources :contracts do
-    collection do
-      post :confirm
-      post :thanks
-    end
-    member do
-      post :send_mail
-      get "info" #案内
-      get "conclusion"
-    end
-  end
-
-  #get  '/clients/new', to: 'clients#new',    as: :new_client
-  #post '/clients',     to: 'clients#create', as: :clients
-  #get '/clients/thanks', to: 'clients#thanks', as: :thanks_clients
-
   # クライアントアカウント
   devise_for :clients, controllers: {
     registrations: 'clients/registrations',
@@ -53,12 +37,6 @@ Rails.application.routes.draw do
     passwords: 'clients/passwords'
   }
   resources :clients, except: [:new, :create] do
-    resources :offers do
-      member do
-        get 'confirm'
-        post 'thanks'
-      end
-    end
     resources :comments 
     collection do
       post :confirm
@@ -71,32 +49,12 @@ Rails.application.routes.draw do
     end
   end
 
-    #加盟店先アカウント
-    devise_for :partners, controllers: {
-      registrations: 'partners/registrations',
-      sessions: 'partners/sessions'
-    }
-    resources :partners do
-      member do
-        post :disclose
-        post :send_mail
-        post :send_mail_start #開始日の送信
-        get "conclusion"
-      end
-    end
-
   # ユーザーアカウントとワーカーリソース
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
   resources :users do
-    resources :offers do
-      member do
-        get 'confirm'
-        post 'thanks'
-      end
-    end
     resource :comments
     collection do
       post :confirm
@@ -110,10 +68,6 @@ Rails.application.routes.draw do
       get "payment"
       get "calendar"
       get "start"
-      post 'offer_email', to: 'workers#offer_email', as: 'offer_email'
-      post 'reject_email', to: 'workers#reject_email', as: 'reject_email'
    end
   end
-
-  resources :offers, only: [:index, :show]
 end

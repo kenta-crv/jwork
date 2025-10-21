@@ -1,3 +1,0 @@
-class Contract < ApplicationRecord
-
-end

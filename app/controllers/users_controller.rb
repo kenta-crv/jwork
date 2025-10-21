@@ -13,21 +13,11 @@ class UsersController < ApplicationController
   def show
     #user_id = params[:user_id] || params[:id]
     @user = User.find(params[:id])
+    @comment = Comment.new
   end  
 
   def edit
     @user = User.find(params[:id])
-  end
-
-  def update
-    @user = current_user
-    if @user.update(user_params)
-      UserMailer.second_received_email(@user).deliver
-      #UserMailer.second_send_email(@user).deliver
-      redirect_to @user, notice: 'ご登録ありがとうございます。社内審査後、担当者よりご連絡差し上げます。'
-    else
-      render :edit
-    end
   end
 
   def info
@@ -38,10 +28,31 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      # conclusion.html.slimからの送信で、かつ同意が得られた場合
+      if @user.agree == "同意しました"
+          # メール送信処理
+          UserMailer.contract_received_email(@user).deliver_now
+          UserMailer.contract_send_email(@user).deliver_now
+          flash[:notice] = "契約が完了しました"
+          redirect_to user_path(@user)
+        # edit.html.slimからの送信、またはconclusion.html.slimからの送信でも同意が得られなかった場合
+      else
+        redirect_to user_path(@user)
+      end
+    else
+      # 更新が失敗した場合の処理
+      render :edit
+    end
+  end
+
   def conclusion
     @user = User.find(params[:id])
     today = Date.today.strftime("%Y-%m-%d")
   end
+
 
   def destroy
     @user = User.find(params[:id])
@@ -79,6 +90,37 @@ class UsersController < ApplicationController
     :call_available,     #電話可能時間
     :speak_japanese,     #日本語会話
     :gender,     #性別
+    #Interviews
+    :drivers_lisence,
+    :car,
+    :address,
+    :change_the_address_check,
+    :work_now,
+    :experience,
+    :which_visa,
+    :japanese_level,   
+    :visiting_in_japan, 
+    :kanzi, 
+    :start,
+    # Users 
+    :address_detail,   
+    :drivers_up,   
+    :emergency_name, 
+    :emergency_relationships,
+    :emergency_tel,  
+    # Users
+    :agree, 
+    :check_1, 
+    :check_2, 
+    :check_3, 
+    :check_4, 
+    :check_5, 
+    :check_6, 
+    :check_7,
+
+    :deliver,
+    :day_off,
+    :contract_date,
     )
   end
 end

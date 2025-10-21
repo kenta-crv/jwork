@@ -5,13 +5,11 @@ table.list
 
   thead
     tr
-      th ユーザー名
-      th 電話番号
-      th ビザ種別
-      th 現在の職種
-      th 登録職種
-      th LINE
-      th 情報登録日
+      th User_name
+      th Phone_number
+      th email
+      th Phase
+      th Register_date
       th 
   tbody
     - @users.each do |user|
@@ -21,17 +19,11 @@ table.list
         td
           = user.tel
         td
-          = user.work_range
+          = user.email
         td
-          = user.work_range
-        td
-          = user.past_business
-        td 
-          = user.hope_work
-        td 
           = user.line
         td
-          = user.updated_at.strftime("%Y年%m月%d日")
+          = user.created_at.strftime("%Y年%m月%d日")
         td
          = link_to "詳細を見る", user_path(user), class: "btn btn-success"
          -if admin_signed_in?

@@ -1,0 +1,25 @@
+<%= @user.company%> <%= @user.representative_name%>様
+
+この度は外国人転職『J Work』にご登録いただきありがとうございます。
+
+担当者にて内容を確認し、ご連絡差し上げます。
+
+引き続きよろしくお願い致します。
+
+--------------------------
+会社名: <%= @user.company %>
+担当者: <%= @user.contact_name %>
+携帯番号: <%= @user.tel %>
+勤務所在地: <%= @user.address %>
+企業URL: <%= @user.url %>
+メールアドレス: <%= @user.email %>
+求人URL: <%= @user.recruit_url.presence || 'なし' %>
+採用したいビザの種類: <%= @user.visa.presence || '未選択' %>
+採用人数: <%= @user.number.presence || '未記入' %>
+備考:<%= @user.remarks.presence || 'なし' %>
+--------------------------
+
+外国人転職『J Work』
+https://j-work.jp/
+info@j-work.jp
+東京都港区芝5-27-3

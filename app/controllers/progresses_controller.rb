@@ -1,34 +1,33 @@
 class ProgressesController < ApplicationController
     def create
-      @worker = Worker.find(params[:worker_id])
-      @progress = @worker.progresses.new(progress_params)
+      @user = User.find(params[:user_id])
+      @progress = @user.progresses.new(progress_params)
       
       if @progress.save
-        WorkerMailer.new_progress_notification(@progress).deliver_now
-        redirect_to worker_path(@worker), notice: 'コメントを更新しました。'
+        UserMailer.new_progress_notification(@progress).deliver_now
+        redirect_to user_path(@user), notice: 'コメントを更新しました。'
       else
         render :new
       end
     end
     
-  
     def edit
-      @worker = Worker.find(params[:worker_id])
+      @user = User.find(params[:user_id])
       @progress = Progress.find(params[:id])
     end
   
       def destroy
-          @worker = Worker.find(params[:worker_id])
-          @progress = @worker.progresses.find(params[:id])
+          @user = User.find(params[:user_id])
+          @progress = @user.progresses.find(params[:id])
           @progress.destroy
-          redirect_to worker_path(@worker)
+          redirect_to user_path(@user)
       end
   
     def update
-      @worker = Worker.find(params[:worker_id])
-      @progress = @worker.progresses.find(params[:id])
+      @user = User.find(params[:user_id])
+      @progress = @user.progresses.find(params[:id])
       if @progress.update(progress_params)
-         redirect_to worker_path(@worker)
+         redirect_to user_path(@user)
       else
           render 'edit'
       end

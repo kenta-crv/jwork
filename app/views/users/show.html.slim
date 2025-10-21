@@ -42,83 +42,165 @@
           | メールアドレス [Mail]
         td
           = @user.email
-      tr
+      - if admin_signed_in?
+       tr
         td
           strong.label 必須
         td.arrow_box
           | あなたの国籍はどこですか？ [what_is_your_nationality?]
         td
           = @user.nationality
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
         td
           = @user.work_range
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | あなたがもっているすべてのしかくをかいてください [pletell_us_all_the_qualifications_you_have]
         td
           = @user.qualifications
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
         td
           = @user.past_business
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | あなたのしょくしゅをおしえてください？[what_industry_are[were]_you_in?]
         td
           = @user.past_year
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | 希望職種
         td
           = @user.hope_work
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
         td
           = @user.past_year
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | いつから働けますか？ [Since when can you job?]
         td
           = @user.hope_work
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | 電話を出れる時間を教えてください。[Could you tell me the time you will come out.]
         td
           = @user.call_available
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | 日本語で会話できますか？[Can you speak Japanese conversation?]
         td
           = @user.speak_japanese
-      tr
+       tr
         td
           strong.label 必須
         td.arrow_box
           | 転居はできますか？[Can I move to a different prefecture?]
         td
           = @user.change_the_address
+
+
+  - if admin_signed_in?
+   h2.headline Interview
+
+   table.company
+    colgroup
+      col width="20%"
+      col width="20%"
+      col width="60%"
+    tbody
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 運転免許
+        td
+          = @user.drivers_lisence
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 車所有有無
+        td
+          = @user.car
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 転居可否
+        td
+          = @user.change_the_address_check
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 現在のお仕事
+        td
+          = @user.work_now
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 軽貨物経験
+        td
+          = @user.experience
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | ビザの種類
+        td
+          = @user.which_visa
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 日本語レベル
+        td
+          = @user.japanese_level
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 日本在住期間
+        td
+          = @user.visiting_in_japan
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 漢字レベル
+        td
+          = @user.kanzi
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 勤務開始希望
+        td
+          = @user.start
       tr
         td
           strong.label 必須
@@ -130,13 +212,158 @@
         td
           strong.label 必須
         td.arrow_box
-          | ライン登録
+          | オススメ度
         td
-          = @user.line
+          = @user.recommend
+
+
+  h2.headline Other
+
+  table.company
+    colgroup
+      col width="20%"
+      col width="20%"
+      col width="60%"
+    tbody
       tr
         td
           strong.label 必須
         td.arrow_box
-          | オススメ度
+          | 緊急連絡先（名前）
         td
-          = @user.recommend
+          = @user.emergency_name
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 関連性
+        td
+          = @user.emergency_relationships
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 緊急連絡先電話番号
+        td
+          = @user.tel
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 報酬
+        td
+          = @user.deliver
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 月休み
+        td
+          = @user.day_off
+
+
+  h2.headline Contract information
+
+  table.company
+    colgroup
+      col width="20%"
+      col width="60%"
+      col width="20%"
+    tbody
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 当社は外国人が働きやすい環境を作ることを重要視している。そのため、各業務委託者には、日本のマナーや節度、挨拶、礼儀をしっかりと行うものとする。
+        td
+          = @user.check_1
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 乙は連絡もなく欠勤をしたり、勤務時間に遅刻することなく、稼働を遂行する。
+        td
+          = @user.check_2
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 退職を行う場合、必ず退職の2ヶ月前に甲に通知を行うものとする。
+        td
+          = @user.check_3
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 佐川急便の場合、1日の平均配送は120個を下回らないよう、効率的に稼働を行うものとする。その他の業務の場合、発注元からの指定個数を下回らないものとする。
+        td
+          = @user.check_4
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | その他契約約款に同意します。
+        td
+          = @user.agree
+      tr
+        td
+          strong.label 必須
+        td.arrow_box
+          | 契約日
+        td
+          = @user.contract_date 
+
+
+.actions_container style="text-align: center; margin-bottom: 30px;"
+  = link_to "契約へ進む", info_user_path(@user), class: "btn btn-primary"
+  - if admin_signed_in?
+   = link_to "削除する", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
+   = link_to "一覧に戻る", users_path, class: "btn btn-default"
+
+- if admin_signed_in?
+ = form_for [@user, @user.comments.build] do |f|
+  table.company[width="100%"]
+    col[width="25%"]
+    col[width="25%"]
+    col[width="25%"]
+    tbody
+      tr
+          th
+            | ステータス
+          th
+            | 次回営業日
+          th
+            | コメント
+
+      tr
+          td
+            = f.select(:status, [\
+            ["Absense","Absense"],\
+            ["Busy","Busy"],\
+            ["LINE","LINE"],\
+            ["HIRE","HIRE"],\
+            ["NG","NG"]],include_blank: "選択してください")     
+          td
+            = f.datetime_field :next
+          td
+            = f.text_area :body
+      tr
+        th[colspan="3"]
+         .center
+          = f.submit "登録する", class:"btn btn-primary"
+ small 商談ステータスを入れる場合は商談日を入力。　不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
+ table.company[width="100%"]
+  - if @user.comments.any?
+    tbody
+     - @user.comments.each do |comment|
+       tr
+        td
+          = comment.status
+        td
+          = comment.next
+        td
+          = comment.body
+        td
+          | 編集
+          | 削除
+
