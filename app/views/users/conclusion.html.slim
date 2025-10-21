@@ -102,15 +102,10 @@
  
   h3.headline 単価表
   table.company.responsive-table
-     col width="25%"
-     col width="25%"
-     col width="25%"
-     col width="25%"
      tr 
-       th 単価（税込）
+       th ほうしゅう[Reward unit price]
        td #{@user.deliver}
-          円
-       th 休日
+       th 月休み[Monthly holiday]
        td #{@user.day_off}
 
 
@@ -124,62 +119,62 @@
          col.col-3
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
-          | 当社は外国人が働きやすい環境を作ることを重要視している。そのため、各業務委託者には、日本のマナーや節度、挨拶、礼儀をしっかりと行うものとする。
+          | 当社（とうしゃ）は外国人（がいこくじん）が働（はたら）きやすい環境（かんきょう）を作（つく）ることを重要視（じゅうようし）している。そのため、各（かく）業務委託者（ぎょうむいたくしゃ）には、日本（にほん）のマナーや節度（せつど）、挨拶（あいさつ）、礼儀（れいぎ）をしっかりと行（おこな）うものとする。 [Our company values creating a comfortable environment for foreign workers, and therefore requires all contractors to properly observe Japanese manners, propriety, greetings, and courtesy.]
         td
           = f.select(:check_1, [ \
-             ["選択する","選択する"],      \
-             ["同意しました","同意しました"],      \
+             ["Select","Select"],      \
+             ["Agree","Agree"],      \
              ])
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
-          | 乙は連絡もなく欠勤をしたり、勤務時間に遅刻することなく、稼働を遂行する。
+          | 乙（おつ）は連絡（れんらく）もなく欠勤（けっきん）をしたり、勤務時間（きんむじかん）に遅刻（ちこく）することなく、稼働（かどう）を遂行（すいこう）する。 [Party B shall perform duties without absence or tardiness and without failing to make contact.]
         td
           = f.select(:check_2, [ \
-             ["選択する","選択する"],      \
-             ["同意しました","同意しました"],      \
+             ["Select","Select"],      \
+             ["Agree","Agree"],      \
              ])
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
-          | 退職を行う場合、必ず退職の2ヶ月前に甲に通知を行うものとする。
+          | 退職（たいしょく）を行（おこな）う場合（ばあい）、必（かなら）ず退職（たいしょく）の2ヶ月前（にかげつまえ）に甲（こう）に通知（つうち）を行（おこな）うものとする。 [In the event of resignation, Party B shall notify Party A at least two months in advance.]
         td
           = f.select(:check_3, [ \
-             ["選択する","選択する"],      \
-             ["同意しました","同意しました"],      \
+             ["Select","Select"],      \
+             ["Agree","Agree"],      \
              ])
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
-          | 佐川急便の場合、1日の平均配送は120個を下回らないよう、効率的に稼働を行うものとする。その他の業務の場合、発注元からの指定個数を下回らないものとする。
+          | 佐川急便（さがわきゅうびん）の場合（ばあい）、1日（いちにち）の平均配送（へいきんはいそう）は120個（ひゃくにじゅっこ）を下回（したまわ）らないよう、効率的（こうりつてき）に稼働（かどう）を行（おこな）うものとする。その他（そのた）の業務（ぎょうむ）の場合（ばあい）、発注元（はっちゅうもと）からの指定（してい）個数（こすう）を下回（したまわ）らないものとする。 [In the case of Sagawa Express, the contractor shall work efficiently so that the average daily delivery does not fall below 120 parcels. For other tasks, the number delivered shall not be less than the quantity designated by the ordering party.]
         td
           = f.select(:check_4, [ \
-             ["選択する","選択する"],      \
-             ["同意しました","同意しました"],      \
+             ["Select","Select"],      \
+             ["Agree","Agree"],      \
              ])
       tr
         td.label-cell
-           strong.label 必須
+           strong.label Required
         td.arrow_box
-          | その他契約約款に同意します。
+          | その他（そのた）契約約款（けいやくやっかん）に同意（どうい）します。 [I agree to the other terms and conditions of the contract.]
         td
            = f.select(:agree, [ \
-             ["選択する","選択する"],      \
-             ["同意しました","同意しました"],      \
+             ["Select","Select"],      \
+             ["Agree","Agree"],      \
              ])
       tr
         td.label-cell
-           strong.label 必須
+           strong.label Required
         td.arrow_box
-          | 契約日：
+          | 契約日（けいやくび） [Contract date]
         td
            = f.date_field :contract_date, value: @user.contract_date || Date.today, class: 'input'
        
       tr
          td colspan="4"
-           = f.submit "契約を締結する", class:"btn btn-danger"
+           = f.submit "Enter into a contract", class:"btn btn-danger"

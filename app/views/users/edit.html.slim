@@ -7,42 +7,45 @@ br/
   - @user.errors.full_messages.each do |message|
     li = message
   table.company
-     colgroup
-      col width="20%"
-      col width="20%"
-      col width="60%"
      tbody
        tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
-            | お名前 [full_name]
+            | おなまえ [full_name]
           td
             = f.text_field :name, placeholder:"Taro Yamada"
        tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
-            | 生年月日 [age]
+            | せいねんがっぴ [age]
           td
             = f.text_field :age, placeholder:"25才"
        tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
-            | 性別 [gender]
+            | せいべつ [gender]
           td
             = f.text_field :gender, placeholder:"Male"
        tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
-            | 電話番号 [Tel]
+            | でんわばんごう [Tel]
           td
             = f.text_field :tel, placeholder:"080-0000-0000"
        tr
           td
-            strong.label 必須
+            strong.label Required
+          td.arrow_box
+            | じゅうしょ[Address]
+          td
+            = f.text_field :address, placeholder:"東京都港区芝5-27-3 MBC・Aー9" 
+       tr
+          td
+            strong.label Required
           td.arrow_box
             | メールアドレス [Mail]
           td
@@ -50,14 +53,14 @@ br/
        - if admin_signed_in?
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | あなたの国籍はどこですか？ [what_is_your_nationality?]
           td
             = f.text_field :nationality, placeholder:"JAPAN"
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
           td
@@ -68,14 +71,14 @@ br/
             ], include_blank: "選択してください[Please select]")       
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | あなたがもっているすべてのしかくをかいてください [pletell_us_all_the_qualifications_you_have]
           td
             = f.text_field :qualifications  
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
           td
@@ -92,28 +95,28 @@ br/
             ], include_blank: "選択してください[Please select]")   
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | あなたのしょくしゅをおしえてください？[what_industry_are[were]_you_in?]
           td
             = f.text_field :past_year
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | 希望職種
           td
             = f.text_field :hope_work
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
           td
             = f.text_field :past_year
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | いつから働けますか？ [Since when can you job?]
           td
@@ -124,7 +127,7 @@ br/
             ], include_blank: "選択してください[Please select]")  
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | 電話を出れる時間を教えてください。[Could you tell me the time you will come out.]
           td
@@ -137,7 +140,7 @@ br/
             ], include_blank: "選択してください[Please select]")  
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | 日本語で会話できますか？[Can you speak Japanese conversation?]
           td
@@ -147,7 +150,7 @@ br/
             ], include_blank: "選択してください[Please select]")  
         tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | 転居はできますか？[Can I move to a different prefecture?]
           td
@@ -160,14 +163,10 @@ br/
    h2.headline Interview
 
    table.company
-    colgroup
-      col width="20%"
-      col width="20%"
-      col width="60%"
     tbody
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | 運転免許
         td
@@ -177,28 +176,28 @@ br/
            ], include_blank: "選択してください")
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | 車所有有無
         td
           = f.text_field :car
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | 転居可否
         td
           = f.text_field :change_the_address_check
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | 現在のお仕事
         td
           = f.text_field :work_now
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | 軽貨物経験
         td
@@ -208,7 +207,7 @@ br/
            ], include_blank: "選択してください")
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | ビザの種類
         td
@@ -220,7 +219,7 @@ br/
            ], include_blank: "選択してください")
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | 日本語レベル
         td
@@ -232,7 +231,7 @@ br/
            ], include_blank: "選択してください")
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | 日本在住期間
         td
@@ -244,7 +243,7 @@ br/
            ], include_blank: "選択してください")
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | 漢字レベル
         td
@@ -257,21 +256,21 @@ br/
            ], include_blank: "選択してください")
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
           | 勤務開始希望
         td
           = f.text_field :start
       tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | 備考
           td
             = f.text_area :remarks
       tr
           td
-            strong.label 必須
+            strong.label Required
           td.arrow_box
             | オススメ度
           td
@@ -294,46 +293,42 @@ br/
     tbody
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
-          | 報酬
+          | ほうしゅう[Reward unit price]
         td
           = f.text_field :deliver
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
-          | 月休み
+          | 月休み[Monthly holiday]
         td
           = f.text_field :day_off
 
   table.company
-    colgroup
-      col width="20%"
-      col width="20%"
-      col width="60%"
     tbody
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
-          | 緊急連絡先（名前）
+          | きんきゅうれんらくしゃ[Emergency Contact Person]
         td
           = f.text_field :emergency_name, placeholder:"Yoko Yamada"
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
-          | 関連性
+          | かんれんせい[Relationship]
         td
           = f.text_field :emergency_relationships, placeholder:"Mother"
       tr
         td
-          strong.label 必須
+          strong.label Required
         td.arrow_box
-          | 緊急連絡先電話番号
+          | きんきゅうれんらくしゃばんごう[Emergency contact number]
         td
           = f.text_field :emergency_tel, placeholder:"+818010101010"
       tr.center
           td[colspan="3"]
-            = f.submit '確認する'
+            = f.submit 'Register'

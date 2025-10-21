@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       # conclusion.html.slimからの送信で、かつ同意が得られた場合
-      if @user.agree == "同意しました"
+      if @user.agree == "Agree"
           # メール送信処理
           UserMailer.contract_received_email(@user).deliver_now
           UserMailer.contract_send_email(@user).deliver_now

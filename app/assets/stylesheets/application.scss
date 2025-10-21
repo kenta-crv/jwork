@@ -244,20 +244,21 @@ table.company {
   width: 90%;
   margin: 0 auto;
   border-collapse: separate;
-  border-spacing: 0px 15px;
-  font-size: 1.5vw;
+  border-spacing: 0px 10px; /* 少し狭める */
+  font-size: 1rem; /* vwを廃止して安定化 */
 
-  th, td { padding: 10px; }
+  th, td {
+    padding: 10px;
+    word-break: break-word; /* 長文でセル内改行を許可 */
+    vertical-align: middle; /* 上寄り→中央寄せ */
+  }
 
   th {
     background: $main_color;
-    vertical-align: middle;
-    text-align: left;
-    overflow: visible;
-    position: relative;
     color: #fff;
     font-weight: normal;
-    font-size: 1.7vw;
+    font-size: 1.2rem;
+    text-align: left;
   }
 
   td {
@@ -270,27 +271,47 @@ table.company {
   td input[type="password"],
   td select {
     width: 100%;
-    font-size: 1.2rem; /* フォームのフォントサイズをアップ */
-    padding: 10px; /* 余白を増やしてタップしやすく */
-    border-radius: 5px; /* 角を少し丸める */
+    font-size: 1.1rem;
+    padding: 8px;
+    border-radius: 5px;
     border: 1px solid #ccc;
   }
 }
 
-/* レスポンシブ対応 */
+/* スマホ対応 */
 @media screen and (max-width: 768px) {
   table.company {
     width: 100%;
+    border-spacing: 0 8px;
+    font-size: 1.2rem; /* vwでなく固定値に変更して安定表示 */
+  }
+
+  th, td {
+    display: block; /* スマホでは縦並びに */
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  tr {
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  th {
+    border-radius: 5px 5px 0 0;
+  }
+
+  td {
+    border-radius: 0 0 5px 5px;
   }
 
   td input[type="text"],
   td input[type="email"],
   td input[type="password"],
   td select {
-    font-size: 2.0rem; /* スマホではさらに大きく */
-    padding: 12px;
+    font-size: 1.3rem;
+    padding: 10px;
   }
-  tr{font-size: 1.5rem;}
 }
 
 
@@ -1254,32 +1275,60 @@ dd {
 }
 
 .organize {
-  text-align:left;
-  margin:15px 0 ;
+  text-align: left;
+  margin: 15px 0;
 
+  // aタグの重複を整理（機能は変えない）
   a {
     text-decoration: none;
-    color:white;
+    color: white;
     text-shadow: 1px 1px 1px #000;
-    margin-top:auto;
-    margin-top:8px;
-    a:hover {
-      background-color: rgba(255,255,255,0.1);
-    }
-}
+    margin-top: 8px;
 
-  a {
-    text-decoration: none;
-    color:white;
-    text-shadow: 1px 1px 1px #000;
-    margin-top:auto;
-    margin-top:8px;
-    a:hover {
-      background-color: rgba(255,255,255,0.1);
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
     }
   }
 
+  // レスポンシブ整形
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 
+  .col-xs-1 {
+    flex: 0 0 5%;
+    max-width: 5%;
+  }
+
+  .col-xs-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    min-width: 180px;
+  }
+
+  .col-xs-7 {
+    flex: 1;
+    max-width: 70%;
+    min-width: 250px;
+  }
+}
+
+// スマホ時は縦並びに
+@media (max-width: 768px) {
+  .organize .row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .organize .col-xs-1,
+  .organize .col-xs-3,
+  .organize .col-xs-7 {
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin-bottom: 8px;
+  }
 }
 
 

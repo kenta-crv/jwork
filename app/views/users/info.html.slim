@@ -1,63 +1,24 @@
-- set_meta_tags  title: ''
-- set_meta_tags  description: ''
+- set_meta_tags title: ''
+- set_meta_tags description: ''
 - set_meta_tags noindex: true
+
 .tops-wrapper
- br
- h2.headline  Apply flow
- br/
- .row.organize
-  .col-xs-1 
-  .col-xs-3.btn.btn-primary.btn-lg
-   = link_to "1.情報入力", edit_user_path(@user)
-  .col-xs-7
-   | あなたの情報を入力してください。登録には証明書や運転免許証が必要です。
- br
- hr.line
- br
+ h2.headline Apply flow
 
- .row.organize
-  .col-xs-1 
-  .col-xs-3.btn.btn-primary.btn-lg
-   = link_to "2.契約締結", conclusion_user_path(@user)
-  .col-xs-7
-   | 当社との業務委託契約を行います。
- br
- hr.line
- br
+.flow-step
+    .step-btn
+      = link_to "1. Enter information", edit_user_path(@user), class: "btn btn-primary btn-lg"
+    br
+    .step-desc
+      | Please enter your information.
 
- .row.organize
-   .col-xs-1 
-   .col-xs-3.btn.btn-primary.btn-lg
-    = link_to "車のレンタル契約", payment_user_path(@user)
-   .col-xs-7
-    | ご契約締結後、3営業日以内に保証金のご入金をお願い致します。ご入金情報はリンクをクリックして頂くと参照可能です。
- br
- hr.line
- br
+hr.line
 
- .row.organize
-   .col-xs-1 
-   .col-xs-3.btn.btn-primary.btn-lg
-    = link_to "保険の加入", payment_user_path(@user)
-   .col-xs-7
-    | ご契約締結後、3営業日以内に保証金のご入金をお願い致します。ご入金情報はリンクをクリックして頂くと参照可能です。
- br
- hr.line
- br
+.flow-step
+    .step-btn
+      = link_to "2. Conclusion of contract", conclusion_user_path(@user), class: "btn btn-primary btn-lg"
+    br/
+    .step-desc
+      | You will enter into a business outsourcing contract with us.
 
-
-- if admin_signed_in?
- .tops-wrapper
-  br
-  h2.headline  管理者フロー
-  br/
-  .row.organize 
-   .col-xs-1 
-   .col-xs-3.btn.btn-primary.btn-lg
-     = link_to "契約書を発行する", send_mail_user_path(@user), method: :post, data: { confirm: "企業様へ契約依頼のメールを送信しますか？" } 
-   .col-xs-7
-     | ①②の登録が完了したら、企業様へ契約依頼のメール送信を行います。
-  br
-  hr.line
-  br
 
