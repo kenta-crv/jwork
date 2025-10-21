@@ -20,6 +20,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:account_update, keys: additional_keys)
   end
 
+  def update_resource(resource, params)
+  # パスワードなしで更新できるようにする
+    resource.update_without_password(params)
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
