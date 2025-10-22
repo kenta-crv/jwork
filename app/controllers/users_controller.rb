@@ -121,6 +121,12 @@ class UsersController < ApplicationController
     :deliver,
     :day_off,
     :contract_date,
+
+    :account_name,
+    :image_1, 
+    :image_2, 
+    :image_3, 
+    :image_4, 
     )
   end
 end

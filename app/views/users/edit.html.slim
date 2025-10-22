@@ -168,6 +168,13 @@ br/
         td
           strong.label Required
         td.arrow_box
+          | LINE Account
+        td
+           = f.text_field :account_name
+      tr
+        td
+          strong.label Required
+        td.arrow_box
           | 運転免許
         td
            = f.select(:drivers_lisence, [\
@@ -329,6 +336,35 @@ br/
           | きんきゅうれんらくしゃばんごう[Emergency contact number]
         td
           = f.text_field :emergency_tel, placeholder:"+818010101010"
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | めんしょしょう（おもて）[Driver's lisense[front]]
+        td
+          = f.file_field :image_1
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | めんしょしょう（うら）[Driver's lisense[back]]
+        td
+          = f.file_field :image_2
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
+        td
+          = f.file_field :image_3
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ざいりゅうきょかしょう（うら）[Residence permit[back]]
+        td
+          = f.file_field :image_4
+
       tr.center
           td[colspan="3"]
             = f.submit 'Register'

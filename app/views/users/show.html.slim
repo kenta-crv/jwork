@@ -134,6 +134,13 @@
         td
           strong.label Required
         td.arrow_box
+          | LINE Account
+        td
+           = @user.account_name
+      tr
+        td
+          strong.label Required
+        td.arrow_box
           | 運転免許
         td
           = @user.drivers_lisence
@@ -255,6 +262,46 @@
           | 月休み[Monthly holiday]
         td
           = @user.day_off
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | めんしょしょう（おもて）[Driver's lisense[front]]
+        td
+          - if @user.image_1?
+            = image_tag @user.image_1.url, width: 100
+            br
+            = link_to 'Download', @user.image_1.url, download: true
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | めんしょしょう（うら）[Driver's lisense[back]]
+        td
+          - if @user.image_2?
+            = image_tag @user.image_2.url, width: 100
+            br
+            = link_to 'Download', @user.image_2.url, download: true
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
+        td
+          - if @user.image_3?
+            = image_tag @user.image_3.url, width: 100
+            br
+            = link_to 'Download', @user.image_3.url, download: true
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ざいりゅうきょかしょう（うら）[Residence permit[back]]
+        td
+          - if @user.image_4?
+            = image_tag @user.image_4.url, width: 100
+            br
+            = link_to 'Download', @user.image_4.url, download: true
 
 
   h2.headline Contract information

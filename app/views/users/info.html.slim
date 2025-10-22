@@ -2,23 +2,61 @@
 - set_meta_tags description: ''
 - set_meta_tags noindex: true
 
-.tops-wrapper
- h2.headline Apply flow
+.section.process
+  .process-title PROCESS
+  .process-sub ご利用の流れ
 
-.flow-step
-    .step-btn
-      = link_to "1. Enter information", edit_user_path(@user), class: "btn btn-primary btn-lg"
-    br
-    .step-desc
-      | Please enter your information.
+  .process-container
+    .process-step
+      .num 01
+      .content
+        h3 
+         = link_to "Enter Information", edit_user_path(@user)
+        p Please enter your information.
+        
 
-hr.line
+    .process-step
+      .num 02
+      .content
+        h3 
+         = link_to "Conclusion of contract", conclusion_user_path(@user)
+        p You will enter into a business outsourcing contract with us.
 
-.flow-step
-    .step-btn
-      = link_to "2. Conclusion of contract", conclusion_user_path(@user), class: "btn btn-primary btn-lg"
-    br/
-    .step-desc
-      | You will enter into a business outsourcing contract with us.
+    .process-step
+      .num 03
+      .content
+        h3 レンタカーの契約（車がない人）
+        p 以下のURLから軽バンのレンタカーを借りられます。
+        .row 
+         .col-xs-4
+          = link_to "合同会社ヴィジョン", "https://van-tora.com/", class:"btn btn-process"
+         .col-xs-4
+          = link_to "ユニバンリース", "https://www.anycarry.co.jp/k-van/", class:"btn btn-process"
+         .col-xs-4
+          = link_to "ESCOリース", "https://www.esco-keiban-lease.com/", class:"btn btn-process"
 
 
+    .process-step
+      .num 04
+      .content
+        h3 駐車場
+        p 自宅近くでパーキングを探して頂く必要があります。見つからない場合、以下サイトを参考にしてください。
+        .row 
+         .col-xs-4
+          = link_to "CarParking", "https://carparking.jp/", class:"btn btn-process"
+         .col-xs-4
+          = link_to "ParkDirect", "https://www.park-direct.jp/", class:"btn btn-process"
+         .col-xs-4
+          = link_to "TimesParking", "https://times-info.net/", class:"btn btn-process"
+
+    .process-step
+      .num 05
+      .content
+        h3 保険加入
+        p 軽貨物の車を運転する場合、事前の保険加入が推奨されています。以下ページより保険加入することができます。
+
+    .process-step
+      .num 06
+      .content
+        h3 お仕事の開始
+        p 事前の準備が出来次第、お仕事を開始することができます。配属先によっては事前の面接が必要な場合もあります。

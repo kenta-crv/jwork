@@ -245,7 +245,7 @@ table.company {
   margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0px 10px; /* 少し狭める */
-  font-size: 1rem; /* vwを廃止して安定化 */
+  font-size: 1.5rem; /* vwを廃止して安定化 */
 
   th, td {
     padding: 10px;
@@ -257,7 +257,7 @@ table.company {
     background: $main_color;
     color: #fff;
     font-weight: normal;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     text-align: left;
   }
 
@@ -271,7 +271,7 @@ table.company {
   td input[type="password"],
   td select {
     width: 100%;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -1251,28 +1251,18 @@ dd {
   }
 
 
-.text{
-  font-size:16px;
-}
 
 .contract-wrapper {
   margin:0 40px;
   text-align:left;
 
    .text{
-     font-size:16px;
+     font-size:14px;
      line-height:2.0;
      padding:0 50px;
    }
 }
 
-.contract{
-  .text {
-    font-size:14px;
-    line-height:24px;
-    margin:0 40px;
-  }
-}
 
 .organize {
   text-align: left;
@@ -1866,4 +1856,139 @@ table.right {margin:5px 50px 5px 0px;}
 .condition {
   color: red;
   font-weight: bold;
+}
+
+
+
+.section.process {
+  position: relative;
+  background: linear-gradient(to bottom right, #fafafa, #f5f7ff, #fff0f5);
+  padding: 80px 20px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.process-title {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #1a237e;
+  letter-spacing: 0.1em;
+}
+
+.process-sub {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.process-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.process-step .num {
+  font-size: 6.0rem;
+  font-weight: 900;
+  color: #1a237e;
+  flex-shrink: 0;
+  width: 80px;
+  text-align: center;
+}
+
+.process-step .content {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.process-step .content h3 {
+  font-size: 2.0rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1a237e;
+}
+
+/* h3内のリンクカラー制御 */
+.process-step .content h3 a {
+  color: #1a237e;              /* 見出しと同じ色 */
+  text-decoration: none;       /* 下線を消す */
+  transition: opacity 0.2s ease;
+}
+
+.process-step .content h3 a:hover {
+  opacity: 0.7;                /* ホバー時に少し薄くする */
+}
+
+
+.process-step .content p {
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.btn {
+  display: inline-block;
+  background: #1a237e;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  margin-top: 10px;
+}
+.btn:hover {
+  background: #3949ab;
+}
+
+/* ボタンデザイン統一 */
+.btn.btn-process {
+  display: block;              /* Bootstrapのcol内で均等幅 */
+  width: 100%;                 /* カラム内いっぱいに広げる */
+  background-color: #1a237e;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 10px;         /* スマホ時の隙間対策 */
+}
+
+.btn.btn-process:hover {
+  background-color: #3949ab;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* レスポンシブ崩れ対応：Bootstrapのcol-xs系を補完 */
+@media (max-width: 767px) {
+  .process-step .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .process-step .col-xs-4 {
+    width: 100%;
+    margin-bottom: 8px;
+  }
 }
