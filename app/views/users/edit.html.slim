@@ -336,6 +336,36 @@ br/
           | きんきゅうれんらくしゃばんごう[Emergency contact number]
         td
           = f.text_field :emergency_tel, placeholder:"+818010101010"
+
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ぎんこうめい[Bank name]
+        td
+          = f.text_field :bank, placeholder:"三井住友銀行"
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | してんめい[Branch]
+        td
+          = f.text_field :branch, placeholder:"東京支店"
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | こうざばんごう[Account number]
+        td
+          = f.text_field :bank_number, placeholder:"0123456"
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | こうざめいぎ[Account name]
+        td
+          = f.text_field :bank_name, placeholder:"ヤマダ　タロウ"
+
       tr
         td
           strong.label Required
@@ -364,7 +394,20 @@ br/
           | ざいりゅうきょかしょう（うら）[Residence permit[back]]
         td
           = f.file_field :image_4
-
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ぎんこうかーど（おもて）[Bank card[front]]
+        td
+          = f.file_field :image_5
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ぎんこうかーど（うら）[Bank card[back]]
+        td
+          = f.file_field :image_6
       tr.center
           td[colspan="3"]
             = f.submit 'Register'

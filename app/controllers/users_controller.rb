@@ -127,6 +127,12 @@ class UsersController < ApplicationController
     :image_2, 
     :image_3, 
     :image_4, 
+    :image_5,
+    :image_6,
+    :bank,
+    :branch,
+    :bank_number,
+    :bank_name,
     )
   end
 end

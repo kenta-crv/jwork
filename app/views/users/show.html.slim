@@ -262,6 +262,37 @@
           | 月休み[Monthly holiday]
         td
           = @user.day_off
+
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ぎんこうめい[Bank name]
+        td
+          = @user.bank
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | してんめい[Branch]
+        td
+          = @user.branch
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | こうざばんごう[Account number]
+        td
+          = @user.bank_number
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | こうざめいぎ[Account name]
+        td
+          = @user.bank_name
+
+
       tr
         td
           strong.label Required
@@ -302,7 +333,26 @@
             = image_tag @user.image_4.url, width: 100
             br
             = link_to 'Download', @user.image_4.url, download: true
-
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ぎんこうかーど（おもて）[Bank card[front]]
+        td
+          - if @user.image_5?
+            = image_tag @user.image_5.url, width: 100
+            br
+            = link_to 'Download', @user.image_5.url, download: true
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ぎんこうかーど（うら）[Bank card[back]]
+        td
+          - if @user.image_6?
+            = image_tag @user.image_6.url, width: 100
+            br
+            = link_to 'Download', @user.image_6.url, download: true
 
   h2.headline Contract information
 

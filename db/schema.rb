@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_10_22_073451) do
+ActiveRecord::Schema.define(version: 2025_10_23_082935) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -151,6 +151,12 @@ ActiveRecord::Schema.define(version: 2025_10_22_073451) do
     t.string "image_2"
     t.string "image_3"
     t.string "image_4"
+    t.string "image_5"
+    t.string "image_6"
+    t.string "bank"
+    t.string "branch"
+    t.string "bank_number"
+    t.string "bank_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
