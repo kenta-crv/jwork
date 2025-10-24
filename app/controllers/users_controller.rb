@@ -28,27 +28,24 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      # conclusion.html.slimからの送信で、かつ同意が得られた場合
-      if @user.agree == "Agree"
-          # メール送信処理
-          UserMailer.contract_received_email(@user).deliver_now
-          UserMailer.contract_send_email(@user).deliver_now
-          flash[:notice] = "契約が完了しました"
-          redirect_to user_path(@user)
-        # edit.html.slimからの送信、またはconclusion.html.slimからの送信でも同意が得られなかった場合
-      else
-        redirect_to user_path(@user)
-      end
-    else
-      # 更新が失敗した場合の処理
-      render :edit
-    end
-  end
+def update
+  @user = User.find(params[:id])
+  previous_agree = @user.agree # 更新前の状態を保持
 
-  def conclusion
+  if @user.update(user_params)
+    # 「同意状態が変わってAgreeになった」タイミングでのみメール送信
+    if @user.agree == "Agree" && previous_agree != "Agree"
+      UserMailer.contract_received_email(@user).deliver_now
+      UserMailer.contract_send_email(@user).deliver_now
+      flash[:notice] = "契約が完了しました"
+    end
+    redirect_to user_path(@user)
+  else
+    render :edit
+  end
+end
+
+def conclusion
     @user = User.find(params[:id])
     today = Date.today.strftime("%Y-%m-%d")
   end
