@@ -9,6 +9,7 @@ table.list
       th Phone_number
       th email
       th Phase
+      th Contract
       th Register_date
       th 
   tbody
@@ -22,6 +23,8 @@ table.list
           = user.email
         td
           = user.line
+        td
+          = user&.contract_date
         td
           = user.created_at.strftime("%Y年%m月%d日")
         td
