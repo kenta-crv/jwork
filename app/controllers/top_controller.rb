@@ -14,6 +14,9 @@ class TopController < ApplicationController
   def flow
   end
 
+  def calculation
+  end
+
   def database 
   end 
 

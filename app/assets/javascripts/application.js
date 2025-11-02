@@ -25,3 +25,36 @@ $(function() {
         }
     });
 });
+
+
+// 確実にDOMがある状態で実行
+document.addEventListener("turbolinks:load", function() {
+  var unitPriceInput = document.getElementById("unit_price");
+  var quantityInput = document.getElementById("quantity");
+  var daysInput = document.getElementById("days");
+
+  var totalRewardEl = document.getElementById("total_reward");
+  var totalExpenseEl = document.getElementById("total_expense");
+  var netIncomeEl = document.getElementById("net_income");
+
+  function calculate() {
+    var unitPrice = parseFloat(unitPriceInput.value) || 0;
+    var quantity = parseFloat(quantityInput.value) || 0;
+    var days = parseFloat(daysInput.value) || 0;
+
+    var totalReward = unitPrice * quantity * days;
+    var totalExpense = 25000 + 25000 + 1500;
+    var netIncome = totalReward - totalExpense;
+
+    totalRewardEl.textContent = totalReward.toLocaleString();
+    totalExpenseEl.textContent = totalExpense.toLocaleString();
+    netIncomeEl.textContent = netIncome.toLocaleString();
+  }
+
+  [unitPriceInput, quantityInput, daysInput].forEach(function(input) {
+    input.addEventListener("input", calculate);
+  });
+
+  // 初期計算
+  calculate();
+});
