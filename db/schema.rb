@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_10_23_082935) do
+ActiveRecord::Schema.define(version: 2025_11_03_054333) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 2025_10_23_082935) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "alcohols", force: :cascade do |t|
+    t.datetime "post"
+    t.string "check"
+    t.string "health"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_alcohols_on_user_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -82,6 +92,34 @@ ActiveRecord::Schema.define(version: 2025_10_23_082935) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_comments_on_client_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "inspections", force: :cascade do |t|
+    t.datetime "post"
+    t.string "brakes"
+    t.string "steering"
+    t.string "tires"
+    t.string "lighting"
+    t.string "battely"
+    t.string "engine"
+    t.string "coolant"
+    t.string "wiper"
+    t.string "exhaust"
+    t.string "underbody"
+    t.string "remarks"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_inspections_on_user_id"
+  end
+
+  create_table "journals", force: :cascade do |t|
+    t.datetime "post"
+    t.string "dialy"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_journals_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

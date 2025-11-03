@@ -56,7 +56,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   resources :users do
-    resource :comments
+    resources :comments
+    resources :journals
+    resources :alcohols
+    resources :inspections
     collection do
       post :confirm
       post :thanks
