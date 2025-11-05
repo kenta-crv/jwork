@@ -13,12 +13,13 @@ br/
 
     .form-group
       label 配送(はいそう)[Delivery] 単価(たんか)[Unit Price]（円[JPY]）
+      small エリアによって変動あり 
       input#unit_price.form-control type="number" value="130"
 
     .form-group
       label 配送(はいそう)[Delivery] 個数(こすう)[Quantity]
-      input#quantity.form-control type="number" value="135"
-
+      small 慣れている人の目安
+      input#quantity.form-control type="number" value="150"
     .form-group
       label 日数(にっすう)[Days]
       input#days.form-control type="number" value="25"
@@ -26,13 +27,16 @@ br/
     h3 経費(けいひ)[Expenses]
     .form-group
       label 車レンタル代(しゃレンタルだい)[Car Rental]（円[JPY]）
-      input#rental.form-control type="number" value="25000"
+      small おおよそ35,000~40,000円でエリアや空き状況による
+      input#rental.form-control type="number" value="35000"
     .form-group
       label ガソリン代(ガソリンだい)[Gasoline]（円[JPY]）
+      small 稼働時間や運転の仕方による
       input#gas.form-control type="number" value="25000"
     .form-group
       label 保険代(ほけんだい)[Insurance]（円[JPY]）
-      input#insurance.form-control type="number" value="1500"
+      small 年齢や事故歴による
+      input#insurance.form-control type="number" value="7000"
 
     .result-box
       p
