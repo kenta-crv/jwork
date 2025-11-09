@@ -1,6 +1,9 @@
 - set_meta_tags noindex: true
 .tops-wrapper
   h2.headline 基本情報
+  = link_to "ジョブを新規作成", new_client_job_path(@client), class: "btn btn-primary"
+  br/
+  br/
   table.company
     colgroup
       col width="10%"
@@ -11,176 +14,103 @@
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | ご担当者様名
+          | 会社名
         td.responsive-cell
-          = "#{@contract.person_first} #{@contract.person_last}"
+          = @client.company
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 役職
+        td.responsive-cell
+          = @client.position
+      tr
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
+          | 担当者
+        td.responsive-cell
+          = @client.person
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
           | 電話番号
         td.responsive-cell
-          = @contract.tel
+          = @client.tel
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 所在地
+          | 携帯番号
         td.responsive-cell
-          = @contract.address
+          = @client.mobile
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
           | メールアドレス
         td.responsive-cell
-          = @contract.email
+          = @client.email
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | メールアドレス（cc） 
+          | 所在地
         td.responsive-cell
-          = @contract.cc
+          = @client.address
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 代表者名
+          | 企業URL
         td.responsive-cell
-          = "#{@contract.president_first} #{@contract.president_last}"
+          = @client.url
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 代表者役職
+          | 商談日時
         td.responsive-cell
-          = @contract.post_title
+          = @client.meeting
       tr
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 採用ページURL
+          | 商談日時
         td.responsive-cell
-          = link_to @contract.recruit_url, @contract.recruit_url, target: '_blank' if @contract.recruit_url.present?
-      tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | 採用ページURL2
-        td.responsive-cell
-          = link_to @contract.recruit_url_2, @contract.recruit_url_2, target: '_blank' if @contract.recruit_url_2.present?
+          = @client.remarks
 
-      - if admin_signed_in?
+
+br/
+br/
+table.company[width="100%"]
+  - if @client.jobs.any?
+    tbody
+      tr
+        th 内容
+        th 勤務時間
+        th エリア
+        th 仕入れ価格
+        th 販売価格
+        th 配送
+        th 支払い
+        th 備考
+      - @client.jobs.each do |job|
         tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 成果報酬単価
-          td.responsive-cell
-            = @contract.unit_price
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 返戻金条件
-          td.responsive-cell
-            = @contract.refund
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 支払日
-          td.responsive-cell
-            = @contract.payment
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 採用予定職種
-          td.responsive-cell
-            = @contract.work
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 希望在留資格
-          td.responsive-cell
-            = @contract.qualifications
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 採用予定人数
-          td.responsive-cell
-            = @contract.number
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 給与幅
-          td.responsive-cell
-            = @contract.salary
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 経験則
-          td.responsive-cell
-            = @contract.experience
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 年齢幅
-          td.responsive-cell
-            = @contract.age
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | ドライバーライセンス
-          td.responsive-cell
-            = @contract.driver_licence
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 書類申請代行
-          td.responsive-cell
-            = @contract.application
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 住居・寮
-          td.responsive-cell
-            = @contract.housing
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | その他の採用条件
-          td.responsive-cell
-            = @contract.employment_conditions
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 書類選考期間・面接回数
-          td.responsive-cell
-            = @contract.document_screening
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 採用率
-          td.responsive-cell
-            = @contract.conversion
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 備考・要望
-          td.responsive-cell
-            = @contract.remarks
+          td
+            = job.content
+          td
+            = job.working_time
+          td
+            = job.area
+          td
+            = job.purchase_price
+          td
+            = job.sales_price
+          td
+            = job.delivery
+          td
+            = job.payment
+          td
+            = job.remarks

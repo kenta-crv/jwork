@@ -4,32 +4,37 @@
   br/
   br/
   h2.headline
-   管理者ログイン
-  
+   | 管理者ログイン
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    table.list
+    table.company
       colgroup
-        col(width="40%")
-        col(width="60%")
+      tbody
       tr
-        th
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
           | ログインアドレス
-        td
-          = f.email_field :email, autofocus: true, autocomplete: "email"
+        td.responsive-cell
+         .input-container
+          = f.email_field :email, autocomplete: "email"
       tr
-        th
+        td.label-cell
+          strong.label 必須
+        td.arrow-box-cell
           | パスワード
-        td
+        td.responsive-cell
+         .input-container
+          - if @minimum_password_length
+            em
+              | (
+              = @minimum_password_length
+              |  characters minimum)
           = f.password_field :password, autocomplete: "off"
       tr
-        td(colspan="2")
-          - if devise_mapping.rememberable?
-            = f.check_box :remember_me
-            = f.label :remember_me
-      tr
-        th(colspan="2")
-          = f.submit "ログイン"
+        td[colspan="3"]
+          = f.submit "ログイン", class: "btn btn-primary", data: { confirm: "送信してもよろしいですか？" }
+
     
   br
   .center
-    = render "admins/shared/links"
+    = render "clients/shared/links"

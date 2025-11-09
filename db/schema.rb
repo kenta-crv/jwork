@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_11_03_054333) do
+ActiveRecord::Schema.define(version: 2025_11_09_112528) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -45,41 +45,18 @@ ActiveRecord::Schema.define(version: 2025_11_03_054333) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string "user_name", default: "", null: false
-    t.string "email"
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
     t.string "company"
-    t.string "post_title"
-    t.string "representative_name"
-    t.string "contact_name"
+    t.string "position"
+    t.string "person"
     t.string "tel"
+    t.string "email"
+    t.string "mobile"
     t.string "address"
     t.string "url"
-    t.string "message"
-    t.string "recruit_url"
-    t.string "visa"
-    t.string "business"
-    t.string "genre"
-    t.string "salary"
-    t.string "work_time"
-    t.string "day_off"
-    t.string "work_contents"
-    t.string "number"
-    t.string "house_agents"
-    t.string "house_support"
+    t.datetime "meeting"
     t.string "remarks"
-    t.string "agree"
-    t.string "contract_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
-    t.string "plan1"
-    t.string "plan2"
-    t.index ["email"], name: "index_clients_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
   create_table "comments", force: :cascade do |t|
@@ -113,6 +90,21 @@ ActiveRecord::Schema.define(version: 2025_11_03_054333) do
     t.index ["user_id"], name: "index_inspections_on_user_id"
   end
 
+  create_table "jobs", force: :cascade do |t|
+    t.string "content"
+    t.string "working_time"
+    t.string "area"
+    t.string "purchase_price"
+    t.string "sales_price"
+    t.string "delivery"
+    t.string "payment"
+    t.string "remarks"
+    t.integer "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_jobs_on_client_id"
+  end
+
   create_table "journals", force: :cascade do |t|
     t.datetime "post"
     t.string "dialy"
@@ -120,6 +112,17 @@ ActiveRecord::Schema.define(version: 2025_11_03_054333) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_journals_on_user_id"
+  end
+
+  create_table "user_step_mails", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "mail_type"
+    t.datetime "scheduled_at"
+    t.datetime "sent_at"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_step_mails_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -195,6 +198,7 @@ ActiveRecord::Schema.define(version: 2025_11_03_054333) do
     t.string "branch"
     t.string "bank_number"
     t.string "bank_name"
+    t.string "status"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

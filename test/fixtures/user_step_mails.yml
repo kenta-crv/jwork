@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  mail_type: MyString
+  scheduled_at: 2025-11-09 20:25:28
+  sent_at: 2025-11-09 20:25:28
+  status: MyString
+
+two:
+  user: two
+  mail_type: MyString
+  scheduled_at: 2025-11-09 20:25:28
+  sent_at: 2025-11-09 20:25:28
+  status: MyString

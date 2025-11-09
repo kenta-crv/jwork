@@ -1,41 +1,30 @@
-br/
-br/
-.category-wrapper
-  h2.headline = "求人一覧"
-
-  - if @clients.any?
+table.company[width="100%"]
+  thead
+    tr
+      th 会社名
+      th 内容
+      th 勤務時間
+      th エリア
+      th 仕入れ価格
+      th 販売価格
+      th 配送
+      th 支払い
+      th 備考
+  tbody
     - @clients.each do |client|
-      .job-card
-        h3 = client.title
-        p = client.work_contents
-        .row 
-         .col-sm-6
-          p
-           strong 給与：
-           | #{client.salary}
-         .col-sm-6
-          p
-          strong 募集職種：
-          | #{client.genre}
-        .row 
-         .col-sm-6
-          p
-           strong 勤務時間：
-           | #{client.work_time}
-         .col-sm-6
-          p
-          strong 求人：
-          | #{client.day_off} 
-        .row 
-         .col-sm-6
-          p
-           strong 会社名：
-           | #{client.company}
-         .col-sm-6
-          p
-          strong 勤務地：
-          | #{client.address}
-
-        = link_to "詳細を見る", client_path(client), class: "btn-detail"
-  - else
-    p 該当する求人は見つかりませんでした。
+      - if client.jobs.any?
+        - client.jobs.each do |job|
+          tr
+            td= link_to client.company, client_path(client)
+            td= job.content
+            td= job.working_time
+            td= job.area
+            td= job.purchase_price
+            td= job.sales_price
+            td= job.delivery
+            td= job.payment
+            td= job.remarks
+      - else
+        tr
+          td= link_to client.company, client_path(client)
+          td[colspan=8] なし

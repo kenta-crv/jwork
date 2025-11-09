@@ -31,14 +31,9 @@ Rails.application.routes.draw do
   }
   resources :admins, only: [:show]
 
-  # クライアントアカウント
-  devise_for :clients, controllers: {
-    registrations: 'clients/registrations',
-    sessions: 'clients/sessions',
-    passwords: 'clients/passwords'
-  }
-  resources :clients, except: [:new, :create] do
-    resources :comments 
+
+  resources :clients do
+    resources :jobs 
     collection do
       post :confirm
       post :thanks

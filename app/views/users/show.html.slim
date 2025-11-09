@@ -1,4 +1,15 @@
 .tops-wrapper
+  h2.headline ステータス
+  table.company
+    tbody
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | ステータス
+        td
+          = @user.status
+
   h2.headline 詳細情報
 
   table.company

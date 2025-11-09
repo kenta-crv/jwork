@@ -22,44 +22,28 @@ class ClientsController < ApplicationController
 
 def create
   @client = Client.new(client_params)
-  @client.password = Devise.friendly_token.first(8)
+
   if @client.save
-    # 管理者が登録していない場合のみメール送信
-    unless admin_signed_in?
-      ClientMailer.inquiry_send_email(@client).deliver_now
-      ClientMailer.inquiry_received_email(@client).deliver_now
+    if params[:commit] == '登録＋商談メール送信'
+      # 保存後にメール送信
+      ClientMailer.teleapo_send_email(@client).deliver_later
+      ClientMailer.teleapo_reply_email(@client).deliver_later
     end
-    redirect_to thanks_clients_path
+    redirect_to clients_path, notice: "クライアントを登録しました"
   else
-    if Client.exists?(email: @client.email)
-      redirect_to thanks_clients_path
-    else
-      render :new
-    end
+    flash.now[:alert] = @client.errors.full_messages.join(", ")
+    render :new
   end
 end
-  
-  def thanks
-  end
 
   def show
   @client = Client.find(params[:id])
-  @comments = @client.comments.order(created_at: :desc)
-  @comment = @client.comments.build # 新規用
+  @job = @client.jobs.build # 新規用
   end
 
   def edit
     @client = Client.find(params[:id])
   end
-
-  #def update
-  #  @client = Client.find(params[:id])
-  #  if @client.update(client_params)
-  #    redirect_to @client, notice: 'クライアント情報が更新されました。'
-  #  else
-  #    render :edit
-  #  end
-  #end
 
   def update
     @client = Client.find(params[:id])
@@ -117,12 +101,16 @@ end
 
   def client_params
     params.require(:client).permit(
-      :client_name, :email, :current_password, :password, :password_confirmation,
-      :company, :post_title, :representative_name, :contact_name, :tel, :address, :url,
-      :message, :agree, :contract_date, :question_people, :question_attractive, :question_open,
-      :question_prediction, :agree_1, :agree_2, :agree_3, :agree_4, :agree_5, :agree_6, :agree_7,
-      :user_name, :select, :recruit_url, :visa, :business, :genre, :salary, :work_time,
-      :day_off, :work_contents, :number, :house_agents, :house_support, :remarks, :plan1, :plan2
+      :company,
+      :position,
+      :person,
+      :tel,
+      :email,
+      :mobile,
+      :address,
+      :url,
+      :meeting,
+      :remarks
     )
   end
 end

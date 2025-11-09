@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       :name, :tel, :age, :nationality, :past_business, :past_genre, :past_year,
       :qualifications, :work_range, :hope_work, :hope_other, :line, :period,
       :recommend, :remarks, :conversation, :resume, :available, :different,
-      :call_check, :call_impressions, :change_the_address, :call_available, :speak_japanese, :gender,
+      :call_check, :call_impressions, :change_the_address, :call_available, :speak_japanese, :gender, :status
     ]
 
     devise_parameter_sanitizer.permit(:sign_up, keys: additional_keys)

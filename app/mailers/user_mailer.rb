@@ -66,4 +66,46 @@ class UserMailer < ActionMailer::Base
       format.text
     end
   end
+
+  def welcome_email(user)
+    @user = user
+    attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
+    mail(to: @user.email, subject: 'METAよりおといあわせありがとうございます。')
+  end
+
+  def followup_1_day(user)
+    @user = user
+    attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
+    mail(to: @user.email, subject: '📨 人気（にんき）No.1！高収入（こうしゅうにゅう）ドライバーのご紹介（しょうかい）')
+  end
+
+  def followup_3_day(user)
+    @user = user
+    attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
+    mail(to: @user.email, subject: 'LINEへの登録はお済みですか？まずは面接を開始しましょう！')
+  end
+
+  def followup_7_day(user)
+    @user = user
+    attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
+    mail(to: @user.email, subject: '📨 日本語（にほんご）が不安（ふあん）な方（かた）にもおすすめ！')
+  end
+
+  def followup_15_day(user)
+    @user = user
+    attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
+    mail(to: @user.email, subject: 'LINEへの登録はお済みですか？月給40~70万円稼げるお仕事をご紹介')
+  end
+
+  def followup_30_day(user)
+    @user = user
+    attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
+    mail(to: @user.email, subject: '【J Work】その後お仕事はお決まりでしょうか？')
+  end
+
+  def followup_60_day(user)
+    @user = user
+    attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
+    mail(to: @user.email, subject: 'いまのお仕事に満足していますか？稼げるドライバー職をご紹介！')
+  end
 end

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+   @q = User.ransack(params[:q])
+   @users = @q.result(distinct: true)  # ここで配列化していないこと
+   @users = @users.page(params[:page])
   end
 
   def new 
@@ -39,7 +41,7 @@ def update
       UserMailer.contract_send_email(@user).deliver_now
       flash[:notice] = "契約が完了しました"
     end
-    redirect_to user_path(@user)
+    redirect_to users_path
   else
     render :edit
   end
@@ -130,6 +132,7 @@ def conclusion
     :branch,
     :bank_number,
     :bank_name,
+    :status,
     )
   end
 end

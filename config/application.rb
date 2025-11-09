@@ -1,7 +1,7 @@
 require_relative 'boot'
 
 require 'rails/all'
-
+require 'kaminari'  # これを追加
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -12,6 +12,7 @@ module Bookkeeping
     config.load_defaults 5.2
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
     config.time_zone = 'Tokyo'
+    config.active_job.queue_adapter = :sidekiq
     
     config.autoload_paths += %W(#{config.root}/app/workers)
     config.eager_load_paths += %W(#{config.root}/app/workers) # 追加推奨

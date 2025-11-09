@@ -20,8 +20,6 @@ html
               = link_to "管理者マイページ", admin_path(current_admin), class: "btn btn-primary"
             - if user_signed_in?
               = link_to "ユーザーマイページ", user_path(current_user), class: "btn btn-primary"
-            - if client_signed_in?
-              = link_to "企業様マイページ", client_path(current_client), class: "btn btn-primary"
       .row.navi
        .col-xs-12.center
            br/

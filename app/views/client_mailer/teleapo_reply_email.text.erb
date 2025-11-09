@@ -1,0 +1,13 @@
+<%= @client.company %>との商談が決定しました。
+
+会社名：<%= @client.company %>
+役職：<%= @client.position %>
+担当者：<%= @client.person %>
+電話番号：<%= @client.tel %>
+携帯番号：<%= @client.mobile %>
+住所：<%= @client.address %>
+メールアドレス：<%= @client.email %>
+URL：<%= @client.url %>
+商談日時：<%= @client.meeting.strftime("%-m月%-d日%-H時%-M分") if @client.meeting.present? %>
+ヒアリング事項：
+<%= @client.remarks.to_s %>

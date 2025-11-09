@@ -1,5 +1,15 @@
 class ClientMailer < ActionMailer::Base
   default from: "info@j-work.jp"
+    def teleapo_send_email(client)
+    @client = client
+    mail(to: client.email, from: "info@j-work.jp", subject: 'オンライン商談URLのご案内')
+  end
+
+  def teleapo_reply_email(client)
+    @client = client
+    mail(to: "info@j-work.jp", from: "info@j-work.jp", subject: "【#{@client.company}】#{@client.meeting.strftime('%-m月%-d日-%H時%-M分')}")
+  end
+
   def received_email(client)
     @client = client
     mail from: client.email

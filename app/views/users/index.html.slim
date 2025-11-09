@@ -1,35 +1,45 @@
-br
-br
-table.list
-  colgroup
+= search_form_for @q, url: users_path, method: :get, class: "form-inline" do |f|
+ table.list
+  thead
+   tr
+    td
+      = f.select :status_eq, [\
+        ["SMS","SMS"],\
+        ["LINE","LINE"],\
+        ["Recruitment","Recruitment"],\
+        ["Interview considering","Interview considering"],\
+        ["Interview NG","Interview NG"],\
+        ["Not join","Not join"]\
+       ], { include_blank: "選択してください[Please select]" }, class: "form-control"
+    td
+     = f.submit "検索", class: "btn btn-primary"
 
+br/
+br/
+
+table.list
   thead
     tr
       th User_name
       th Phone_number
       th email
-      th Phase
+      th Status
       th Contract
       th Register_date
-      th 
+      th
   tbody
     - @users.each do |user|
       tr
+        td= link_to user.name, user_path(user)
+        td= user.tel
+        td= user.email
+        td= user.status
+        td= user&.contract_date
+        td= user.created_at.strftime("%Y年%m月%d日")
         td
-          = link_to user.name, user.account_name, target:"_blank"
-        td
-          = user.tel
-        td
-          = user.email
-        td
-          = user.line
-        td
-          = user&.contract_date
-        td
-          = user.created_at.strftime("%Y年%m月%d日")
-        td
-         = link_to "詳細を見る", user_path(user), class: "btn btn-success"
-         -if admin_signed_in?
-          = link_to "編集", edit_user_path(user), class: "btn btn-success"
-          = link_to "削除", user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
-          
+          = link_to "LINE", user.account_name, target:"_blank", class: "btn btn-success"
+          - if admin_signed_in?
+            = link_to "編集", edit_user_path(user), class: "btn btn-success"
+            = link_to "削除", user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
+
+= paginate @users

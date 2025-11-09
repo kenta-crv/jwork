@@ -11,4 +11,42 @@ class User < ApplicationRecord
   mount_uploader :image_2, ImagesUploader
   mount_uploader :image_3, ImagesUploader
   mount_uploader :image_4, ImagesUploader
+  after_create :schedule_step_mails
+  after_update :schedule_step_mails_if_sms
+
+  has_many :user_step_mails, dependent: :destroy
+
+  STEP_MAILS = [1, 3, 7, 15, 30, 60]
+
+  private
+
+  def schedule_step_mails
+    # 登録時メール
+    UserMailer.welcome_email(self).deliver_later
+
+    # SMSステータスならフォローメール予約
+    schedule_followup_mails if status == "SMS"
+  end
+
+  def schedule_step_mails_if_sms
+    return unless saved_change_to_status?
+    return unless status == "SMS"
+
+    schedule_followup_mails
+  end
+
+  def schedule_followup_mails
+    STEP_MAILS.each do |days|
+      mail_type = "#{days}_day"
+      # 同じ種類の予約がすでにある場合はスキップ
+      next if user_step_mails.exists?(mail_type: mail_type, status: "pending")
+
+      step_mail = user_step_mails.create!(
+        mail_type: mail_type,
+        scheduled_at: Time.current + days.days,
+        status: "pending"
+      )
+      StepMailJob.set(wait_until: step_mail.scheduled_at).perform_later(step_mail.id)
+    end
+  end
 end
