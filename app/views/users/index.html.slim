@@ -1,18 +1,24 @@
-= search_form_for @q, url: users_path, method: :get, class: "form-inline" do |f|
- table.list
-  thead
-   tr
-    td
-      = f.select :status_eq, [\
-        ["SMS","SMS"],\
-        ["LINE","LINE"],\
-        ["Recruitment","Recruitment"],\
-        ["Interview considering","Interview considering"],\
-        ["Interview NG","Interview NG"],\
-        ["Not join","Not join"]\
-       ], { include_blank: "選択してください[Please select]" }, class: "form-control"
-    td
-     = f.submit "検索", class: "btn btn-primary"
+= search_form_for @q, url: users_path, method: :get do |f|
+  table.list
+    thead
+     tr
+      td
+          = f.label :name_cont, "名前 [Name]"
+          = f.text_field :name_cont, class: "form-control", placeholder: "名前を入力 [Enter name]"
+      td
+          = f.label :tel_cont, "電話番号 [Tel]"
+          = f.text_field :tel_cont, class: "form-control", placeholder: "電話番号を入力 [Enter tel]"
+      td
+        = f.select :status_eq, [\
+          ["SMS","SMS"],\
+          ["LINE","LINE"],\
+          ["Recruitment","Recruitment"],\
+          ["Interview considering","Interview considering"],\
+          ["Interview NG","Interview NG"],\
+          ["Not join","Not join"]\
+        ], { include_blank: "選択してください[Please select]" }, class: "form-control"
+      td
+        = f.submit "検索", class: "btn btn-primary"
 
 br/
 br/

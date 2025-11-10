@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   def index
-   @q = User.ransack(params[:q])
-   @users = @q.result(distinct: true)  # ここで配列化していないこと
-   @users = @users.page(params[:page])
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true)
+             .order(updated_at: :desc)  # 更新日が新しい順
+             .page(params[:page])
   end
 
   def new 
