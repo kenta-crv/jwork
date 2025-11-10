@@ -60,6 +60,12 @@ def conclusion
     redirect_to users_path, alert:"削除しました"
   end
 
+  def send_sms
+    user = User.find(params[:id])
+    SendSmsJob.perform_later(user.id)
+    redirect_to users_path, notice: "#{user.name} に SMS を送信しました。"
+  end
+
   private
 
   def user_params

@@ -58,3 +58,20 @@ document.addEventListener("turbolinks:load", function() {
   // 初期計算
   calculate();
 });
+
+
+// app/javascript/packs/application.js または index用JS
+document.addEventListener('DOMContentLoaded', () => {
+  const copyButtons = document.querySelectorAll('.copy-btn');
+
+  copyButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const text = btn.dataset.clipboardText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('メール文をコピーしました。');
+      }).catch(() => {
+        alert('コピーに失敗しました。');
+      });
+    });
+  });
+});

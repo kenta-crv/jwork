@@ -13,7 +13,7 @@ class User < ApplicationRecord
   mount_uploader :image_4, ImagesUploader
   after_create :schedule_step_mails
   after_update :schedule_step_mails_if_sms
-
+  after_create :send_welcome_sms_async
   has_many :user_step_mails, dependent: :destroy
 
   STEP_MAILS = [1, 3, 7, 15, 30, 60]
@@ -48,5 +48,10 @@ class User < ApplicationRecord
       )
       StepMailJob.set(wait_until: step_mail.scheduled_at).perform_later(step_mail.id)
     end
+  end
+
+
+  def send_welcome_sms_async
+    SendSmsJob.perform_later(self.id)
   end
 end

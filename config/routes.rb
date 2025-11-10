@@ -60,6 +60,7 @@ Rails.application.routes.draw do
       post :thanks
     end
     member do
+      post :send_sms
       post :send_mail
       post :send_mail_start
       get "info"
