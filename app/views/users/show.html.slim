@@ -1,6 +1,7 @@
 .tops-wrapper
-  h2.headline ステータス
-  table.company
+  - if admin_signed_in?
+   h2.headline ステータス
+   table.company
     tbody
       tr
         td

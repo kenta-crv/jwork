@@ -6,7 +6,8 @@ br/
   h2.headline ステータス
   - @user.errors.full_messages.each do |message|
     li = message
-  table.company
+  - if admin_signed_in?
+   table.company
      tbody
        tr
           td
