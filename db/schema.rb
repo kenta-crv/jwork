@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_11_09_112528) do
+ActiveRecord::Schema.define(version: 2025_11_12_113141) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -112,6 +112,16 @@ ActiveRecord::Schema.define(version: 2025_11_09_112528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_journals_on_user_id"
+  end
+
+  create_table "situations", force: :cascade do |t|
+    t.string "status"
+    t.string "next"
+    t.string "body"
+    t.integer "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_situations_on_client_id"
   end
 
   create_table "user_step_mails", force: :cascade do |t|

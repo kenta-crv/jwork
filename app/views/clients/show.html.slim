@@ -114,3 +114,53 @@ table.company[width="100%"]
             = job.payment
           td
             = job.remarks
+
+
+br/
+br/
+= form_for [@client, @client.situations.build] do |f|
+  table.company[width="100%"]
+    col[width="25%"]
+    col[width="25%"]
+    col[width="25%"]
+    tbody
+      tr
+          th
+            | ステータス
+          th
+            | 次回営業日
+          th
+            | コメント
+
+      tr
+          td
+            = f.select(:status, [\
+            ["Absense","Absense"],\
+            ["Busy","Busy"],\
+            ["LINE","LINE"],\
+            ["HIRE","HIRE"],\
+            ["NG","NG"]],include_blank: "選択してください")     
+          td
+            = f.datetime_field :next
+          td
+            = f.text_area :body
+      tr
+        th[colspan="3"]
+         .center
+          = f.submit "登録する", class:"btn btn-primary"
+small 商談ステータスを入れる場合は商談日を入力。　不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
+table.company[width="100%"]
+  - if @client.situations.any?
+    tbody
+     - @client.situations.each do |situation|
+       tr
+        td
+          = situation.status
+        td
+          = situation.next
+        td
+          = situation.body
+        td
+          | 編集
+          | 削除
+

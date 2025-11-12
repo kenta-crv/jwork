@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
 
   resources :clients do
+    resources :situations
     resources :jobs 
     collection do
       post :confirm

@@ -48,7 +48,7 @@ def update
   end
 end
 
-def conclusion
+  def conclusion
     @user = User.find(params[:id])
     today = Date.today.strftime("%Y-%m-%d")
   end
