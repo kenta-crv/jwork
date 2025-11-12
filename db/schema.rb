@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_11_12_122551) do
+ActiveRecord::Schema.define(version: 2025_11_12_133553) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2025_11_12_122551) do
     t.integer "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "rental"
     t.index ["client_id"], name: "index_jobs_on_client_id"
   end
 
