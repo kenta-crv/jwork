@@ -1,3 +1,3 @@
 class Situation < ApplicationRecord
-    belongs_to :situation
+    belongs_to :client
 end

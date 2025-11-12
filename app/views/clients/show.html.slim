@@ -134,12 +134,10 @@ br/
 
       tr
           td
-            = f.select(:status, [\
-            ["Absense","Absense"],\
-            ["Busy","Busy"],\
-            ["LINE","LINE"],\
-            ["HIRE","HIRE"],\
-            ["NG","NG"]],include_blank: "選択してください")     
+           = f.select(:status, [\
+            ["契約", "契約"],\
+            ["NG", "NG"]\
+           ], include_blank: "選択してください")   
           td
             = f.datetime_field :next
           td
