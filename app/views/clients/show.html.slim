@@ -80,7 +80,7 @@
         td.label-cell
           strong.label 必須
         td.arrow-box-cell
-          | 商談日時
+          | 備考
         td.responsive-cell
           = @client.remarks
 
@@ -97,6 +97,7 @@ table.company[width="100%"]
         th 仕入れ価格
         th 販売価格
         th 配送
+        th レンタル
         th 支払い
         th 備考
       - @client.jobs.each do |job|
@@ -113,6 +114,8 @@ table.company[width="100%"]
             = job.sales_price
           td
             = job.delivery
+          td
+            = job.rental
           td
             = job.payment
           td

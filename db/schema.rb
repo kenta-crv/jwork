@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_11_12_113141) do
+ActiveRecord::Schema.define(version: 2025_11_12_122551) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
     t.string "path"
     t.string "ip"
     t.datetime "accessed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "add_column_to_clients", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,6 +62,7 @@ ActiveRecord::Schema.define(version: 2025_11_12_113141) do
     t.string "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "rental"
   end
 
   create_table "comments", force: :cascade do |t|

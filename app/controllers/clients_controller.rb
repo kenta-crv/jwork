@@ -110,7 +110,7 @@ end
       :address,
       :url,
       :meeting,
-      :remarks
+      :remarks,
     )
   end
 end

@@ -53,6 +53,7 @@ class JobsController < ApplicationController
       :delivery,
       :payment,
       :remarks,
+      :rental
       )
     end
 end

@@ -1,7 +1,7 @@
 table.company[width="100%"]
   thead
     tr
-      th
+      th 操作
       th 会社名
       th 内容
       th 勤務時間
@@ -9,26 +9,24 @@ table.company[width="100%"]
       th 仕入れ価格
       th 販売価格
       th 配送
+      th レンタル
       th 支払い
       th 備考
   tbody
     - @clients.each do |client|
-      - if client.jobs.any?
-        - client.jobs.each do |job|
-          tr
-            td
-              = link_to '🔺', edit_client_path(client), class:"btn btn-success"
-              = link_to '❌', client_path(client), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-danger"
-            td= link_to client.company, client_path(client)
-            td= job.content
-            td= job.working_time
-            td= job.area
-            td= job.purchase_price
-            td= job.sales_price
-            td= job.delivery
-            td= job.payment
-            td= job.remarks
-      - else
+      - client.jobs.presence || [nil]  # job がなければ nil の配列でループ
+      - (client.jobs.presence || [nil]).each do |job|
         tr
+          td
+            = link_to '🔺', edit_client_path(client), class: "btn btn-success"
+            = link_to '❌', client_path(client), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
           td= link_to client.company, client_path(client)
-          td[colspan=8] なし
+          td= job&.content
+          td= job&.working_time
+          td= job&.area
+          td= job&.purchase_price
+          td= job&.sales_price
+          td= job&.delivery
+          td= job&.rental
+          td= job&.payment
+          td= job&.remarks
