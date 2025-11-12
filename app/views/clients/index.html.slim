@@ -1,6 +1,7 @@
 table.company[width="100%"]
   thead
     tr
+      th
       th 会社名
       th 内容
       th 勤務時間
@@ -15,6 +16,9 @@ table.company[width="100%"]
       - if client.jobs.any?
         - client.jobs.each do |job|
           tr
+            td
+              = link_to '🔺', edit_client_path(client), class:"btn btn-success"
+              = link_to '❌', client_path(client), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-danger"
             td= link_to client.company, client_path(client)
             td= job.content
             td= job.working_time

@@ -2,6 +2,9 @@
 .tops-wrapper
   h2.headline 基本情報
   = link_to "ジョブを新規作成", new_client_job_path(@client), class: "btn btn-primary"
+  = link_to '🔺', edit_client_path(@client), class:"btn btn-success"
+  = link_to '❌', client_path(@client), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-danger"
+
   br/
   br/
   table.company
