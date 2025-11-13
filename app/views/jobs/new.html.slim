@@ -60,6 +60,14 @@
           td
             strong.label 必須
           td.arrow_box
+            | 車レンタル
+          td.center
+            = f.text_field :rental, class: "form-control"
+
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
             | 支払い
           td.center
             = f.text_field :payment, class: "form-control"
