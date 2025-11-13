@@ -374,7 +374,7 @@
         td
           strong.label Required
         td.arrow_box
-          | 当社（とうしゃ）は外国人（がいこくじん）が働（はたら）きやすい環境（かんきょう）を作（つく）ることを重要視（じゅうようし）している。そのため、各（かく）業務委託者（ぎょうむいたくしゃ）には、日本（にほん）のマナーや節度（せつど）、挨拶（あいさつ）、礼儀（れいぎ）をしっかりと行（おこな）うものとする。 [Our company values creating a comfortable environment for foreign workers, and therefore requires all contractors to properly observe Japanese manners, propriety, greetings, and courtesy.]
+          | 当社（とうしゃ）は外国人（がいこくじん）が働（はたら）きやすい環境（かんきょう）を作（つく）ることを重要視（じゅうようし）している。そのため、各（かく）業務委託者（ぎょうむいたくしゃ）には、日本（にほん）のマナーや節度（せつど）、挨拶（あいさつ）、礼儀（れいぎ）をしっかりと行（おこな）うものとする。 [Our company values creating a comfortable environment for foreign workers, and therefore requires all userors to properly observe Japanese manners, propriety, greetings, and courtesy.]
         td
           = @user.check_1
       tr
@@ -395,14 +395,14 @@
         td
           strong.label Required
         td.arrow_box
-          | 佐川急便（さがわきゅうびん）の場合（ばあい）、1日（いちにち）の平均配送（へいきんはいそう）は120個（ひゃくにじゅっこ）を下回（したまわ）らないよう、効率的（こうりつてき）に稼働（かどう）を行（おこな）うものとする。その他（そのた）の業務（ぎょうむ）の場合（ばあい）、発注元（はっちゅうもと）からの指定（してい）個数（こすう）を下回（したまわ）らないものとする。 [In the case of Sagawa Express, the contractor shall work efficiently so that the average daily delivery does not fall below 120 parcels. For other tasks, the number delivered shall not be less than the quantity designated by the ordering party.]
+          | 佐川急便（さがわきゅうびん）の場合（ばあい）、1日（いちにち）の平均配送（へいきんはいそう）は120個（ひゃくにじゅっこ）を下回（したまわ）らないよう、効率的（こうりつてき）に稼働（かどう）を行（おこな）うものとする。その他（そのた）の業務（ぎょうむ）の場合（ばあい）、発注元（はっちゅうもと）からの指定（してい）個数（こすう）を下回（したまわ）らないものとする。 [In the case of Sagawa Express, the useror shall work efficiently so that the average daily delivery does not fall below 120 parcels. For other tasks, the number delivered shall not be less than the quantity designated by the ordering party.]
         td
           = @user.check_4
       tr
         td
           strong.label Required
         td.arrow_box
-          | その他（そのた）契約約款（けいやくやっかん）に同意（どうい）します。 [I agree to the other terms and conditions of the contract.]
+          | その他（そのた）契約約款（けいやくやっかん）に同意（どうい）します。 [I agree to the other terms and conditions of the user.]
         td
           = @user.agree
       tr
@@ -414,7 +414,7 @@
           = @user.contract_date
 
 .actions_container style="text-align: center; margin-bottom: 30px;"
-  = link_to "Proceed to contract", info_user_path(@user), class: "btn btn-primary"
+  = link_to "Proceed to user", info_user_path(@user), class: "btn btn-primary"
   - if admin_signed_in?
    = link_to "削除する", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
    = link_to "一覧に戻る", users_path, class: "btn btn-default"
@@ -465,8 +465,11 @@ br/
         td
           = comment.body
         td
-          | 編集
-          | 削除
+         - if comment.id.present?
+           = link_to "編集", edit_user_comment_path(@user, comment)
+           = link_to "削除", user_comment_path(@user, comment), method: :delete, data: { confirm: "本当に削除しますか？" }
+         - else
+           = "コメントが見つかりません"
 
 
 

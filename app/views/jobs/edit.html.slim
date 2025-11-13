@@ -1,0 +1,84 @@
+- set_meta_tags noindex: true
+.tops-wrapper
+  h2.headline  仕事情報登録
+  = form_for([@client, @job]) do |f| 
+    table.company
+      colgroup
+        col width="20%"
+        col width="20%"
+        col width="60%"
+      tbody
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 内容
+          td.center
+            = f.text_field :content, class: "form-control"
+
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 勤務時間
+          td.center
+            = f.text_field :working_time, class: "form-control"
+
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | エリア
+          td.center
+            = f.text_field :area, class: "form-control"
+
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 仕入れ価格
+          td.center
+            = f.text_field :purchase_price, class: "form-control"
+
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 販売価格
+          td.center
+            = f.text_field :sales_price, class: "form-control"
+
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 配送
+          td.center
+            = f.text_field :delivery, class: "form-control"
+
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 車レンタル
+          td.center
+            = f.text_field :rental, class: "form-control"
+
+        tr
+          td
+            strong.label 必須
+          td.arrow_box
+            | 支払い
+          td.center
+            = f.text_field :payment, class: "form-control"
+
+        tr
+          td
+            strong.label
+          td.arrow_box
+            | 備考
+          td.center
+            = f.text_area :remarks, rows: 10, class: "form-control"
+
+        tr
+          td.center[colspan="3"]= f.submit "登録する"

@@ -100,6 +100,7 @@ table.company[width="100%"]
         th レンタル
         th 支払い
         th 備考
+        th 
       - @client.jobs.each do |job|
         tr
           td
@@ -120,9 +121,10 @@ table.company[width="100%"]
             = job.payment
           td
             = job.remarks
-
-
-br/
+          td 
+           - if job.id.present?
+            = link_to "🔺", edit_client_job_path(@client, job), class:"btn btn-success"
+            = link_to "❌", client_job_path(@client, job), method: :delete, data: { confirm: "本当に削除しますか？" }, class:"btn btn-danger"
 br/
 = form_for [@client, @client.situations.build] do |f|
   table.company[width="100%"]
@@ -165,6 +167,7 @@ table.company[width="100%"]
         td
           = situation.body
         td
-          | 編集
-          | 削除
+         - if situation.id.present?
+           = link_to "編集", edit_client_situation_path(@client, situation)
+           = link_to "削除", client_situation_path(@client, situation), method: :delete, data: { confirm: "本当に削除しますか？" }
 

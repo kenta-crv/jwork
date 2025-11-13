@@ -12,8 +12,6 @@ class CommentsController < ApplicationController
       @comment = Comment.find(params[:id])
     end
 
-    def edit
-    end
 
     def create
       @comment = @user.comments.new(comment_params)
@@ -25,24 +23,29 @@ class CommentsController < ApplicationController
       end
     end
 
-  	def destroy
-  		@user = User.find(params[:user_id])
-  		@comment = @user.comments.find(params[:id])
-  		@comment.destroy
-  		redirect_to user_path(@user)
-  	end
+  def edit
+    @user = User.find(params[:user_id])
+    @comment = @user.comments.find(params[:id])
+  end
+  
+  def destroy
+    @user = User.find(params[:user_id])
+    @comment = @user.comments.find(params[:id])
+    @comment.destroy
+    redirect_to user_path(@user)
+  end
 
-  	 def update
-      @comment = Comment.find(params[:user_id])
-      @comment = @user.comments.find(params[:id])
-      if @comment.update(comment_params)
-         redirect_to user_path(@user)
-      else
-          render 'edit'
-      end
+  def update
+    @user = User.find(params[:user_id])
+    @comment = @user.comments.find(params[:id])
+    if @comment.update(comment_params)
+      redirect_to user_path(@user), notice: 'コメントが更新されました。'
+    else
+      render :edit
     end
+  end
 
-    private
+  private
    	def comment_params
    		params.require(:comment).permit(
        :status,

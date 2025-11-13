@@ -20,18 +20,18 @@ class JobsController < ApplicationController
       redirect_to client_path(@client)
     end
   
-    def destroy
-      @client = Client.find(params[:client_id])
-      @job = @client.jobs.find(params[:id])
-      @job.destroy
-      redirect_to client_path(@client)
-    end
-
-    def edit
-      @client = Client.find(params[:client_id])
-      @job = @client.jobs.find(params[:id])
-    end
+  def edit
+    @client = Client.find(params[:client_id])
+    @job = @client.jobs.find(params[:id])
+  end
   
+  def destroy
+    @client = Client.find(params[:client_id])
+    @job = @client.jobs.find(params[:id])
+    @job.destroy
+    redirect_to client_path(@client)
+  end
+
     def update
         @client = Client.find(params[:client_id])
         @job = @client.jobs.find(params[:id])

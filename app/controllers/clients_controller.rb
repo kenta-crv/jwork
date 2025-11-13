@@ -37,8 +37,9 @@ def create
 end
 
   def show
-  @client = Client.find(params[:id])
-  @job = @client.jobs.build # 新規用
+    @client = Client.find(params[:id])
+    @job = Job.new # 新規用
+    @situation = Situation.new
   end
 
   def edit

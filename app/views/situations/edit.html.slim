@@ -13,11 +13,11 @@ h2 コメント編集
 
       tr
         td
-          = f.select(:status, [
-            ["商談", "商談"],
-            ["再調整", "再調整"],
-            ["契約", "契約"],
-            ["NG", "NG"]
+          = f.select(:status, [\
+            ["商談", "商談"],\
+            ["再調整", "再調整"],\
+            ["契約", "契約"],\
+            ["NG", "NG"]\
           ], include_blank: "選択してください")
         td
           = f.datetime_field :next

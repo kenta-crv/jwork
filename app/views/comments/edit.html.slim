@@ -1,6 +1,6 @@
 h2 コメント編集
 
-= form_for [@client, @comment] do |f|
+= form_for [@user, @comment] do |f|
   table.company[width="100%"]
     col[width="25%"]
     col[width="25%"]
@@ -13,13 +13,13 @@ h2 コメント編集
 
       tr
         td
-          = f.select(:status, [
-            ["商談", "商談"],
-            ["見込低", "見込低"],
-            ["見込中", "見込中"],
-            ["見込高", "見込高"],
-            ["契約", "契約"],
-            ["NG", "NG"]
+          = f.select(:status, [\
+            ["商談", "商談"],\
+            ["見込低", "見込低"],\
+            ["見込中", "見込中"],\
+            ["見込高", "見込高"],\
+            ["契約", "契約"],\
+            ["NG", "NG"]\
           ], include_blank: "選択してください")
         td
           = f.datetime_field :next
@@ -31,4 +31,4 @@ h2 コメント編集
           .center
             = f.submit "更新する", class: "btn btn-primary"
 
-= link_to "戻る", client_path(@client), class: "btn btn-secondary"
+= link_to "戻る", user_path(@user), class: "btn btn-secondary"

@@ -26,14 +26,12 @@ class SituationsController < ApplicationController
     end
 
   	def destroy
-  		@client = Client.find(params[:client_id])
-  		@situation = @client.situations.find(params[:id])
+  		@situation = Situation.find(params[:id])
   		@situation.destroy
   		redirect_to client_path(@client)
   	end
 
   	 def update
-      @situation = Situation.find(params[:client_id])
       @situation = @client.situations.find(params[:id])
       if @situation.update(situation_params)
          redirect_to client_path(@client)
