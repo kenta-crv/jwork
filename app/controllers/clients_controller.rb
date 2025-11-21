@@ -26,8 +26,8 @@ def create
   if @client.save
     if params[:commit] == '登録＋商談メール送信'
       # 保存後にメール送信
-      ClientMailer.teleapo_send_email(@client).deliver_later
-      ClientMailer.teleapo_reply_email(@client).deliver_later
+      ClientMailer.teleapo_send_email(@client).deliver_now
+      ClientMailer.teleapo_reply_email(@client).deliver_now
     end
     redirect_to clients_path, notice: "クライアントを登録しました"
   else

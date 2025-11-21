@@ -7,8 +7,6 @@ class JobsController < ApplicationController
       @job = Job.find(params[:id])
     end
 
-    
-
     def new
       @client = Client.find(params[:client_id])
       @job = @client.jobs.new

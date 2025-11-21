@@ -71,4 +71,5 @@ Rails.application.routes.draw do
       get "start"
    end
   end
+  post "/api/v1/users/from_sheet", to: "api/v1/users#sheet_create"
 end
