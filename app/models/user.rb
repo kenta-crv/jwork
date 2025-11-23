@@ -54,4 +54,13 @@ class User < ApplicationRecord
   def send_welcome_sms_async
     SendSmsJob.perform_later(self.id)
   end
+
+  enum status: { 
+    sms: "SMS", 
+    line: "LINE", 
+    recruitment: "Recruitment", 
+    interview_considering: "Interview considering", 
+    interview_ng: "Interview NG", 
+    not_join: "Not join" 
+  }
 end

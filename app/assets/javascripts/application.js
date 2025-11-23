@@ -75,3 +75,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+
+// ドキュメント全体に変更イベントのリスナーを設定
+$(document).on('change', '.update-status', function() {
+  const selectElement = $(this);
+  const userId = selectElement.data('user-id');
+  const newStatus = selectElement.val();
+  
+  // CSRFトークンを取得
+  const authenticityToken = $('meta[name="csrf-token"]').attr('content');
+
+  // Ajaxリクエストの実行
+  $.ajax({
+    url: `/users/${userId}`, // /users/:id にリクエストを送信
+    method: 'PATCH',        
+    dataType: 'json',       
+    data: { 
+      user: {
+        status: newStatus
+      },
+      authenticity_token: authenticityToken 
+    },
+    success: function(response) {
+      // 成功時の処理
+      console.log('ステータスが正常に更新されました:', response);
+    },
+    error: function(xhr) {
+      // エラー時の処理 (バリデーションエラーなど)
+      console.error('ステータスの更新に失敗しました:', xhr.responseText);
+      alert('ステータスの更新に失敗しました。詳細: ' + (xhr.responseJSON && xhr.responseJSON.errors ? xhr.responseJSON.errors.join(', ') : 'サーバーエラー'));
+    }
+  });
+});
