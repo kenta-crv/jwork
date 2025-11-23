@@ -17,15 +17,15 @@ class UserImporter
 
       next if User.exists?(email: user_data['email'])
 
-      User.create!(
+User.create!(
         email: user_data['email'],
         name: user_data['full_name'],
         tel: user_data['phone_number'],
         age: user_data['date_of_birth'],
         nationality: user_data['what_is_your_nationality?（あなたの国籍はどこですか？）'],
         past_business: user_data['_what_job_are_you_currently_doing?（あなたはげんざいなんのしごとをしていますか？）'],
-        password: '12345678',      # ← ここを追加
-        password_confirmation: '12345678' # もし確認が必要なら
+        password: '12345678',
+        password_confirmation: '12345678', # ← この行の末尾にカンマが必要です
         past_genre: user_data['what_industry_are[were]_you_in?（あなたはなんのしごとをしていますか？）'],
         past_year: user_data['how_long_years_have_you_been_working_in_japan?（にほんでなんねんかんはたらきましたか？）'],
         qualifications: user_data['tell_us_all_the_qualifications_you_have（あなたがもっているすべてのしかくをかいてください）'],
