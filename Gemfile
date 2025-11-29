@@ -96,5 +96,3 @@ gem 'google_drive'
 
 gem 'sidekiq'
 gem 'twilio-ruby'
-
-gem 'recaptcha', require: 'recaptcha/rails'
