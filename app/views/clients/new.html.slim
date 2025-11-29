@@ -4,6 +4,7 @@
   h2.headline
     | 求人申込フォーム
   = form_for @client, url: clients_path do |f|
+    = recaptcha_v3(action: 'create_client', site_key: Rails.application.credentials.recaptcha[:site_key])
     table.company
       colgroup
 
