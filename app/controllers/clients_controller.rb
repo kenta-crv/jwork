@@ -21,12 +21,6 @@ class ClientsController < ApplicationController
   end
 
 def create
-  # まず reCAPTCHA チェック
-  unless verify_recaptcha(action: 'create_client', minimum_score: 0.5)
-    flash[:alert] = "スパム判定により送信できませんでした。"
-    redirect_to new_client_path and return
-  end
-
   @client = Client.new(client_params)
 
   if @client.save

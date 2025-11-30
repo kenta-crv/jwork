@@ -91,10 +91,9 @@ gem 'ransack'
 
 gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'dotenv-rails', groups: [:development, :test]
-gem 'google_drive'
+#gem 'google_drive'
 # Gemfile
 
 gem 'sidekiq'
 gem 'twilio-ruby'
 
-gem 'recaptcha', require: 'recaptcha/rails'
