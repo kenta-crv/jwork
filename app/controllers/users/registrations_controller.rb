@@ -1,16 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def create
-    # ここで reCAPTCHA v3 を検証
-    unless verify_recaptcha(action: 'inquiry', minimum_score: 0.5)
-      flash[:alert] = "スパム判定により送信できませんでした。"
-      redirect_to new_user_registration_path and return
-    end
-
-    # reCAPTCHA が通った場合、通常の Devise create を呼ぶ
-    super
-  end
 
   def after_sign_up_path_for(resource)
     "/users/thanks"
