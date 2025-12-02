@@ -6,7 +6,7 @@ private
    when Admin
     clients_path
    when User
-    user_path
+    user_path(resource)
    when Client
     client_path(resource.id)
    else

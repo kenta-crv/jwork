@@ -415,6 +415,7 @@
 
 .actions_container style="text-align: center; margin-bottom: 30px;"
   = link_to "Proceed to user", info_user_path(@user), class: "btn btn-primary"
+  = link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "本当にログアウトしますか？" }, class: "btn btn-primary"
   - if admin_signed_in?
    = link_to "削除する", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
    = link_to "一覧に戻る", users_path, class: "btn btn-default"
