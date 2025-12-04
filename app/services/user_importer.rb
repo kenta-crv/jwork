@@ -1,5 +1,4 @@
 # app/services/user_importer.rb
-require 'google_drive'
 
 class UserImporter
   def self.import_from_spreadsheet
