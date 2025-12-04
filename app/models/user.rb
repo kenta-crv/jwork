@@ -25,12 +25,12 @@ class User < ApplicationRecord
     UserMailer.welcome_email(self).deliver_later
 
     # SMSステータスならフォローメール予約
-    schedule_followup_mails if status == "SMS"
+    schedule_followup_mails if status == "sms" # ★ status は小文字で比較すべき
   end
 
   def schedule_step_mails_if_sms
     return unless saved_change_to_status?
-    return unless status == "SMS"
+    return unless status == "sms" # ★ status は小文字で比較すべき
 
     schedule_followup_mails
   end
@@ -55,12 +55,13 @@ class User < ApplicationRecord
     SendSmsJob.perform_later(self.id)
   end
 
+  # ★★★ 修正箇所: enum の定義を慣習通り、キーと値を小文字に統一 (DBに小文字で保存される) ★★★
   enum status: { 
-    sms: "SMS", 
-    line: "LINE", 
-    recruitment: "Recruitment", 
-    interview_considering: "Interview considering", 
-    interview_ng: "Interview NG", 
-    not_join: "Not join" 
+    sms: "sms",                 # DBに "sms" が保存される
+    line: "line",               # DBに "line" が保存される
+    recruitment: "recruitment", 
+    interview_considering: "interview_considering", # 括弧書きの部分もDBに保存する値として小文字に統一
+    interview_ng: "interview_ng", 
+    not_join: "not_join" 
   }
 end
