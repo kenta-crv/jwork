@@ -14,8 +14,11 @@ class StepMailJob < ApplicationJob
     puts ">>> StepMailJob START id=#{user_step_mail_id} time=#{Time.current}"
 
     step_mail = UserStepMail.find_by(id: user_step_mail_id)
-    return unless step_mail && step_mail.pending?
+    # ★ 修正: レコードの存在のみを確認 (pending? チェックを削除)
+    return unless step_mail 
 
+    # ステータスチェック（これは以前の修正のまま維持）
+    return unless step_mail.user.status.upcase == "SMS"
 
     mail_method = FOLLOWUP_METHODS[step_mail.mail_type.to_i]
     if mail_method
@@ -23,14 +26,15 @@ class StepMailJob < ApplicationJob
       step_mail.user.reload if step_mail.user.status.downcase == "sms"
       
       UserMailer.send(mail_method, step_mail.user).deliver_now
-      step_mail.update(sent_at: Time.current, status: "sent")
+      
+      # ★ 修正: status: "sent" への更新を削除し、sent_at の記録のみを残す
+      step_mail.update(sent_at: Time.current) 
     end
 
     puts ">>> StepMailJob END id=#{user_step_mail_id} time=#{Time.current}"
 
   rescue => e
-    # エラー発生時は status を 'failed' に更新し、ログに出力
-    step_mail.update(status: "failed") if step_mail.present?
+    # エラー発生時の status 変更ロジックを削除
     Rails.logger.error("StepMailJob failed: #{e.message}")
   end
 end
