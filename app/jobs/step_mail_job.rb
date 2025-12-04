@@ -15,9 +15,7 @@ class StepMailJob < ApplicationJob
 
     step_mail = UserStepMail.find_by(id: user_step_mail_id)
     return unless step_mail && step_mail.pending?
-    
-    # 【修正箇所】大文字に変換して比較する (大文字・小文字の不一致を回避)
-    return unless step_mail.user.status.upcase == "SMS"
+
 
     mail_method = FOLLOWUP_METHODS[step_mail.mail_type.to_i]
     if mail_method
