@@ -14,7 +14,7 @@ def perform(user_id)
   client.messages.create(
     from: ENV['TWILIO_PHONE_NUMBER'],
     to: tel,
-    body: "#{user.name}さん！Thank you for choosing J Work..."
+    body: "#{user.name}さん！Thank you for choosing J Work, a job search site for foreigners. https://lin.ee/gIX2fUT We are introducing our jobs on LINE, so please use LINE and send us a message."
   )
 end
 
