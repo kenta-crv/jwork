@@ -12,7 +12,7 @@ class UserMailer < ActionMailer::Base
   def send_email(user)
     @user = user
     mail to: user.email
-    mail(subject: 'ご登録頂きありがとうございます。') do |format|
+    mail(subject: 'META広告よりお問い合わせありがとうございます。【Thank you for your inquiry from META Advertising.】') do |format|
       format.text
     end
   end
