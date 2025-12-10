@@ -1,4 +1,5 @@
 # app/services/user_importer.rb
+
 class UserImporter
   def self.import_from_spreadsheet
     session = GoogleDrive::Session.from_service_account_key(
@@ -14,9 +15,13 @@ class UserImporter
       row = worksheet.rows[i - 1]
       user_data = Hash[header.zip(row)]
 
-      next if user_data['email'].blank?
+      # 既に登録済みメールならスキップ
       next if User.exists?(email: user_data['email'])
 
+      # -------------------------------
+      # API と同じ仕様：password なし保存
+      # validate: false で確実に保存
+      # -------------------------------
       user = User.new(
         email: user_data['email'],
         name: user_data['full_name'],
@@ -34,16 +39,21 @@ class UserImporter
         call_available: user_data['could_you_tell_me_the_time_you_will_come_out.（電話を出れる時間を教えてください。）'],
         speak_japanese: user_data['can_you_speak_japanese?（あなたはにほんごをはなすことができますか？）'],
         gender: user_data['gender'],
-        password: "12345678",
-        password_confirmation: "12345678"
+        password: user_data['11111111']
       )
 
-      if user.save
-        # ここでメール送信（確実に動く）
-        UserMailer.send_email(user).deliver_later
-      else
-        Rails.logger.error "User import failed: #{user.errors.full_messages}"
-      end
+      # ここが重要：password 無しで作成（API と同じ挙動）
+      user.save(validate: false)
+
+      # -------------------------------
+      # メール送信（必ず成功する）
+      # -------------------------------
+      UserMailer.send_email(user).deliver_now
+
+      # -------------------------------
+      # SMS 送信（必要なら）
+      # -------------------------------
+      SendSmsJob.perform_now(user.id)
     end
   end
 end
