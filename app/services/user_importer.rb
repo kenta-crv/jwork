@@ -2,6 +2,8 @@
 
 class UserImporter
   def self.import_from_spreadsheet
+    require 'google_drive'
+
     session = GoogleDrive::Session.from_service_account_key(
       Rails.root.join("config/eighth-facet-468213-h7-9e4a9687aedf.json")
     )
@@ -10,66 +12,38 @@ class UserImporter
     worksheet = spreadsheet.worksheets.first
 
     header = worksheet.rows.first
-    Rails.logger.info "=== HEADER ==="
-    Rails.logger.info header.inspect
 
     (2..worksheet.num_rows).each do |i|
       row = worksheet.rows[i - 1]
-      user_data = Hash[header.zip(row)]
+      raw_data = Hash[header.zip(row)]
 
-      Rails.logger.info "=== ROW #{i} DATA ==="
-      Rails.logger.info user_data.inspect
+      # ここでスプレッドシートの日本語ヘッダー → Rails の英語キーへ変換
+      user_data = {
+        email: raw_data['メール'],
+        name: raw_data['名前'],
+        tel: raw_data['電話番号'],
+        age: raw_data['生年月日'],
+        nationality: raw_data['国籍'],
+        past_business: raw_data['現在のお仕事'],
+        past_genre: raw_data['職種'],
+        past_year: raw_data['日本での就労年数'],
+        qualifications: raw_data['資格'],
+        work_range: raw_data['在留資格'],
+        hope_work: raw_data['応募職種'],
+        period: raw_data['就業開始日'],
+        change_the_address: raw_data['住所変更可否'],
+        call_available: raw_data['電話可能時間'],
+        speak_japanese: raw_data['日本語能力'],
+        gender: raw_data['性別']
+      }
 
-      # email が空ならスキップ
-      next if user_data['email'].blank?
-
-      # 重複チェック
-      if User.exists?(email: user_data['email'])
-        Rails.logger.info "Skip: #{user_data['email']} (already exists)"
-        next
-      end
-
-      # 値が取れないヘッダーがある場合のデバッグ
-      [
-        'full_name',
-        'phone_number',
-        'date_of_birth',
-        'what_is_your_nationality?（あなたの国籍はどこですか？）',
-        '_what_job_are_you_currently_doing?（あなたはげんざいなんのしごとをしていますか？）',
-        'what_industry_are[were]_you_in?（あなたはなんのしごとをしていますか？）',
-        'how_long_years_have_you_been_working_in_japan?（にほんでなんねんかんはたらきましたか？）',
-        'tell_us_all_the_qualifications_you_have（あなたがもっているすべてのしかくをかいてください）',
-        'please_tell_me_your_status_of_residence（visaのしゅるいをおしえてください）',
-        '_when_are_you_available_to_work?（あなたはいつからはたらけますか？）',
-        'can_you_change_the_prefecture_you_live_in?あなたはすむとどふけんをかえることができますか?',
-        'could_you_tell_me_the_time_you_will_come_out.（電話を出れる時間を教えてください。）',
-        'can_you_speak_japanese?（あなたはにほんごをはなすことができますか？）',
-        'gender'
-      ].each do |key|
-        if !user_data.key?(key)
-          Rails.logger.warn "⚠ Missing header: #{key}"
-        end
-      end
+      # ★★★ ここを削除：skip しない ★★★
+      # next if User.exists?(email: user_data[:email])
 
       User.create!(
-        email: user_data['email'],
-        name: user_data['full_name'],
-        tel: user_data['phone_number'],
-        age: user_data['date_of_birth'],
-        nationality: user_data['what_is_your_nationality?（あなたの国籍はどこですか？）'],
-        past_business: user_data['_what_job_are_you_currently_doing?（あなたはげんざいなんのしごとをしていますか？）'],
-        password: '12345678',
-        password_confirmation: '12345678',
-        past_genre: user_data['what_industry_are[were]_you_in?（あなたはなんのしごとをしていますか？）'],
-        past_year: user_data['how_long_years_have_you_been_working_in_japan?（にほんでなんねんかんはたらきましたか？）'],
-        qualifications: user_data['tell_us_all_the_qualifications_you_have（あなたがもっているすべてのしかくをかいてください）'],
-        work_range: user_data['please_tell_me_your_status_of_residence（visaのしゅるいをおしえてください）'],
-        hope_work: user_data['ad_name'],
-        period: user_data['_when_are_you_available_to_work?（あなたはいつからはたらけますか？）'],
-        change_the_address: user_data['can_you_change_the_prefecture_you_live_in?あなたはすむとどふけんをかえることができますか?'],
-        call_available: user_data['could_you_tell_me_the_time_you_will_come_out.（電話を出れる時間を教えてください。）'],
-        speak_japanese: user_data['can_you_speak_japanese?（あなたはにほんごをはなすことができますか？）'],
-        gender: user_data['gender']
+        **user_data,
+        password: "12345678",
+        password_confirmation: "12345678"
       )
     end
   end
