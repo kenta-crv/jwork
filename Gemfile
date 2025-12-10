@@ -96,3 +96,5 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'sidekiq'
 gem 'twilio-ruby'
+
+gem "faraday", "~> 1.10"

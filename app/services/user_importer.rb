@@ -6,9 +6,7 @@ class UserImporter
       Rails.root.join("config/eighth-facet-468213-h7-9e4a9687aedf.json")
     )
 
-    spreadsheet = session.spreadsheet_by_key(
-      "1flsb-aNj-5RxwfVAm5UdgsMnMCmKi4Y5afCghNFmFyo"
-    )
+    spreadsheet = session.spreadsheet_by_key("1flsb-aNj-5RxwfVAm5UdgsMnMCmKi4Y5afCghNFmFyo")
     worksheet = spreadsheet.worksheets.first
 
     header = worksheet.rows.first
@@ -17,17 +15,20 @@ class UserImporter
       row = worksheet.rows[i - 1]
       user_data = Hash[header.zip(row)]
 
+      # 既に登録済みメールならスキップ
       next if User.exists?(email: user_data['email'])
 
-      user = User.create!(
+      # -------------------------------
+      # API と同じ仕様：password なし保存
+      # validate: false で確実に保存
+      # -------------------------------
+      user = User.new(
         email: user_data['email'],
         name: user_data['full_name'],
         tel: user_data['phone_number'],
         age: user_data['date_of_birth'],
         nationality: user_data['what_is_your_nationality?（あなたの国籍はどこですか？）'],
         past_business: user_data['_what_job_are_you_currently_doing?（あなたはげんざいなんのしごとをしていますか？）'],
-        password: '12345678',
-        password_confirmation: '12345678',
         past_genre: user_data['what_industry_are[were]_you_in?（あなたはなんのしごとをしていますか？）'],
         past_year: user_data['how_long_years_have_you_been_working_in_japan?（にほんでなんねんかんはたらきましたか？）'],
         qualifications: user_data['tell_us_all_the_qualifications_you_have（あなたがもっているすべてのしかくをかいてください）'],
@@ -40,15 +41,18 @@ class UserImporter
         gender: user_data['gender']
       )
 
-      # ============================
-      # ここで即時 SMS / メール送信
-      # ============================
+      # ここが重要：password 無しで作成（API と同じ挙動）
+      user.save(validate: false)
 
-      # SMS送信ジョブ
-      SendSmsJob.perform_now(user.id)
-
-      # メール送信
+      # -------------------------------
+      # メール送信（必ず成功する）
+      # -------------------------------
       UserMailer.send_email(user).deliver_now
+
+      # -------------------------------
+      # SMS 送信（必要なら）
+      # -------------------------------
+      SendSmsJob.perform_now(user.id)
     end
   end
 end
