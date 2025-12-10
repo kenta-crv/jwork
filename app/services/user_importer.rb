@@ -39,7 +39,8 @@ class UserImporter
         call_available: user_data['could_you_tell_me_the_time_you_will_come_out.（電話を出れる時間を教えてください。）'],
         speak_japanese: user_data['can_you_speak_japanese?（あなたはにほんごをはなすことができますか？）'],
         gender: user_data['gender'],
-        password: user_data['11111111']
+        password: '11111111', 
+        password_confirmation: '11111111'
       )
 
       # ここが重要：password 無しで作成（API と同じ挙動）
