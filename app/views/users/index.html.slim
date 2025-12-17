@@ -53,7 +53,9 @@ table.list
         td= user&.contract_date
         td= user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
         td
-          span.copy-btn.btn.btn-success  data-clipboard-text="お疲(つか)れ様(さま)です。\n先日(せんじつ)は面接(めんせつ)対応(たいおう)をいただきありがとうございました。\n以下(いか)、手続(てつづ)きを進(すす)めるためにまずは契約(けいやく)の締結(ていけつ)を行(おこな)いますので、以下URLよりアクセスいただき、契約を完了(かんりょう)してください。\n"
+          span.copy-btn.btn.btn-success data-clipboard-text=user.interview_request_text
+           | ℹ️
+          span.copy-btn.btn.btn-success data-clipboard-text=user.contract_request_text
            | ✅
           = link_to "LINE", user.account_name, target:"_blank", class: "btn btn-success"
           = link_to "SMS", send_sms_user_path(user), \

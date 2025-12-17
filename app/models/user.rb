@@ -18,6 +18,36 @@ class User < ApplicationRecord
 
   STEP_MAILS = [1, 3, 7, 15, 30, 60]
 
+    def interview_request_text
+    <<~TEXT
+      お世話になっております。
+      以下人材の面接をお願いしたく存じます。
+
+      名前：#{name}
+      生年月日：#{age}
+      住まい：#{address}
+      お仕事：#{work_now}
+      ビザ種別：#{which_visa}
+      日本滞在：#{visiting_in_japan}
+      開始希望日：#{start}
+      面接希望日：
+
+      以上、よろしくお願い致します。
+    TEXT
+  end
+
+  def contract_request_text
+    <<~TEXT
+      お疲(つか)れ様(さま)です。
+      先日(せんじつ)は面接(めんせつ)対応(たいおう)をいただきありがとうございました。
+      以下(いか)、手続(てつづ)きを進(すす)めるために
+      まずは契約(けいやく)の締結(ていけつ)を行(おこな)います。
+
+      以下URLよりアクセスいただき、
+      契約を完了(かんりょう)してください。
+    TEXT
+  end
+  
   private
 
   def schedule_step_mails
