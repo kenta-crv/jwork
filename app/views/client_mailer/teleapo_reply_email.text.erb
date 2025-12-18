@@ -1,5 +1,7 @@
 <%= @client.company %>との商談が決定しました。
 
+https://j-work.jp/clients/<%= @client.id %>
+
 会社名：<%= @client.company %>
 役職：<%= @client.position %>
 担当者：<%= @client.person %>
@@ -8,6 +10,7 @@
 住所：<%= @client.address %>
 メールアドレス：<%= @client.email %>
 URL：<%= @client.url %>
+業種：<%= @client.industry %>
 商談日時：<%= @client.meeting.strftime("%-m月%-d日%-H時%-M分") if @client.meeting.present? %>
 ヒアリング事項：
 <%= @client.remarks.to_s %>
