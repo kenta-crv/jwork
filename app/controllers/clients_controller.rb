@@ -112,6 +112,7 @@ end
       :url,
       :meeting,
       :remarks,
+      :industry
     )
   end
 end

@@ -1,3 +1,13 @@
+h2 顧客一覧
+
+/ フィルターボタン
+.mb-3
+  button.btn.btn-primary.filter-btn[data-target="all" style="margin-right: 5px;"] 全て表示
+  button.btn.btn-primary.filter-btn[data-target="cargo" style="margin-right: 5px;"] 軽貨物業
+  button.btn.btn-primary.filter-btn[data-target="security" style="margin-right: 5px;"] 警備業
+  button.btn.btn-primary.filter-btn[data-target="cleaning" style="margin-right: 5px;"] 清掃業
+  button.btn.btn-primary.filter-btn[data-target="other"] その他
+
 table.company[width="100%"]
   thead
     tr
@@ -14,9 +24,13 @@ table.company[width="100%"]
       th 備考
   tbody
     - @clients.each do |client|
-      - client.jobs.presence || [nil]  # job がなければ nil の配列でループ
+      / マッピングを定義。DBの値がこれら以外なら空文字にする
+      - mapping = { "軽貨物業" => "cargo", "警備業" => "security", "清掃業" => "cleaning", "その他" => "other" }
+      - industry_code = mapping[client.industry] || ""
+      
       - (client.jobs.presence || [nil]).each do |job|
-        tr
+        / industry_codeが一致しない限り表示されないように設定
+        tr.filter-item[data-industry="#{industry_code}"]
           td
             = link_to '🔺', edit_client_path(client), class: "btn btn-success"
             = link_to '❌', client_path(client), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
@@ -30,3 +44,32 @@ table.company[width="100%"]
           td= job&.rental
           td= job&.payment
           td= job&.remarks
+
+javascript:
+  document.addEventListener("turbolinks:load", function() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const rows = document.querySelectorAll('.filter-item');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', function() {
+        const target = this.getAttribute('data-target');
+
+        rows.forEach(row => {
+          const rowIndustry = row.getAttribute('data-industry');
+          
+          if (target === 'all') {
+            // 「全て表示」ボタン：無条件で出す
+            row.style.display = '';
+          } else {
+            // その他のボタン（cargo, security, cleaning, other）：
+            // データ属性とボタンのターゲットが「完全一致」する場合のみ出す
+            if (rowIndustry === target) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  });

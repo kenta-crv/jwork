@@ -1,0 +1,2 @@
+class AddColumnToIndustry < ApplicationRecord
+end
