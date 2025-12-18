@@ -81,6 +81,15 @@
           td.responsive-cell
             .input-container
               = f.text_field :url, placeholder: "https://abc.com"
+              
+        tr
+          td.label-cell
+            strong.label 必須
+          td.arrow-box-cell
+            | 業種指定
+          td.responsive-cell
+            .input-container
+              = f.select :industry, [["軽貨物業", "軽貨物業"], ["警備業", "警備業"], ["清掃業", "清掃業"], ["その他", "その他"]], { include_blank: "選択してください" }, { class: "form-control" }
 
         tr
           td.label-cell
