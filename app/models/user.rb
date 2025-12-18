@@ -76,7 +76,7 @@ class User < ApplicationRecord
         scheduled_at: Time.current + days.days,
         status: "pending"
       )
-      StepMailJob.set(wait_until: step_mail.scheduled_at).perform_later(step_mail.id)
+      #StepMailJob.set(wait_until: step_mail.scheduled_at).perform_later(step_mail.id)
     end
   end
 
