@@ -13,6 +13,8 @@ class TopController < ApplicationController
   end
   def flow
   end
+  def recruit_clean
+  end
 
   def calculation
   end
