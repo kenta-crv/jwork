@@ -28,7 +28,6 @@ table.list
     tr
       th User_name
       th Phone_number
-      th email
       th Status
       th Contract
       th Register_date
@@ -38,7 +37,6 @@ table.list
       tr
         td= link_to user.name, user_path(user)
         td= user.tel
-        td= user.email
         td
           - status_options = User.statuses.keys.map do |key|
             - display_name = key.humanize
@@ -57,12 +55,12 @@ table.list
            | ℹ️
           span.copy-btn.btn.btn-success data-clipboard-text=user.contract_request_text
            | ✅
-          = link_to "LINE", user.account_name, target:"_blank", class: "btn btn-success"
+          = link_to "LINE", user.account_name, target:"_blank", class: "btn btn-success btn-sm"
           = link_to "SMS", send_sms_user_path(user), \
             method: :post, \
             data: { confirm: "本当に送信しますか？" }, \
             class: "btn btn-primary btn-sm"          
-          = link_to "EDIT", edit_user_path(user), class: "btn btn-success"
-          = link_to "×", user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
+          = link_to "EDIT", edit_user_path(user), class: "btn btn-success btn-sm"
+          = link_to "×", user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger btn-sm"
 
 = paginate @users

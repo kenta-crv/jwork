@@ -237,7 +237,61 @@ footer {
      background: linear-gradient(transparent 60%, #FFFF66 60%);
 }
 
-                                            /*テーブルに関する情報*/
+
+
+/* Indexページ（.table-scroll配下）のテーブルのみに適用 */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;            /* 横スクロールを有効化 */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Index専用：この外枠の幅(90%)を超えたらスクロールさせる */
+.table-scroll {
+  width: 90% !important;
+  margin: 0 auto !important;
+  overflow-x: auto !important; /* 絶対にスクロールを許可 */
+  display: block;              /* tableの性質を打ち消し、独立した箱にする */
+}
+
+/* テーブル本体 */
+.table-scroll table.company {
+  width: auto;                 /* 100%にせず、中身のサイズに任せる */
+  min-width: 100%;             /* ただし、中身が少ない時は90%の幅いっぱいに広げる */
+  text-align: center;
+  border-spacing: 0px 10px;
+  table-layout: auto;          /* 中身の文字幅を優先する設定 */
+}
+
+.table-scroll table.company th,
+.table-scroll table.company td {
+  white-space: nowrap !important; /* 絶対に改行させない（これで横に突き抜けさせる） */
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 10px 15px;             /* セル間に適度な余白 */
+}
+
+/* スマホ対応：既存の縦並び（block化）を強制解除 */
+@media screen and (max-width: 768px) {
+  .table-scroll {
+    width: 95% !important; /* スマホは少し広く */
+  }
+
+  .table-scroll table.company {
+    display: table !important; /* 縦並びを阻止 */
+  }
+
+  .table-scroll table.company tr {
+    display: table-row !important; /* 縦並びを阻止 */
+  }
+
+  .table-scroll table.company th,
+  .table-scroll table.company td {
+    display: table-cell !important; /* 縦並びを阻止 */
+    font-size: 1.2rem;
+    white-space: nowrap !important;
+  }
+}/*テーブルに関する情報*/
           /*テーブルに関する情報*/
 /* テーブル共通 */
 table.company {
