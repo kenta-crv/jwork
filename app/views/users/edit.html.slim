@@ -327,16 +327,16 @@ br/
         td
           strong.label Required
         td.arrow_box
-          | ほうしゅう[Reward unit price]
+          | ほうしゅうじょうけん[Reward Conditions]
         td
-          = f.text_field :deliver
+          = f.text_area :deliver
       tr
         td
           strong.label Required
         td.arrow_box
-          | 月休み[Monthly holiday]
+          | しゅっきんじょうけん[Working conditions]
         td
-          = f.text_field :day_off
+          = f.text_area :day_off
 
   table.company
     tbody
