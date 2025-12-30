@@ -23,21 +23,27 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def contract_received_email(user)
-    @user = user
-    mail(
-      to: "info@j-work.jp",
-      subject: 'J Workで契約同意がありました'
-    )
-  end
+def contract_received_email(user)
+  @user = user
+  template =
+    @user.hope_work == "Cleaner" ? "contract_received_cleaner" : "contract_received_driver"
+  mail(
+    to: "info@j-work.jp",
+    subject: "J Workで契約同意がありました",
+    template_name: template
+  )
+end
 
-  def contract_send_email(user)
-    @user = user
-    mail(
-      to: @user.email,
-      subject: 'ご契約いただきありがとうございます。'
-    )
-  end
+def contract_send_email(user)
+  @user = user
+  template =
+    @user.hope_work == "Cleaner" ? "contract_send_cleaner" : "contract_send_driver"
+  mail(
+    to: @user.email,
+    subject: "ご契約いただきありがとうございます。",
+    template_name: template
+  )
+end
 
   def received_first_email(user)
     @user = user

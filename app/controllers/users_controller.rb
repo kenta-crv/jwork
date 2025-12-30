@@ -32,53 +32,52 @@ class UsersController < ApplicationController
   end
 
 
-  def update
-    @user = User.find(params[:id])
-    previous_agree = @user.agree # 更新前の agree 状態を保持
+def update
+  @user = User.find(params[:id])
+  previous_agree = @user.agree # 更新前の agree 状態を保持
 
-    if @user.update(user_params)
-      # 契約完了メール送信ロジック (agreeが変わった場合のみ)
-      if @user.agree == "Agree" && previous_agree != "Agree"
-        UserMailer.contract_received_email(@user).deliver_now
-        UserMailer.contract_send_email(@user).deliver_now
-        flash[:notice] = "契約が完了しました"
+  if @user.update(user_params)
+    # 契約完了メール送信ロジック（agree が変わった場合のみ）
+    if @user.agree == "Agree" && previous_agree != "Agree"
+      UserMailer.contract_received_email(@user).deliver_now
+      UserMailer.contract_send_email(@user).deliver_now
+      flash[:notice] = "契約が完了しました"
+    end
+
+    respond_to do |format|
+      # HTML形式（通常のフォーム送信）
+      format.html do
+        if current_admin.present?
+          redirect_to users_path
+        else
+          redirect_to info_user_path(@user)
+        end
       end
 
-      # リクエスト形式に応じてレスポンスを切り替える
-      respond_to do |format|
-        # 1. HTML形式でのリクエスト (通常のフォーム送信、リダイレクト)
-        format.html { 
-          redirect_to users_path 
-        }
-        
-        # 2. JSON形式でのリクエスト (Ajaxによる status 更新)
-        format.json { 
-          render json: { 
-            status: :ok, 
-            message: 'Status updated successfully.',
-            new_status: @user.status 
-          }
-        }
-      end
-
-    else
-      # 更新に失敗した場合
-      respond_to do |format|
-        # 1. HTML形式でのリクエスト (edit画面に戻る)
-        format.html { 
-          render :edit 
-        }
-        
-        # 2. JSON形式でのリクエスト (Ajaxエラー応答)
-        format.json { 
-          render json: { 
-            status: :unprocessable_entity, 
-            errors: @user.errors.full_messages 
-          }, status: :unprocessable_entity 
+      # JSON形式（Ajax）
+      format.json do
+        render json: {
+          status: :ok,
+          message: 'Status updated successfully.',
+          new_status: @user.status
         }
       end
     end
+  else
+    respond_to do |format|
+      # HTML形式（edit に戻す）
+      format.html { render :edit }
+
+      # JSON形式（Ajax エラー）
+      format.json do
+        render json: {
+          status: :unprocessable_entity,
+          errors: @user.errors.full_messages
+        }, status: :unprocessable_entity
+      end
+    end
   end
+end
 
   def conclusion
     @user = User.find(params[:id])
