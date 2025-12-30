@@ -32,13 +32,6 @@
         td
           strong.label Required
         td.arrow_box
-          | せいねんがっぴ [age]
-        td
-          = @user.age
-      tr
-        td
-          strong.label Required
-        td.arrow_box
           | せいべつ [gender]
         td
           = @user.gender
@@ -50,200 +43,220 @@
         td
           = @user.tel
       tr
-          td
-            strong.label Required
-          td.arrow_box
-            | じゅうしょ[Address]
-          td
-            = @user.address
-      tr
         td
           strong.label Required
         td.arrow_box
           | メールアドレス [Mail]
         td
           = @user.email
+      tr
+        td
+          strong.label Required
+        td.arrow_box
+          | せいねんがっぴ [age]
+        td
+          = @user.age
+      tr
+          td
+            strong.label Required
+          td.arrow_box
+            | じゅうしょ[Address]
+          td
+            = @user.address
       - if admin_signed_in?
-       /tr
-       / td
-          strong.label Required
-       / td.arrow_box
-          | 国籍
-       / td
-          = @user.nationality
-       tr
-        td
-          strong.label Required
-        td.arrow_box
-          | VISA
-        td
-          = @user.work_range
-       /tr
-       / td
-          strong.label Required
-       / td.arrow_box
-          | あなたがもっているすべてのしかくをかいてください [pletell_us_all_the_qualifications_you_have]
-       / td
-          = @user.qualifications
-       /tr
-       / td
-          strong.label Required
-       / td.arrow_box
-          | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
-       / td
-          = @user.past_business
-       /tr
-       / td
-          strong.label Required
-       / td.arrow_box
-          | あなたのしょくしゅをおしえてください？[what_industry_are[were]_you_in?]
-       / td
-          = @user.past_year
-       /tr
-       / td
-          strong.label Required
-       / td.arrow_box
-          | 希望職種
-       / td
-          = @user.hope_work
-       tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 日本滞在
-        td
-          = @user.past_year
-       tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 稼働希望
-        td
-          = @user.hope_work
-       /tr
-       / td
-          strong.label Required
-       / td.arrow_box
-          | 電話を出れる時間を教えてください。[Could you tell me the time you will come out.]
-       / td
-          = @user.call_available
-       tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 日本語力
-        td
-          = @user.speak_japanese
-       /tr
-       / td
-          strong.label Required
-       / td.arrow_box
-          | 転居はできますか？[Can I move to a different prefecture?]
-       / td
-          = @user.change_the_address
-
-
-  - if admin_signed_in?
-   h2.headline Interview
-
-   table.company
-    col[width="10%"]
-    col[width="20%"]
-    col[width="70%"]
-    tbody
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | LINE Account
-        td
-           = @user.account_name
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 運転免許
-        td
-          = @user.drivers_lisence
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 車所有有無
-        td
-          = @user.car
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 転居可否
-        td
-          = @user.change_the_address_check
-      /tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 現在のお仕事
-        td
-          = @user.work_now
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 職種経験
-        td
-          = @user.experience
-      /tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ビザの種類
-        td
-          = @user.which_visa
-      /tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 日本語レベル
-        td
-          = @user.japanese_level
-      /tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 日本在住期間
-        td
-          = @user.visiting_in_japan
-      /tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 漢字レベル
-        td
-          = @user.kanzi
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 勤務開始希望
-        td
-          = @user.period
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 備考
-        td
-          = @user.remarks
-      /tr
-        td
-          strong.label Required
-        td.arrow_box
-          | オススメ度
-        td
-          = @user.recommend
-
-
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 転居はできますか？[Can I move to a different prefecture?]
+          td
+            = @user.change_the_address
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 希望職種
+          td
+            = @user.hope_work
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
+          td
+            = @user.past_business  
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
+          td
+            = @user.work_range      
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
+          td
+            = @user.past_year
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | いつから働けますか？ [Since when can you job?]
+          td
+            = @user.hope_work
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 日本語で会話できますか？[Can you speak Japanese conversation?]
+          td
+            = @user.speak_japanese  
+        tr
+            td
+              strong.label Required
+            td.arrow_box
+              | 備考
+            td
+              = @user.remarks
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | LINE Account
+          td
+             = @user.account_name
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 現在のお仕事
+          td
+            = @user.work_now
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | あなたの国籍はどこですか？ [what_is_your_nationality?]
+          td
+            = @user.nationality, placeholder:"JAPAN"
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | あなたがもっているすべてのしかくをかいてください [pletell_us_all_the_qualifications_you_have]
+          td
+            = @user.qualifications  
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | あなたのしょくしゅをおしえてください？[what_industry_are[were]_you_in?]
+          td
+            = @user.past_year
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 電話を出れる時間を教えてください。[Could you tell me the time you will come out.]
+          td
+            = f.select(:call_available, [\
+             ["いつでも可能[Everytime is fine]",""],\
+             ["10:00~12:00",""],\
+             ["12:00~13:00",""],\
+             ["13:00~17:00",""],\
+             ["17:00~20:00",""],\
+            ], include_blank: "選択してください[Please select]")  
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 運転免許
+          td
+             = f.select(:drivers_lisence, [\
+              ["なし","なし"],\
+              ["あり","あり"],\
+             ], include_blank: "選択してください")
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 軽貨物経験
+          td
+             = f.select(:experience, [\
+              ["なし","なし"],\
+              ["あり","あり"],\
+             ], include_blank: "選択してください")
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | ビザの種類
+          td
+             = f.select(:which_visa, [\
+              ["会話が難しい","会話が難しい"],\
+              ["会話は可能","会話は可能"],\
+              ["ある程度流暢","ある程度流暢"],\
+              ["流暢","流暢"],\
+             ], include_blank: "選択してください")
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 日本語レベル
+          td
+             = f.select(:japanese_level, [\
+              ["会話が難しい","会話が難しい"],\
+              ["会話は可能","会話は可能"],\
+              ["ある程度流暢","ある程度流暢"],\
+              ["流暢","流暢"],\
+             ], include_blank: "選択してください")
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 日本在住期間
+          td
+             = f.select(:visiting_in_japan, [\
+              ["来たばかり","来たばかり"],\
+              ["1~5年","1~5年"],\
+              ["6~14年","6〜14年"],\
+              ["15年以上","15年以上"],\
+             ], include_blank: "選択してください")
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 漢字レベル
+          td
+             = f.select(:kanzi, [\
+              ["ネイティブ","ネイティブ"],\
+              ["ある程度読める","ある程度読める"],\
+              ["簡単な漢字なら読める","簡単な漢字なら読める"],\
+              ["ある程度イメージで把握","ある程度イメージで把握"],\
+              ["全く読めない","全く読めない"],\
+             ], include_blank: "選択してください")
+        /tr
+          td
+            strong.label Required
+          td.arrow_box
+            | 勤務開始希望
+          td
+            = @user.start
+        /tr
+            td
+              strong.label Required
+            td.arrow_box
+              | オススメ度
+            td
+             = f.select(:recommend, [\
+              ["100","100"],\
+              ["90","90"],\
+              ["80","80"],\
+              ["70","70"],\
+              ["0","0"],\
+             ], include_blank: "選択してください")
   h2.headline Other
 
   table.company
