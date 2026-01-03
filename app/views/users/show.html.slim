@@ -336,10 +336,12 @@
         td.arrow_box
           | めんしょしょう（おもて）[Driver's lisense[front]]
         td
-          - if @user.image_1.present?
+          - if @user.image_1.present? && @user.image_1.respond_to?(:thumb)
             = image_tag @user.image_1.thumb.url
             br
             = link_to 'Download', @user.image_1.url, download: true
+          - else
+            | 画像がありません
       
       tr
         td
@@ -347,10 +349,12 @@
         td.arrow_box
           | めんしょしょう（うら）[Driver's lisense[back]]
         td
-          - if @user.image_2.present?
+          - if @user.image_2.present? && @user.image_2.respond_to?(:thumb)
             = image_tag @user.image_2.thumb.url
             br
             = link_to 'Download', @user.image_2.url, download: true
+          - else
+            | 画像がありません
       
       tr
         td
@@ -358,10 +362,12 @@
         td.arrow_box
           | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
         td
-          - if @user.image_3.present?
+          - if @user.image_3.present? && @user.image_3.respond_to?(:thumb)
             = image_tag @user.image_3.thumb.url
             br
             = link_to 'Download', @user.image_3.url, download: true
+          - else
+            | 画像がありません
       
       tr
         td
@@ -369,10 +375,12 @@
         td.arrow_box
           | ざいりゅうきょかしょう（うら）[Residence permit[back]]
         td
-          - if @user.image_4.present?
+          - if @user.image_4.present? && @user.image_4.respond_to?(:thumb)
             = image_tag @user.image_4.thumb.url
             br
             = link_to 'Download', @user.image_4.url, download: true
+          - else
+            | 画像がありません
       
       tr
         td
@@ -380,10 +388,12 @@
         td.arrow_box
           | ぎんこうかーど（おもて）[Bank card[front]]
         td
-          - if @user.image_5.present?
+          - if @user.image_5.present? && @user.image_5.respond_to?(:thumb)
             = image_tag @user.image_5.thumb.url
             br
             = link_to 'Download', @user.image_5.url, download: true
+          - else
+            | 画像がありません
       
       tr
         td
@@ -391,10 +401,12 @@
         td.arrow_box
           | ぎんこうかーど（うら）[Bank card[back]]
         td
-          - if @user.image_6.present?
+          - if @user.image_6.present? && @user.image_6.respond_to?(:thumb)
             = image_tag @user.image_6.thumb.url
             br
             = link_to 'Download', @user.image_6.url, download: true
+          - else
+            | 画像がありません
 
   h2.headline Contract information
 
