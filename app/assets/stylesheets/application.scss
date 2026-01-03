@@ -266,7 +266,8 @@ footer {
 .table-scroll table.company th,
 .table-scroll table.company td {
   white-space: nowrap !important; /* 絶対に改行させない（これで横に突き抜けさせる） */
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: bold;
   text-align: center;
   padding: 10px 15px;             /* セル間に適度な余白 */
 }

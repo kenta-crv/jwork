@@ -9,43 +9,54 @@ h2 顧客一覧
   button.btn.btn-primary.filter-btn[data-target="other"] その他
 
 br/
+
 .table-scroll
- table.company
-  thead
-    tr
-      th 操作
-      th 会社名
-      th 内容
-      th 勤務時間
-      th エリア
-      th 仕入れ価格
-      th 販売価格
-      th 配送
-      th レンタル
-      th 支払い
-      th 備考
-  tbody
-    - @clients.each do |client|
-      / マッピングを定義。DBの値がこれら以外なら空文字にする
+  table.company
+    colgroup
+      col width="5%"
+      col width="15%"
+      col width="8%"
+      col width="8%"
+      col width="8%"
+      col width="8%"
+      col width="8%"
+      col width="8%"
+      col width="8%"
+      col width="8%"
+      col width="16%"
+    thead
+      tr
+        th 操作
+        th.company-head 会社名
+        th 内容
+        th 勤務時間
+        th エリア
+        th 仕入れ価格
+        th 販売価格
+        th 配送
+        th レンタル
+        th 支払い
+        th 備考
+    tbody
       - mapping = { "軽貨物業" => "cargo", "警備業" => "security", "清掃業" => "cleaning", "その他" => "other" }
-      - industry_code = mapping[client.industry] || ""
-      
-      - (client.jobs.presence || [nil]).each do |job|
-        / industry_codeが一致しない限り表示されないように設定
-        tr.filter-item[data-industry="#{industry_code}"]
-          td
-            = link_to '🔺', edit_client_path(client), class: "btn btn-success"
-            = link_to '❌', client_path(client), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
-          td= link_to client.company, client_path(client)
-          td= job&.content
-          td= job&.working_time
-          td= job&.area
-          td= job&.purchase_price
-          td= job&.sales_price
-          td= job&.delivery
-          td= job&.rental
-          td= job&.payment
-          td= job&.remarks
+
+      - @clients.each do |client|
+        - industry_code = mapping[client.industry] || ""
+        - (client.jobs.presence || [nil]).each do |job|
+          tr.filter-item[data-industry="#{industry_code}"]
+            td
+              = link_to '🔺', edit_client_path(client), class: "btn btn-success"
+              = link_to '❌', client_path(client), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
+            td.company-cell= link_to client.company, client_path(client)
+            td.wrap-25= job&.content
+            td= job&.working_time
+            td= job&.area
+            td= job&.purchase_price
+            td= job&.sales_price
+            td= job&.delivery
+            td= job&.rental
+            td= job&.payment
+            td.wrap-25= job&.remarks
 
 javascript:
   document.addEventListener("turbolinks:load", function() {
@@ -54,22 +65,15 @@ javascript:
 
     buttons.forEach(button => {
       button.addEventListener('click', function() {
-        const target = this.getAttribute('data-target');
+        const target = this.dataset.target;
 
         rows.forEach(row => {
-          const rowIndustry = row.getAttribute('data-industry');
-          
-          if (target === 'all') {
-            // 「全て表示」ボタン：無条件で出す
+          const rowIndustry = row.dataset.industry;
+
+          if (target === 'all' || rowIndustry === target) {
             row.style.display = '';
           } else {
-            // その他のボタン（cargo, security, cleaning, other）：
-            // データ属性とボタンのターゲットが「完全一致」する場合のみ出す
-            if (rowIndustry === target) {
-              row.style.display = '';
-            } else {
-              row.style.display = 'none';
-            }
+            row.style.display = 'none';
           }
         });
       });
