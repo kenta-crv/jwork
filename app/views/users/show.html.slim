@@ -336,60 +336,60 @@
         td.arrow_box
           | めんしょしょう（おもて）[Driver's lisense[front]]
         td
-          - if @user.image_1?
-            = image_tag @user.image_1.url, width: 100
-            br
-            = link_to 'Download', @user.image_1.url, download: true
+          - if @user.image_1.attached?
+           = image_tag @user.image_1.variant(resize_to_limit: [100, 100])
+           br
+           = link_to 'Download', rails_blob_path(@user.image_1, disposition: "attachment")
       tr
         td
           strong.label Required
         td.arrow_box
           | めんしょしょう（うら）[Driver's lisense[back]]
         td
-          - if @user.image_2?
-            = image_tag @user.image_2.url, width: 100
-            br
-            = link_to 'Download', @user.image_2.url, download: true
+          - if @user.image_2.attached?
+           = image_tag @user.image_2.variant(resize_to_limit: [100, 100])
+           br
+           = link_to 'Download', rails_blob_path(@user.image_2, disposition: "attachment")
       tr
         td
           strong.label Required
         td.arrow_box
           | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
         td
-          - if @user.image_3?
-            = image_tag @user.image_3.url, width: 100
-            br
-            = link_to 'Download', @user.image_3.url, download: true
+          - if @user.image_3.attached?
+           = image_tag @user.image_3.variant(resize_to_limit: [100, 100])
+           br
+           = link_to 'Download', rails_blob_path(@user.image_3, disposition: "attachment")
       tr
         td
           strong.label Required
         td.arrow_box
           | ざいりゅうきょかしょう（うら）[Residence permit[back]]
         td
-          - if @user.image_4?
-            = image_tag @user.image_4.url, width: 100
-            br
-            = link_to 'Download', @user.image_4.url, download: true
+          - if @user.image_4.attached?
+           = image_tag @user.image_4.variant(resize_to_limit: [100, 100])
+           br
+           = link_to 'Download', rails_blob_path(@user.image_4, disposition: "attachment")
       tr
         td
           strong.label Required
         td.arrow_box
           | ぎんこうかーど（おもて）[Bank card[front]]
         td
-          - if @user.image_5?
-            = image_tag @user.image_5.url, width: 100
-            br
-            = link_to 'Download', @user.image_5.url, download: true
+          - if @user.image_5.attached?
+           = image_tag @user.image_5.variant(resize_to_limit: [100, 100])
+           br
+           = link_to 'Download', rails_blob_path(@user.image_5, disposition: "attachment")
       tr
         td
           strong.label Required
         td.arrow_box
           | ぎんこうかーど（うら）[Bank card[back]]
         td
-          - if @user.image_6?
-            = image_tag @user.image_6.url, width: 100
-            br
-            = link_to 'Download', @user.image_6.url, download: true
+          - if @user.image_6.attached?
+           = image_tag @user.image_6.variant(resize_to_limit: [100, 100])
+           br
+           = link_to 'Download', rails_blob_path(@user.image_6, disposition: "attachment")
 
   h2.headline Contract information
 
