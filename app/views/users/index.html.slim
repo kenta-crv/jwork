@@ -18,6 +18,14 @@
             ["Not join","not_join"]\
           ], { include_blank: "選択してください[Please select]" }, class: "form-control"
         td
+          = f.label :agree_eq, "契約同意 [Agreement]"
+          = f.select :agree_eq,
+            [\
+              ["Agree", "Agree"]\
+            ],\
+            { include_blank: "指定なし" },\
+            class: "form-control"
+        td
           = f.submit "検索", class: "btn btn-primary"
 
 br/
@@ -30,6 +38,7 @@ table.list
       th Phone_number
       th Status
       th Contract
+      th select
       th Register_date
       th
   tbody
@@ -49,6 +58,7 @@ table.list
                        class: 'form-control update-status',
                        data: { user_id: user.id }
         td= user&.contract_date
+        td= user&.hope_work
         td= user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
         td
           span.copy-btn.btn.btn-success data-clipboard-text=user.interview_request_text
