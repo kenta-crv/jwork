@@ -9,13 +9,21 @@
           = f.label :tel_cont, "電話番号 [Tel]"
           = f.text_field :tel_cont, class: "form-control", placeholder: "電話番号を入力 [Enter tel]"
         td
+          = f.label :status_eq, "ステータス"
           = f.select :status_eq, [\
-            ["SMS","sms"],\
-            ["LINE","line"],\
-            ["Recruitment","recruitment"],\
-            ["Interview considering","interview_considering"],\
-            ["Interview NG","interview_ng"],\
-            ["Not join","not_join"]\
+              ["SMS", "sms"],\
+              ["LINE", "line"],\
+              ["Recruitment", "recruitment"],\
+              ["Interviewed", "interviewed"],\
+              ["Interview NG", "interview_ng"],\
+              ["Not Join", "not_join"],\
+              ["NG", "ng"]\
+          ], { include_blank: "選択してください[Please select]" }, class: "form-control"
+        td
+          = f.label :hope_work_eq, "業種"
+          = f.select :hope_work_eq, [\
+              ["Cleaner", "Cleaner"],\
+              ["Driver", "Driver"],\
           ], { include_blank: "選択してください[Please select]" }, class: "form-control"
         td
           = f.label :agree_eq, "契約同意 [Agreement]"
@@ -39,7 +47,7 @@ table.list
       th Status
       th Contract
       th select
-      th Register_date
+      th Register_date(Updated_at)
       th
   tbody
     - @users.each do |user|
@@ -56,10 +64,16 @@ table.list
           = select_tag :status, 
                        options_for_select(status_options, user.status),
                        class: 'form-control update-status',
-                       data: { user_id: user.id }
+                       data: { user_id: user.id },
+                       style: 'width: 120px;'
         td= user&.contract_date
         td= user&.hope_work
-        td= user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+        td
+          = user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+          br/
+          |(
+          = user.updated_at ? user.updated_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+          |)
         td
           span.copy-btn data-clipboard-text=user.interview_request_text
             = image_tag("icon_information.png", width: 20)

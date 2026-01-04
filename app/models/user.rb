@@ -90,8 +90,9 @@ class User < ApplicationRecord
     sms: "sms",                 # DBに "sms" が保存される
     line: "line",               # DBに "line" が保存される
     recruitment: "recruitment", 
-    interview_considering: "interview_considering", # 括弧書きの部分もDBに保存する値として小文字に統一
+    interviewed: "interviewed", # 括弧書きの部分もDBに保存する値として小文字に統一
     interview_ng: "interview_ng", 
-    not_join: "not_join" 
+    not_join: "not_join",
+    ng: "ng"  
   }
 end

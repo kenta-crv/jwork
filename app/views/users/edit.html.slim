@@ -15,14 +15,15 @@ br/
           td.arrow_box
             | ステータス
           td
-            = f.select(:work_range, [\
-             ["SMS","SMS"],\
-             ["LINE","LINE"],\
-             ["Recruitment","Recruitment"],\
-             ["Interview NG","Interview NG"],\
-             ["Interview considering","Interview considering"],\
-             ["留学ビザ [Student visa]","留学ビザ [Student visa]"],\
-            ], include_blank: "選択してください[Please select]")    
+            = f.select(:status, [\
+              ["SMS", "sms"],\
+              ["LINE", "line"],\
+              ["Recruitment", "recruitment"],\
+              ["Interviewed", "interviewed"],\
+              ["Interview NG", "interview_ng"],\
+              ["Not Join", "not_join"],\
+              ["NG", "ng"]\
+              ], include_blank: "選択してください[Please select]")
 
  .tops-wrapper
   h2.headline 求職者入力

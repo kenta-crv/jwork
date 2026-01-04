@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  def index
-    @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true)
-             .order(updated_at: :desc)  # 更新日が新しい順
-             .page(params[:page])
-  end
+def index
+  @q = User.ransack(params[:q])
+  @users = @q.result(distinct: true)
+             .order(updated_at: :desc)
+             .paginate(page: params[:page], per_page: 150) # will_paginate用
+end
 
   def new 
     @user = User.new
