@@ -16,7 +16,7 @@ class UserImporter
       user_data = Hash[header.zip(row)]
 
       # 既に登録済みメールならスキップ
-      next if User.exists?(email: user_data['email'])
+      # next if User.exists?(email: user_data['email'])
 
       # -------------------------------
       # API と同じ仕様：password なし保存
