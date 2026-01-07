@@ -108,3 +108,26 @@ $(document).on('change', '.update-status', function() {
     }
   });
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const checks = document.querySelectorAll('.confirm-check');
+  const nextButton = document.getElementById('next-button');
+
+  const toggleButton = () => {
+    const allChecked = Array.from(checks).every(c => c.checked);
+    if (allChecked) {
+      nextButton.classList.remove('disabled');
+      nextButton.style.pointerEvents = 'auto';
+    } else {
+      nextButton.classList.add('disabled');
+      nextButton.style.pointerEvents = 'none';
+    }
+  };
+
+  checks.forEach(check => {
+    check.addEventListener('change', toggleButton);
+  });
+
+  toggleButton();
+});

@@ -1,0 +1,31 @@
+- set_meta_tags  title: '軽貨物ドライバーになるために'
+- set_meta_tags  description: '軽貨物ドライバーになるために'
+= render 'shared/step_indicator'
+.jwork-section
+  h2.jwork-headline 
+    | 経費について
+  p 軽貨物をはじめるにあたり、荷物を運ぶために軽バンの車が必要となります。軽バン車は当社提携会社よりレンタルを行っていただくことができます。
+  .row.center
+    .col-sm-4
+        .jwork-example-box
+          h3 軽貨物車両
+          = image_tag "policy4.webp", class:"image"
+          br/
+          h4.red 月35,000~40,000円
+          p 車両がない場合、車両を購入するか、もしくはレンタルを行っていただきます。
+    .col-sm-4
+        .jwork-example-box
+          h3 ガソリン代
+          = image_tag "policy5.webp", class:"image"
+          br/
+          h4.red 月30,000~40,000円前後
+          p 毎月のガソリン実費がかかります。ガソリン代は走行方法や車種・走行距離によって変動します。
+    .col-sm-4
+        .jwork-example-box
+          h3 任意保険
+          = image_tag "policy6.webp", class:"image"
+          h4.red 月5,000~15,000円前後
+          p 業務で車を走行するにあたり必要な任意保険に加入いただきます。
+
+= link_to '次へ進む', top_apply_path, class: 'btn btn-primary btn-block disabled', id: 'next-button'
+

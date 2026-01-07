@@ -1,118 +1,44 @@
-- set_meta_tags  title: '即戦力の特定技能外国人の転職なら『J Work』'
-- set_meta_tags  description: '特定技能外国人の転職（とくていぎのうがいこくじんのてんしょく）ならFutureJobsにお任せください。'
-
+- set_meta_tags  title: '軽貨物ドライバーになるために'
+- set_meta_tags  description: '軽貨物ドライバーになるために'
+= render 'shared/step_indicator'
 .jwork-section
-  h2.jwork-headline はじめに
-    | 軽貨物ドライバーになるために
+  h2.jwork-headline
+    | 軽貨物ドライバーの条件
+
   .row.center
     .col-sm-12
       .jwork-example-box
-        p 本ページでは、軽貨物ドライバーになるための流れをご案内致します。非常に重要な内容となっておりますので、必ず入念な確認を行なってください。
+        p
+          | 本ページでは、軽貨物ドライバーになるための流れをご案内致します。非常に重要な内容となっておりますので、必ず入念な確認を行なってください。
+          br
+          | This page explains the steps required to become a light cargo driver. As this information is extremely important, please be sure to review it carefully.
 
-.jwork-section
-  h2.jwork-headline 
-    | 契約形態について
-  .row.center
-    .col-sm-12
-      =image_tag 'recruit1.webp', width:"50%"
-  br/
-  br/
-  .row.center
-    .col-sm-12
-      .jwork-example-box
-        p 軽貨物ドライバーの大半は『業務委託契約』により締結されます。当社でも同様にドライバーと業務提携契約を結び、お仕事を手配致します。注意点として、個人事業主として稼働を行うため、社会保険や労働保険は会社で加入せず個人で加入するものとなります。   
+        ul.jwork-checklist
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'license', false, class: 'confirm-check'
+              span 普通免許で運転を行う軽貨物ドライバーの仕事であることを理解しました。I understand that this job is for a light cargo driver operating with a standard driver’s license.
 
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'visa', false, class: 'confirm-check'
+              span 就労制限のない在留資格（日本国籍・永住・定住・配偶者・難民等）が必要であることを理解しました。I understand that a residence status with no work restrictions is required (Japanese nationality, permanent resident, long-term resident, spouse visa, refugee status, etc.).
 
-.jwork-section
-  h2.jwork-headline 
-    | 軽貨物をはじめるために必要なもの
-  .row.center
-    .col-sm-4
-        .jwork-example-box
-          h3 軽貨物車両
-          = image_tag "policy4.webp", class:"image"
-          p 車両がない場合、車両を購入するか、もしくはレンタルを行っていただきます。
-    .col-sm-4
-        .jwork-example-box
-          h3 ガソリン代
-          = image_tag "policy5.webp", class:"image"
-          p 毎月のガソリン実費がかかります
-    .col-sm-4
-        .jwork-example-box
-          h3 各種保険
-          = image_tag "policy6.webp", class:"image"
-          p 車に乗るためにの保険や荷物を紛失した場合に保証など様々あります。
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'reading', false, class: 'confirm-check'
+              span 住所を読むため、ひらがな・カタカナ・簡単な漢字を読める必要があることを理解しました。I understand that, in order to read addresses, I must be able to read hiragana, katakana, and basic kanji.
+
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'fulltime', false, class: 'confirm-check'
+              span アルバイトでの応募は不可で、フルタイム勤務のみが対象であることを理解しました。I understand that applications for part-time work are not accepted and that only full-time positions are available.
+
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'contract', false, class: 'confirm-check'
+              span 業務委託契約となり、社会保険ではなく国民健康保険に加入することを理解しました。I understand that this will be a contract for services and that I will be enrolled in national health insurance rather than social insurance.
 
 
-.jwork-section
-  h2.jwork-headline 
-   | 車両がない場合の方法
-  .row.center
-    .col-sm-4
-        .jwork-example-box
-          h3 車両購入
-          = image_tag "recruit2.webp", class:"image"
-          p 長期的にドライバーとして活躍して行きたいなら絶対に購入がおすすめです。毎月のレンタル代がかからないため多くのお金を稼ぐことができます。
-    .col-sm-4
-        .jwork-example-box
-          h3 短期リース
-          = image_tag "recruit3.webp", class:"image"
-          p 最初から車を購入するのは大変。。。と言う方には短期でリース会社から月単位でリースすることができます。当社からご紹介も可能ですが、おおよそ月額35,000円〜40,000円ほどとなります。
+          = link_to '次へ進む', top_entry_path, class: 'btn btn-primary btn-block disabled', id: 'next-button'
 
-
-.tops-wrapper
- h2.headline
-    | 一次面接合格後の今後の稼働までの流れ
-
-ul.flow.center
-  li
-    dl
-      dt
-        span.icon
-          | STEP.01
-        | 配属先での面接
-      dd.center
-        | まずは配属先での面接を行います。ここで印象が悪いと働くことができないので、頑張りましょう。
-        br
-        | 尚、配属先によって、オンライン面接・直接面接と方法は様々です。面接がない場合もあります。
-  li
-    dl
-      dt
-        span.icon
-          | STEP.02
-        | 業務委託契約の締結
-      dd.center
-        | 配属先からも問題なく稼働許可が出れば、契約書の締結を行います。
-        br/
-        | この段階で保険の加入の確認も行いますので、早めに準備を進めましょう。
-  li
-    dl
-      dt
-        span.icon
-          | STEP.03
-        | （車がない場合）車両の確保
-      dd.center
-        | 車がない場合、車を購入するか、リース会社からレンタルを行います。
-        br/
-        | 配属先から早めに稼働を希望される場合、このステップは先に行う場合があります。
-  li
-    dl
-      dt
-        span.icon
-          | STEP.04
-        | 勤務開始
-      dd.center
-        | 契約書・保険・車両確保を完了したら勤務開始です。
-        br
-        | 必ず配属先から指示された日までに準備をしましょう。
-
-
-.jwork-section
-  h2.jwork-headline 
-    | その他の注意点
-  .row.center
-    .col-sm-12
-      .jwork-example-box
-        p・事故の場合は一切の負担は行いません。
-        p・車両の故障の負担は行いません。
-        p・車両契約ができなかった場合、業務委託契約が解除されます。

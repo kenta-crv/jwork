@@ -12,6 +12,16 @@ class TopController < ApplicationController
   def policy
   end
   def flow
+    @current_step = 1
+  end
+  def entry
+    @current_step = 2
+  end
+  def attention
+    @current_step = 3
+  end
+  def apply
+    @current_step = 4
   end
   def recruit_clean
   end
@@ -32,6 +42,9 @@ class TopController < ApplicationController
   end
 
   def line
+  end
+
+  def information
   end
 
   def restaurant

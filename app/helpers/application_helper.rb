@@ -16,5 +16,9 @@ module ApplicationHelper
 
     }
   end
-
+def step_class(step_number)
+  return 'is-active' if step_number == @current_step
+  return 'is-done'   if step_number < @current_step
+  ''
+end
 end

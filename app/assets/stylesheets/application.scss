@@ -2137,3 +2137,213 @@ hr {
     font-size: 17px;
   }
 }
+
+
+
+.jwork-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.jwork-checklist li {
+  padding: 12px 8px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.jwork-check-label {
+  display: flex;
+  align-items: flex-start; /* ← 縦ズレ防止 */
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.confirm-check {
+  width: 18px;        /* ← サイズ固定 */
+  height: 18px;
+  margin-top: 3px;    /* ← テキスト1行目と中央揃え */
+  flex-shrink: 0;     /* ← 押し潰され防止 */
+}
+
+#next-button.disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+}
+
+/* ===== namespace: lc- ===== */
+
+
+/* レイアウト */
+.lc-layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.lc-image {
+  flex: 0 0 40%;
+  text-align: center;
+}
+
+.lc-img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+}
+
+.lc-content {
+  flex: 1;
+}
+
+/* カード */
+.lc-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.lc-good {
+  border-left: 6px solid #1976d2;
+}
+
+.lc-bad {
+  border-left: 6px solid #90a4ae;
+}
+
+/* タイトル */
+.lc-card-title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  margin-top: 5px;
+  color: #1976d2;
+}
+
+.lc-bad .lc-card-title {
+  color: #546e7a;
+}
+
+/* リスト */
+.lc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lc-list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+
+/* CSSチェック */
+.lc-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid #1976d2;
+  border-bottom: 3px solid #1976d2;
+  transform: rotate(45deg);
+}
+
+.lc-bad .lc-list li::before {
+  border-color: #90a4ae;
+}
+
+/* モバイル */
+@media (max-width: 768px) {
+  .lc-layout {
+    flex-direction: column;
+  }
+
+  .lc-image {
+    flex: none;
+  }
+}
+
+
+.step-indicator {
+  margin-bottom: 40px;
+}
+
+.step-list {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  list-style: none;
+}
+
+.step-item {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  color: #999;
+}
+
+/* 接続線 */
+.step-item::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  right: -50%;
+  width: 100%;
+  height: 4px;
+  background: #ddd;
+  z-index: 0;
+}
+
+/* 最後のステップは線なし */
+.step-item:last-child::after {
+  display: none;
+}
+
+/* 丸 */
+.step-number {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 50%;
+  background: #ddd;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* ラベル */
+.step-label {
+  display: block;
+  font-size: 12px;
+}
+
+/* 完了済み（青） */
+.step-item.is-done {
+  color: #007bff;
+}
+
+.step-item.is-done .step-number {
+  background: #007bff;
+  color: #fff;
+}
+
+.step-item.is-done::after {
+  background: #007bff;
+}
+
+/* 現在地（緑） */
+.step-item.is-active {
+  color: #28a745;
+}
+
+.step-item.is-active .step-number {
+  background: #28a745;
+  color: #fff;
+}

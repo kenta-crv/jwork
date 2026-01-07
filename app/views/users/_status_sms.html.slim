@@ -1,0 +1,47 @@
+h3 Interviewed ユーザー表示
+table.list
+    thead
+      tr
+        th User_name
+        th Phone_number
+        th status
+        th Register_date(Updated_at)
+        th
+    tbody
+      - @users.each do |user|
+        tr
+          td= link_to user.name, user_path(user)
+          td= user.tel
+          td
+            - status_options = User.statuses.keys.map do |key|
+              - display_name = key.humanize
+              - if key == "sms" || key == "line"
+                - display_name = key.upcase
+              - [display_name, key]
+
+            = select_tag :status, 
+                         options_for_select(status_options, user.status),
+                         class: 'form-control update-status',
+                         data: { user_id: user.id },
+                         style: 'width: 120px;'
+          td
+            = user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+            br/
+            |(
+            = user.updated_at ? user.updated_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+            |)
+          td
+            span.copy-btn data-clipboard-text=user.interview_request_text
+              = image_tag("icon_information.png", width: 20)
+            span.copy-btn data-clipboard-text=user.contract_request_text
+              = image_tag("icon_copy.png", width: 20)
+            = link_to user.account_name, target: "_blank" do
+              = image_tag("icon_line.png", width: 20)
+            = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
+              = image_tag("icon_sms.png", width: 20)
+            = link_to edit_user_path(user) do
+              = image_tag("icon_edit.png", width: 20)
+            = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
+              = image_tag("icon_trash.png", width: 20)
+
+= paginate @users

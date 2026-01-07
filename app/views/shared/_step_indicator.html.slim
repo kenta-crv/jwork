@@ -1,0 +1,6 @@
+.step-indicator
+  ul.step-list
+    - (1..4).each do |i|
+      li.step-item class=step_class(i)
+        span.step-number = i
+        span.step-label = "STEP #{i}"

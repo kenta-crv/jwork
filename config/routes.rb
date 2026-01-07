@@ -8,7 +8,14 @@ Rails.application.routes.draw do
   get "top/recruit_en" => 'top#recruit_en'  # クライアント側トップ
   get "top/recruit_clean" => 'top#recruit_clean'  # クライアント側トップ
   get "top/calculation" => 'top#calculation'  
-  get "top/flow" => 'top#flow'  
+
+  get 'information' => 'top#information' #社外周知
+
+  get "top/flow" => 'top#flow'
+  get "top/entry" => 'top#entry'
+  get "top/attention" => 'top#attention'  
+  get "top/apply" => 'top#apply'  
+
   get "top/policy" => 'top#policy'  
 
   get "/appointer" => 'top#appointer' # ユーザー側トップ
