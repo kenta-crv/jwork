@@ -1,0 +1,32 @@
+(function() {
+  const userId = "<%= @user.id %>";
+  const commentArea = document.getElementById(`latest-comment-${userId}`);
+  const form = document.getElementById(`comment-form-${userId}`);
+
+  // 1. 表示の更新
+  if (commentArea) {
+    commentArea.innerHTML = `
+      <span class="badge" style="background: #eee; color: #333; margin-right: 5px; padding: 2px 5px; border-radius: 4px; font-size: 10px;">
+        <%= j @comment.status %>
+      </span>
+      <span style="font-size: 12px;"><%= j @comment.body %></span>
+      <br>
+      <small style="color: #999; font-size: 10px;">
+        <%= @comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </small>
+    `;
+  }
+
+  // 2. フォームのリセットと「ボタンの復活」
+  if (form) {
+    form.reset();
+    
+    // Rails UJSがボタンを disable にしてしまうのを強制解除
+    const submitBtn = form.querySelector('input[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.removeAttribute('data-disabled');
+      submitBtn.value = "追加";
+    }
+  }
+})();

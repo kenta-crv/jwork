@@ -1,47 +1,80 @@
 h3 Interviewed ユーザー表示
-table.list
-    thead
-      tr
-        th User_name
-        th Phone_number
-        th status
-        th Register_date(Updated_at)
-        th
-    tbody
-      - @users.each do |user|
-        tr
-          td= link_to user.name, user_path(user)
-          td= user.tel
-          td
-            - status_options = User.statuses.keys.map do |key|
-              - display_name = key.humanize
-              - if key == "sms" || key == "line"
-                - display_name = key.upcase
-              - [display_name, key]
 
-            = select_tag :status, 
-                         options_for_select(status_options, user.status),
-                         class: 'form-control update-status',
-                         data: { user_id: user.id },
-                         style: 'width: 120px;'
-          td
-            = user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+table.list
+  thead
+    tr
+      th User_name
+      th Phone_number
+      th Status
+      th 最新コメント (ステータス/本文)
+      th コメント追加
+      th Register_date(Updated_at)
+      th アクション
+  tbody
+    - @users.each do |user|
+      - latest_comment = user.comments.order(created_at: :desc).first
+      
+      tr id="user-row-#{user.id}"
+        / ユーザー名
+        td= link_to user.name, user_path(user)
+
+        / 電話番号
+        td= user.tel
+
+        / 現在のステータス
+        td
+          - status_options = User.statuses.keys.map { |k| [k == "sms" || k == "line" ? k.upcase : k.humanize, k] }
+          = select_tag :status,
+                       options_for_select(status_options, user.status),
+                       class: 'form-control update-status',
+                       data: { user_id: user.id },
+                       style: 'width:120px;'
+
+        / 最新コメント表示エリア（ここをJSで書き換える）
+        td id="latest-comment-#{user.id}"
+          - if latest_comment.present?
+            span.badge style="background: #eee; color: #333; margin-right: 5px; padding: 2px 5px; border-radius: 4px; font-size: 10px;"
+              = latest_comment.status
+            /span style="font-size: 12px;" = latest_comment.body
+            br
+            small style="color: #999; font-size: 10px;" = latest_comment.created_at.strftime("%Y/%m/%d %H:%M")
+          - else
+            span style="color: #ccc;" なし
+
+        / コメント追加フォーム（完全に1つに統合）
+        td
+          - if admin_signed_in?
+            / remote: true で Ajax送信。data-disable-with を false にしてボタン固まりを防止
+            = form_for [user, user.comments.build], remote: true, html: { id: "comment-form-#{user.id}", style: "display:flex; gap:4px; align-items:center;" }, data: { type: 'script' } do |f|
+              = f.select :status, [["Absense","Absense"],["Busy","Busy"],["LINE","LINE"],["HIRE","HIRE"],["NG","NG"]], 
+                         { include_blank: "ステータス" }, 
+                         { style: "width:90px; font-size:12px;" }
+              = f.text_area :body, rows: 1, placeholder: "コメント本文", 
+                            style: "width:150px; font-size:12px; height:30px; padding:2px;"
+              = f.submit "追加", class: "btn btn-xs btn-primary", style: "font-size:10px; padding: 2px; height:28px; width:35px; min-width:35px;",data: { disable_with: false }
+
+        / 登録・更新日時
+        td
+          small
+            = user.created_at ? user.created_at.strftime("%Y/%m/%d %H:%M") : "―"
             br/
             |(
-            = user.updated_at ? user.updated_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+            = user.updated_at ? user.updated_at.strftime("%Y/%m/%d %H:%M") : "―"
             |)
-          td
-            span.copy-btn data-clipboard-text=user.interview_request_text
-              = image_tag("icon_information.png", width: 20)
-            span.copy-btn data-clipboard-text=user.contract_request_text
-              = image_tag("icon_copy.png", width: 20)
-            = link_to user.account_name, target: "_blank" do
-              = image_tag("icon_line.png", width: 20)
-            = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
-              = image_tag("icon_sms.png", width: 20)
-            = link_to edit_user_path(user) do
-              = image_tag("icon_edit.png", width: 20)
-            = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
-              = image_tag("icon_trash.png", width: 20)
+
+        / アクション列
+        td style="white-space: nowrap;"
+          span.copy-btn data-clipboard-text=user.interview_request_text
+            = image_tag("icon_information.png", width: 20)
+          span.copy-btn data-clipboard-text=user.contract_request_text
+            = image_tag("icon_copy.png", width: 20)
+          = link_to user.account_name, target: "_blank" do
+            = image_tag("icon_line.png", width: 20)
+          = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
+            = image_tag("icon_sms.png", width: 20)
+          = link_to edit_user_path(user) do
+            = image_tag("icon_edit.png", width: 20)
+          = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
+            = image_tag("icon_trash.png", width: 20)
 
 = paginate @users

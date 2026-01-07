@@ -1,43 +1,41 @@
 class CommentsController < ApplicationController
-    before_action :load_user
-    before_action :load_comment, only: [:edit,:update,:show,:destroy]
-    #before_action :authenticate_user!
+  before_action :load_user
+  before_action :load_comment, only: [:edit, :update, :destroy]
 
-    def load_user
-      @user = User.find(params[:user_id])
-      @comment = Comment.new
-    end
+  def load_user
+    @user = User.find(params[:user_id])
+  end
 
-    def load_comment
-      @comment = Comment.find(params[:id])
-    end
+  def load_comment
+    @comment = Comment.find(params[:id])
+  end
 
+  def create
+    @comment = @user.comments.new(comment_params)
 
-    def create
-      @comment = @user.comments.new(comment_params)
-      if @comment.save
-        redirect_to user_path(@user)
-      else
-        logger.debug @comment.errors.full_messages
-        # 適切なエラー処理（例: フォームを再表示するなど）
+    if @comment.save
+      respond_to do |format|
+        format.html do
+          # index 以外は従来通りリダイレクト
+          redirect_to user_path(@user)
+        end
+        format.js do
+          # index用: 最新コメントと件数を反映
+          @comment_count = @user.comments.count
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { render :new }
+        format.js { render js: "alert('コメントの保存に失敗しました');" }
       end
     end
+  end
 
   def edit
-    @user = User.find(params[:user_id])
-    @comment = @user.comments.find(params[:id])
-  end
-  
-  def destroy
-    @user = User.find(params[:user_id])
-    @comment = @user.comments.find(params[:id])
-    @comment.destroy
-    redirect_to user_path(@user)
   end
 
   def update
-    @user = User.find(params[:user_id])
-    @comment = @user.comments.find(params[:id])
     if @comment.update(comment_params)
       redirect_to user_path(@user), notice: 'コメントが更新されました。'
     else
@@ -45,13 +43,13 @@ class CommentsController < ApplicationController
     end
   end
 
-  private
-   	def comment_params
-   		params.require(:comment).permit(
-       :status,
-       :next,
-       :body,
-      )
-   	end
+  def destroy
+    @comment.destroy
+    redirect_to user_path(@user)
+  end
 
+  private
+    def comment_params
+      params.require(:comment).permit(:status, :next, :body)
+    end
 end

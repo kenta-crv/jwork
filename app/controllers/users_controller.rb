@@ -2,13 +2,14 @@ class UsersController < ApplicationController
 def index
   @q = User.ransack(params[:q])
   @users = @q.result(distinct: true)
+             .includes(:comments)
              .order(updated_at: :desc)
-             .paginate(page: params[:page], per_page: 150) # will_paginate用
-  # interviewed の検索時だけ部分テンプレを表示するためのフラグ
+             .paginate(page: params[:page], per_page: 150)
+
   @status_interviewed_driver  = params.dig(:q, :status_eq) == "interviewed" && params.dig(:q, :hope_work_eq) == "Driver"
   @status_interviewed_cleaner = params.dig(:q, :status_eq) == "interviewed" && params.dig(:q, :hope_work_eq) == "Cleaner"
   @status_sms_partial = params.dig(:q, :status_eq) == "sms"
-end     
+end
 
   def new 
     @user = User.new
