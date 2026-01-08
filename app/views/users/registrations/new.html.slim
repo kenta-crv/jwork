@@ -4,165 +4,410 @@
 
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = devise_error_messages!
+
     table.company
-     colgroup
-      col width="20%"
-      col width="20%"
-      col width="60%"
-     tbody
-       tr
+      tbody
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | ステータス
+          td
+            = f.select(:status, [\
+              ["SMS", "sms"],\
+              ["LINE", "line"],\
+              ["Recruitment", "recruitment"],\
+              ["Interviewed", "interviewed"],\
+              ["Interview NG", "interview_ng"],\
+              ["Not Join", "not_join"],\
+              ["NG", "ng"]\
+            ], include_blank: "選択してください[Please select]")
+
+    .tops-wrapper
+      h2.headline 求職者入力
+      - @user.errors.full_messages.each do |message|
+        li = message
+
+      table.company
+        tbody
+          tr
+            td
+              strong.label Required
+            td.arrow_box
+              | おなまえ [full_name]
+            td
+              = f.text_field :name, placeholder:"Taro Yamada"
+          tr
+            td
+              strong.label Required
+            td.arrow_box
+              | せいべつ [gender]
+            td
+              = f.text_field :gender, placeholder:"Male"
+          tr
+            td
+              strong.label Required
+            td.arrow_box
+              | でんわばんごう [Tel]
+            td
+              = f.text_field :tel, placeholder:"080-0000-0000"
+          tr
+            td
+              strong.label Required
+            td.arrow_box
+              | メールアドレス [Mail]
+            td
+              = f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"yamada@abc.com"
+          tr
+            td
+              strong.label Required
+            td.arrow_box
+              | せいねんがっぴ [age]
+            td
+              = f.text_field :age, placeholder:"25才"
+          tr
+            td
+              strong.label Required
+            td.arrow_box
+              | じゅうしょ[Address]
+            td
+              = f.text_field :address, placeholder:"東京都港区芝5-27-3 MBC・Aー9"
+
+          - if admin_signed_in?
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 転居はできますか？[Can I move to a different prefecture?]
+              td
+                = f.text_field :change_the_address
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 希望職種
+              td
+                = f.text_field :hope_work
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
+              td
+                = f.text_field :past_business  
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
+              td
+                = f.select(:work_range, [\
+                  ["特定技能ビザ[Specified Skilled Visa]","特定技能ビザ[Specified Skilled Visa]"],\
+                  ["技術・人文・国際ビザ[Engineer/Humanities/International Visa]","技術・人文・国際ビザ[Engineer/Humanities/International Visa]"],\
+                  ["永住ビザ [Permanent Resident Visa]","永住ビザ [Permanent Resident Visa]"],\
+                  ["定住ビザ [Long-term resident visa]","定住ビザ [Long-term resident visa]"],\
+                  ["配偶者ビザ [Spouse visa]","配偶者ビザ [Spouse visa]"],\
+                  ["留学ビザ [Student visa]","留学ビザ [Student visa]"]\
+                ], include_blank: "選択してください[Please select]")       
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
+              td
+                = f.text_field :past_year
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | いつから働けますか？ [Since when can you job?]
+              td
+                = f.text_field :period
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 日本語で会話できますか？[Can you speak Japanese conversation?]
+              td
+                = f.select(:speak_japanese, [\
+                  ["漢字・ひらがな・カタカナができます","漢字・ひらがな・カタカナができます"],\
+                  ["簡単な漢字・ひらがな・カタカナができます","簡単な漢字・ひらがな・カタカナができます"],\
+                  ["漢字はできないが、ひらがな・カタカナができます","漢字はできないが、ひらがな・カタカナができます"],\
+                  ["日本語の読み書きはできません","日本語の読み書きはできません"]\
+                ], include_blank: "選択してください[Please select]")  
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 備考
+              td
+                = f.text_area :remarks
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | LINE Account
+              td
+                = f.text_field :account_name
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 現在のお仕事
+              td
+                = f.text_field :work_now
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | あなたの国籍はどこですか？ [what_is_your_nationality?]
+              td
+                = f.text_field :nationality, placeholder:"JAPAN"
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | あなたがもっているすべてのしかくをかいてください [pletell_us_all_the_qualifications_you_have]
+              td
+                = f.text_field :qualifications  
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | あなたのしょくしゅをおしえてください？[what_industry_are[were]_you_in?]
+              td
+                = f.text_field :past_year
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 電話を出れる時間を教えてください。[Could you tell me the time you will come out.]
+              td
+                = f.select(:call_available, [\
+                  ["いつでも可能[Everytime is fine]","いつでも可能[Everytime is fine]"],\
+                  ["10:00~12:00","10:00~12:00"],\
+                  ["12:00~13:00","12:00~13:00"],\
+                  ["13:00~17:00","13:00~17:00"],\
+                  ["17:00~20:00","17:00~20:00"]\
+                ], include_blank: "選択してください[Please select]")  
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 運転免許
+              td
+                = f.select(:drivers_lisence, [\
+                  ["なし","なし"],\
+                  ["あり","あり"]\
+                ], include_blank: "選択してください")
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 軽貨物経験
+              td
+                = f.select(:experience, [\
+                  ["なし","なし"],\
+                  ["あり","あり"]\
+                ], include_blank: "選択してください")
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ビザの種類
+              td
+                = f.select(:which_visa, [\
+                  ["会話が難しい","会話が難しい"],\
+                  ["会話は可能","会話は可能"],\
+                  ["ある程度流暢","ある程度流暢"],\
+                  ["流暢","流暢"]\
+                ], include_blank: "選択してください")
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 日本語レベル
+              td
+                = f.select(:japanese_level, [\
+                  ["会話が難しい","会話が難しい"],\
+                  ["会話は可能","会話は可能"],\
+                  ["ある程度流暢","ある程度流暢"],\
+                  ["流暢","流暢"]\
+                ], include_blank: "選択してください")
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 日本在住期間
+              td
+                = f.select(:visiting_in_japan, [\
+                  ["来たばかり","来たばかり"],\
+                  ["1~5年","1~5年"],\
+                  ["6~14年","6〜14年"],\
+                  ["15年以上","15年以上"]\
+                ], include_blank: "選択してください")
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 漢字レベル
+              td
+                = f.select(:kanzi, [\
+                  ["ネイティブ","ネイティブ"],\
+                  ["ある程度読める","ある程度読める"],\
+                  ["簡単な漢字なら読める","簡単な漢字なら読める"],\
+                  ["ある程度イメージで把握","ある程度イメージで把握"],\
+                  ["全く読めない","全く読めない"]\
+                ], include_blank: "選択してください")
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 勤務開始希望
+              td
+                = f.text_field :start
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | オススメ度
+              td
+                = f.select(:recommend, [\
+                  ["100","100"],\
+                  ["90","90"],\
+                  ["80","80"],\
+                  ["70","70"],\
+                  ["0","0"]\
+                ], include_blank: "選択してください")
+            
+    - if admin_signed_in?
+      h2.headline Work Information
+      table.company
+        colgroup
+          col width="20%"
+          col width="20%"
+          col width="60%"
+        tbody
+          tr
+            td
+              strong.label Required
+            td.arrow_box
+              | ほうしゅうじょうけん[Reward Conditions]
+            td
+              = f.text_area :deliver
+          tr
+            td
+              strong.label Required
+            td.arrow_box
+              | しゅっきんじょうけん[Working conditions]
+            td
+              = f.text_area :day_off
+
+    table.company
+      tbody
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | きんきゅうれんらくしゃ[Emergency Contact Person]
+          td
+            = f.text_field :emergency_name, placeholder:"Yoko Yamada"
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | かんれんせい[Relationship]
+          td
+            = f.text_field :emergency_relationships, placeholder:"Mother"
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | きんきゅうれんらくしゃばんごう[Emergency contact number]
+          td
+            = f.text_field :emergency_tel, placeholder:"+818010101010"
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | ぎんこうめい[Bank name]
+          td
+            = f.text_field :bank, placeholder:"三井住友銀行"
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | してんめい[Branch]
+          td
+            = f.text_field :branch, placeholder:"東京支店"
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | こうざばんごう[Account number]
+          td
+            = f.text_field :bank_number, placeholder:"0123456"
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | こうざめいぎ[Account name]
+          td
+            = f.text_field :bank_name, placeholder:"ヤマダ　タロウ"
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | めんしょしょう（おもて）[Driver's lisense[front]]
+          td
+            = f.file_field :image_1
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | めんしょしょう（うら）[Driver's lisense[back]]
+          td
+            = f.file_field :image_2
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
+          td
+            = f.file_field :image_3
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | ざいりゅうきょかしょう（うら）[Residence permit[back]]
+          td
+            = f.file_field :image_4
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | ぎんこうかーど（おもて）[Bank card[front]]
+          td
+            = f.file_field :image_5
+        tr
+          td
+            strong.label Required
+          td.arrow_box
+            | ぎんこうかーど（うら）[Bank card[back]]
+          td
+            = f.file_field :image_6
+        tr
           td
             strong.label 必須
           td.arrow_box
-            | お名前 [full_name]
+            | パスワード[Password]
           td
-            = f.text_field :name, placeholder:"山田　太郎"
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 年齢 [age]
-          td
-            = f.text_field :age, placeholder:"25才"
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 性別 [gender]
-          td
-            = f.text_field :gender, placeholder:"25才"
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 電話番号 [Tel]
-          td
-            = f.text_field :tel, placeholder:"080-0000-0000"
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | メールアドレス [Mail]
-          td
-            = f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"yamada@abc.com"
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | あなたの国籍はどこですか？ [what_is_your_nationality?]
-          td
-            = f.text_field :nationality, placeholder:"JAPAN"
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
-          td
-            = f.select(:work_range, [\
-             ["特定技能ビザ[Specified Skilled Visa]","特定技能ビザ[Specified Skilled Visa]"],\
-             ["技術・人文・国際ビザ[Engineer/Humanities/International Visa]","技術・人文・国際ビザ[Engineer/Humanities/International Visa]"],\
-             ["永住ビザ [Permanent Resident Visa]","永住ビザ [Permanent Resident Visa]"],\
-            ], include_blank: "選択してください[Please select]")    
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | あなたがもっているすべてのしかくをかいてください [pletell_us_all_the_qualifications_you_have]
-          td
-            = f.text_field :qualifications  
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
-          td
-            = f.select(:past_business, [\
-             ["製造工場[Manufacturing Plant]","製造工場[Manufacturing Plant]"],\
-             ["食品工場[Food factory]","食品工場[Food factory]"],\
-             ["自動車整備[Car maintenance]","自動車整備[Car maintenance]"],\
-             ["レストラン[Restaurant]","レストラン[Restaurant]"],\
-             ["ホテル[Hotel]","ホテル[Hotel]"],\
-             ["介護助手[Care Assistant]","介護助手[Care Assistant]"],\
-             ["看護助手[Nursing Assistant]","看護助手[Nursing Assistant]"],\
-             ["ドライバー[Driver]","ドライバー[Driver]"],\
-             ["その他[Other]","その他[Other]"],\
-            ], include_blank: "選択してください[Please select]")   
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | あなたのしょくしゅをおしえてください？[what_industry_are[were]_you_in?]
-          td
-            = f.text_field :past_year
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 希望職種
-          td
-            = f.text_field :hope_work
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
-          td
-            = f.text_field :past_year
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | いつから働けますか？ [Since when can you job?]
-          td
-            = f.select(:hope_work, [\
-             ["すぐにでも[Immidiantly]","すぐにでも[Immidiantly]"],\
-             ["1ヶ月以内[Within 1 month]","1ヶ月以内[Within 1 month]"],\
-             ["3ヶ月以内[Within 1 month]","3ヶ月以内[Within 1 month]"],\
-            ], include_blank: "選択してください[Please select]")  
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 電話を出れる時間を教えてください。[Could you tell me the time you will come out.]
-          td
-            = f.select(:call_available, [\
-             ["いつでも可能[Everytime is fine]",""],\
-             ["10:00~12:00",""],\
-             ["12:00~13:00",""],\
-             ["13:00~17:00",""],\
-             ["17:00~20:00",""],\
-            ], include_blank: "選択してください[Please select]")  
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 日本語で会話できますか？[Can you speak Japanese conversation?]
-          td
-            = f.select(:speak_japanese, [\
-             ["できます[Yes, I can.]","できます[Yes, I can.]"],\
-             ["できません[No, I can't]","できません[No, I can't]"],\
-            ], include_blank: "選択してください[Please select]")  
-       tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | 転居はできますか？[Can I move to a different prefecture?]
-          td
-            = f.select(:change_the_address, [\
-             ["できます[Yes, I can.]","できます[Yes, I can.]"],\
-             ["できません[No, I can't]","できません[No, I can't]"],\
-            ], include_blank: "選択してください[Please select]")  
-       tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | パスワード[Password]
-        td
-          - if @minimum_password_length
-            em = "(#{@minimum_password_length} characters minimum)"
-          = f.password_field :password, autocomplete: "off"
-       tr
-        td.center colspan="3" = f.submit "同意して登録"
+            - if @minimum_password_length
+              em = "(#{@minimum_password_length} characters minimum)"
+            = f.password_field :password, autocomplete: "off"
+        tr
+          td.center colspan="3" = f.submit "同意して登録"
+
   br
   .center
     = render "users/shared/links"

@@ -11,71 +11,38 @@ h2 顧客一覧
 br/
 
 .table-scroll
-  table.company
-    colgroup
-      col width="5%"
-      col width="15%"
-      col width="8%"
-      col width="8%"
-      col width="8%"
-      col width="8%"
-      col width="8%"
-      col width="8%"
-      col width="8%"
-      col width="8%"
-      col width="16%"
-    thead
-      tr
-        th 操作
-        th.company-head 会社名
-        th 内容
-        th 勤務時間
-        th エリア
-        th 仕入れ価格
-        th 販売価格
-        th 配送
-        th レンタル
-        th 支払い
-        th 備考
+  table.table.table-bordered.company
     tbody
       - mapping = { "軽貨物業" => "cargo", "警備業" => "security", "清掃業" => "cleaning", "その他" => "other" }
 
       - @clients.each do |client|
         - industry_code = mapping[client.industry] || ""
-        - (client.jobs.presence || [nil]).each do |job|
+
+        / --- 親行：会社基本情報 ---
+        tr.filter-item.table-secondary.font-weight-bold[data-industry="#{industry_code}"]
+          td
+            .d-flex.gap-1
+              = link_to '編集', edit_client_path(client), class: "btn btn-sm btn-success"
+              = link_to '削除', client_path(client), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger"
+          td[colspan="2"]
+            span.badge.badge-info.mr-2 = client.industry
+            = client.company
+          td[colspan="2"] 担当: #{client.person}
+          td[colspan="2"] TEL: #{client.tel} (#{client.mobile})
+          td[colspan="3"] Email: #{client.email}
+
+        / --- 子行：案件情報 ---
+        - client.jobs.each do |job|
           tr.filter-item[data-industry="#{industry_code}"]
             td
-              = link_to '🔺', edit_client_path(client), class: "btn btn-success"
-              = link_to '❌', client_path(client), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"
-            td.company-cell= link_to client.company, client_path(client)
-            td.wrap-25= job&.content
-            td= job&.working_time
-            td= job&.area
-            td= job&.purchase_price
-            td= job&.sales_price
-            td= job&.delivery
-            td= job&.rental
-            td= job&.payment
-            td.wrap-25= job&.remarks
-
-javascript:
-  document.addEventListener("turbolinks:load", function() {
-    const buttons = document.querySelectorAll('.filter-btn');
-    const rows = document.querySelectorAll('.filter-item');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', function() {
-        const target = this.dataset.target;
-
-        rows.forEach(row => {
-          const rowIndustry = row.dataset.industry;
-
-          if (target === 'all' || rowIndustry === target) {
-            row.style.display = '';
-          } else {
-            row.style.display = 'none';
-          }
-        });
-      });
-    });
-  });
+            td.wrap-25
+              i.fas.fa-level-up-alt.fa-rotate-90.text-muted.mr-2
+              = job.content
+            td = job.working_time
+            td = job.area
+            td = job.purchase_price
+            td = job.sales_price
+            td = job.delivery
+            td = job.rental
+            td = job.payment
+            td.wrap-25 = job.remarks
