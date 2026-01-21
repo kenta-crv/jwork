@@ -72,6 +72,20 @@
           td
             = @user.change_the_address
         tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 車の種類
+              td
+                = @user.car
+        tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 経験則
+              td
+                = @user.experience
+        tr
           td
             strong.label Required
           td.arrow_box

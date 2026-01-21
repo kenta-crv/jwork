@@ -4,38 +4,57 @@
 .jwork-section
   h2.jwork-headline 
     | 経費について
+    br/
+    | About expenses
   p 軽貨物をはじめるにあたり、荷物を運ぶために軽バンの車が必要となります。軽バン車は当社提携会社よりレンタルを行っていただくことができます。
+  p To start light cargo work, you need a light van to carry packages. You can rent a light van through our partner company.
   br/
-  .red ⇩⇩音声を再生してください⇩⇩
-  br/
+  .red 
+   |⇩⇩音声を再生してください⇩⇩
+   br/
+   |Please play the audio
   = audio_tag '/yamato.mp3', controls: true
   .row.center
     .col-sm-4
         .jwork-example-box
-          h3 軽貨物車両
+          h3 
+           | 軽貨物車両
+           br/
+           | Light cargo vehicle
           = image_tag "policy4.webp", class:"image"
           br/
-          h4.red 月35,000~40,000円
-          p 車両がない場合、車両を購入するか、もしくはレンタルを行っていただきます。
+          h4.red 
+           | 月35,000~40,000円
+          p 車両がない場合、車両を購入するか、もしくはレンタルを行っていただきます。-If you do not own a vehicle, you will need to purchase one or rent one.-
     .col-sm-4
         .jwork-example-box
-          h3 ガソリン代
+          h3 
+           | ガソリン代
+           br/
+           | Gasoline cost
           = image_tag "policy5.webp", class:"image"
           br/
-          h4.red 月30,000円前後
-          p 毎月のガソリン実費がかかります。ガソリン代は走行方法や車種・走行距離によって変動します。
+          h4.red 月30,000円くらい
+          p 毎月のガソリン実費がかかります。ガソリン代は走行方法や車種・走行距離によって変動します。 -You must pay the actual gasoline cost every month. The amount varies depending on driving style, vehicle type, and driving distance.-
     .col-sm-4
         .jwork-example-box
-          h3 任意保険
+          h3 
+           | 任意保険
+           br/
+           | Voluntary insurance
           = image_tag "policy6.webp", class:"image"
-          h4.red 月5,000~15,000円前後
-          p 業務で車を走行するにあたり必要な任意保険に加入いただきます。
+          br/
+          h4.red 月5,000~15,000円くらい
+          p 業務で車を走行するにあたり必要な任意保険に加入いただきます。-You are required to enroll in voluntary insurance in order to use the vehicle for work.-
 
 
 
 .container
   .calculator
-    h2 報酬(ほうしゅう)[Reward] 自動(じどう)[Automatic] 計算(けいさん)[Calculation] ツール[Tool]（個人配送モデル[personal delivery model]）
+    h2 
+     |報酬自動計算ツール
+     small（※個人配送モデル）
+
 
     .form-group
       label 配送(はいそう)[Delivery] 単価(たんか)[Unit Price]（円[JPY]）
@@ -106,9 +125,9 @@ script
       $('#unit_price, #quantity, #days, #rental, #gas, #insurance').on('input', calculate);
 
       // 初期計算
+      // Initial calculation
       calculate();
     });
 
 
-= link_to '次へ進む', top_apply_path, class: 'btn btn-primary btn-block', id: 'next-button'
-
+= link_to 'Next page', top_apply_path, class: 'btn btn-primary btn-block', id: 'next-button'

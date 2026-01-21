@@ -4,6 +4,8 @@
 .jwork-section
   h2.jwork-headline
     | 軽貨物ドライバーの条件
+    br/
+    | Requirements for a light freight driver
 
   .row.center
     .col-sm-12
@@ -38,7 +40,6 @@
             label.jwork-check-label
               = check_box_tag 'confirm[]', 'contract', false, class: 'confirm-check'
               span 業務委託契約となり、社会保険ではなく国民健康保険に加入することを理解しました。I understand that this will be a contract for services and that I will be enrolled in national health insurance rather than social insurance.
-
-
-          = link_to '次へ進む', top_entry_path, class: 'btn btn-primary btn-block disabled', id: 'next-button'
+          .red チェックすると次に進めます（Check to proceed to the next step）
+          = link_to 'Next page', top_entry_path, class: 'btn btn-primary btn-block disabled', id: 'next-button'
 
