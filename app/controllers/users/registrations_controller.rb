@@ -113,6 +113,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     :status,
     ]
 
+
     devise_parameter_sanitizer.permit(:sign_up, keys: additional_keys)
     devise_parameter_sanitizer.permit(:account_update, keys: additional_keys)
   end
