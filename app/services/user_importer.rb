@@ -15,6 +15,9 @@ class UserImporter
     return if rows.blank?
 
     header = rows.first
+    Rails.logger.info "===== SPS HEADER DUMP START ====="
+    Rails.logger.info header.map { |h| [h, h.bytes] }
+    Rails.logger.info "===== SPS HEADER DUMP END ====="
 
     # --------------------------------
     # 列名 → index マッピング（ズレ防止）
