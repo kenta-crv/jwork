@@ -103,7 +103,7 @@ end
   end
 
   def call
-  @q = User.where("work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ?", "%定住%", "%永住%", "%配偶者%", "%permanent long-term spouse%").where(status: "sms").ransack(params[:q])
+  @q = User.where("work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ?", "%定住%", "%永住%", "%配偶者%", "%permanent long-term spouse%").ransack(params[:q])
   @users = @q.result(distinct: true)
              .includes(:comments)
              .order(updated_at: :desc)
