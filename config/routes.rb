@@ -65,6 +65,7 @@ Rails.application.routes.draw do
     resources :alcohols
     resources :inspections
     collection do
+      get :call
       post :confirm
       post :thanks
     end

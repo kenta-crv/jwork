@@ -85,6 +85,16 @@ class User < ApplicationRecord
     SendSmsJob.perform_later(self.id)
   end
 
+  scope :visa_group_eq, ->(value = nil) {
+    return all if value.to_i != 1
+    where("work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ?", 
+          "%永住%", "%Permanent%", "%定住%", "%Long-term%", "%配偶者%", "%Spouse%")
+  }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    [:visa_group_eq]
+  end
+
   # ★★★ 修正箇所: enum の定義を慣習通り、キーと値を小文字に統一 (DBに小文字で保存される) ★★★
   enum status: { 
     sms: "sms",                 # DBに "sms" が保存される

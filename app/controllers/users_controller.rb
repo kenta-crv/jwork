@@ -102,6 +102,18 @@ end
     redirect_to users_path, notice: "#{user.name} に SMS を送信しました。"
   end
 
+  def call
+  @q = User.where("work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ?", "%定住%", "%永住%", "%配偶者%", "%permanent long-term spouse%").where(status: "sms").ransack(params[:q])
+  @users = @q.result(distinct: true)
+             .includes(:comments)
+             .order(updated_at: :desc)
+             .paginate(page: params[:page], per_page: 150)
+
+  @status_interviewed_driver  = params.dig(:q, :status_eq) == "interviewed" && params.dig(:q, :hope_work_eq) == "Driver"
+  @status_interviewed_cleaner = params.dig(:q, :status_eq) == "interviewed" && params.dig(:q, :hope_work_eq) == "Cleaner"
+  @status_sms_partial = params.dig(:q, :status_eq) == "sms"
+end
+
   private
 
   def user_params
