@@ -104,7 +104,7 @@ end
 
 def call
 params[:q]&.delete(:status_eq)
-@q = User.where("work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ?", "%定住%", "%永住%", "%配偶者%", "%permanent long-term spouse%", "%日本%", "%Japanese%").where(status: nil).ransack(params[:q])
+@q = User.where("work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ?", "%定住%", "%永住%", "%配偶者%", "%ていじゅう%", "%えいじゅう%", "%はいぐうしゃ%", "%にほん%","%permanent%", "%long-term%", "%spouse%", "%日本%", "%japanese%").where(status: [nil,"sms","SMS"]).ransack(params[:q])
 @users = @q.result(distinct: true)
            .includes(:comments)
            .order(updated_at: :desc)
