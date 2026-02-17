@@ -115,14 +115,7 @@ br/
           td.arrow_box
             | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
           td
-            = f.select(:work_range, [\
-             ["特定技能ビザ[Specified Skilled Visa]","特定技能ビザ[Specified Skilled Visa]"],\
-             ["技術・人文・国際ビザ[Engineer/Humanities/International Visa]","技術・人文・国際ビザ[Engineer/Humanities/International Visa]"],\
-             ["永住ビザ [Permanent Resident Visa]","永住ビザ [Permanent Resident Visa]"],\
-             ["定住ビザ [Long-term resident visa]","定住ビザ [Long-term resident visa]"],\
-             ["配偶者ビザ [Spouse visa]","配偶者ビザ [Spouse visa]"],\
-             ["留学ビザ [Student visa]","留学ビザ [Student visa]"],\
-            ], include_blank: "選択してください[Please select]")       
+            = f.text_field :work_range
         tr
           td
             strong.label Required
@@ -143,12 +136,7 @@ br/
           td.arrow_box
             | 日本語で会話できますか？[Can you speak Japanese conversation?]
           td
-            = f.select(:speak_japanese, [\
-             ["漢字・ひらがな・カタカナができます","漢字・ひらがな・カタカナができます"],\
-             ["簡単な漢字・ひらがな・カタカナができます","簡単な漢字・ひらがな・カタカナができます"],\
-             ["漢字はできないが、ひらがな・カタカナができます","漢字はできないが、ひらがな・カタカナができます"],\
-             ["日本語の読み書きはできません","日本語の読み書きはできません"],\
-            ], include_blank: "選択してください[Please select]")  
+            = f.text_field :speak_japanese
         tr
             td
               strong.label Required
