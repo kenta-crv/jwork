@@ -1577,14 +1577,20 @@ table.right {margin:5px 50px 5px 0px;}
 
 .job-card h3 {
   font-size: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   color: #2c3e50;
 }
 
 .job-card p {
-  margin: 6px 0;
+  margin: 10px 0;
   font-size: 15px;
   color: #555;
+}
+
+.job-card strong {
+  font-size: 18px;
+
+  color: black;
 }
 
 /* ボタン */
