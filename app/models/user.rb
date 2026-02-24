@@ -24,12 +24,14 @@ class User < ApplicationRecord
       以下人材の面接をお願いしたく存じます。
 
       名前：#{name}
+      性別：#{gender}
       生年月日：#{age}
       住まい：#{address}
-      お仕事：#{work_now}
-      ビザ種別：#{which_visa}
-      日本滞在：#{visiting_in_japan}
-      開始希望日：#{start}
+      経験則: #{experience}
+      ビザ種別：#{work_range}
+      日本滞在：#{past_year}
+      開始希望日：#{period}
+      日本語レベル：#{speak_japanese}
       面接希望日：
 
       以上、よろしくお願い致します。
@@ -38,13 +40,17 @@ class User < ApplicationRecord
 
   def contract_request_text
     <<~TEXT
-      お疲(つか)れ様(さま)です。
-      先日(せんじつ)は面接(めんせつ)対応(たいおう)をいただきありがとうございました。
-      以下(いか)、手続(てつづ)きを進(すす)めるために
-      まずは契約(けいやく)の締結(ていけつ)を行(おこな)います。
+      おつかれさまです。今回採用したお仕事の契約書を締結します。
+      以下URLよりアクセスし、手続きを完了してください。
+      ①証明書アップロード・振込先入力
+      ②契約の締結
+      以上、よろしくお願い致します。
 
-      以下URLよりアクセスいただき、
-      契約を完了(かんりょう)してください。
+      Thank you for your hard work. We are now entering into a contract for the position you have been hired for.
+      Please access the URL below and complete the procedure.
+      1. Upload certificates and enter bank details
+      2. Enter contract
+      Thank you for your cooperation.
     TEXT
   end
   
