@@ -3,6 +3,8 @@ class TopController < ApplicationController
   def index
   end
 
+  def black 
+  end
   def recruit 
   end
   def recruit_jp

@@ -26,7 +26,15 @@ class UserMailer < ActionMailer::Base
 def contract_received_email(user)
   @user = user
   template =
-    @user.hope_work == "Cleaner" ? "contract_received_cleaner" : "contract_received_driver"
+    case @user.hope_work
+    when "Cleaner"
+      "contract_received_cleaner"
+    when "Food"
+      "contract_received_food"
+    else
+      "contract_received_driver"
+    end
+
   mail(
     to: "info@j-work.jp",
     subject: "J Workで契約同意がありました",
@@ -37,7 +45,15 @@ end
 def contract_send_email(user)
   @user = user
   template =
-    @user.hope_work == "Cleaner" ? "contract_send_cleaner" : "contract_send_driver"
+    case @user.hope_work
+    when "Cleaner"
+      "contract_send_cleaner"
+    when "Food"
+      "contract_send_food"
+    else
+      "contract_send_driver"
+    end
+
   mail(
     to: @user.email,
     subject: "ご契約いただきありがとうございます。",

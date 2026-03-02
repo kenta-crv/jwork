@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'information' => 'top#information' #社外周知
 
+  get "top/black" => 'top#black'
+  
   get "top/flow" => 'top#flow'
   get "top/entry" => 'top#entry'
   get "top/attention" => 'top#attention'  
