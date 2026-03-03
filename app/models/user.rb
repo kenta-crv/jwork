@@ -42,13 +42,15 @@ class User < ApplicationRecord
     <<~TEXT
       おつかれさまです。今回採用したお仕事の契約書を締結します。
       以下URLよりアクセスし、手続きを完了してください。
-      ①証明書アップロード・振込先入力
+      ①住所・証明書アップロード・振込先入力
+      https://j-work.jp/users/#{id}/edit
       ②契約の締結
+      https://j-work.jp/users/#{id}/conclusion
       以上、よろしくお願い致します。
 
       Thank you for your hard work. We are now entering into a contract for the position you have been hired for.
       Please access the URL below and complete the procedure.
-      1. Upload certificates and enter bank details
+      1. Upload address and certificates and enter bank details
       2. Enter contract
       Thank you for your cooperation.
     TEXT
