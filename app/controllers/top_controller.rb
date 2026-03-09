@@ -90,7 +90,7 @@ class TopController < ApplicationController
   end  
 
   def redirect
-    line_url = "https://page.line.me/522jmsbm"
+    line_url = "https://lin.ee/yVI3ClY"
     render inline: <<-HTML
       <!DOCTYPE html>
       <html lang="ja">
