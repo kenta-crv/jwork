@@ -100,3 +100,4 @@ gem 'twilio-ruby'
 gem "faraday", "~> 1.10"
 
 gem 'kaminari'
+gem 'twilio-ruby'

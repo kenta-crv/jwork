@@ -83,4 +83,11 @@ Rails.application.routes.draw do
    end
   end
   post "/api/v1/users/from_sheet", to: "api/v1/users#sheet_create"
+
+  resources :ivr, only: [] do
+   member do
+    get :show      # 初期質問
+    post :handle_choice  # 選択の受信
+   end
+  end
 end
