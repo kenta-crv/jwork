@@ -88,8 +88,8 @@ class TopController < ApplicationController
       render plain: 'ファイルが見つかりません', status: 404
     end
   end  
-
-  def redirect
+=begin
+   def redirect
     line_url = "https://lin.ee/yVI3ClY"
     render inline: <<-HTML
       <!DOCTYPE html>
@@ -131,4 +131,5 @@ class TopController < ApplicationController
       </html>
     HTML
   end
+=end
 end
