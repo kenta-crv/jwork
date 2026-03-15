@@ -67,6 +67,7 @@ Rails.application.routes.draw do
     resources :alcohols
     resources :inspections
     collection do
+      post :bulk_call_ivr # 一括発信用
       get :call
       post :confirm
       post :thanks
@@ -80,6 +81,9 @@ Rails.application.routes.draw do
       get "payment"
       get "calendar"
       get "start"
+      post :call_ivr
+      match 'show_ivr', to: 'ivr#show', as: :show_ivr, via: [:get, :post]
+      post 'handle_choice_ivr', to: 'ivr#handle_choice', as: :handle_choice_ivr
    end
   end
   post "/api/v1/users/from_sheet", to: "api/v1/users#sheet_create"

@@ -1,5 +1,5 @@
+# app/models/user_step_mail.rb
 class UserStepMail < ApplicationRecord
   belongs_to :user
-
-  enum status: { pending: "pending", sent: "sent", failed: "failed" }
+  # status の enum は削除するか無視してOK
 end
