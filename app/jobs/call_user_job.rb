@@ -12,6 +12,11 @@ class CallUserJob < ApplicationJob
     to_number = user.tel
     to_number = to_number.sub(/^p:/, '') if to_number.start_with?('p:')
 
+    ivr_url = Rails.application.routes.url_helpers.ivr_user_url(
+      user, 
+      Rails.application.config.action_controller.default_url_options
+    )
+    
     # Twilioへ発信リクエスト
     client.calls.create(
       from: ENV['TWILIO_PHONE_NUMBER'],
