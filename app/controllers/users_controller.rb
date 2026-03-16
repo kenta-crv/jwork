@@ -69,20 +69,18 @@ class UsersController < ApplicationController
     redirect_to users_path, alert: "削除しました"
   end
 
-  # ===========================
-  # 既存SMS送信（即時）
-  # ===========================
   def send_sms
     user = User.find(params[:id])
     
     if user.tel.present?
       begin
         client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
-        message_body = "Interviews are conducted on LINE. Please register here: https://example.com/line\n面接はLINEで行います。こちらから登録してください: https://example.com/line"
+        message_body = "Interviews are conducted on LINE. Please register here: https://j-work.jp/line\n面接はLINEで行います。こちらから登録してください: https://j-work.jp/line"
         
+        to_number = user.tel.sub(/^p:/, '')
         client.messages.create(
           from: ENV['TWILIO_PHONE_NUMBER'],
-          to: user.tel,
+          to: to_number,
           body: message_body
         )
 
@@ -97,56 +95,53 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  # ===========================
-  # IVR即時発信アクション
-  # ===========================
-def call_ivr
-  user = User.find(params[:id])
+  def call_ivr
+    user = User.find(params[:id])
 
-  if user.tel.blank?
-    redirect_to users_path, alert: "電話番号が設定されていません"
-    return
-  end
-
-  begin
-    client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
-
-    # 修正: ルーティングヘルパーを正しく使う
-    ivr_url = show_ivr_user_url(user, host: 'nondisastrous-sheri-arabinosic.ngrok-free.dev')
-
-    client.calls.create(
-      from: ENV['TWILIO_PHONE_NUMBER'],
-      to: user.tel,
-      url: ivr_url
-    )
-
-    flash[:notice] = "#{user.name} に IVR 発信しました。"
-  rescue => e
-    flash[:alert] = "IVR 発信に失敗しました: #{e.message}"
-  end
-
-  redirect_to users_path
-end
-
-def bulk_call_ivr
-  # 検索条件をそのまま使ってユーザーを抽出
-  @q = User.ransack(params[:q])
-  users = @q.result
-
-  if users.present?
-    users.each_with_index do |user, index|
-      # Sidekiqジョブに投入 (10秒ずつずらして予約)
-      CallUserJob.set(wait: (index * 10).seconds).perform_later(user.id)
+    if user.tel.blank?
+      redirect_to users_path, alert: "電話番号が設定されていません"
+      return
     end
-    flash[:notice] = "#{users.count}人に対して順次IVR発信を開始しました。"
-  else
-    flash[:alert] = "対象ユーザーが見つかりません。"
+
+    begin
+      client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
+
+      # 本番ドメインに固定
+      app_host = (Rails.env.development? && !ENV['APP_HOST']) ? 'nondisastrous-sheri-arabinosic.ngrok-free.dev' : 'j-work.jp'
+      ivr_url = show_ivr_user_url(user, host: app_host)
+
+      to_number = user.tel.sub(/^p:/, '')
+      client.calls.create(
+        from: ENV['TWILIO_PHONE_NUMBER'],
+        to: to_number,
+        url: ivr_url
+      )
+
+      flash[:notice] = "#{user.name} に IVR 発信しました。"
+    rescue => e
+      flash[:alert] = "IVR 発信に失敗しました: #{e.message}"
+    end
+
+    redirect_to users_path
   end
 
-  redirect_back(fallback_location: users_path)
-end
+  def bulk_call_ivr
+    @q = User.ransack(params[:q])
+    users = @q.result
 
-private
+    if users.present?
+      users.each_with_index do |user, index|
+        CallUserJob.set(wait: (index * 10).seconds).perform_later(user.id)
+      end
+      flash[:notice] = "#{users.count}人に対して順次IVR発信を開始しました。"
+    else
+      flash[:alert] = "対象ユーザーが見つかりません。"
+    end
+
+    redirect_back(fallback_location: users_path)
+  end
+
+  private
 
   def user_params
     params.require(:user).permit(

@@ -1,5 +1,4 @@
 class IvrController < ApplicationController
-  # ログイン認証をスキップ（Twilioが外部からアクセスできるようにするため）
   skip_before_action :authenticate_admin!, raise: false
   skip_before_action :authenticate_user!, raise: false
   skip_before_action :verify_authenticity_token
@@ -7,12 +6,12 @@ class IvrController < ApplicationController
   def show
     user = User.find(params[:id])
     
-    # 開発環境ならngrok、それ以外（本番）なら j-work.jp を自動で切り替える
     app_host = (Rails.env.development? && !ENV['APP_HOST']) ? 'nondisastrous-sheri-arabinosic.ngrok-free.dev' : 'j-work.jp'
+    action_url = handle_choice_ivr_user_url(user, host: app_host, protocol: 'https')
 
     render xml: <<~XML
       <Response>
-        <Gather numDigits="1" action="#{handle_choice_ivr_user_url(user, host: app_host, protocol: 'https')}" method="POST" timeout="10">
+        <Gather numDigits="1" action="#{action_url}" method="POST" timeout="10">
           <Say voice="alice" language="en-US">
             Thank you for applying for a job at J Work.
             This call is for applicants who have not yet registered their LINE account.
@@ -43,19 +42,14 @@ class IvrController < ApplicationController
     
     logger.info "User ID: #{user.id}, Pressed Digits: #{choice}"
 
-    # ステータス更新とSMS送信を実行
     begin
-      # ステータスを適切に更新（choice_to_statusは下部に定義）
       user.update!(status: choice_to_status(choice))
-      
-      # SMS送信を有効化
       send_sms(user, choice) 
       logger.info "SMS sent for User ID: #{user.id}"
     rescue => e
       logger.error "Update/SMS Error: #{e.message}"
     end
 
-    # 応答メッセージの作成
     message_en, message_jp = case choice
               when '1'
                 ["Thank you. We will send you a LINE URL via SMS shortly. Please join LINE and follow the instructions. Goodbye.",
@@ -82,7 +76,7 @@ class IvrController < ApplicationController
   def choice_to_status(choice)
     case choice
     when '1'
-      'invited_line' # 必要に応じてモデルのenum定義に合わせて変更してください
+      'invited_line'
     when '2'
       'already_decided_ng'
     else
@@ -96,11 +90,8 @@ class IvrController < ApplicationController
       ENV['TWILIO_AUTH_TOKEN']
     )
 
-    # 電話番号の整形
-    to_number = user.tel
-    to_number = to_number.sub(/^p:/, '') if to_number.start_with?('p:')
+    to_number = user.tel.sub(/^p:/, '') if user.tel.present?
 
-    # LINEのURLなどは適宜変更してください
     message = case choice
               when '1'
                 "面接はLINEで行います。こちらから登録してください: https://j-work.jp/line"

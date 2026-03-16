@@ -7,15 +7,13 @@ class CallUserJob < ApplicationJob
 
     client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
 
-    # 本番は j-work.jp を固定で使用（開発環境ならngrok）
     app_host = (Rails.env.development? && !ENV['APP_HOST']) ? 'nondisastrous-sheri-arabinosic.ngrok-free.dev' : 'j-work.jp'
-    
-    # 先ほどコンソールで成功したURL構造を直接指定します
     ivr_url = "https://#{app_host}/users/#{user.id}/show_ivr"
 
+    to_number = user.tel.sub(/^p:/, '')
     client.calls.create(
       from: ENV['TWILIO_PHONE_NUMBER'],
-      to: user.tel.sub(/^p:/, ''),
+      to: to_number,
       url: ivr_url
     )
     
