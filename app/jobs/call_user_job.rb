@@ -12,7 +12,7 @@ class CallUserJob < ApplicationJob
     
     # routes.rb の定義 (users/:id/show_ivr) に合わせた絶対URLを生成
     # これなら show_ivr_user_url といったメソッド名の混乱に左右されません
-    ivr_url = "https://#{app_host}/users/#{user.id}/show_ivr"
+    ivr_url = "https://j-work.jp/users/#{user.id}/show_ivr"
 
     client.calls.create(
       from: ENV['TWILIO_PHONE_NUMBER'],
