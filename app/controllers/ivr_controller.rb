@@ -1,11 +1,11 @@
 class IvrController < ApplicationController
-  # 認証スキップ
+  # 認証スキップ：Twilio（外部）がアクセスできるよう、これらは必須です
   skip_before_action :authenticate_admin!, raise: false
   skip_before_action :authenticate_user!, raise: false
   skip_before_action :verify_authenticity_token
 
   def show
-    # RailsのURLヘルパーに頼らず、直接文字列で作ります。これが一番確実です。
+    # RailsのURLヘルパーを使わず、ドメインを固定することでSidekiq経由のngrok混入を防ぎます
     user_id = params[:id]
     action_url = "https://j-work.jp/users/#{user_id}/handle_choice_ivr"
 

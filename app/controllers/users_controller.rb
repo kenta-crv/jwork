@@ -95,7 +95,7 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def call_ivr
+def call_ivr
     user = User.find(params[:id])
 
     if user.tel.blank?
@@ -106,9 +106,8 @@ class UsersController < ApplicationController
     begin
       client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
 
-      # 本番ドメインに固定
-      app_host = (Rails.env.development? && !ENV['APP_HOST']) ? 'nondisastrous-sheri-arabinosic.ngrok-free.dev' : 'j-work.jp'
-      ivr_url = show_ivr_user_url(user, host: app_host)
+      # ★修正ポイント：環境に依存せず、常に本番ドメインの show_ivr パスを指定します
+      ivr_url = "https://j-work.jp/users/#{user.id}/show_ivr"
 
       to_number = user.tel.sub(/^p:/, '')
       client.calls.create(
