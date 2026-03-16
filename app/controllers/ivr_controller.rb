@@ -1,13 +1,18 @@
 class IvrController < ApplicationController
+  # ログイン認証をスキップ（Twilioが外部からアクセスできるようにするため）
+  skip_before_action :authenticate_admin!, raise: false
+  skip_before_action :authenticate_user!, raise: false
   skip_before_action :verify_authenticity_token
-  NGROK_HOST = 'nondisastrous-sheri-arabinosic.ngrok-free.dev'
 
   def show
     user = User.find(params[:id])
+    
+    # 開発環境ならngrok、それ以外（本番）なら j-work.jp を自動で切り替える
+    app_host = (Rails.env.development? && !ENV['APP_HOST']) ? 'nondisastrous-sheri-arabinosic.ngrok-free.dev' : 'j-work.jp'
 
     render xml: <<~XML
       <Response>
-        <Gather numDigits="1" action="#{handle_choice_ivr_user_url(user, host: NGROK_HOST)}" method="POST" timeout="10">
+        <Gather numDigits="1" action="#{handle_choice_ivr_user_url(user, host: app_host, protocol: 'https')}" method="POST" timeout="10">
           <Say voice="alice" language="en-US">
             Thank you for applying for a job at J Work.
             This call is for applicants who have not yet registered their LINE account.
@@ -40,13 +45,13 @@ class IvrController < ApplicationController
 
     # ステータス更新とSMS送信を実行
     begin
+      # ステータスを適切に更新（choice_to_statusは下部に定義）
       user.update!(status: choice_to_status(choice))
       
-      # コメントアウトを解除し、SMS送信を有効化
+      # SMS送信を有効化
       send_sms(user, choice) 
       logger.info "SMS sent for User ID: #{user.id}"
     rescue => e
-      # エラーが起きても電話が途切れないようにログに記録
       logger.error "Update/SMS Error: #{e.message}"
     end
 
@@ -72,11 +77,12 @@ class IvrController < ApplicationController
     XML
   end
 
+  private
 
   def choice_to_status(choice)
     case choice
     when '1'
-      'invited_line'
+      'invited_line' # 必要に応じてモデルのenum定義に合わせて変更してください
     when '2'
       'already_decided_ng'
     else
@@ -94,13 +100,14 @@ class IvrController < ApplicationController
     to_number = user.tel
     to_number = to_number.sub(/^p:/, '') if to_number.start_with?('p:')
 
+    # LINEのURLなどは適宜変更してください
     message = case choice
               when '1'
-                "Interviews are conducted on LINE. Please register here: https://example.com/line\n面接はLINEで行います。こちらから登録してください: https://example.com/line"
+                "面接はLINEで行います。こちらから登録してください: https://j-work.jp/line"
               when '2'
-                "Thank you for using our service.\nご利用ありがとうございました。"
+                "ジェイワークです。ご確認ありがとうございました。またの機会によろしくお願いいたします。"
               else
-                "Thank you.\nありがとうございました。"
+                "ご確認ありがとうございました。"
               end
 
     client.messages.create(
