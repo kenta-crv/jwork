@@ -7,12 +7,11 @@ class CallUserJob < ApplicationJob
 
     client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
 
-    # 本番ドメインを直接指定。ENV['APP_HOST'] があれば優先、なければ直書き
-    app_host = ENV['APP_HOST'] || 'j-work.jp'
+    # 本番は j-work.jp を固定で使用（開発環境ならngrok）
+    app_host = (Rails.env.development? && !ENV['APP_HOST']) ? 'nondisastrous-sheri-arabinosic.ngrok-free.dev' : 'j-work.jp'
     
-    # routes.rb の定義 (users/:id/show_ivr) に合わせた絶対URLを生成
-    # これなら show_ivr_user_url といったメソッド名の混乱に左右されません
-    ivr_url = "https://j-work.jp/users/#{user.id}/show_ivr"
+    # 先ほどコンソールで成功したURL構造を直接指定します
+    ivr_url = "https://#{app_host}/users/#{user.id}/show_ivr"
 
     client.calls.create(
       from: ENV['TWILIO_PHONE_NUMBER'],
@@ -20,7 +19,7 @@ class CallUserJob < ApplicationJob
       url: ivr_url
     )
     
-    Rails.logger.info "Sent IVR call via: #{ivr_url}"
+    Rails.logger.info "IVR call sent to: #{user.tel} URL: #{ivr_url}"
   rescue => e
     Rails.logger.error "IVR Job Error: #{e.message}"
     raise e
