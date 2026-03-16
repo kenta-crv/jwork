@@ -1,13 +1,13 @@
 class IvrController < ApplicationController
+  # 認証スキップ
   skip_before_action :authenticate_admin!, raise: false
   skip_before_action :authenticate_user!, raise: false
   skip_before_action :verify_authenticity_token
 
   def show
-    user = User.find(params[:id])
-    
-    app_host = (Rails.env.development? && !ENV['APP_HOST']) ? 'nondisastrous-sheri-arabinosic.ngrok-free.dev' : 'j-work.jp'
-    action_url = handle_choice_ivr_user_url(user, host: app_host, protocol: 'https')
+    # RailsのURLヘルパーに頼らず、直接文字列で作ります。これが一番確実です。
+    user_id = params[:id]
+    action_url = "https://j-work.jp/users/#{user_id}/handle_choice_ivr"
 
     render xml: <<~XML
       <Response>
@@ -26,11 +26,9 @@ class IvrController < ApplicationController
           </Say>
           <Pause length="2"/>
         </Gather>
-
         <Say voice="alice" language="ja-JP">
           入力が確認できませんでした。失礼いたします。
         </Say>
-
         <Hangup/>
       </Response>
     XML
