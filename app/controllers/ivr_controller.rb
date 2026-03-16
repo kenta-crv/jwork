@@ -11,7 +11,7 @@ class IvrController < ApplicationController
 
     render xml: <<~XML
       <Response>
-        <Gather numDigits="1" action="#{handle_choice_ivr_user_url(user, host: NGROK_HOST)}" method="POST" timeout="10">
+        <Gather numDigits="1" action="#{action_url}" method="POST" timeout="10">
           <Say voice="alice" language="en-US">
             Thank you for applying for a job at J Work.
             This call is for applicants who have not yet registered their LINE account.
@@ -26,11 +26,9 @@ class IvrController < ApplicationController
           </Say>
           <Pause length="2"/>
         </Gather>
-
         <Say voice="alice" language="ja-JP">
           入力が確認できませんでした。失礼いたします。
         </Say>
-
         <Hangup/>
       </Response>
     XML
@@ -50,7 +48,6 @@ class IvrController < ApplicationController
       logger.error "Update/SMS Error: #{e.message}"
     end
 
-    # 応答メッセージの作成
     message_en, message_jp = case choice
               when '1'
                 ["Thank you. We will send you a LINE URL via SMS shortly. Please join LINE and follow the instructions. Goodbye.",
@@ -89,17 +86,15 @@ class IvrController < ApplicationController
       ENV['TWILIO_AUTH_TOKEN']
     )
 
-    # 電話番号の整形
-    to_number = user.tel
-    to_number = to_number.sub(/^p:/, '') if to_number.start_with?('p:')
+    to_number = user.tel.sub(/^p:/, '') if user.tel.present?
 
     message = case choice
               when '1'
-                "Interviews are conducted on LINE. Please register here: https://example.com/line\n面接はLINEで行います。こちらから登録してください: https://example.com/line"
+                "面接はLINEで行います。こちらから登録してください: https://j-work.jp/line"
               when '2'
-                "Thank you for using our service.\nご利用ありがとうございました。"
+                "ジェイワークです。ご確認ありがとうございました。またの機会によろしくお願いいたします。"
               else
-                "Thank you.\nありがとうございました。"
+                "ご確認ありがとうございました。"
               end
 
     client.messages.create(
