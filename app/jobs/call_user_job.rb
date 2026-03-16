@@ -7,25 +7,12 @@ class CallUserJob < ApplicationJob
 
     client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
 
-    # 他に影響を与えないよう、ここでドメインを直接判別する
-    # Socket.gethostname などで判別も可能ですが、一番確実なのは環境変数
-    app_host = ENV['APP_HOST'] 
-
-    # もし環境変数が設定されていない場合でも動くように、
-    # 本番サーバーのドメインをここに直接書いてしまう（開発環境以外の場合）
-    if Rails.env.development? && !ENV['APP_HOST']
-      # あなたの手元（ローカル）で動かす時は ngrok
-      app_host = 'nondisastrous-sheri-arabinosic.ngrok-free.dev'
-    else
-      # 本番サーバーで動いている時は、実際のドメインを直接指定
-      app_host = 'あなたの本番ドメイン.com' # ← ここに実際のドメインを書いてください
-    end
-
-    ivr_url = Rails.application.routes.url_helpers.ivr_user_url(
-      user, 
-      host: app_host, 
-      protocol: 'https'
-    )
+    # 本番ドメインを直接指定。ENV['APP_HOST'] があれば優先、なければ直書き
+    app_host = ENV['APP_HOST'] || 'j-work.jp'
+    
+    # routes.rb の定義 (users/:id/show_ivr) に合わせた絶対URLを生成
+    # これなら show_ivr_user_url といったメソッド名の混乱に左右されません
+    ivr_url = "https://#{app_host}/users/#{user.id}/show_ivr"
 
     client.calls.create(
       from: ENV['TWILIO_PHONE_NUMBER'],
@@ -33,7 +20,7 @@ class CallUserJob < ApplicationJob
       url: ivr_url
     )
     
-    Rails.logger.info "Sent IVR call via #{app_host}"
+    Rails.logger.info "Sent IVR call via: #{ivr_url}"
   rescue => e
     Rails.logger.error "IVR Job Error: #{e.message}"
     raise e
