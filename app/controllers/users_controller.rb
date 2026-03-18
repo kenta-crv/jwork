@@ -144,21 +144,40 @@ def call_ivr
     redirect_to users_path
   end
 
-  def bulk_call_ivr
-    @q = User.ransack(params[:q])
-    users = @q.result
+def bulk_call_ivr
+  base_q = params[:q]&.to_unsafe_h || {}
 
-    if users.present?
-      users.each_with_index do |user, index|
-        CallUserJob.set(wait: (index * 10).seconds).perform_later(user.id)
-      end
-      flash[:notice] = "#{users.count}人に対して順次IVR発信を開始しました。"
-    else
-      flash[:alert] = "対象ユーザーが見つかりません。"
-    end
+  if base_q["status_eq"] == "sms"
+    other_conditions = base_q.except("status_eq")
 
-    redirect_back(fallback_location: users_path)
+    @q = User.ransack(
+      other_conditions.merge(
+        "g" => [
+          {
+            "m" => "or",
+            "status_eq" => "sms",
+            "status_null" => true
+          }
+        ]
+      )
+    )
+  else
+    @q = User.ransack(base_q)
   end
+
+  users = @q.result
+
+  if users.present?
+    users.each_with_index do |user, index|
+      CallUserJob.set(wait: (index * 10).seconds).perform_later(user.id)
+    end
+    flash[:notice] = "#{users.count}人に対して順次IVR発信を開始しました。"
+  else
+    flash[:alert] = "対象ユーザーが見つかりません。"
+  end
+
+  redirect_back(fallback_location: users_path)
+end
 
   private
 
