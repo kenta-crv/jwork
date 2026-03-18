@@ -3,12 +3,19 @@ def index
   base_q = params[:q]&.to_unsafe_h || {}
 
   if base_q["status_eq"] == "sms"
+    # status以外の条件
+    other_conditions = base_q.except("status_eq")
+
     @q = User.ransack(
-      {
-        "m" => "or",
-        "status_eq" => "sms",
-        "status_null" => true
-      }.merge(base_q.except("status_eq"))
+      other_conditions.merge(
+        "g" => [
+          {
+            "m" => "or",
+            "status_eq" => "sms",
+            "status_null" => true
+          }
+        ]
+      )
     )
   else
     @q = User.ransack(base_q)

@@ -1,5 +1,3 @@
-# app/services/user_importer.rb
-
 class UserImporter
   def self.import_from_spreadsheet
     session = GoogleDrive::Session.from_service_account_key(
@@ -19,24 +17,24 @@ class UserImporter
     Rails.logger.info header.map { |h| [h, h.bytes] }
     Rails.logger.info "===== SPS HEADER DUMP END ====="
 
-    # --------------------------------
-    # 列名 → index マッピング（ズレ防止）
-    # --------------------------------
+    # 列名 → index マッピング
     index = {}
     header.each_with_index do |column_name, i|
       index[column_name] = i
     end
 
-    # --------------------------------
-    # データ行を1行ずつ処理
-    # --------------------------------
+    # データ行処理
     rows.drop(1).each_with_index do |row, row_index|
-      # 完全空行はスキップ
       next if row.blank?
 
       begin
-        user = User.new(
-          email: row[index['email']],
+        email = row[index['email']]
+        next if email.blank?
+
+        # ★ここが変更ポイント（上書き対応）
+        user = User.find_or_initialize_by(email: email)
+
+        user.assign_attributes(
           name: row[index['full_name']],
           tel: row[index['phone_number']],
           age: row[index['date_of_birth']],
@@ -53,7 +51,6 @@ class UserImporter
           password_confirmation: '11111111'
         )
 
-        # validate 無視で保存（API と同仕様）
         user.save!(validate: false)
 
         # メール送信
