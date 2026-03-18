@@ -1,15 +1,28 @@
 class UsersController < ApplicationController
-  def index
-    @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true)
-               .includes(:comments)
-               .order(updated_at: :desc)
-               .paginate(page: params[:page], per_page: 150)
+def index
+  base_q = params[:q]&.to_unsafe_h || {}
 
-    @status_interviewed_driver  = params.dig(:q, :status_eq) == "interviewed" && params.dig(:q, :hope_work_eq) == "Driver"
-    @status_interviewed_cleaner = params.dig(:q, :status_eq) == "interviewed" && params.dig(:q, :hope_work_eq) == "Cleaner"
-    @status_sms_partial = params.dig(:q, :status_eq) == "sms"
+  if base_q["status_eq"] == "sms"
+    @q = User.ransack(
+      {
+        "m" => "or",
+        "status_eq" => "sms",
+        "status_null" => true
+      }.merge(base_q.except("status_eq"))
+    )
+  else
+    @q = User.ransack(base_q)
   end
+
+  @users = @q.result(distinct: true)
+             .includes(:comments)
+             .order(updated_at: :desc)
+             .paginate(page: params[:page], per_page: 150)
+
+  @status_interviewed_driver  = base_q["status_eq"] == "interviewed" && base_q["hope_work_eq"] == "Driver"
+  @status_interviewed_cleaner = base_q["status_eq"] == "interviewed" && base_q["hope_work_eq"] == "Cleaner"
+  @status_sms_partial = base_q["status_eq"] == "sms"
+end
 
   def new 
     @user = User.new
