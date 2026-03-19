@@ -123,7 +123,7 @@ end
     attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
     mail(
       to: @user.email,
-      subject: '📨 人気（にんき）No.1！高収入（こうしゅうにゅう）ドライバーのご紹介（しょうかい）'
+      subject: '📨 Our most popular job! Introducing our food driver position with a daily wage of 18,000 yen.'
     )
   end
 
@@ -141,7 +141,7 @@ end
     attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
     mail(
       to: @user.email,
-      subject: '📨 日本語（にほんご）が不安（ふあん）な方（かた）にもおすすめ！'
+      subject: '📨 Work as an Amazon Driver in English！'
     )
   end
 
