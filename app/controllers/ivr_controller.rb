@@ -1,8 +1,8 @@
 class IvrController < ApplicationController
-  # 認証スキップ：Twilio（外部）がアクセスできるよう、これらは必須です
+  # 外部（Twilio）がアクセスできるよう、Railsの認証とCSRFチェックをこのコントローラのみ解除します
+  skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_admin!, raise: false
   skip_before_action :authenticate_user!, raise: false
-  skip_before_action :verify_authenticity_token
 
   def show
     # RailsのURLヘルパーを使わず、ドメインを固定することでSidekiq経由のngrok混入を防ぎます
@@ -68,6 +68,8 @@ class IvrController < ApplicationController
       </Response>
     XML
   end
+
+  private
 
   def choice_to_status(choice)
     case choice
