@@ -6,37 +6,40 @@ class CallUserJob < ApplicationJob
     return if user.nil? || user.tel.blank?
 
     # 1. 電話番号のクリーニング
-    raw_tel = user.tel.sub(/^p:/, '').gsub(/[^\d+]/, '')
-    formatted_to = nil
-    if raw_tel.start_with?('+81')
-      formatted_to = raw_tel
-    elsif raw_tel.start_with?('0')
-      formatted_to = "+81#{raw_tel[1..-1]}"
-    end
+    raw_tel = user.tel.to_s.strip
+    raw_tel = raw_tel.sub(/^p:/, '')        # 先頭の "p:" を除去
+    raw_tel = raw_tel.gsub(/[^\d+]/, '')    # 数字と+以外を除去
 
-    if formatted_to.nil?
-      Rails.logger.warn "User ID: #{user.id} の番号 (#{user.tel}) は日本国内の番号ではないためスキップします。"
+    formatted_to = nil
+    if raw_tel.match?(/^\+81\d{9,10}$/)
+      formatted_to = raw_tel
+    elsif raw_tel.match?(/^0\d{9,10}$/)
+      formatted_to = "+81#{raw_tel[1..-1]}"
+    else
+      Rails.logger.warn "User ID: #{user.id} の番号 (#{user.tel.inspect}) は無効な形式のためスキップします。raw_tel=#{raw_tel.inspect}"
       return
     end
 
     # 2. 発信処理
     begin
       client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
-      
-      # ★修正：URLを文字列で書かず、Railsのヘルパーを使って生成します。
-      # show_ivr_user_url は routes.rb の match 'show_ivr' ... as: :show_ivr から自動生成される名前です。
-      # host を指定することで、Twilioが外からアクセスできる完全なURLになります。
-      ivr_url = Rails.application.routes.url_helpers.show_ivr_user_url(user, host: 'j-work.jp', protocol: 'https')
+
+      # URLは固定してユーザーIDはクエリで渡す方式に変更
+      ivr_url = Rails.application.routes.url_helpers.show_ivr_user_url(
+        host: 'j-work.jp',
+        protocol: 'https',
+        user_id: user.id
+      )
 
       client.calls.create(
         from: ENV['TWILIO_PHONE_NUMBER'],
         to: formatted_to,
         url: ivr_url
       )
-      Rails.logger.info "User ID: #{user.id} へのIVR発信に成功しました。URL: #{ivr_url}"
+
+      Rails.logger.info "User ID: #{user.id} へのIVR発信に成功しました。to=#{formatted_to} URL=#{ivr_url}"
     rescue => e
-      # 今出ている 404 エラーは Twilio 側がこの URL を叩いた瞬間に発生しています。
-      Rails.logger.error "IVR発信エラー (User ID: #{user_id}): #{e.message}"
+      Rails.logger.error "IVR発信エラー (User ID: #{user_id}): #{e.message} to=#{formatted_to} raw_tel=#{raw_tel.inspect}"
     end
   end
 end
