@@ -83,7 +83,7 @@ class User < ApplicationRecord
 
   def schedule_step_mails
     # 登録直後のウェルカムメール
-    UserMailer.welcome_email(self).deliver_later
+    UserMailer.welcome_email(self).deliver_now
 
     # ステータスが nil または sms なら予約作成
     if status.nil? || status == "sms"

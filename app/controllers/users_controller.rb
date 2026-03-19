@@ -145,40 +145,41 @@ def call_ivr
   end
 
 def bulk_call_ivr
-  base_q = params[:q]&.to_unsafe_h || {}
+    base_q = params[:q]&.to_unsafe_h || {}
 
-  if base_q["status_eq"] == "sms"
-    other_conditions = base_q.except("status_eq")
+    if base_q["status_eq"] == "sms"
+      other_conditions = base_q.except("status_eq")
 
-    @q = User.ransack(
-      other_conditions.merge(
-        "g" => [
-          {
-            "m" => "or",
-            "status_eq" => "sms",
-            "status_null" => true
-          }
-        ]
+      @q = User.ransack(
+        other_conditions.merge(
+          "g" => [
+            {
+              "m" => "or",
+              "status_eq" => "sms",
+              "status_null" => true
+            }
+          ]
+        )
       )
-    )
-  else
-    @q = User.ransack(base_q)
-  end
-
-  users = @q.result
-
-  if users.present?
-    users.each_with_index do |user, index|
-      CallUserJob.set(wait: (index * 10).seconds).perform_later(user.id)
+    else
+      @q = User.ransack(base_q)
     end
-    flash[:notice] = "#{users.count}人に対して順次IVR発信を開始しました。"
-  else
-    flash[:alert] = "対象ユーザーが見つかりません。"
+
+    users = @q.result
+
+    if users.present?
+      user_ids = users.pluck(:id) # IDだけを抽出してメモリ負荷を抑える
+
+      # Sidekiqを使わず、OSのプロセスを切り離して実行（spawn）
+      spawn("bundle exec rails runner 'User.where(id: #{user_ids}).find_each { |u| CallUserJob.perform_now(u.id) }'")
+
+      flash[:notice] = "#{users.count}人に対してバックグラウンドでIVR発信を開始しました。画面を閉じても処理は続きます。"
+    else
+      flash[:alert] = "対象ユーザーが見つかりません。"
+    end
+
+    redirect_back(fallback_location: users_path)
   end
-
-  redirect_back(fallback_location: users_path)
-end
-
   private
 
   def user_params
