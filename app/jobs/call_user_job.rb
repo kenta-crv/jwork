@@ -7,7 +7,6 @@ class CallUserJob < ApplicationJob
 
     # 1. 電話番号のクリーニング
     raw_tel = user.tel.sub(/^p:/, '').gsub(/[^\d+]/, '')
-
     formatted_to = nil
     if raw_tel.start_with?('+81')
       formatted_to = raw_tel
@@ -24,18 +23,19 @@ class CallUserJob < ApplicationJob
     begin
       client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
       
-      # ★修正ポイント：URLを文字列で直接書くのをやめ、Railsのヘルパーを使います。
-      # 理由：ドメインやルーティングの不整合を物理的に防ぐためです。
-      ivr_url = Rails.application.routes.url_helpers.show_ivr_user_url(user, host: 'j-work.jp')
+      # ★修正：URLを文字列で書かず、Railsのヘルパーを使って生成します。
+      # show_ivr_user_url は routes.rb の match 'show_ivr' ... as: :show_ivr から自動生成される名前です。
+      # host を指定することで、Twilioが外からアクセスできる完全なURLになります。
+      ivr_url = Rails.application.routes.url_helpers.show_ivr_user_url(user, host: 'j-work.jp', protocol: 'https')
 
       client.calls.create(
         from: ENV['TWILIO_PHONE_NUMBER'],
         to: formatted_to,
         url: ivr_url
       )
-      Rails.logger.info "User ID: #{user.id} へのIVR発信に成功しました。宛先: #{formatted_to} URL: #{ivr_url}"
+      Rails.logger.info "User ID: #{user.id} へのIVR発信に成功しました。URL: #{ivr_url}"
     rescue => e
-      # いまログに出ているエラーはここから出力されています。
+      # 今出ている 404 エラーは Twilio 側がこの URL を叩いた瞬間に発生しています。
       Rails.logger.error "IVR発信エラー (User ID: #{user_id}): #{e.message}"
     end
   end
