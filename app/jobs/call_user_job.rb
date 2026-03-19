@@ -2,21 +2,10 @@ class CallUserJob < ApplicationJob
   queue_as :default
 
   def perform(user_id)
-    # 1. 時間帯判定ロジック (一時的にコメントアウト)
-    # now = Time.current
-    # hour = now.hour
-    #
-    # if hour >= 20 || hour < 11
-    #   scheduled_time = hour >= 20 ? now.tomorrow.change(hour: 11, min: 0) : now.change(hour: 11, min: 0)
-    #   Rails.logger.info "夜間禁止時間帯のため、User ID: #{user_id} への発信を #{scheduled_time} に延期します。"
-    #   CallUserJob.set(wait_until: scheduled_time).perform_later(user_id)
-    #   return
-    # end
-
     user = User.find_by(id: user_id)
     return if user.nil? || user.tel.blank?
 
-    # 2. 電話番号のクリーニングと日本番号の判定
+    # 1. 電話番号のクリーニング
     raw_tel = user.tel.sub(/^p:/, '').gsub(/[^\d+]/, '')
 
     formatted_to = nil
@@ -31,19 +20,22 @@ class CallUserJob < ApplicationJob
       return
     end
 
-    # 3. 発信処理
+    # 2. 発信処理
     begin
       client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
       
-      ivr_url = "https://j-work.jp/users/#{user.id}/show_ivr"
+      # ★修正ポイント：URLを文字列で直接書くのをやめ、Railsのヘルパーを使います。
+      # 理由：ドメインやルーティングの不整合を物理的に防ぐためです。
+      ivr_url = Rails.application.routes.url_helpers.show_ivr_user_url(user, host: 'j-work.jp')
 
       client.calls.create(
         from: ENV['TWILIO_PHONE_NUMBER'],
         to: formatted_to,
         url: ivr_url
       )
-      Rails.logger.info "User ID: #{user.id} へのIVR発信に成功しました。宛先: #{formatted_to}"
+      Rails.logger.info "User ID: #{user.id} へのIVR発信に成功しました。宛先: #{formatted_to} URL: #{ivr_url}"
     rescue => e
+      # いまログに出ているエラーはここから出力されています。
       Rails.logger.error "IVR発信エラー (User ID: #{user_id}): #{e.message}"
     end
   end
