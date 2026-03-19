@@ -24,11 +24,11 @@ class CallUserJob < ApplicationJob
     begin
       client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
 
-      # URLは固定してユーザーIDはクエリで渡す方式に変更
+      # 検証済み: 第一引数に user オブジェクトを渡し、host/protocol を指定する形式
       ivr_url = Rails.application.routes.url_helpers.show_ivr_user_url(
+        user,
         host: 'j-work.jp',
-        protocol: 'https',
-        user_id: user.id
+        protocol: 'https'
       )
 
       client.calls.create(
@@ -39,6 +39,7 @@ class CallUserJob < ApplicationJob
 
       Rails.logger.info "User ID: #{user.id} へのIVR発信に成功しました。to=#{formatted_to} URL=#{ivr_url}"
     rescue => e
+      # UrlGenerationError や Twilio API エラーをここでキャッチ
       Rails.logger.error "IVR発信エラー (User ID: #{user_id}): #{e.message} to=#{formatted_to} raw_tel=#{raw_tel.inspect}"
     end
   end
