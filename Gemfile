@@ -94,7 +94,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 #gem 'google_drive'
 # Gemfile
 
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.2.10'
 gem 'twilio-ruby'
 
 gem "faraday", "~> 1.10"
