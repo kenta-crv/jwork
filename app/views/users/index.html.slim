@@ -1,3 +1,5 @@
+- set_meta_tags  title: 'ユーザー一覧'
+
 = search_form_for @q, url: users_path, method: :get do |f|
   table.list
     thead
@@ -8,6 +10,9 @@
         td
           = f.label :tel_cont, "電話番号 [Tel]"
           = f.text_field :tel_cont, class: "form-control", placeholder: "電話番号を入力 [Enter tel]"
+        td
+          = f.label :email_cont, "電話番号 [Mail]"
+          = f.text_field :email_cont, class: "form-control", placeholder: "メールアドレスを入力 [Enter Mail]"
         td
           = f.label :status_eq, "ステータス"
           = f.select :status_eq, [\

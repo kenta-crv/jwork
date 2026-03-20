@@ -2,8 +2,35 @@ class UsersController < ApplicationController
 def index
   base_q = params[:q]&.to_unsafe_h || {}
 
+  tel_variants = nil
+
+  if base_q["tel_cont"].present?
+    tel = base_q["tel_cont"]
+
+    normalized = tel.gsub(/\D/, '')
+
+    variants = []
+
+    if normalized.start_with?('81')
+      variants << '0' + normalized[2..]
+    elsif normalized.start_with?('0')
+      variants << normalized
+    end
+
+    if normalized.start_with?('0')
+      variants << '81' + normalized[1..]
+    else
+      variants << normalized
+    end
+
+    tel_variants = variants.uniq
+    base_q.delete("tel_cont")
+  end
+
+  # =========================
+  # Ransack
+  # =========================
   if base_q["status_eq"] == "sms"
-    # status以外の条件
     other_conditions = base_q.except("status_eq")
 
     @q = User.ransack(
@@ -21,7 +48,22 @@ def index
     @q = User.ransack(base_q)
   end
 
-  @users = @q.result(distinct: true)
+  users = @q.result(distinct: true)
+
+  # =========================
+  # 電話番号フィルタ（ここが重要）
+  # =========================
+  if tel_variants.present?
+    conditions = tel_variants.map do |v|
+      "REPLACE(REPLACE(tel, '+', ''), '-', '') LIKE ?"
+    end.join(" OR ")
+
+    values = tel_variants.map { |v| "%#{v}%" }
+
+    users = users.where(conditions, *values)
+  end
+
+  @users = users
              .includes(:comments)
              .order(updated_at: :desc)
              .paginate(page: params[:page], per_page: 150)
@@ -179,6 +221,18 @@ def bulk_call_ivr
   redirect_back(fallback_location: users_path)
 end
 
+  def food_1 
+    @current_step = 1
+  end
+  def food_2
+    @current_step = 1
+  end  
+  def food_3 
+    @current_step = 1
+  end  
+  def food_4 
+    @current_step = 1
+  end
   private
 
   def user_params

@@ -84,7 +84,11 @@ Rails.application.routes.draw do
       post :call_ivr
       match 'show_ivr', to: 'ivr#show', as: :show_ivr, via: [:get, :post]
       post 'handle_choice_ivr', to: 'ivr#handle_choice', as: :handle_choice_ivr
-   end
+      get "food_1"  # Upload
+      get "food_2"  # Constract
+      get "food_3"
+      get "food_4"
+    end
   end
   post "/api/v1/users/from_sheet", to: "api/v1/users#sheet_create"
 

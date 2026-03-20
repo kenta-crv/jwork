@@ -1,8 +1,10 @@
-- set_meta_tags title: ''
-- set_meta_tags description: ''
+- set_meta_tags title: 'Process a food delivery'
 - set_meta_tags noindex: true
 
-.section.process
+- if @user.hope_work = "Food"
+
+- else
+ .section.process
   .process-title PROCESS
   .process-sub ご利用の流れ
 

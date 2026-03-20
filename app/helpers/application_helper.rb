@@ -1,13 +1,13 @@
 module ApplicationHelper
   def default_meta_tags
     {
-      site: "特定技能外国人の求人紹介なら｜Future Jobs",
-      title:"<%= yield(:title) | 合同会社ファクトル' %>",
-      description: "特定技能・就労ビザ・永住ビザの外国人の求人紹介ならFuture Jobsにお任せください。豊富な案件で御社をサポートします。",
-      canonical: request.original_url,  # 優先されるurl
-      charset: "UTF-8",
+      site: "外国人専門の人材提供ならJ Work｜株式会社セールスプロ",
+      title: "合同会社ファクトル", # ← ここを単純な文字列にする
       reverse: true,
       separator: '|',
+      description: "",
+      canonical: request.original_url,
+      charset: "UTF-8",
       icon: [
         { href: image_url('favicon.ico') },
         { href: image_url('favicon.ico'),  rel: 'apple-touch-icon' },

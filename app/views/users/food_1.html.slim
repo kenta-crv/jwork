@@ -1,0 +1,45 @@
+- set_meta_tags  title: '書類をアップロード'
+- set_meta_tags  description: ''
+= render 'shared/step_indicator'
+.jwork-section
+  h2.jwork-headline
+    | はじめに
+    br/
+    | 
+
+  .row.center
+    .col-sm-12
+      .jwork-example-box
+        p
+          | 本ページでは、軽貨物ドライバーになるための流れをご案内致します。非常に重要な内容となっておりますので、必ず入念な確認を行なってください。
+          br
+          | This page explains the steps required to become a light cargo driver. As this information is extremely important, please be sure to review it carefully.
+
+        ul.jwork-checklist
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'license', false, class: 'confirm-check'
+              span 普通免許で運転を行う軽貨物ドライバーの仕事であることを理解しました。I understand that this job is for a light cargo driver operating with a standard driver’s license.
+
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'visa', false, class: 'confirm-check'
+              span 就労制限のない在留資格（日本国籍・永住・定住・配偶者・難民等）が必要であることを理解しました。I understand that a residence status with no work restrictions is required (Japanese nationality, permanent resident, long-term resident, spouse visa, refugee status, etc.).
+
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'reading', false, class: 'confirm-check'
+              span 住所を読むため、ひらがな・カタカナ・簡単な漢字を読める必要があることを理解しました。I understand that, in order to read addresses, I must be able to read hiragana, katakana, and basic kanji.
+
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'fulltime', false, class: 'confirm-check'
+              span アルバイトでの応募は不可で、フルタイム勤務のみが対象であることを理解しました。I understand that applications for part-time work are not accepted and that only full-time positions are available.
+
+          li
+            label.jwork-check-label
+              = check_box_tag 'confirm[]', 'contract', false, class: 'confirm-check'
+              span 業務委託契約となり、社会保険ではなく国民健康保険に加入することを理解しました。I understand that this will be a contract for services and that I will be enrolled in national health insurance rather than social insurance.
+          .red チェックすると次に進めます（Check to proceed to the next step）
+          = link_to 'Next page', top_entry_path, class: 'btn btn-primary btn-block disabled', id: 'next-button'
+

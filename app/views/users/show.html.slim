@@ -1,3 +1,4 @@
+- set_meta_tags title: "#{@user.name}"
 .tops-wrapper
   - if admin_signed_in?
    h2.headline ステータス
@@ -470,7 +471,10 @@
           = @user.contract_date
 
 .actions_container style="text-align: center; margin-bottom: 30px;"
-  = link_to "Proceed to user", info_user_path(@user), class: "btn btn-primary"
+  - if @user.hope_work = "Food"
+   = link_to "Proceed a food flow", food_1_user_path(@user), class: "btn btn-primary"
+  - else  
+   = link_to "Proceed to user", info_user_path(@user), class: "btn btn-primary"
   = link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "本当にログアウトしますか？" }, class: "btn btn-primary"
   - if admin_signed_in?
    = link_to "削除する", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
@@ -531,88 +535,3 @@ br/
 
 
 
-
-br/
-br/
-table.company[width="100%"]
-  - if @user.alcohols.any?
-    col[width="10%"]
-    col[width="70%"]
-    col[width="20%"]
-    tbody
-      tr
-        th 勤務日
-        th アルコールチェック
-        th 健康チェック
-        th 登録日時
-      - @user.alcohols.each do |alcohol|
-       tr
-        td
-          = alcohol.post
-        td
-          = alcohol.check
-        td
-          = alcohol.health
-        td
-          = alcohol.created_at
-
-br/
-br/
-table.company[width="100%"]
-  - if @user.journals.any?
-    tbody
-      tr
-        th 勤務日
-        th 日報
-        th 登録日時
-      - @user.journals.each do |alcohol|
-       tr
-        td
-          = alcohol.post
-        td
-          = alcohol.dialy
-        td
-          = alcohol.created_at
-
-br/
-br/
-table.company[width="100%"]
-  - if @user.inspections.any?
-    tbody
-      tr
-        th 点検日
-        th ブレーキ
-        th ステアリング
-        th タイヤ・ホイール
-        th 灯火装置
-        th バッテリー
-        th エンジンオイル
-        th 冷却水
-        th ワイパー・ウォッシャー
-        th 排気系
-        th 車体下回り
-      - @user.inspections.each do |inspection|
-       tr
-        td
-          = inspection.post
-        td
-          = inspection.brakes
-        td
-          = inspection.steering
-        td
-          = inspection.tires
-        td
-          = inspection.lighting
-        td
-          = inspection.battely
-        td
-          = inspection.engine
-        td
-          = inspection.coolant
-        td
-          = inspection.wiper
-        td
-          = inspection.exhaust
-        td
-          = inspection.underbody
-          
