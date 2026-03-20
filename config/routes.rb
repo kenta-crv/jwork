@@ -11,12 +11,12 @@ Rails.application.routes.draw do
 
   get 'information' => 'top#information' #社外周知
 
-  get "top/black" => 'top#black'
   
   get "top/flow" => 'top#flow'
   get "top/entry" => 'top#entry'
   get "top/attention" => 'top#attention'  
   get "top/apply" => 'top#apply'  
+  get "top/black" => 'top#black'
 
   get "top/policy" => 'top#policy'  
 
@@ -84,10 +84,6 @@ Rails.application.routes.draw do
       post :call_ivr
       match 'show_ivr', to: 'ivr#show', as: :show_ivr, via: [:get, :post]
       post 'handle_choice_ivr', to: 'ivr#handle_choice', as: :handle_choice_ivr
-      get "food_1"  # Upload
-      get "food_2"  # Constract
-      get "food_3"
-      get "food_4"
     end
   end
   post "/api/v1/users/from_sheet", to: "api/v1/users#sheet_create"

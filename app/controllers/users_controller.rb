@@ -239,18 +239,6 @@ def send_sms
     redirect_back(fallback_location: users_path)
   end
 
-  def food_1 
-    @current_step = 1
-  end
-  def food_2
-    @current_step = 1
-  end  
-  def food_3 
-    @current_step = 1
-  end  
-  def food_4 
-    @current_step = 1
-  end
   private
 
   def user_params

@@ -1922,138 +1922,118 @@ table.right {margin:5px 50px 5px 0px;}
 
 
 .section.process {
-  position: relative;
-  background: linear-gradient(to bottom right, #fafafa, #f5f7ff, #fff0f5);
-  padding: 80px 20px;
+  background: #f7f8fc;
+  padding: 40px 16px;
   font-family: 'Noto Sans JP', sans-serif;
 }
 
-.process-title {
-  position: absolute;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  writing-mode: vertical-rl;
-  font-size: 2.4rem;
+/* ヘッダー */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 1.8rem;
   font-weight: 700;
   color: #1a237e;
-  letter-spacing: 0.1em;
 }
 
-.process-sub {
-  position: absolute;
-  right: 80px;
-  top: 50%;
-  transform: translateY(-50%) rotate(180deg);
-  writing-mode: vertical-rl;
+.subtitle {
   font-size: 0.9rem;
-  color: #555;
+  color: #666;
 }
 
-.process-container {
-  max-width: 700px;
+/* タイムライン */
+.timeline {
+  position: relative;
+  max-width: 500px;
   margin: 0 auto;
 }
 
-.process-step {
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #d1d5db;
+}
+
+/* ステップ */
+.step {
+  position: relative;
   display: flex;
   align-items: flex-start;
-  background: #fff;
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 16px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
 }
 
-.process-step .num {
-  font-size: 6.0rem;
-  font-weight: 900;
-  color: #1a237e;
-  flex-shrink: 0;
-  width: 80px;
-  text-align: center;
-}
-
-.process-step .content {
-  flex: 1;
-  padding-left: 20px;
-}
-
-.process-step .content h3 {
-  font-size: 2.0rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #1a237e;
-}
-
-/* h3内のリンクカラー制御 */
-.process-step .content h3 a {
-  color: #1a237e;              /* 見出しと同じ色 */
-  text-decoration: none;       /* 下線を消す */
-  transition: opacity 0.2s ease;
-}
-
-.process-step .content h3 a:hover {
-  opacity: 0.7;                /* ホバー時に少し薄くする */
-}
-
-
-.process-step .content p {
-  color: #333;
-  line-height: 1.7;
-  margin-bottom: 6px;
-}
-
-.btn {
-  display: inline-block;
+/* 番号丸 */
+.circle {
+  width: 40px;
+  height: 40px;
   background: #1a237e;
   color: #fff;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  text-decoration: none;
-  margin-top: 10px;
-}
-.btn:hover {
-  background: #3949ab;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: 700;
+  z-index: 1;
+  flex-shrink: 0;
 }
 
-/* ボタンデザイン統一 */
-.btn.btn-process {
-  display: block;              /* Bootstrapのcol内で均等幅 */
-  width: 100%;                 /* カラム内いっぱいに広げる */
-  background-color: #1a237e;
+/* カード */
+.card {
+  background: #fff;
+  margin-left: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  flex: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #1a237e;
+}
+
+.card h3 a {
+  color: #1a237e;
+  text-decoration: none;
+}
+
+.card h3 a:hover {
+  opacity: 0.7;
+}
+
+.card p {
+  font-size: 1.3rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* ボタン */
+.btn-process {
+  display: block;
+  width: 100%;
+  background: #1a237e;
   color: #fff;
-  padding: 10px 16px;
+  padding: 10px;
   border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: bold;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease-in-out;
-  margin-bottom: 10px;         /* スマホ時の隙間対策 */
+  margin-bottom: 8px;
+  transition: 0.2s;
 }
 
-.btn.btn-process:hover {
-  background-color: #3949ab;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+.btn-process:hover {
+  background: #3949ab;
 }
-
-/* レスポンシブ崩れ対応：Bootstrapのcol-xs系を補完 */
-@media (max-width: 767px) {
-  .process-step .row {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .process-step .col-xs-4 {
-    width: 100%;
-    margin-bottom: 8px;
-  }
-}
-
 
 
 body {
@@ -2353,3 +2333,131 @@ hr {
   background: #28a745;
   color: #fff;
 }
+
+
+
+.doc-list {
+  list-style: none;        /* デフォルトの点を消す */
+  padding-left: 0;
+  margin-bottom: 16px;
+}
+
+.doc-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  color: #1a237e;         /* 文字色を丸と統一 */
+  font-weight: 600;        /* 少し強調しておしゃれに */
+}
+
+
+
+.section.black-number {
+  background: #f7f8fc;
+  padding: 40px 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.2rem;     /* タイトル大きめ */
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 24px;
+}
+
+.note {
+  text-align: center;
+  font-size: 1rem;       /* 注釈文字も少し大きく */
+  color: #666;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+/* タイムライン */
+.timeline {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 25px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #d1d5db;
+}
+
+/* ステップ */
+.step {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 36px;  /* 少し余白増やす */
+}
+
+/* 番号丸 */
+.circle {
+  width: 50px;           /* 丸大きめ */
+  height: 50px;
+  background: #1a237e;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  font-weight: 700;
+  font-size: 1.2rem;     /* 数字大きめ */
+  flex-shrink: 0;
+}
+
+/* カード */
+.card {
+  background: #fff;
+  margin-left: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  font-size: 1.3rem;     /* ステップ見出し大きめ */
+  color: #1a237e;
+  margin-bottom: 12px;
+}
+
+.card p {
+  font-size: 1.05rem;    /* 本文大きめ */
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.card .note {
+  font-size: 0.95rem;
+  color: #999;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* 必要書類リスト */
+.doc-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 16px;
+}
+
+.doc-list li {
+  position: relative;
+  padding-left: 24px;    /* 丸との余白増やす */
+  margin-bottom: 10px;
+  font-size: 1.05rem;    /* リスト文字大きめ */
+  color: #1a237e;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
