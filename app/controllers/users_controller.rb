@@ -131,22 +131,32 @@ end
     redirect_to users_path, alert: "削除しました"
   end
 
-  def send_sms
+def send_sms
     user = User.find(params[:id])
     
     if user.tel.present?
       begin
+        # 番号整形: 080... -> +8180...
+        raw_tel = user.tel.to_s.strip.sub(/^p:/, '').gsub(/[^\d+]/, '')
+        
+        if raw_tel.match?(/^0\d{9,11}$/)
+          to_number = "+81#{raw_tel[1..-1]}"
+        elsif raw_tel.match?(/^81\d{9,11}$/)
+          to_number = "+#{raw_tel}"
+        else
+          to_number = raw_tel
+        end
+
         client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
         message_body = "Interviews are conducted on LINE. Please register here: https://j-work.jp/line\n面接はLINEで行います。こちらから登録してください: https://j-work.jp/line"
         
-        to_number = user.tel.sub(/^p:/, '')
         client.messages.create(
           from: ENV['TWILIO_PHONE_NUMBER'],
           to: to_number,
           body: message_body
         )
 
-        flash[:notice] = "#{user.name} に SMS を送信しました。"
+        flash[:notice] = "#{user.name} に SMS を送信しました。(To: #{to_number})"
       rescue => e
         flash[:alert] = "SMS送信に失敗しました: #{e.message}"
       end
@@ -157,7 +167,10 @@ end
     redirect_to users_path
   end
 
-def call_ivr
+  # ==========================================
+  # 2. IVR単体発信 (080... を +81... に変換)
+  # ==========================================
+  def call_ivr
     user = User.find(params[:id])
 
     if user.tel.blank?
@@ -166,19 +179,27 @@ def call_ivr
     end
 
     begin
-      client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
+      # 番号整形: 080... -> +8180...
+      raw_tel = user.tel.to_s.strip.sub(/^p:/, '').gsub(/[^\d+]/, '')
+      
+      if raw_tel.match?(/^0\d{9,11}$/)
+        to_number = "+81#{raw_tel[1..-1]}"
+      elsif raw_tel.match?(/^81\d{9,11}$/)
+        to_number = "+#{raw_tel}"
+      else
+        to_number = raw_tel
+      end
 
-      # ★修正ポイント：環境に依存せず、常に本番ドメインの show_ivr パスを指定します
+      client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
       ivr_url = "https://j-work.jp/users/#{user.id}/show_ivr"
 
-      to_number = user.tel.sub(/^p:/, '')
       client.calls.create(
         from: ENV['TWILIO_PHONE_NUMBER'],
         to: to_number,
         url: ivr_url
       )
 
-      flash[:notice] = "#{user.name} に IVR 発信しました。"
+      flash[:notice] = "#{user.name} に IVR 発信しました。(To: #{to_number})"
     rescue => e
       flash[:alert] = "IVR 発信に失敗しました: #{e.message}"
     end
@@ -186,40 +207,37 @@ def call_ivr
     redirect_to users_path
   end
 
-def bulk_call_ivr
-  base_q = params[:q]&.to_unsafe_h || {}
+  # ==========================================
+  # 3. IVR一括発信 (バックグラウンドJobを起動)
+  # ==========================================
+  def bulk_call_ivr
+    base_q = params[:q]&.to_unsafe_h || {}
 
-  if base_q["status_eq"] == "sms"
-    other_conditions = base_q.except("status_eq")
-
-    @q = User.ransack(
-      other_conditions.merge(
-        "g" => [
-          {
-            "m" => "or",
-            "status_eq" => "sms",
-            "status_null" => true
-          }
-        ]
+    if base_q["status_eq"] == "sms"
+      other_conditions = base_q.except("status_eq")
+      @q = User.ransack(
+        other_conditions.merge(
+          "g" => [{ "m" => "or", "status_eq" => "sms", "status_null" => true }]
+        )
       )
-    )
-  else
-    @q = User.ransack(base_q)
-  end
-
-  users = @q.result
-
-  if users.present?
-    users.each_with_index do |user, index|
-      CallUserJob.set(wait: (index * 10).seconds).perform_later(user.id)
+    else
+      @q = User.ransack(base_q)
     end
-    flash[:notice] = "#{users.count}人に対して順次IVR発信を開始しました。"
-  else
-    flash[:alert] = "対象ユーザーが見つかりません。"
-  end
 
-  redirect_back(fallback_location: users_path)
-end
+    users = @q.result
+
+    if users.present?
+      users.each_with_index do |user, index|
+        # 10秒おきに順次実行。Job側での正規表現修正も忘れずに行ってください。
+        CallUserJob.set(wait: (index * 10).seconds).perform_later(user.id)
+      end
+      flash[:notice] = "#{users.count}人に対して順次IVR発信を開始しました。"
+    else
+      flash[:alert] = "対象ユーザーが見つかりません。"
+    end
+
+    redirect_back(fallback_location: users_path)
+  end
 
   def food_1 
     @current_step = 1
