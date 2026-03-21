@@ -71,6 +71,7 @@ br/
             strong.label Required
           td.arrow_box
             | じゅうしょ[Address]
+            .red ※correct address
           td
             = f.text_field :address, placeholder:"東京都港区芝5-27-3 MBC・Aー9" 
        - if admin_signed_in?
@@ -386,20 +387,19 @@ br/
           | ざいりゅうきょかしょう（うら）[Residence permit[back]]
         td
           = f.file_field :image_4
-      tr
+      - if @user.hope_work = "Food"
+       tr
         td
           strong.label Required
         td.arrow_box
-          | ぎんこうかーど（おもて）[Bank card[front]]
+          | (Car) Photo of a vehicle with a black license plate
+          br
+          | (Scooter) Photo of a scooter including its license plate
+          br/
+          | (Bicycle) Photo of a bicycle with an anti-theft license plate
         td
           = f.file_field :image_5
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ぎんこうかーど（うら）[Bank card[back]]
-        td
-          = f.file_field :image_6
+
       tr.center
           td[colspan="3"]
             = f.submit 'Register'

@@ -471,10 +471,7 @@
           = @user.contract_date
 
 .actions_container style="text-align: center; margin-bottom: 30px;"
-  - if @user.hope_work = "Food"
-   = link_to "Proceed a food flow", food_1_user_path(@user), class: "btn btn-primary"
-  - else  
-   = link_to "Proceed to user", info_user_path(@user), class: "btn btn-primary"
+  = link_to "Proceed to user", info_user_path(@user), class: "btn btn-primary"
   = link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "本当にログアウトしますか？" }, class: "btn btn-primary"
   - if admin_signed_in?
    = link_to "削除する", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
