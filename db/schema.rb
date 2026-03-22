@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_12_18_114708) do
+ActiveRecord::Schema.define(version: 2026_03_22_134613) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -307,6 +307,7 @@ ActiveRecord::Schema.define(version: 2025_12_18_114708) do
     t.string "bank_number"
     t.string "bank_name"
     t.string "status"
+    t.datetime "next_call_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

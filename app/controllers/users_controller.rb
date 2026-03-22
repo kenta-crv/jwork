@@ -68,8 +68,7 @@ def index
              .order(updated_at: :desc)
              .paginate(page: params[:page], per_page: 150)
 
-  @status_interviewed_driver  = base_q["status_eq"] == "interviewed" && base_q["hope_work_eq"] == "Driver"
-  @status_interviewed_cleaner = base_q["status_eq"] == "interviewed" && base_q["hope_work_eq"] == "Cleaner"
+  @status_interviewed  = base_q["status_eq"] == "interviewed"
   @status_sms_partial = base_q["status_eq"] == "sms"
 end
 
@@ -253,7 +252,7 @@ def send_sms
       :emergency_relationships, :emergency_tel, :agree, :check_1, :check_2, :check_3, :check_4,
       :check_5, :check_6, :check_7, :deliver, :day_off, :contract_date, :account_name,
       :image_1, :image_2, :image_3, :image_4, :image_5, :image_6, :bank, :branch, :bank_number,
-      :bank_name, :status
+      :bank_name, :status, :next_call_at
     )
   end
 end

@@ -8,7 +8,10 @@ br/
     li = message
   - if admin_signed_in?
    table.company
-     tbody
+    tbody
+    col[width="10%"]
+    col[width="40%"]
+    col[width="50%"]
        tr
           td
             strong.label Required
@@ -30,6 +33,10 @@ br/
   - @user.errors.full_messages.each do |message|
     li = message
   table.company
+    tbody
+    col[width="10%"]
+    col[width="40%"]
+    col[width="50%"]
      tbody
        tr
           td
@@ -139,157 +146,36 @@ br/
           td
             = f.text_field :speak_japanese
         tr
-            td
-              strong.label Required
-            td.arrow_box
-              | 備考
-            td
-              = f.text_area :remarks
-        tr
           td
             strong.label Required
           td.arrow_box
             | LINE Account
           td
              = f.text_field :account_name
-        /tr
+        tr
           td
             strong.label Required
           td.arrow_box
-            | 現在のお仕事
+            | 次回確認日
           td
-            = f.text_field :work_now
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | あなたの国籍はどこですか？ [what_is_your_nationality?]
-          td
-            = f.text_field :nationality, placeholder:"JAPAN"
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | あなたがもっているすべてのしかくをかいてください [pletell_us_all_the_qualifications_you_have]
-          td
-            = f.text_field :qualifications  
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | あなたのしょくしゅをおしえてください？[what_industry_are[were]_you_in?]
-          td
-            = f.text_field :past_year
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 電話を出れる時間を教えてください。[Could you tell me the time you will come out.]
-          td
-            = f.select(:call_available, [\
-             ["いつでも可能[Everytime is fine]",""],\
-             ["10:00~12:00",""],\
-             ["12:00~13:00",""],\
-             ["13:00~17:00",""],\
-             ["17:00~20:00",""],\
-            ], include_blank: "選択してください[Please select]")  
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 運転免許
-          td
-             = f.select(:drivers_lisence, [\
-              ["なし","なし"],\
-              ["あり","あり"],\
-             ], include_blank: "選択してください")
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 軽貨物経験
-          td
-             = f.select(:experience, [\
-              ["なし","なし"],\
-              ["あり","あり"],\
-             ], include_blank: "選択してください")
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | ビザの種類
-          td
-             = f.select(:which_visa, [\
-              ["会話が難しい","会話が難しい"],\
-              ["会話は可能","会話は可能"],\
-              ["ある程度流暢","ある程度流暢"],\
-              ["流暢","流暢"],\
-             ], include_blank: "選択してください")
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 日本語レベル
-          td
-             = f.select(:japanese_level, [\
-              ["会話が難しい","会話が難しい"],\
-              ["会話は可能","会話は可能"],\
-              ["ある程度流暢","ある程度流暢"],\
-              ["流暢","流暢"],\
-             ], include_blank: "選択してください")
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 日本在住期間
-          td
-             = f.select(:visiting_in_japan, [\
-              ["来たばかり","来たばかり"],\
-              ["1~5年","1~5年"],\
-              ["6~14年","6〜14年"],\
-              ["15年以上","15年以上"],\
-             ], include_blank: "選択してください")
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 漢字レベル
-          td
-             = f.select(:kanzi, [\
-              ["ネイティブ","ネイティブ"],\
-              ["ある程度読める","ある程度読める"],\
-              ["簡単な漢字なら読める","簡単な漢字なら読める"],\
-              ["ある程度イメージで把握","ある程度イメージで把握"],\
-              ["全く読めない","全く読めない"],\
-             ], include_blank: "選択してください")
-        /tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 勤務開始希望
-          td
-            = f.text_field :start
-        /tr
+             = f.date_field :next_call_at
+        tr
             td
               strong.label Required
             td.arrow_box
-              | オススメ度
+              | 備考
             td
-             = f.select(:recommend, [\
-              ["100","100"],\
-              ["90","90"],\
-              ["80","80"],\
-              ["70","70"],\
-              ["0","0"],\
-             ], include_blank: "選択してください")
+              = f.text_area :remarks, rows: 10
+
+
   - if admin_signed_in?
    h2.headline Work Information
 
    table.company
-    colgroup
-      col width="20%"
-      col width="20%"
-      col width="60%"
+    tbody
+    col[width="10%"]
+    col[width="40%"]
+    col[width="50%"]
     tbody
       tr
         td
@@ -308,6 +194,9 @@ br/
 
   table.company
     tbody
+    col[width="10%"]
+    col[width="40%"]
+    col[width="50%"]
       tr
         td
           strong.label Required

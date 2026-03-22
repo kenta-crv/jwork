@@ -1,0 +1,70 @@
+h3 Interviewed ユーザー表示
+
+/ 横スクロールを強制的に有効にするラッパー
+div style="overflow-x: auto; -webkit-overflow-scrolling: touch;"
+  / min-width を設定することで、画面が狭くなった時にテーブルが潰れずスクロールが発生します
+  table.list style="width: 90%; min-width: 1250px; table-layout: fixed; border-collapse: collapse;"
+    thead
+      tr
+        th style="width: 100px;" User_name
+        th style="width: 110px;" Phone_number
+        th style="width: 80px;" Hope_Work
+        th style="width: 80px;" Next_Call
+        th style="width: 180px;" Remarks 
+        th style="width: 130px;" SMS
+        th style="width: 150px;"
+          |Register_date
+          br/
+          |(Updated_at)
+        / アイコン6つ分が余裕を持って収まる幅に変更
+        th style="width: 160px;" Action
+    tbody
+      - @users.each do |user|
+        tr
+          td style="word-break: break-all;" = link_to user.name, user_path(user)
+          td= user.tel
+          td= user.hope_work
+          td= user.next_call_at
+          td style="word-break: break-all;" = user.remarks
+          td
+            - status_options = User.statuses.keys.map do |key|
+              - display_name = key.humanize
+              - if key == "sms" || key == "line"
+                - display_name = key.upcase
+              - [display_name, key]
+
+            = select_tag :status, 
+                         options_for_select(status_options, user.status),
+                         class: 'form-control update-status',
+                         data: { user_id: user.id },
+                         style: 'width: 120px;'
+          td
+            = user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+            br/
+            |(
+            = user.updated_at ? user.updated_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+            |)
+          td
+            .action-flex
+              span.copy-btn data-clipboard-text=user.interview_request_text
+                = image_tag("icon_information.png", width: 20)
+              span.copy-btn data-clipboard-text=user.contract_request_text
+                = image_tag("icon_copy.png", width: 20)
+
+              - if user.account_name.present?
+                = link_to user.account_name, target: "_blank" do
+                  = image_tag("icon_line.png", width: 20)
+
+              = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
+                = image_tag("icon_sms.png", width: 20)
+
+              = link_to call_ivr_user_path(user), method: :post, data: { confirm: "本当にIVRを発信しますか？" } do
+                = image_tag("icon_phone.png", width: 20)
+
+              = link_to edit_user_path(user) do
+                = image_tag("icon_edit.png", width: 20)
+
+              = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
+                = image_tag("icon_trash.png", width: 20)
+
+= paginate @users

@@ -239,246 +239,170 @@ footer {
 
 
 
-/* Indexページ（.table-scroll配下）のテーブルのみに適用 */
-.table-scroll {
-  width: 100%;
-  overflow-x: auto;            /* 横スクロールを有効化 */
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Index専用：この外枠の幅(90%)を超えたらスクロールさせる */
+/* =============================================
+   1. Indexページ（.table-scroll配下）
+   横スクロールが必要なテーブルの設定
+   ============================================= */
 .table-scroll {
   width: 90% !important;
   margin: 0 auto !important;
-  overflow-x: auto !important; /* 絶対にスクロールを許可 */
-  display: block;              /* tableの性質を打ち消し、独立した箱にする */
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  display: block; /* 親要素としてのブロック */
 }
 
-/* テーブル本体 */
 .table-scroll table.company {
-  width: auto;                 /* 100%にせず、中身のサイズに任せる */
-  min-width: 100%;             /* ただし、中身が少ない時は90%の幅いっぱいに広げる */
+  width: auto;
+  min-width: 100%;
   text-align: center;
   border-spacing: 0px 10px;
-  table-layout: auto;          /* 中身の文字幅を優先する設定 */
+  /* colを有効にするため、ここでは display: table (初期値) を維持 */
+  table-layout: fixed; 
 }
 
 .table-scroll table.company th,
 .table-scroll table.company td {
-  white-space: nowrap !important; /* 絶対に改行させない（これで横に突き抜けさせる） */
+  white-space: nowrap !important;
   font-size: 1.4rem;
   font-weight: bold;
   text-align: center;
-  padding: 10px 15px;             /* セル間に適度な余白 */
+  padding: 10px 15px;
 }
 
-/* スマホ対応：既存の縦並び（block化）を強制解除 */
-@media screen and (max-width: 768px) {
-  .table-scroll {
-    width: 95% !important; /* スマホは少し広く */
-  }
-
-  .table-scroll table.company {
-    display: table !important; /* 縦並びを阻止 */
-  }
-
-  .table-scroll table.company tr {
-    display: table-row !important; /* 縦並びを阻止 */
-  }
-
-  .table-scroll table.company th,
-  .table-scroll table.company td {
-    display: table-cell !important; /* 縦並びを阻止 */
-    font-size: 1.2rem;
-    white-space: nowrap !important;
-  }
-}/*テーブルに関する情報*/
-          /*テーブルに関する情報*/
-/* テーブル共通 */
+/* =============================================
+   2. テーブル共通（詳細画面など）
+   PC版：col[width] を有効にするための設定
+   ============================================= */
 table.company {
   width: 90%;
   margin: 0 auto;
   border-collapse: separate;
-  border-spacing: 0px 10px; /* 少し狭める */
-  font-size: 1.5rem; /* vwを廃止して安定化 */
-
-  th, td {
-    padding: 10px;
-    word-break: break-word; /* 長文でセル内改行を許可 */
-    vertical-align: middle; /* 上寄り→中央寄せ */
-  }
-
-  th {
-    background: $main_color;
-    color: #fff;
-    font-weight: normal;
-    font-size: 1.5rem;
-    text-align: left;
-  }
-
-  td {
-    background: #f4f4f4;
-  }
-
-  /* 入力フィールドを100%幅にする */
-  td input[type="text"],
-  td input[type="email"],
-  td input[type="password"],
-  td select {
-    width: 100%;
-    font-size: 1.5rem;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
+  border-spacing: 0px 10px;
+  font-size: 1.5rem;
+  /* 重要：display: table (デフォルト) である必要がある */
+  table-layout: fixed; 
 }
 
-/* スマホ対応 */
+table.company th, 
+table.company td {
+  padding: 10px;
+  word-break: break-word;
+  vertical-align: middle;
+}
+
+table.company th {
+  background: $main_color;
+  color: #fff;
+  font-weight: normal;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+table.company td {
+  background: #f4f4f4;
+}
+
+/* 入力フィールド */
+td input[type="text"],
+td input[type="email"],
+td input[type="password"],
+td select {
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* =============================================
+   3. スマートフォン対応（768px以下）
+   スマホの時だけ block にして col を無効化する
+   ============================================= */
 @media screen and (max-width: 768px) {
+  /* スマホでは col の 10%/20% 指定が邪魔になるので消す */
+  table.company col {
+    display: none !important;
+  }
+
   table.company {
-    width: 100%;
-    border-spacing: 0 8px;
-    font-size: 1.2rem; /* vwでなく固定値に変更して安定表示 */
+    width: 100% !important;
+    display: block !important; /* ここで初めて block にする */
   }
 
-  th, td {
-    display: block; /* スマホでは縦並びに */
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  tr {
-    display: block;
-    margin-bottom: 12px;
-  }
-
-  th {
-    border-radius: 5px 5px 0 0;
-  }
-
-  td {
-    border-radius: 0 0 5px 5px;
-  }
-
-  td input[type="text"],
-  td input[type="email"],
-  td input[type="password"],
-  td select {
-    font-size: 1.3rem;
-    padding: 10px;
-  }
-}
-
-
-
-/* firefox */
-@-moz-document url-prefix() {
-  table.company th::after {
-     float: right;
-     padding: 0;
-     left: 30px;
-     top: 10px;
-     content: " ";
-     height: 0;
-     width: 0;
-     position: relative;
-     pointer-events: none;
-     border: 10px solid transparent;
-     border-left: $main_color 10px solid;
-     margin-top: -10px;
-     }
-}
-input {
-  width:90%;
-}
-textarea {
-  width:90%;
-  line-height: 1.5em;
-}
-
-
-.price {
-  color:red;
-  font-size:2.5vw;
-  font-weight:bold;
-}
-
-
-@media screen and (max-width: 767px) {
-  .label-cell,
-  .arrow-box-cell {
-    display: inline-block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  th.arrow-box-cell {
-    font-size: 5vw !important;
-    text-align: center !important;
+  table.company tbody,
+  table.company tr {
     display: block !important;
     width: 100% !important;
   }
 
-  .label-cell {
-    background-color: #f0f0f0 !important; /* 任意の背景色に変更 */
+  table.company th, 
+  table.company td {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+    border-radius: 5px;
+    margin-bottom: 2px;
   }
 
-  .responsive-cell {
-    display: block;
-    width: 100%;
-    background-color: #e0e0e0 !important; /* 任意の背景色に変更 */
+  /* .table-scroll 配下だけはスマホでも横スクロール(table維持)にする場合 */
+  .table-scroll table.company {
+    display: table !important;
   }
-
-  .input-container {
-    display: block;
-    width: 100%;
+  .table-scroll table.company tr {
+    display: table-row !important;
+  }
+  .table-scroll table.company td {
+    display: table-cell !important;
+    width: auto !important;
   }
 }
 
-.pc-image {
-  display: none; // PC向けの画像を初めに非表示にします
+/* =============================================
+   4. その他共通設定
+   ============================================= */
+input, textarea {
+  width: 90%;
 }
+
+textarea {
+  line-height: 1.5em;
+}
+
+.price {
+  color: red;
+  font-size: 2.5vw;
+  font-weight: bold;
+}
+
+/* Firefox用装飾 */
+@-moz-document url-prefix() {
+  table.company th::after {
+    float: right;
+    padding: 0;
+    left: 30px;
+    top: 10px;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: relative;
+    pointer-events: none;
+    border: 10px solid transparent;
+    border-left: $main_color 10px solid;
+    margin-top: -10px;
+  }
+}
+
+/* 画像レスポンシブ */
+.pc-image { display: block; width: 95%; }
+.mobile-image { display: none; }
 
 @media only screen and (max-width: 599px) {
-  .pc-image {
-    display: none; // モバイルビューではPC向けの画像を非表示にします
-    width: 95%;
-  }
-
-  .mobile-image {
-    display: block; // モバイルビューではモバイル向けの画像を表示します
-    width: 100%;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .pc-image {
-    display: block; // PCビューではPC向けの画像を表示します
-    width: 95%;
-  }
-
-  .mobile-image {
-    display: none; // PCビューではモバイル向けの画像を非表示にします
-  }
+  .pc-image { display: none; }
+  .mobile-image { display: block; width: 100%; }
 }
 
 
-/* firefox */
-@-moz-document url-prefix() {
-    table.company th::after {
-       float: right;
-       padding: 0;
-       left: 30px;
-       top: 10px;
-       content: " ";
-       height: 0;
-       width: 0;
-       position: relative;
-       pointer-events: none;
-       border: 10px solid transparent;
-       border-left: $main_color 10px solid;
-       margin-top: -10px;
-       }
-}
   input {
     width:90%;
   }
@@ -1377,7 +1301,7 @@ dd {
 }
 
 
-/*テーブル共通*/
+/* --- テーブル共通 (元のUI・デザインを完全維持) --- */
 table.list {
   width: 90%;
   margin: 0 auto;
@@ -1397,13 +1321,62 @@ table.list {
      color: #fff;
      font-weight: normal;
      font-size: 1.0vw;
-     }
+  }
   td {
      background: #f4f4f4;
-     }
-
+  }
 }
 
+/* --- スマホ・レスポンシブ対応 --- */
+/* PCのUI（1.0vwやcol幅）を壊さないよう、スマホ時のみ最小幅を確保して横スクロールさせます */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;            /* 横スクロールを有効化 */
+  -webkit-overflow-scrolling: touch;
+}
+
+@media screen and (max-width: 768px) {
+  /* 検索フォーム：テーブル構造を解除して縦並びに（入力不能回避のため） */
+  form table.list,
+  form table.list thead,
+  form table.list tr,
+  form table.list td {
+    display: block !important;
+    width: 100% !important;
+  }
+  
+  form table.list td {
+    padding: 5px 0 !important;
+  }
+
+  /* ユーザー一覧：PCのUI(比率)を維持したまま、潰れないよう最小幅を固定 */
+  .table-responsive table.list {
+    table-layout: fixed !important; /* Slim側のcol width指定を強制適用 */
+    min-width: 1000px;             /* スマホで14%幅が極小になるのを防ぐ */
+    font-size: 12px;                /* スマホで1.0vwだと小さすぎるため固定値へ */
+  }
+  
+  .table-responsive table.list th {
+    font-size: 12px;
+  }
+}
+
+/* --- その他既存要素 (現状維持) --- */
+.bulk-action-area {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #fff5f5;
+  border: 2px solid #ffcccc;
+  border-radius: 5px;
+}
+
+.action-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
 
 .set-devise {
   padding-top:20px;

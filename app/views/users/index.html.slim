@@ -11,6 +11,9 @@
           = f.label :tel_cont, "電話番号 [Tel]"
           = f.text_field :tel_cont, class: "form-control", placeholder: "電話番号を入力 [Enter tel]"
         td
+          = f.label :account_name_cont, "LINEアカウント"
+          = f.text_field :account_name_cont, class: "form-control", placeholder: "LINEアカウントを入力"
+        td
           = f.label :email_cont, "電話番号 [Mail]"
           = f.text_field :email_cont, class: "form-control", placeholder: "メールアドレスを入力 [Enter Mail]"
         td
@@ -41,12 +44,10 @@
 br/
 br/
 
-/ 修正箇所: params[:q] の有無に関わらず、ユーザーが存在すればボタンを出す（誤操作防止のため一応 present? は維持）
 - if @users.present?
   - total_count = @users.respond_to?(:total_count) ? @users.total_count : @users.count
   .bulk-action-area style="margin-bottom: 20px; padding: 15px; background: #fff5f5; border: 2px solid #ffcccc; border-radius: 5px;"
     strong 対象人数: #{total_count}名（全ページ合計）
-    / params[:q] が nil の場合でもエラーにならないようボム記法 (&.) を使用
     = link_to "この条件に合う全 #{total_count} 名にIVRを一括発信", 
               bulk_call_ivr_users_path(q: params[:q]&.to_unsafe_h), 
               method: :post, 
@@ -54,20 +55,28 @@ br/
               class: "btn btn-danger", 
               style: "margin-left: 15px;"
 
-- if @status_interviewed_driver
-  = render partial: "status_interview_driver", locals: { users: @users }
-- elsif @status_interviewed_cleaner
-  = render partial: "status_interview_cleaner", locals: { users: @users }
+- if @status_interviewed
+  = render partial: "status_interview", locals: { users: @users }
 - elsif @status_sms_partial
   = render partial: "status_sms", locals: { users: @users }
 
 - else
+.table-responsive
   table.list
+    colgroup
+      col style="width: 14%;"
+      col style="width: 14%;"
+      col style="width: 14%;"
+      col style="width: 14%;"
+      col style="width: 14%;"
+      col style="width: 14%;"
+      col style="width: 16%;"
     thead
       tr
         th User_name
         th Phone_number
         th Status
+        th account_name
         th select
         th Register_date(Updated_at)
         th
@@ -76,6 +85,7 @@ br/
         tr
           td= link_to user.name, user_path(user)
           td= user.tel
+
           td
             - status_options = User.statuses.keys.map do |key|
               - display_name = key.humanize
@@ -88,27 +98,64 @@ br/
                          class: 'form-control update-status',
                          data: { user_id: user.id },
                          style: 'width: 120px;'
+
+          td
+            = text_field_tag :account_name, user.account_name,
+              class: "form-control account-name-input",
+              data: { user_id: user.id },
+              placeholder: "LINE ID入力",
+              style: "width: 150px;"
+
           td= user&.hope_work
+
           td
             = user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
             br/
             |(
             = user.updated_at ? user.updated_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
             |)
+
           td
-            span.copy-btn data-clipboard-text=user.interview_request_text
-              = image_tag("icon_information.png", width: 20)
-            span.copy-btn data-clipboard-text=user.contract_request_text
-              = image_tag("icon_copy.png", width: 20)
-            = link_to user.account_name, target: "_blank" do
-              = image_tag("icon_line.png", width: 20)
-            = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
-              = image_tag("icon_sms.png", width: 20)
-            = link_to call_ivr_user_path(user), method: :post, data: { confirm: "本当にIVRを発信しますか？" } do
-              = image_tag("icon_phone.png", width: 20)
-            = link_to edit_user_path(user) do
-              = image_tag("icon_edit.png", width: 20)
-            = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
-              = image_tag("icon_trash.png", width: 20)
+            .action-flex
+              span.copy-btn data-clipboard-text=user.interview_request_text
+                = image_tag("icon_information.png", width: 20)
+              span.copy-btn data-clipboard-text=user.contract_request_text
+                = image_tag("icon_copy.png", width: 20)
+
+              - if user.account_name.present?
+                = link_to user.account_name, target: "_blank" do
+                  = image_tag("icon_line.png", width: 20)
+
+              = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
+                = image_tag("icon_sms.png", width: 20)
+
+              = link_to call_ivr_user_path(user), method: :post, data: { confirm: "本当にIVRを発信しますか？" } do
+                = image_tag("icon_phone.png", width: 20)
+
+              = link_to edit_user_path(user) do
+                = image_tag("icon_edit.png", width: 20)
+
+              = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
+                = image_tag("icon_trash.png", width: 20)
 
 = paginate @users
+script
+  | document.addEventListener("DOMContentLoaded", function() {
+  |   document.querySelectorAll(".account-name-input").forEach(function(input) {
+  |     input.addEventListener("blur", function() {
+  |       const userId = this.dataset.userId;
+  |       const value = this.value;
+  |
+  |       fetch(`/users/${userId}`, {
+  |         method: "PATCH",
+  |         headers: {
+  |           "Content-Type": "application/json",
+  |           "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+  |         },
+  |         body: JSON.stringify({
+  |           user: { account_name: value }
+  |         })
+  |       });
+  |     });
+  |   });
+  | });
