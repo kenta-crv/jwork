@@ -13,6 +13,7 @@ module Bookkeeping
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
     config.time_zone = 'Tokyo'
     config.active_job.queue_adapter = :async
+    config.i18n.default_locale = :ja
     
     config.autoload_paths += %W(#{config.root}/app/workers)
     config.eager_load_paths += %W(#{config.root}/app/workers) # 追加推奨

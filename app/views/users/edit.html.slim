@@ -18,15 +18,7 @@ br/
           td.arrow_box
             | ステータス
           td
-            = f.select(:status, [\
-              ["SMS", "sms"],\
-              ["LINE", "line"],\
-              ["Recruitment", "recruitment"],\
-              ["Interviewed", "interviewed"],\
-              ["Interview NG", "interview_ng"],\
-              ["Not Join", "not_join"],\
-              ["NG", "ng"]\
-              ], include_blank: "選択してください[Please select]")
+            = f.select :status, User.statuses_i18n.invert, { include_blank: "選択してください[Please select]" }
 
  .tops-wrapper
   h2.headline 求職者入力

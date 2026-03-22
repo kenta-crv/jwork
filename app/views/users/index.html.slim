@@ -1,4 +1,4 @@
-- set_meta_tags  title: 'ユーザー一覧'
+- set_meta_tags title: 'ユーザー一覧'
 
 = search_form_for @q, url: users_path, method: :get do |f|
   table.list
@@ -18,15 +18,8 @@
           = f.text_field :email_cont, class: "form-control", placeholder: "メールアドレスを入力 [Enter Mail]"
         td
           = f.label :status_eq, "ステータス"
-          = f.select :status_eq, [\
-              ["SMS", "sms"],\
-              ["LINE", "line"],\
-              ["Recruitment", "recruitment"],\
-              ["Interviewed", "interviewed"],\
-              ["Interview NG", "interview_ng"],\
-              ["Not Join", "not_join"],\
-              ["NG", "ng"]\
-          ], { include_blank: "選択してください[Please select]" }, class: "form-control"
+          / User.statuses_i18n を使うことで、ja.yml の日本語が自動で反映されます
+          = f.select :status_eq, User.statuses_i18n.invert, { include_blank: "選択してください[Please select]" }, class: "form-control"
         td
           = f.label :hope_work_eq, "業種"
           = f.select :hope_work_eq, [\
@@ -61,100 +54,111 @@ br/
   = render partial: "status_sms", locals: { users: @users }
 
 - else
-.table-responsive
-  table.list
-    colgroup
-      col style="width: 14%;"
-      col style="width: 14%;"
-      col style="width: 14%;"
-      col style="width: 14%;"
-      col style="width: 14%;"
-      col style="width: 14%;"
-      col style="width: 16%;"
-    thead
-      tr
-        th User_name
-        th Phone_number
-        th Status
-        th account_name
-        th select
-        th Register_date(Updated_at)
-        th
-    tbody
-      - @users.each do |user|
+  .table-responsive
+    table.list
+      colgroup
+        col style="width: 14%;"
+        col style="width: 14%;"
+        col style="width: 14%;"
+        col style="width: 14%;"
+        col style="width: 14%;"
+        col style="width: 14%;"
+        col style="width: 16%;"
+      thead
         tr
-          td= link_to user.name, user_path(user)
-          td= user.tel
+          th User_name
+          th Phone_number
+          th Status
+          th account_name
+          th select
+          th Register_date(Updated_at)
+          th
+      tbody
+        - @users.each do |user|
+          tr
+            td= link_to user.name, user_path(user)
+            td= user.tel
 
-          td
-            - status_options = User.statuses.keys.map do |key|
-              - display_name = key.humanize
-              - if key == "sms" || key == "line"
-                - display_name = key.upcase
-              - [display_name, key]
+            td
+              / options_for_select に User.statuses_i18n.invert を渡すことで
+              / 手動の map ループを削除し、日本語表示を適用しています
+              = select_tag :status, 
+                           options_for_select(User.statuses_i18n.invert, user.status),
+                           class: 'form-control update-status',
+                           data: { user_id: user.id },
+                           style: 'width: 120px;'
 
-            = select_tag :status, 
-                         options_for_select(status_options, user.status),
-                         class: 'form-control update-status',
-                         data: { user_id: user.id },
-                         style: 'width: 120px;'
+            td
+              = text_field_tag :account_name, user.account_name,
+                class: "form-control account-name-input",
+                data: { user_id: user.id },
+                placeholder: "LINE ID入力",
+                style: "width: 150px;"
 
-          td
-            = text_field_tag :account_name, user.account_name,
-              class: "form-control account-name-input",
-              data: { user_id: user.id },
-              placeholder: "LINE ID入力",
-              style: "width: 150px;"
+            td= user&.hope_work
 
-          td= user&.hope_work
+            td
+              = user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+              br/
+              |(
+              = user.updated_at ? user.updated_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+              |)
 
-          td
-            = user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
-            br/
-            |(
-            = user.updated_at ? user.updated_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
-            |)
+            td
+              .action-flex
+                span.copy-btn data-clipboard-text=user.interview_request_text
+                  = image_tag("icon_information.png", width: 20)
+                span.copy-btn data-clipboard-text=user.contract_request_text
+                  = image_tag("icon_copy.png", width: 20)
 
-          td
-            .action-flex
-              span.copy-btn data-clipboard-text=user.interview_request_text
-                = image_tag("icon_information.png", width: 20)
-              span.copy-btn data-clipboard-text=user.contract_request_text
-                = image_tag("icon_copy.png", width: 20)
+                - if user.account_name.present?
+                  = link_to user.account_name, target: "_blank" do
+                    = image_tag("icon_line.png", width: 20)
 
-              - if user.account_name.present?
-                = link_to user.account_name, target: "_blank" do
-                  = image_tag("icon_line.png", width: 20)
+                = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
+                  = image_tag("icon_sms.png", width: 20)
 
-              = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
-                = image_tag("icon_sms.png", width: 20)
+                = link_to call_ivr_user_path(user), method: :post, data: { confirm: "本当にIVRを発信しますか？" } do
+                  = image_tag("icon_phone.png", width: 20)
 
-              = link_to call_ivr_user_path(user), method: :post, data: { confirm: "本当にIVRを発信しますか？" } do
-                = image_tag("icon_phone.png", width: 20)
+                = link_to edit_user_path(user) do
+                  = image_tag("icon_edit.png", width: 20)
 
-              = link_to edit_user_path(user) do
-                = image_tag("icon_edit.png", width: 20)
-
-              = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
-                = image_tag("icon_trash.png", width: 20)
+                = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
+                  = image_tag("icon_trash.png", width: 20)
 
 = paginate @users
+
 script
   | document.addEventListener("DOMContentLoaded", function() {
-  |   document.querySelectorAll(".account-name-input").forEach(function(input) {
-  |     input.addEventListener("blur", function() {
+  |   // ステータス更新用の処理（update-status クラスを持つ select にイベント付与）
+  |   document.querySelectorAll(".update-status").forEach(function(select) {
+  |     select.addEventListener("change", function() {
   |       const userId = this.dataset.userId;
   |       const value = this.value;
-  |
   |       fetch(`/users/${userId}`, {
   |         method: "PATCH",
   |         headers: {
   |           "Content-Type": "application/json",
   |           "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
   |         },
-  |         body: JSON.stringify({
-  |           user: { account_name: value }
-  |         })
+  |         body: JSON.stringify({ user: { status: value } })
+  |       });
+  |     });
+  |   });
+  |
+  |   // LINEアカウント名の更新処理
+  |   document.querySelectorAll(".account-name-input").forEach(function(input) {
+  |     input.addEventListener("blur", function() {
+  |       const userId = this.dataset.userId;
+  |       const value = this.value;
+  |       fetch(`/users/${userId}`, {
+  |         method: "PATCH",
+  |         headers: {
+  |           "Content-Type": "application/json",
+  |           "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+  |         },
+  |         body: JSON.stringify({ user: { account_name: value } })
   |       });
   |     });
   |   });

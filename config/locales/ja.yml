@@ -1,0 +1,16 @@
+ja:
+  enums:
+    user:
+      status:
+        sms: "SMS"
+        line: "LINE"
+        interviewed: "面接検討中"
+        final_interview_adjustment: "最終面接調整中"
+        contract_wait: "契約待ち"
+        started_operation: "稼働開始"
+        interview_ng: "面接不合格"
+        not_join: "面接不参加"
+        ng: "NG"
+        invited_line: "LINE招待済"
+        already_decided_ng: "他社決定（NG）"
+        recruitment: "（旧）採用決定"

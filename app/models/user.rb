@@ -22,14 +22,21 @@ class User < ApplicationRecord
   enum status: { 
     sms: "sms",
     line: "line",
-    recruitment: "recruitment", 
     interviewed: "interviewed", 
+    final_interview_adjustment: "final_interview_adjustment",
+    contract_wait: "contract_wait",
+    started_operation: "started_operation",
     interview_ng: "interview_ng", 
     not_join: "not_join",
     ng: "ng",
     invited_line: "invited_line",
-    already_decided_ng: "already_decided_ng"
+    already_decided_ng: "already_decided_ng",
+    recruitment: "recruitment", 
   }
+
+  def status_label
+    I18n.t("activerecord.attributes.user.status.#{status}")
+  end
 
   def interview_request_text
     <<~TEXT
