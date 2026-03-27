@@ -1,37 +1,37 @@
-meta[charset="uft-8"]
-meta[http-equiv="X^UA-Compatible" content="IE=edge"]
+meta[charset="utf-8"]
+meta[http-equiv="X-UA-Compatible" content="IE=edge"]
 meta[name="google-site-verification" content="sNFIkUT2BafOhtUULy_tHZ7G_4X0oho8joY8ekeNiOo"]
-meta[name="viewport" content="width=device-width, initial-scale=1,0, initial-scale=1, shrink-to-fit=no"]
+meta[name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"]
+
 = csrf_meta_tags
+
 = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-= stylesheet_link_tag rel="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'
+
 script[src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"]
 = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-
 
 == display_meta_tags(default_meta_tags)
 = favicon_link_tag('favicon.ico')
 
 
-script[async src="https://www.googletagmanager.com/gtag/js?id=AW-10998015402"]
-script
-  |  window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-10998015402');
-script
-  |  gtag('event', 'conversion', {'send_to': 'AW-10998015402/TzzVCIjG_qQDEIzyn5cC'});
-
-
 / Google Tag Manager
 script
-  | (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  | new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  | j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  | 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  | })(window,document,'script','dataLayer','GTM-NFRCPZ5F');
+  |
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NFRCPZ5F');
 / End Google Tag Manager
+
+
 / Google Tag Manager (noscript)
 noscript
   iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFRCPZ5F" height="0" width="0" style="display:none;visibility:hidden"
 / End Google Tag Manager (noscript)
+
+
 / Meta Pixel Code
 script
   |
@@ -48,12 +48,3 @@ script
 noscript
   img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=609043125437314&ev=PageView&noscript=1"
 / End Meta Pixel Code
-/ Google tag (gtag.js)
-script async=true src="https://www.googletagmanager.com/gtag/js?id=G-T5M1QP6DV4"
-script
-  |
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-T5M1QP6DV4');
-
