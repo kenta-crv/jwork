@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  root to: 'top#index' # クライアント側トップ
+  #root to: 'top#index' # クライアント側トップ
   get "top/recruit" => 'top#recruit'  # クライアント側トップ
   get "top/recruit_jp" => 'top#recruit_jp'  # クライアント側トップ
   get "top/recruit_en" => 'top#recruit_en'  # クライアント側トップ
@@ -20,15 +20,9 @@ Rails.application.routes.draw do
 
   get "top/policy" => 'top#policy'  
 
-  get "/appointer" => 'top#appointer' # ユーザー側トップ
   get "/database" => 'top#database' # ユーザー側トップ
-  get "/zero" => 'top#zero' # ユーザー側トップ
-  get "/free" => 'top#free' # ユーザー側トップ
-  get "/restaurant" => 'top#restaurant' # ユーザー側トップ
   get '/redirect', to: 'top#redirect'
   get 'users/thanks', to: 'users#thanks'
-  get 'documents', to: 'top#documents'
-  get 'databases', to: 'top#databases'
   get 'lp', to: 'top#lp'
   resources :access_logs, only: [:index]
    

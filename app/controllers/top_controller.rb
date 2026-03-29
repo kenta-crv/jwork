@@ -37,57 +37,12 @@ class TopController < ApplicationController
   def lp
   end
 
-  def zero 
-  end
-
-  def free
-  end
-
   def line
   end
 
   def information
   end
 
-  def restaurant
-  end
-
-  def appointer
-  end
-
-  def documents
-    if params[:from].present?
-      AccessLog.create!(
-        source: params[:from],
-        path: request.path,
-        ip: request.remote_ip,
-        accessed_at: Time.current
-      )
-    end
-    pdf_path = Rails.root.join('public', 'documents.pdf')
-    if File.exist?(pdf_path)
-      send_file pdf_path, filename: 'documents.pdf', type: 'application/pdf', disposition: 'attachment'
-    else
-      render plain: 'ファイルが見つかりません', status: 404
-    end
-  end  
-
-  def databases
-    if params[:from].present?
-      AccessLog.create!(
-        source: params[:from],
-        path: request.path,
-        ip: request.remote_ip,
-        accessed_at: Time.current
-      )
-    end
-    pdf_path = Rails.root.join('public', 'databases.pdf')
-    if File.exist?(pdf_path)
-      send_file pdf_path, filename: 'databases.pdf', type: 'application/pdf', disposition: 'attachment'
-    else
-      render plain: 'ファイルが見つかりません', status: 404
-    end
-  end  
 =begin
    def redirect
     line_url = "https://lin.ee/yVI3ClY"
