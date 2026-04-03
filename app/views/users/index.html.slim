@@ -37,13 +37,10 @@
 br/
 br/
 
-= button_to "選択ユーザーにSMS送信",
-            bulk_sms_users_path,
-            method: :post,
-            params: {},
-            form: { id: "bulk_sms_form" },
-            class: "btn btn-warning",
-            data: { confirm: "選択したユーザーにSMS送信します。よろしいですか？" }
+= form_with url: bulk_sms_users_path, method: :post, local: true, id: "bulk_sms_form" do |f|
+  = f.submit "選択ユーザーにSMS送信", 
+             class: "btn btn-warning", 
+             data: { confirm: "選択したユーザーにSMS送信します。よろしいですか？" }
 
 - if @users.present?
   - total_count = @users.respond_to?(:total_count) ? @users.total_count : @users.count
