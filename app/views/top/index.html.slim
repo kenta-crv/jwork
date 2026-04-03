@@ -1,451 +1,475 @@
-- set_meta_tags title: '人材の業務委託・業務請負なら『OK Work』｜総合人材サービス'
-- set_meta_tags description: 'イベント・物流・清掃・建設・警備・軽貨物まで対応。人材の業務委託・業務請負なら総合サービス企業『OK Work』にお任せください。'
+- set_meta_tags  title: '即戦力の特定技能外国人の転職なら『J Work』'
+- set_meta_tags  description: '特定技能外国人の転職（とくていぎのうがいこくじんのてんしょく）ならFutureJobsにお任せください。'
+.back-image-index.back-image-top
+  .row
+    .col-sm-6
+       = image_tag "base.webp", class: "pc-image", alt:"自動販売機を設置するなら『自動販売機ねっと』。自動販売機ねっとなら、キリン自動販売機・アサヒ自動販売機・サントリー自動販売機・大塚自動販売機・コカコーラ自動販売機・ダイドー自動販売機・伊藤園自動販売機・ネオス自動販売機から最適な条件の自動販売機の設置を一元サポートします。"
+       = image_tag "base.webp", class: "mobile-image", alt:"自動販売機を設置するなら『自動販売機ねっと』。自動販売機ねっとなら、キリン自動販売機・アサヒ自動販売機・サントリー自動販売機・大塚自動販売機・コカコーラ自動販売機・ダイドー自動販売機・伊藤園自動販売機・ネオス自動販売機から最適な条件の自動販売機の設置を一元サポートします。"
+    .col-sm-6
+        h1.index-3
+         | 国内で働く即戦力外国人と
+         br
+         | 最短即日マッチングなら
+         br
+         .blue
+          | 外国人転職の『J Work』
+        =link_to 'https://j-work.jp/line', :target=>["_blank"]  do
+         =image_tag 'line.webp', width: '100%', class: 'center', alt:"自動販売機の一括見積もり『自動販売機ねっと』をご利用ならこちらをクリック。簡単60秒で無料で自動販売機を一括比較見積もり"
 
-section.hero-main-section.position-relative(style="background-image: url(#{asset_path('top-image.png')});")
-  .container
-    .row.align-items-center.gy-4
-      .col-lg-6
-        .hero-main-left
-          .hero-main-top
-            button.hero-main-top-btn
-              | 人材不足でお困りの企業様へ
-          h1.hero-main-title.mt-4
-            span.noto
-              | 業界屈指の人材力で
-              br
-              | 現場課題を解決
-          h2.hero-main-subtitle.mt-3
-            span.noto
-              | 人材の業務委託・業務請負なら『OK Work』
-          .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
-            button.hero-main-badge
-              | ✓ 総合対応
-            p.hero-main-badge-text
-              | 複数業界の人材手配を一括で対応
-          .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
-            button.hero-main-badge
-              | ✓ 全国対応
-            p.hero-main-badge-text
-              | 全国各地の現場ニーズに柔軟に対応
-          .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
-            button.hero-main-badge
-              | ✓ スポット・長期
-            p.hero-main-badge-text
-              | 単発案件から長期契約まで対応可能
-      .col-lg-6
-            .hero-main-right
-              h3.hero-main-trial.text-center
-                | ＼まずは無料で見積から／
-              = form_with model: @contract, url: contracts_path, local: true, html: { id: "hero-main-top", class: "hero-main-form mt-3 p-4 rounded-3" } do |f|
-                - if @contract.errors.any?
-                 .alert.alert-danger
-                   ul
-                      - @contract.errors.full_messages.each do |message|
-                          li = message
-                .row.g-3
-                  .col-12
-                    label.form-label.hero-main-label
-                      | 会社名 
-                      span.required-badge
-                        | 必須
-                    = f.text_field :company, class: "form-control hero-main-input", placeholder: "株式会社〇〇〇〇", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | ご担当者様名
-                      span.required-badge
-                        | 必須
-                    = f.text_field :name, class: "form-control hero-main-input", placeholder: "山田太郎", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | 電話番号 
-                      span.required-badge
-                        | 必須
-                    = f.telephone_field :tel, class: "form-control hero-main-input", placeholder: "050-1234-5678", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | 住所
-                      span.required-badge
-                        | 必須
-                    = f.text_field :address, class: "form-control hero-main-input", placeholder: "東京都東京市東京町1-1-1東京ビル111", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | URL
-                      span.required-badge
-                        | 必須
-                    = f.url_field :url, class: "form-control hero-main-input", placeholder: "https://ri-plus.jp/", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | メールアドレス 
-                      span.required-badge
-                        | 必須
-                    = f.email_field :email, class: "form-control hero-main-input", placeholder: "test@example.com", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | 備考・要望 
-                      span.required-badge
-                        | 任意
-                    = f.text_area :message, class: "form-control hero-main-input", placeholder:"（例）お問い合わせ内容"
-                  .col-12
-                    = f.submit "まずは無料で見積から", class: "btn hero-main-submit w-100"
-  .hero-main-overlay
+br
+hr.line
+br
 
-/ ブランドマーク表示はそのまま
-/section.brand-marquee-section.py-4
-  .brand-marquee
-    .brand-track
-      = image_tag "icon-1.png", alt: "Icon 1"
-      = image_tag "icon-2.png", alt: "Icon 2"
-      = image_tag "icon-3.png", alt: "Icon 3"
-      = image_tag "icon-4.png", alt: "Icon 4"
-      = image_tag "icon-5.png", alt: "Icon 5"
-      = image_tag "icon-6.png", alt: "Icon 6"
-      = image_tag "icon-7.png", alt: "Icon 7"
-      = image_tag "icon-8.png", alt: "Icon 8"
-      = image_tag "icon-9.png", alt: "Icon 9"
-      = image_tag "icon-10.png", alt: "Icon 10"
-      = image_tag "icon-1.png", alt: "Icon 1"
-      = image_tag "icon-2.png", alt: "Icon 2"
-      = image_tag "icon-3.png", alt: "Icon 3"
-      = image_tag "icon-4.png", alt: "Icon 4"
-      = image_tag "icon-5.png", alt: "Icon 5"
-      = image_tag "icon-6.png", alt: "Icon 6"
-      = image_tag "icon-7.png", alt: "Icon 7"
-      = image_tag "icon-8.png", alt: "Icon 8"
-      = image_tag "icon-9.png", alt: "Icon 9"
-      = image_tag "icon-10.png", alt: "Icon 10"
+  /# push font
+h2.push
+     span
+       | 国内で転職を希望する外国人に
+       br
+       | 特化してご紹介！
 
-/ サービス紹介
-section#service.japan-notyo-section
-  .japan-notyo-container
-    .japan-notyo-column.japan-notyo-text-column
-      h2.japan-notyo-heading
-        | 総合人材サービス『OK Work』とは？
-      h2.japan-notyo-heading
-        | 
-      p.japan-notyo-description
-        | 『OK Work』は、イベント・物流・清掃・建設・警備・軽貨物など、
+
+br
+hr.line
+br
+
+
+/# USP Point
+.top-wrapper
+  h2.heading
+    strong
+     | 『J Work』
+    | は外国人と企業のマッチングサービス
+  h6.heading
+    br
+    | 即戦力外国人転職『J Work』は、以下のような企業様に特におすすめさせて頂いております。
+  br/
+.row.center
+    .col-sm-12
+      =image_tag 'front.webp', class: 'center entire-image'
+
+br
+hr.line
+br
+
+/# Trouble
+.top-wrapper
+  h2.heading
+    strong
+      | こんなお悩み
+    | のあなたに最適です
+  h6.heading
+    br
+    | 即戦力外国人転職『J Work』は、以下のような企業様に特におすすめさせて頂いております。
+  br/
+  br/
+.row.center
+    .col-sm-12
+      =image_tag 'worries.webp', class: 'center entire-image'
+
+
+br
+hr.line
+br
+
+  /# push font
+  h2.push
+     span
+       | お任せください！
+       br
+       | 他社より質の高い人材を提供！
+
+
+br
+hr.line
+br
+
+/# inquiry image
+.row
+  .col-sm-6.center
+    =link_to "https://j-work.jp/line", :target=>["_blank"]   do
+      = image_tag 'line.webp', class: 'responsive-line center'
+  .col-sm-6.center
+    =link_to "https://j-work.jp/clients/new", :target=>["_blank"]   do
+      = image_tag 'click5.webp', class: 'responsive-line center'
+br
+hr.line
+br
+
+
+.top-wrapper
+  h2.heading
+    strong
+      | こんな業種の方が
+    | 多く登録しています！
+  h6.heading
+    br
+    | 即戦力外国人転職『J Work』で転職希望の依頼が多い業種についてご紹介しております。以下の業種以外にも幅広い応募がございます。
+  br
+  br
+.row
+  .col-sm-4.text-center.center-on-mobile
+    .border2
+      p 介護
+      = image_tag "work-1.jpg", class: 'block-image'
+  .col-sm-4.text-center.center-on-mobile
+    .border2
+      p 食品加工
+      = image_tag "work-3.jpg", class: 'block-image'
+  .col-sm-4.text-center.center-on-mobile
+    .border2
+      p エンジニア
+      = image_tag "work-5.jpg", class: 'block-image'
+
+.row
+  .col-sm-4.text-center.center-on-mobile
+    .border2
+      p 工場全般
+      = image_tag "work-2.jpg", class: 'block-image'
+  .col-sm-4.text-center.center-on-mobile
+    .border2
+      p ホテル受付
+      = image_tag "work-6.jpg", class: 'block-image'
+  .col-sm-4.text-center.center-on-mobile
+    .border2
+      p 通訳
+      = image_tag "work-7.jpg", class: 'block-image'
+
+
+br
+hr.line
+br
+
+/# inquiry image
+.row
+  .col-sm-6.center
+    =link_to "https://j-work.jp/line", :target=>["_blank"]   do
+      = image_tag 'line.webp', class: 'responsive-line center'
+  .col-sm-6.center
+    =link_to "https://j-work.jp/clients/new", :target=>["_blank"]   do
+      = image_tag 'click5.webp', class: 'responsive-line center'
+br
+hr.line
+br
+
+  /# push font
+  h2.push
+     span
+       | 即戦力外国人転職
+       br
+       | 『J Work』の強みをご紹介！
+
+
+br
+hr.line
+br
+
+
+.top-wrapper
+  h2.heading
+    strong
+      | 国内で稼働する外国人に特化
+  br
+  h6.heading
+    br
+    | 即戦力外国人転職『J Work』は、登録支援機関では珍しく、人材の質を重視するため、日本で勤務経験のない人材の取り扱いは行なっておりません。紹介する人材は国内転職層の外国人のため、日本語での面接も可能となり、スムーズに面接まで進んで頂けます。
+  br/
+.row.center
+    .col-sm-12
+      =image_tag 'foreign1.webp', class: 'center entire-image',alt:"問い合わせから設置までスピーディーに済ませたい。自販機を設置したいが、各メーカーに問い合わせするのが手間だなと感じる。自販機の相見積もりを簡単に取得したい。過去に現地調査で落ちてしまって困っている。自販機を交換したいが、対応してくれる自販機メーカーを探して欲しい"
+
+
+
+br
+hr.line
+br
+
+.top-wrapper
+  h2.heading
+    strong
+      | 毎月100名以上!!
+    | 日々リアルタイムに更新
+  br
+  h6.heading
+    br
+    | 即戦力外国人転職『J Work』では、転職を希望する国内人材から毎月100名以上の応募があります。その中からお電話にて転職意思の確認と、日本語能力の確認を行なった上で、弊社審査に通過した人材のみをご紹介対象としております。
+  br/
+  br/
+.row.center
+    .col-sm-12
+      =image_tag 'foreign2.webp', class: 'center entire-image',alt:"問い合わせから設置までスピーディーに済ませたい。自販機を設置したいが、各メーカーに問い合わせするのが手間だなと感じる。自販機の相見積もりを簡単に取得したい。過去に現地調査で落ちてしまって困っている。自販機を交換したいが、対応してくれる自販機メーカーを探して欲しい"
+
+
+br
+hr.line
+br
+
+.top-wrapper
+  h2.heading
+    strong
+      | 同一業種転職で即戦力人材
+    | が多い！
+  br
+  h6.heading
+    br
+    | 即戦力外国人転職『J Work』の人材の特徴は、応募人材が既に御社の業種・職種の経験者である確率が非常に高いこと。これは、外国人在留資格が影響しており、業種を変更するためには新たな試験に合格する必要があるため、同一職種による転職が大半を占めます。
+  br/
+  br/
+.row.center
+    .col-sm-12
+      =image_tag 'foreign3.webp', class: 'center entire-image',alt:"問い合わせから設置までスピーディーに済ませたい。自販機を設置したいが、各メーカーに問い合わせするのが手間だなと感じる。自販機の相見積もりを簡単に取得したい。過去に現地調査で落ちてしまって困っている。自販機を交換したいが、対応してくれる自販機メーカーを探して欲しい"
+
+br
+hr.line
+br
+
+.top-wrapper
+  h2.heading
+    strong
+      | 日常生活サポートは
+    | 最小限でOK！
+  br
+  h6.heading
+    br
+    | 通常の登録支援機関や協同組合から人材を受け入れると、日本で生活したことがない人材のため、空港送迎やオリエンテーション、生活サポートと労力が大変多いです。『J Work』なら国内での転職人材となり、既に日本で在住経験があるので最低限のサポートのみでOKです。
+  br/
+  br/
+.row.center
+    .col-sm-12
+      =image_tag 'foreign4.webp', class: 'center entire-image',alt:"問い合わせから設置までスピーディーに済ませたい。自販機を設置したいが、各メーカーに問い合わせするのが手間だなと感じる。自販機の相見積もりを簡単に取得したい。過去に現地調査で落ちてしまって困っている。自販機を交換したいが、対応してくれる自販機メーカーを探して欲しい"
+
+br
+hr.line
+br
+
+
+.top-wrapper
+  h2.heading
+      | 前職退職後
+      strong
+       | 最短即日勤務OK！
+  br
+  h6.heading
+    br
+    | 即戦力外国人転職『J Work』は、先述の通り、外国人在留資格の理由もあり、前職を退職してからすぐに次の仕事に就きたい人が大半です。そのため、前職を離職後、即日で御社で稼働することができます。
+  br/
+  br/
+.row.center
+    .col-sm-12
+      =image_tag 'foreign5.webp', class: 'center entire-image',alt:"問い合わせから設置までスピーディーに済ませたい。自販機を設置したいが、各メーカーに問い合わせするのが手間だなと感じる。自販機の相見積もりを簡単に取得したい。過去に現地調査で落ちてしまって困っている。自販機を交換したいが、対応してくれる自販機メーカーを探して欲しい"
+
+br
+hr.line
+br
+
+/# inquiry image
+.row
+  .col-sm-6.center
+    =link_to "https://j-work.jp/line", :target=>["_blank"]   do
+      = image_tag 'line.webp', class: 'responsive-line center'
+  .col-sm-6.center
+    =link_to "https://j-work.jp/clients/new", :target=>["_blank"]   do
+      = image_tag 'click5.webp', class: 'responsive-line center'
+br
+hr.line
+br
+
+.top-wrapper
+  h2.heading
+    strong
+      | 料金案内
+  br
+  br
+  h6.heading
+    | 以下では、即戦力外国人材国内転職『J Work』のご利用料金をご案内しております。
+  br/
+  table.company.center
+     tr
+      th.arrow-box-cell サイト登録費
+      td.responsive-cell.red お問い合わせ
+     tr
+      th.arrow-box-cell 人材の閲覧
+      td.responsive-cell.red お問い合わせ
+     tr
+      th.arrow-box-cell 面接費用
+      td.responsive-cell.red お問い合わせ
+     tr
+      th.arrow-box-cell 採用成功報酬
+      td.responsive-cell.red お問い合わせ
+
+br
+hr.line
+br
+
+.top-wrapper
+  h2.heading
+    strong
+      | 『J Work』
+    | のよくある質問
+  br
+  br
+  h6.heading
+    | 即戦力外国人材国内転職『J Work』でよくある質問の一覧を掲載しております。
+
+.cp_qa
+    .cp_actab.left
+      input#cp_tabfour028[type="checkbox" name="tabs"]
+      label[for="cp_tabfour028"]
+        h4 日本語はどの程度話せる人材でしょうか？
+      .cp_actab-content
+        p
+          | 前提として人材に差はありますが、日本でお仕事をされている方ばかりではあるので、日本語検定以上の日本語レベルがある方が多いです。弊社でもレベル確認の目的より、外国人材には日本語のみでの対応を行っており、会話が成り立たない人材についてはサービス提供をお断りしており、当社サイトには登録しておりません。
+    .cp_actab.left
+      input#cp_tabfour029[type="checkbox" name="tabs"]
+      label[for="cp_tabfour029"]
+        h4 今既に登録支援機関と付き合いがあるんだけど？
+      .cp_actab-content
+        p
+          | 登録支援機関は基本的に『外国人人材単位』での契約となっております。そのため外国人人材が複数名在籍している場合、登録支援機関も複数取引する形となります。但し、既に取引のある登録支援機関をご紹介いただき、折り合いがつけば、現行登録支援機関に内容を引き継ぐことが可能となります。
+    .cp_actab.left
+      input#cp_tabfour030[type="checkbox" name="tabs"]
+      label[for="cp_tabfour030"]
+        h4 短期離職した場合の返戻金はありますか？
+      .cp_actab-content
+        p
+          | 1ヶ月以内に退職した場合、お支払い頂いた費用の50%をご返金しております。
+    .cp_actab.left
+      input#cp_tabfour031[type="checkbox" name="tabs"]
+      label[for="cp_tabfour031"]
+        h4 採用決定したが、やはり採用を取り消したい
+      .cp_actab-content
+        p
+          | 恐れ入りますが、採用決定した後は、既に前職の勤務先より在留管理局に退職手続きを進めております。多くの場合、社宅の解約等も決まってしまっており、最悪外国人が帰国せざるを得ない環境に陥るため、お受け致しかねます。
+
+
+br
+hr.line
+br
+br
+br
+
+/# inquiry image
+.row
+  .col-sm-6.center
+    =link_to "https://j-work.jp/line", :target=>["_blank"]   do
+      = image_tag 'line.webp', class: 'responsive-line center'
+  .col-sm-6.center
+    =link_to "https://j-work.jp/clients/new", :target=>["_blank"]   do
+      = image_tag 'click5.webp', class: 'responsive-line center'
+br
+hr.line
+br
+br
+
+.top-wrapper
+  h2.heading
+    strong
+      | 『J Work』
+    | 導入フロー
+  br
+  br
+  h6.heading
+    | 即戦力外国人転職『J Work』をご利用頂く際の導入フローをご案内いたします。
+
+br
+br
+
+ul.flow.center
+  li
+    dl
+      dt
+        span.icon
+          | STEP.01
+        | 無料登録
+      dd.center
+        | まずは下記無料登録へお進みください。企業情報を登録頂くだけで、登録人材情報の閲覧を頂けます。
         br
-        | 幅広い業界における人材の業務委託・業務請負を行う総合サービス企業です。
+        | 人材情報については、リアルタイムで更新されますので、日々チェック頂くことで理想の人材とマッチ可能です。
+  li
+    dl
+      dt
+        span.icon
+          | STEP.02
+        | 無料面接開始
+      dd.center
+        | 良い人材がおりましたら、サイト上より面接打診を行うことができます。
         br
-        | 人材紹介事業を基盤に培った集客力とマッチング力を活かし、
+        | 求職者が興味を示せば、日程調整を行なった上で、面接実施となります。
+  li
+    dl
+      dt
+        span.icon
+          | STEP.03
+        | 採用・前職の退職手続き
+      dd.center
+        | 良い人材は早めに採用が決まってしまう傾向があるため、興味を持った場合は迅速に採用通知を行います。
+        br/
+        | 採用通知を受けた後、前職での退職手続きと日取りの決定を行います。
+  li
+    dl
+      dt
+        span.icon
+          | STEP.04
+        | 勤務開始
+      dd.center
+        | STEP.03が終了後、御社で働くための手続きを在留管理局に提出し
         br
-        | 現場ごとの課題や条件に最適な人材を迅速にご提供いたします。
-    .japan-notyo-column.japan-notyo-image-column
-      = image_tag "image.png", class: "japan-notyo-image", alt: "OK Work"
+        | 承認が得られ次第、勤務開始可能となります。
 
-section.jap-notto-section
-  .jap-notto-container
-    h2.jap-notto-heading
-      | こんなお悩みはありませんか？
-    .jap-notto-semicircle-wrapper
-      .jap-notto-image-container.jap-notto-image-1
-        = image_tag "mainn-1.png", class: "jap-notto-image"
-      .jap-notto-image-container.jap-notto-image-2
-        = image_tag "mainn-2.png", class: "jap-notto-image"
-      .jap-notto-image-container.jap-notto-image-3
-        = image_tag "mainn-3.png", class: "jap-notto-image"
-      .jap-notto-image-container.jap-notto-image-4
-        = image_tag "mainn-4.png", class: "jap-notto-image"
-      .jap-notto-image-container.jap-notto-image-5
-        = image_tag "mainn-5.png", class: "jap-notto-image"
-      .jap-notto-center-image
-        = image_tag "mainn-7.png", class: "jap-notto-center-img"
+br
+br
+hr.line
+br
 
-section#business.ser-mos-section[style="background-image: url('#{asset_path('bg-services.png')}');"]
-  .container.py-5.text-center
-    .ser-mos-headings.mb-4
-      .ser-mos-kicker
-        | 
-      h2.ser-mos-title
-        | OK Workの事業内容
-    .ser-mos-panel.mx-auto.p-4.rounded-4
-      .row.g-4
-        .col-lg-6
-          article.ser-mos-card
-            .ser-mos-card-media
-              = image_tag "ser-event1.png", class: "ser-mos-card-img", alt: "Service 1"
-            h3.ser-mos-card-title
-              | イベントスタッフ請負
-            p.ser-mos-card-desc
-              | 展示会・催事・各種イベントにおける受付、誘導、設営・撤去補助など、
-              br
-              | 即戦力となるイベントスタッフを業務請負にてご提供いたします。
-        .col-lg-6
-          article.ser-mos-card
-            .ser-mos-card-media
-              = image_tag "ser-logistics1.png", class: "ser-mos-card-img", alt: "Service 1"
-            h3.ser-mos-card-title
-              | 物流・倉庫作業請負
-            p.ser-mos-card-desc
-              | 仕分け、ピッキング、入出庫作業など、
-              br
-              | 物流現場の安定稼働を支える人材を柔軟に手配いたします。
-        .col-lg-6
-          article.ser-mos-card
-            .ser-mos-card-media
-              = image_tag "ser-cleaning1.png", class: "ser-mos-card-img", alt: "Service 1"
-            h3.ser-mos-card-title
-              | 清掃業務請負
-            p.ser-mos-card-desc
-              | ビル・施設・ホテルなどの清掃業務を、
-              br
-              | 経験豊富な人材により高品質で対応いたします。
-        .col-lg-6
-          article.ser-mos-card
-            .ser-mos-card-media
-              = image_tag "ser-construction1.png", class: "ser-mos-card-img", alt: "Service 1"
-            h3.ser-mos-card-title
-              | 建設・建築関連人材
-            p.ser-mos-card-desc
-              | 建設現場における作業員・補助業務など、
-              br
-              | 人手不足の解消を目的とした人材を請負で提供いたします。
-        .col-lg-6
-          article.ser-mos-card
-            .ser-mos-card-media
-              = image_tag "ser-security1.png", class: "ser-mos-card-img", alt: "Service 1"
-            h3.ser-mos-card-title
-              | 警備業務請負
-            p.ser-mos-card-desc
-              | 施設警備・交通誘導・イベント警備など、
-              br
-              | 安全確保を目的とした警備人材を手配いたします。
-        .col-lg-6
-          article.ser-mos-card
-            .ser-mos-card-media
-              = image_tag "sec-delivery.png", class: "ser-mos-card-img", alt: "Service 1"
-            h3.ser-mos-card-title
-              | 軽貨物・配送業務請負
-            p.ser-mos-card-desc
-              | 軽貨物ドライバーによる配送業務を、
-              br
-              | 業務請負にて安定的にサポートいたします。
-
-section.main-moss-section
-  .container.text-center.main-moss-header
-    h2.main-moss-title
-      | OK Workが選ばれる理由
-    h3.main-moss-subtitle
-      | 総合人材サービスとしての強み
-  .container-fluid.main-moss-block
-    .row.align-items-center
-      .col-lg-6.text-center
-        = image_tag "main-cargo1.png", class: "main-moss-img img-fluid"
-      .col-lg-6.text-center.main-moss-content
-        h3.main-moss-block-title
-          | 現場に最適な人材を迅速に手配
-        p.main-moss-block-desc
-          | 業界・業務内容・期間に応じた最適な人材をスピーディーにご提供いたします。
-  .container-fluid.main-moss-block
-    .row.align-items-center.flex-row-reverse
-      .col-lg-6.text-center
-        = image_tag "main-cargo2.png", class: "main-moss-img img-fluid"
-      .col-lg-6.text-center.main-moss-content
-        h3.main-moss-block-title
-          | スポットから長期契約まで対応
-        p.main-moss-block-desc
-          | 単発案件から常駐型まで柔軟に対応可能です。
-  .container-fluid.main-moss-block
-    .row.align-items-center
-      .col-lg-6.text-center
-        = image_tag "main-cargo3.png", class: "main-moss-img img-fluid"
-      .col-lg-6.text-center.main-moss-content
-        h3.main-moss-block-title
-          | 全国対応の人材ネットワーク
-        p.main-moss-block-desc
-          | 各地域の人材ネットワークを活かし、全国対応を実現しております。
-  .container-fluid.main-moss-block
-    .row.align-items-center.flex-row-reverse
-      .col-lg-6.text-center
-        = image_tag 'main-cleaning4.png', alt: 'Feature Image', class: 'main-moss-img img-fluid'
-      .col-lg-6.text-center.main-moss-content
-        h3.main-moss-block-title
-          | 地方の人材・現場構築も対応
-        p.main-moss-block-desc
-          | 地方で多数人材が必要な場合でも、早期にスタッフを手配し、地方構築をサポートします。
+/# push font
+h2.push
+   span
+     | お気軽に相談してください。
+     br
+     | 登録〜面接まで完全無料でご利用頂けます！
+br
+hr.line
+br
 
 
-section#case.cards-moos-section.py-5
-  .container.text-center
-    h2.cards-moos-title.mb-5
-      | 記事一覧
-    .row.g-4.cards-moos-row.d-none.d-md-flex
-      - Column.order(created_at: :desc).limit(3).each do |column|
-        .col-lg-4.col-md-6
-          = link_to column_path(column) do
-            .cards-moos-card
-              - if column.file.present?
-               = image_tag column.file.to_s, width:"100%", class: 'column-thumb', alt: column.title
-              h3.cards-moos-heading
-                = column.title
-              p.cards-moos-desc
-                = truncate(column.description, length: 200)
-    .mt-4
-      = link_to "Column一覧", columns_path, class:"btn btn-primary"
-
-section.faq-japan-section.py-5
-  .container.text-center
-    h2.faq-japan-title.mb-5
-      | よくある質問
-    .faq-japan-container
-      .faq-japan-item
-        .faq-japan-question.d-flex.align-items-center.justify-content-between
-          p 対応エリアはどこまでですか？
-          = image_tag "closee.png", class: "faq-japan-icon", alt: "toggle icon"
-        .faq-japan-answer
-          p 全国対応可能です。地域や業種により条件が異なりますのでご相談ください。
-      .faq-japan-item
-        .faq-japan-question.d-flex.align-items-center.justify-content-between
-          p 複数事業をまとめて依頼できますか？
-          = image_tag "closee.png", class: "faq-japan-icon", alt: "toggle icon"
-        .faq-japan-answer
-          p はい、複数業種を一括でご依頼いただけます。
-
-section#case.cards-moos-section.py-5
-  .container.text-center
-    h2.cards-moos-title.mb-5
-      | 導入事例
-    .row.g-4.cards-moos-row.d-none.d-md-flex
-      .col-lg-4.col-md-6
-            .cards-moos-card
-              = image_tag "image-cargo1.png", class: "cards-moos-img", alt: "Case Study 1"
-              h3.cards-moos-heading
-                | 製造業A社様
-              p.cards-moos-desc
-                |  定期便の依頼でしたが、ドライバーさんの対応も丁寧で安心できました。納品も予定通りで助かりました。
-      .col-lg-4.col-md-6
-            .cards-moos-card
-              = image_tag "image-security2.png", class: "cards-moos-img", alt: "Case Study 1"
-              h3.cards-moos-heading
-                | 施設ビル様
-              p.cards-moos-desc
-                |  ビルのメンテナンス清掃の依頼でしたが、スムーズに作業に当たっていただき助かりました。
-      .col-lg-4.col-md-6
-            .cards-moos-card
-              = image_tag "image_construction1.png", class: "cards-moos-img", alt: "Case Study 1"
-              h3.cards-moos-heading
-                | 工務店A様
-              p.cards-moos-desc
-                |  建設現場で人材を集めるのに苦労している中で、OK建設さんをご紹介頂きました。即日３名をご紹介いただき大変驚くと共に助かりました。
-      .col-lg-4.col-md-6
-        .cards-moos-card
-          = image_tag "image-security4.png", class: "cards-moos-img", alt: "Case Study 4"
-          h3.cards-moos-heading
-            | 建設現場D様
-          p.cards-moos-desc
-            | 建設関連人材請負で人手不足を解消し、スケジュール通りに作業が進みました。
-      .col-lg-4.col-md-6
-        .cards-moos-card
-          = image_tag "image-event1.png", class: "cards-moos-img", alt: "Case Study 1"
-          h3.cards-moos-heading
-            | 展示会主催企業様
-          p.cards-moos-desc
-            | 展示会の受付・誘導スタッフを短期間で手配し、スムーズな運営を実現しました。
-      .col-lg-4.col-md-6
-        .cards-moos-card
-          = image_tag "image-logistics1.png", class: "cards-moos-img", alt: "Case Study 1"
-          h3.cards-moos-heading
-            | EC物流企業様
-          p.cards-moos-desc
-            | ピッキング・梱包スタッフを短期間で手配し、繁忙期の作業効率を向上しました。
-      .col-lg-4.col-md-6
-            .cards-moos-card
-              = image_tag "image-security2.png", class: "cards-moos-img", alt: "Case Study 1"
-              h3.cards-moos-heading
-                | 大型病院様
-              p.cards-moos-desc
-                |  深夜警備の強化に警備業を依頼しましたが、真面目に働いて頂いています。
+/# inquiry image
+.row
+  .col-sm-6.center
+    =link_to "https://j-work.jp/line", :target=>["_blank"]   do
+      = image_tag 'line.webp', class: 'responsive-line center'
+  .col-sm-6.center
+    =link_to "https://j-work.jp/clients/new", :target=>["_blank"]   do
+      = image_tag 'click5.webp', class: 'responsive-line center'
+br
+hr.line
+br
 
 
-section#inquiry
-  .container
-    .col-lg-12
-      .hero-main-right.p-4.rounded-3
-        h3.hero-main-trial2.text-center
-          | ＼まずはご相談ください！／
-        = form_with model: @contract, url: contracts_path, local: true, html: { id: "hero-main-top", class: "hero-main-form mt-3 p-4 rounded-3" } do |f|
-                .row.g-3
-                  .col-12
-                    label.form-label.hero-main-label
-                      | 会社名 
-                      span.required-badge
-                        | 必須
-                    = f.text_field :company, class: "form-control hero-main-input", placeholder: "株式会社〇〇〇〇", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | ご担当者様名
-                      span.required-badge
-                        | 必須
-                    = f.text_field :name, class: "form-control hero-main-input", placeholder: "山田太郎", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | 電話番号 
-                      span.required-badge
-                        | 必須
-                    = f.telephone_field :tel, class: "form-control hero-main-input", placeholder: "050-1234-5678", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | 住所
-                      span.required-badge
-                        | 必須
-                    = f.text_field :address, class: "form-control hero-main-input", placeholder: "東京都東京市東京町1-1-1東京ビル111", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | URL
-                      span.required-badge
-                        | 必須
-                    = f.url_field :url, class: "form-control hero-main-input", placeholder: "https://ri-plus.jp/", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | メールアドレス 
-                      span.required-badge
-                        | 必須
-                    = f.email_field :email, class: "form-control hero-main-input", placeholder: "test@example.com", required: true
-                  .col-12
-                    label.form-label.hero-main-label
-                      | 備考・要望 
-                      span.required-badge
-                        | 任意
-                    = f.text_area :message, class: "form-control hero-main-input", placeholder:"（例）お問い合わせ内容"
-                  .col-12
-                    = f.submit "まずは無料で見積から", class: "btn hero-main-submit w-100"
-
-
-/ company overview block
-.section-company
-  .company-card
-    h2.section-title 会社概要
-    p.section-lead 業界屈指の人材力で、現場の課題を解決します。
-
-    table.company-table
-      tr
-        th 会社名
-        td 株式会社セールスプロ
-      tr
-        th 設立
-        td 2023年8月18日
-      tr
-        th 代表者
-        td 代表取締役 奥山　健太
-      tr
-        th 資本金
-        td 5,000,000円
-      tr
-        th 所在地
-        td 東京都港区芝5-27-3 MBC・Aー9
-      tr
-        th 事業内容
-        td
-          | テレマーケティング代行
-          br
-          | 有料職業紹介
-          br/
-          | 軽貨物・配送業務請負
-          br/
-          | 清掃業務請負
-
-
-
-script[src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"]
-script[src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"]
-script[src="js/script.js"]
+.row
+  h1.headline 会社概要
+  table.company
+   col[width="40%"]
+   col[width="60%"]
+   tr
+    th 会社名
+    td 株式会社セールスプロ
+   tr
+    th 代表者
+    td 代表取締役 奥山健太
+   tr
+    th 設立
+    td 2023年8月2日
+   tr
+    th 資本金
+    td 5,000,0000円
+   tr
+    th 住所
+    td 東京都港区芝5-27-3 MBC・Aー9
+   tr
+    th
+    td
+   tr
+    th 事業内容
+    td マーケティング業/IT業/人材紹介業
+   tr 
+    th 有料職業紹介番号
+    td 13-ユ-315910

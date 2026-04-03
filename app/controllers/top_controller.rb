@@ -1,41 +1,7 @@
 class TopController < ApplicationController
-  before_action :set_breadcrumbs
-  # app, ads, short 以外はカラムを表示
-  before_action :set_columns, except: [:app, :ads, :short]
-  before_action :initialize_contract
 
-  # 各アクション（中身は空で各viewを自動呼び出し）
-  def index; end
-  def cargo; end
-  def security; end
-  def construction; end
-  def cleaning; end
-  def daily; end
-  def housekeeping; end
-  def event; end
-  def logistics; end
-  def app; end
-  def ads; end
-  def short; end
-
-  private
-
-  def initialize_contract
-    @contract = Contract.new
+  def index
   end
-
-  def set_columns
-    @columns = Column.order(created_at: :desc).limit(3)
-  end
-
-  def set_breadcrumbs
-    # 修正：ドメインに応じたルートパスを取得
-    add_breadcrumb 'トップ', current_root_path
-    
-    label = LpDefinition.label(action_name)
-    add_breadcrumb label, request.path if label
-  end
-
 
   def black 
   end
@@ -77,4 +43,48 @@ class TopController < ApplicationController
   def information
   end
 
+=begin
+   def redirect
+    line_url = "https://lin.ee/yVI3ClY"
+    render inline: <<-HTML
+      <!DOCTYPE html>
+      <html lang="ja">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Redirecting...</title>
+
+          <!-- Facebook Pixel Code -->
+          <script>
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '609043125437314'); // Facebook Pixel ID
+          fbq('track', 'PageView');
+          </script>
+
+          <noscript>
+            <img height="1" width="1" 
+            src="https://www.facebook.com/tr?id=609043125437314&ev=PageView&noscript=1"/>
+          </noscript>
+          <!-- End Facebook Pixel Code -->
+
+          <script>
+              setTimeout(function() {
+                  window.location.href = "#{line_url}";
+              }, 1000); // 1秒後にリダイレクト
+          </script>
+      </head>
+      <body>
+          <p>LINEへリダイレクト中...</p>
+      </body>
+      </html>
+    HTML
+  end
+=end
 end
