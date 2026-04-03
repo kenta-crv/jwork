@@ -239,38 +239,23 @@ def send_sms
   end
 
 
-  def bulk_sms
-  users = User.where(id: params[:user_ids])
+def bulk_sms
+  # チェックボックスで選択されたIDの配列を取得
+  user_ids = params[:user_ids]
 
-  client = Twilio::REST::Client.new(
-    ENV['TWILIO_ACCOUNT_SID'],
-    ENV['TWILIO_AUTH_TOKEN']
-  )
-
-  success_count = 0
-  error_count   = 0
-
-  users.each_with_index do |user, index|
-    begin
-      client.messages.create(
-        from: ENV['TWILIO_PHONE_NUMBER'],
-        to: user.tel,
-        body: "Thank you for applying to the J Work job posting the other day. We will contact you about the job via LINE. Please register here: https://j-work.jp/line"
-      )
-
-      success_count += 1
-
-      # ★重要：レート制御（Twilio対策）
-      sleep(0.5)
-
-    rescue => e
-      Rails.logger.error "SMS送信失敗 user_id=#{user.id}: #{e.message}"
-      error_count += 1
-    end
+  if user_ids.blank?
+    redirect_to users_path, alert: "ユーザーが選択されていません。"
+    return
   end
 
-  redirect_to users_path,
-    notice: "SMS送信: 成功 #{success_count}件 / 失敗 #{error_count}件"
+  # ここで既存の SendSmsJob を利用する
+  user_ids.each_with_index do |user_id, index|
+    # Twilioの流量制限（1秒に1通程度）を考慮し、実行時間を少しずつずらして予約する
+    # index * 2 とすることで、2秒おきに1人ずつJobが起動する
+    SendSmsJob.set(wait: (index * 2).seconds).perform_later(user_id)
+  end
+
+  redirect_to users_path, notice: "#{user_ids.count}名へのSMS送信をバックグラウンドで予約しました。順次送信されます。"
 end
 
   private
