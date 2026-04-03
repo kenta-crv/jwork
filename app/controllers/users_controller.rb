@@ -131,55 +131,32 @@ end
   end
 
 def bulk_sms
-  # JSから渡されたIDでユーザーを取得
+  # IDが届いているかログで確認
+  Rails.logger.info "--- DEBUG: user_ids = #{params[:user_ids].inspect} ---"
+  
   users = User.where(id: params[:user_ids])
+  return redirect_to users_path, alert: "ユーザーを選択してください" if users.empty?
 
-  if users.empty?
-    redirect_to users_path, alert: "ユーザーが選択されていません"
-    return
-  end
-
-  client = Twilio::REST::Client.new(
-    ENV['TWILIO_ACCOUNT_SID'],
-    ENV['TWILIO_AUTH_TOKEN']
-  )
-
-  success_count = 0
-  error_count   = 0
+  client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
 
   users.each do |user|
     next if user.tel.blank?
-
     begin
-      # ★個別送信と同じ整形ロジックを適用
-      raw_tel = user.tel.to_s.strip.sub(/^p:/, '').gsub(/[^\d+]/, '')
-      
-      if raw_tel.match?(/^0\d{9,11}$/)
-        to_number = "+81#{raw_tel[1..-1]}"
-      elsif raw_tel.match?(/^81\d{9,11}$/)
-        to_number = "+#{raw_tel}"
-      else
-        to_number = raw_tel
-      end
+      # ★個別送信と同じ整形ロジックを必ず入れる（これがないと本番は 20404 で死ぬ）
+      raw_tel = user.tel.to_s.gsub(/[^\d+]/, '')
+      to_number = raw_tel.start_with?('0') ? "+81#{raw_tel[1..-1]}" : "+#{raw_tel}"
 
       client.messages.create(
         from: ENV['TWILIO_PHONE_NUMBER'],
         to: to_number,
-        body: "Thank you for applying to the J Work job posting the other day. We will contact you about the job via LINE. Please register here: https://j-work.jp/line"
+        body: "..."
       )
-
-      success_count += 1
-      sleep(0.5) # レート制限対策
-
+      sleep(0.5)
     rescue => e
-      # ログに詳細を残す
-      Rails.logger.error "SMS送信失敗 user_id=#{user.id} (To: #{user.tel}): #{e.message}"
-      error_count += 1
+      Rails.logger.error "失敗: #{user.id}: #{e.message}"
     end
   end
-
-  redirect_to users_path,
-    notice: "SMS送信完了: 成功 #{success_count}件 / 失敗 #{error_count}件"
+  redirect_to users_path, notice: "送信完了"
 end
   # ==========================================
   # 2. IVR単体発信 (080... を +81... に変換)
