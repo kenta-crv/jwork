@@ -82,7 +82,7 @@ br/
       tbody
         - @users.each do |user|
           tr
-            td = check_box_tag "user_ids[]", user.id, false, class: "user-checkbox", form: "bulk_sms_form"
+            = check_box_tag "user_ids[]", user.id, false, class: "user-checkbox"
             td= link_to user.name, user_path(user)
             td= user.tel
 
