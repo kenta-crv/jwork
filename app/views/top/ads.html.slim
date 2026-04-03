@@ -1,47 +1,47 @@
-- set_meta_tags title: '人材の業務委託・業務請負なら『OK Work』｜総合人材サービス'
-- set_meta_tags description: 'イベント・物流・清掃・建設・警備・軽貨物まで対応。人材の業務委託・業務請負なら総合サービス企業『OK Work』にお任せください。'
+- set_meta_tags title: '広告反応率・求人接続率を最大化する自動マーケティングツール『React-Plus』'
+- set_meta_tags description: 'META広告や求人広告の反応率を劇的に改善。自動メール・SMS・IVR連携で、ステージング率を28%から65%へ、接続率を33%から76%へ向上。広告効果を最大化し、引き上げコストをゼロにします。'
 
-section.hero-main-section.position-relative(style="background-image: url(#{asset_path('top-image.png')});")
+section.hero-main-section.position-relative(style="background-image: url(#{asset_path('ads-image.png')});")
   .container
     .row.align-items-center.gy-4
       .col-lg-6
         .hero-main-left
           .hero-main-top
             button.hero-main-top-btn
-              | 人材不足でお困りの企業様へ
+              | 広告のCPA改善・反応率向上を目指す企業様へ
           h1.hero-main-title.mt-4
             span.noto
-              | 業界屈指の人材力で
+              | 『取りこぼしゼロへ』
               br
-              | 現場課題を解決
+              | 反応率を自動で最大化
           h2.hero-main-subtitle.mt-3
             span.noto
-              | 人材の業務委託・業務請負なら『OK Work』
+              | 即時自動追客ツールで接続率を最大76%まで向上
           .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
             button.hero-main-badge
-              | ✓ 総合対応
+              | ✓ 自動返信メール＋SMS
             p.hero-main-badge-text
-              | 複数業界の人材手配を一括で対応
+              | ユーザーに次の動作を瞬時に誘導
           .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
             button.hero-main-badge
-              | ✓ 全国対応
+              | ✓ ステップメール
             p.hero-main-badge-text
-              | 全国各地の現場ニーズに柔軟に対応
+              | 簡単設定のみで自動で最適なメール促進
           .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
             button.hero-main-badge
-              | ✓ スポット・長期
+              | ✓ IVR自動電話発信
             p.hero-main-badge-text
-              | 単発案件から長期契約まで対応可能
+              | メール反応しないユーザーに効果的な時間に電話発信
+          .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
+            button.hero-main-badge
+              | ✓ リターゲティング広告
+            p.hero-main-badge-text
+              | ユーザーのスマホいつでも追加広告配信
       .col-lg-6
-            .hero-main-right
-              h3.hero-main-trial.text-center
-                | ＼まずは無料で見積から／
-              = form_with model: @contract, url: contracts_path, local: true, html: { id: "hero-main-top", class: "hero-main-form mt-3 p-4 rounded-3" } do |f|
-                - if @contract.errors.any?
-                 .alert.alert-danger
-                   ul
-                      - @contract.errors.full_messages.each do |message|
-                          li = message
+        .hero-main-right.p-4.rounded-3
+          h3.hero-main-trial.text-center
+            | ＼まずは気軽にお問い合わせから！／
+          = form_with model: @contract, url: contracts_path, local: true, html: { id: "hero-main-top", class: "hero-main-form mt-3 p-4 rounded-3" } do |f|
                 .row.g-3
                   .col-12
                     label.form-label.hero-main-label
@@ -119,24 +119,20 @@ section#service.japan-notyo-section
   .japan-notyo-container
     .japan-notyo-column.japan-notyo-text-column
       h2.japan-notyo-heading
-        | 総合人材サービス『OK Work』とは？
+        | 反応率向上ツール『React-Plus』とは？
       h2.japan-notyo-heading
         | 
       p.japan-notyo-description
-        | 『OK Work』は、イベント・物流・清掃・建設・警備・軽貨物など、
+        | 『React-Plus』は、META広告やリスティング、各種求人媒体からのリードに対し、自動メール返信、SMS送信、IVRによる自動架電、スマホへのリターゲティング広告を即座に実行するマーケティングツールです。
         br
-        | 幅広い業界における人材の業務委託・業務請負を行う総合サービス企業です。
-        br
-        | 人材紹介事業を基盤に培った集客力とマッチング力を活かし、
-        br
-        | 現場ごとの課題や条件に最適な人材を迅速にご提供いたします。
+        | 人の手に頼っていた追客プロセスを完全に自動化し、問い合わせ直後の「最も熱い瞬間」を逃さず、成約へつなげるステージングを構築します。
     .japan-notyo-column.japan-notyo-image-column
-      = image_tag "image.png", class: "japan-notyo-image", alt: "OK Work"
+      = image_tag "image.png", class: "japan-notyo-image", alt: "React-Plus"
 
 section.jap-notto-section
   .jap-notto-container
     h2.jap-notto-heading
-      | こんなお悩みはありませんか？
+      | 広告運用でこんなお悩みはありませんか？
     .jap-notto-semicircle-wrapper
       .jap-notto-image-container.jap-notto-image-1
         = image_tag "mainn-1.png", class: "jap-notto-image"
@@ -157,7 +153,7 @@ section#business.ser-mos-section[style="background-image: url('#{asset_path('bg-
       .ser-mos-kicker
         | 
       h2.ser-mos-title
-        | OK Workの事業内容
+        | React-Plusの主要機能
     .ser-mos-panel.mx-auto.p-4.rounded-4
       .row.g-4
         .col-lg-6
@@ -165,110 +161,100 @@ section#business.ser-mos-section[style="background-image: url('#{asset_path('bg-
             .ser-mos-card-media
               = image_tag "ser-event1.png", class: "ser-mos-card-img", alt: "Service 1"
             h3.ser-mos-card-title
-              | イベントスタッフ請負
+              | 自動返信メール＋SMS
             p.ser-mos-card-desc
-              | 展示会・催事・各種イベントにおける受付、誘導、設営・撤去補助など、
+              | リード獲得と同時にパーソナライズされたメールとショートメッセージを即時送信。
               br
-              | 即戦力となるイベントスタッフを業務請負にてご提供いたします。
+              | ユーザーの反応率が最も高い問い合わせ直後のタイミングで適切な促進を行います。
         .col-lg-6
           article.ser-mos-card
             .ser-mos-card-media
-              = image_tag "ser-logistics1.png", class: "ser-mos-card-img", alt: "Service 1"
+              = image_tag "ser-ads1.png", class: "ser-mos-card-img", alt: "Service 1"
             h3.ser-mos-card-title
-              | 物流・倉庫作業請負
+              | ステップメール
             p.ser-mos-card-desc
-              | 仕分け、ピッキング、入出庫作業など、
+              | メールよりも到達率・開封率の高いSMSを自動配信。
               br
-              | 物流現場の安定稼働を支える人材を柔軟に手配いたします。
+              | 確実にメッセージを届け、URLクリックやアクションを促します。
         .col-lg-6
           article.ser-mos-card
             .ser-mos-card-media
-              = image_tag "ser-cleaning1.png", class: "ser-mos-card-img", alt: "Service 1"
+              = image_tag "ser-ads1.png", class: "ser-mos-card-img", alt: "Service 1"
             h3.ser-mos-card-title
-              | 清掃業務請負
+              | IVR自動発信システム
             p.ser-mos-card-desc
-              | ビル・施設・ホテルなどの清掃業務を、
+              | フォーム入力直後に自動音声で架電し、本人確認や意思確認を実施。
               br
-              | 経験豊富な人材により高品質で対応いたします。
+              | 求人案件では接続率を33%から76%まで引き上げた実績があります。
         .col-lg-6
           article.ser-mos-card
             .ser-mos-card-media
-              = image_tag "ser-construction1.png", class: "ser-mos-card-img", alt: "Service 1"
+              = image_tag "ser-ads1.png", class: "ser-mos-card-img", alt: "Service 1"
             h3.ser-mos-card-title
-              | 建設・建築関連人材
+              | スマホリターゲティング
             p.ser-mos-card-desc
-              | 建設現場における作業員・補助業務など、
+              | 開封やクリックなどの反応に基づき、顧客を自動でステージング。
               br
-              | 人手不足の解消を目的とした人材を請負で提供いたします。
+              | 確度の高いリードだけを可視化し、営業効率を最大化させます。
         .col-lg-6
           article.ser-mos-card
             .ser-mos-card-media
-              = image_tag "ser-security1.png", class: "ser-mos-card-img", alt: "Service 1"
+              = image_tag "ser-ads1.png", class: "ser-mos-card-img", alt: "Service 1"
             h3.ser-mos-card-title
-              | 警備業務請負
+              | CPA（獲得単価）の最小化
             p.ser-mos-card-desc
-              | 施設警備・交通誘導・イベント警備など、
+              | 流入したリードの有効活用率を高めることで、実質的な獲得単価を抑制。
               br
-              | 安全確保を目的とした警備人材を手配いたします。
+              | 広告予算を増やすことなく、成果件数だけを増大させます。
         .col-lg-6
           article.ser-mos-card
             .ser-mos-card-media
               = image_tag "sec-delivery.png", class: "ser-mos-card-img", alt: "Service 1"
             h3.ser-mos-card-title
-              | 軽貨物・配送業務請負
+              | アプローチコストの完全撤廃
             p.ser-mos-card-desc
-              | 軽貨物ドライバーによる配送業務を、
+              | 担当者が一件ずつ手動で連絡するコストをシステムに置き換え。
               br
-              | 業務請負にて安定的にサポートいたします。
+              | 人件費をかけずに24時間365日の追客体制を構築します。
 
 section.main-moss-section
   .container.text-center.main-moss-header
     h2.main-moss-title
-      | OK Workが選ばれる理由
+      | React-Plusが選ばれる理由
     h3.main-moss-subtitle
-      | 総合人材サービスとしての強み
-  .container-fluid.main-moss-block
-    .row.align-items-center
-      .col-lg-6.text-center
-        = image_tag "main-cargo1.png", class: "main-moss-img img-fluid"
-      .col-lg-6.text-center.main-moss-content
-        h3.main-moss-block-title
-          | 現場に最適な人材を迅速に手配
-        p.main-moss-block-desc
-          | 業界・業務内容・期間に応じた最適な人材をスピーディーにご提供いたします。
+      | 
   .container-fluid.main-moss-block
     .row.align-items-center.flex-row-reverse
       .col-lg-6.text-center
-        = image_tag "main-cargo2.png", class: "main-moss-img img-fluid"
+        = image_tag 'main-ads1.png', alt: 'Feature Image', class: 'main-moss-img img-fluid'
       .col-lg-6.text-center.main-moss-content
         h3.main-moss-block-title
-          | スポットから長期契約まで対応
+          | 導入するだけで総反応あたりのコスト削減
         p.main-moss-block-desc
-          | 単発案件から常駐型まで柔軟に対応可能です。
+          | 『React-Plus』は、広告運用ではない、ステージング率に着目することで、効果を最大化します。
   .container-fluid.main-moss-block
     .row.align-items-center
       .col-lg-6.text-center
-        = image_tag "main-cargo3.png", class: "main-moss-img img-fluid"
+        = image_tag "main-ads3.png", class: "main-moss-img img-fluid"
       .col-lg-6.text-center.main-moss-content
         h3.main-moss-block-title
-          | 全国対応の人材ネットワーク
+          | 広告運用は変更せず効果だけを最大化
         p.main-moss-block-desc
-          | 各地域の人材ネットワークを活かし、全国対応を実現しております。
+          | 面倒な広告設定の変更よりも、流入後の処理を自動化する方が確実かつ低コストです。
   .container-fluid.main-moss-block
     .row.align-items-center.flex-row-reverse
       .col-lg-6.text-center
-        = image_tag 'main-cleaning4.png', alt: 'Feature Image', class: 'main-moss-img img-fluid'
+        = image_tag 'original.avif', alt: 'Feature Image', class: 'main-moss-img img-fluid'
       .col-lg-6.text-center.main-moss-content
         h3.main-moss-block-title
-          | 地方の人材・現場構築も対応
+          | 属人化脱却と工数削減
         p.main-moss-block-desc
-          | 地方で多数人材が必要な場合でも、早期にスタッフを手配し、地方構築をサポートします。
-
+          | 担当者のスキルや速度に依存せず、常に最高のパフォーマンスで追客を実行可能です。
 
 section#case.cards-moos-section.py-5
   .container.text-center
     h2.cards-moos-title.mb-5
-      | 記事一覧
+      | 広告運用記事一覧
     .row.g-4.cards-moos-row.d-none.d-md-flex
       - Column.order(created_at: :desc).limit(3).each do |column|
         .col-lg-4.col-md-6
@@ -281,7 +267,7 @@ section#case.cards-moos-section.py-5
               p.cards-moos-desc
                 = truncate(column.description, length: 200)
     .mt-4
-      = link_to "Column一覧", columns_path, class:"btn btn-primary"
+      = columns_index_link("ads", "広告運用の記事一覧を見る")
 
 section.faq-japan-section.py-5
   .container.text-center
@@ -290,16 +276,16 @@ section.faq-japan-section.py-5
     .faq-japan-container
       .faq-japan-item
         .faq-japan-question.d-flex.align-items-center.justify-content-between
-          p 対応エリアはどこまでですか？
+          p 導入済みのMETA広告アカウントと連携できますか？
           = image_tag "closee.png", class: "faq-japan-icon", alt: "toggle icon"
         .faq-japan-answer
-          p 全国対応可能です。地域や業種により条件が異なりますのでご相談ください。
+          p はい、既存の広告アカウントや各プラットフォームとAPI等を通じて簡単に連携が可能です。
       .faq-japan-item
         .faq-japan-question.d-flex.align-items-center.justify-content-between
-          p 複数事業をまとめて依頼できますか？
+          p どのような業種に向いていますか？
           = image_tag "closee.png", class: "faq-japan-icon", alt: "toggle icon"
         .faq-japan-answer
-          p はい、複数業種を一括でご依頼いただけます。
+          p 人材採用、不動産、金融、BtoBリード獲得など、即時性が成果に直結するあらゆる業種で有効です。
 
 section#case.cards-moos-section.py-5
   .container.text-center
@@ -308,53 +294,46 @@ section#case.cards-moos-section.py-5
     .row.g-4.cards-moos-row.d-none.d-md-flex
       .col-lg-4.col-md-6
             .cards-moos-card
-              = image_tag "image-cargo1.png", class: "cards-moos-img", alt: "Case Study 1"
+              = image_tag "image-ads1.png", class: "cards-moos-img", alt: "Case Study 1"
               h3.cards-moos-heading
-                | 製造業A社様
+                | 人材紹介業A社様
               p.cards-moos-desc
-                |  定期便の依頼でしたが、ドライバーさんの対応も丁寧で安心できました。納品も予定通りで助かりました。
+                |  求人媒体からの接続率が18%で悩みでしたが、IVR導入により53%まで向上し、面談数が倍増しました。
       .col-lg-4.col-md-6
             .cards-moos-card
-              = image_tag "image-security2.png", class: "cards-moos-img", alt: "Case Study 1"
+              = image_tag "image-ads2.png", class: "cards-moos-img", alt: "Case Study 1"
               h3.cards-moos-heading
-                | 施設ビル様
+                | 不動産販売B社様
               p.cards-moos-desc
-                |  ビルのメンテナンス清掃の依頼でしたが、スムーズに作業に当たっていただき助かりました。
+                |  資料請求後のステージング率が28%から79%へ。営業担当が確度の高い客だけに集中できるようになりました。
       .col-lg-4.col-md-6
             .cards-moos-card
-              = image_tag "image_construction1.png", class: "cards-moos-img", alt: "Case Study 1"
+              = image_tag "image-ads3.png", class: "cards-moos-img", alt: "Case Study 1"
               h3.cards-moos-heading
-                | 工務店A様
+                | 美容クリニックC様
               p.cards-moos-desc
-                |  建設現場で人材を集めるのに苦労している中で、OK建設さんをご紹介頂きました。即日３名をご紹介いただき大変驚くと共に助かりました。
+                |  META広告からの問い合わせに即時メール・SMS配信。他社との比較前に予約まで3倍の誘導することに成功しました。
       .col-lg-4.col-md-6
         .cards-moos-card
-          = image_tag "image-security4.png", class: "cards-moos-img", alt: "Case Study 4"
+          = image_tag "image-ads4.png", class: "cards-moos-img", alt: "Case Study 4"
           h3.cards-moos-heading
-            | 建設現場D様
+            | 太陽光設置業D様
           p.cards-moos-desc
-            | 建設関連人材請負で人手不足を解消し、スケジュール通りに作業が進みました。
+            | 現場仕事のため架電が遅れがちでしたが、IVR自動化により即時アポイントが月間20件増加しました。
       .col-lg-4.col-md-6
         .cards-moos-card
-          = image_tag "image-event1.png", class: "cards-moos-img", alt: "Case Study 1"
+          = image_tag "image-ads5.png", class: "cards-moos-img", alt: "Case Study 1"
           h3.cards-moos-heading
-            | 展示会主催企業様
+            | 女性ファッションサイトF社様
           p.cards-moos-desc
-            | 展示会の受付・誘導スタッフを短期間で手配し、スムーズな運営を実現しました。
-      .col-lg-4.col-md-6
-        .cards-moos-card
-          = image_tag "image-logistics1.png", class: "cards-moos-img", alt: "Case Study 1"
-          h3.cards-moos-heading
-            | EC物流企業様
-          p.cards-moos-desc
-            | ピッキング・梱包スタッフを短期間で手配し、繁忙期の作業効率を向上しました。
+            | 新作発表やセールの度に、スマホ通知機能を使った告知が出来、ユーザーの質が高く売上も1.4倍の成果を得ることができました。
       .col-lg-4.col-md-6
             .cards-moos-card
-              = image_tag "image-security2.png", class: "cards-moos-img", alt: "Case Study 1"
+              = image_tag "image-ads6.png", class: "cards-moos-img", alt: "Case Study 1"
               h3.cards-moos-heading
-                | 大型病院様
+                | インターネットショッピング会社様
               p.cards-moos-desc
-                |  深夜警備の強化に警備業を依頼しましたが、真面目に働いて頂いています。
+                |  ユーザーへのタイムリーな告知をスマホに効率的に出稿出来る手法は、当社にとって革新的で、売上が70万円増加しました。
 
 
 section#inquiry
@@ -410,12 +389,11 @@ section#inquiry
                   .col-12
                     = f.submit "まずは無料で見積から", class: "btn hero-main-submit w-100"
 
-
 / company overview block
 .section-company
   .company-card
     h2.section-title 会社概要
-    p.section-lead 業界屈指の人材力で、現場の課題を解決します。
+    p.section-lead 独自のテクノロジーで広告効果を最大化します。
 
     table.company-table
       tr
@@ -436,13 +414,13 @@ section#inquiry
       tr
         th 事業内容
         td
-          | テレマーケティング代行
+          | マーケティングオートメーションツールの開発・提供
           br
-          | 有料職業紹介
+          | 広告運用コンサルティング
           br/
-          | 軽貨物・配送業務請負
+          | IVR・SMS配信ソリューション事業
           br/
-          | 清掃業務請負
+          | セールスプロセス自動化支援
 
 
 

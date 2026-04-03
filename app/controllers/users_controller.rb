@@ -238,6 +238,41 @@ def send_sms
     redirect_back(fallback_location: users_path)
   end
 
+
+  def bulk_sms
+  users = User.where(id: params[:user_ids])
+
+  client = Twilio::REST::Client.new(
+    ENV['TWILIO_ACCOUNT_SID'],
+    ENV['TWILIO_AUTH_TOKEN']
+  )
+
+  success_count = 0
+  error_count   = 0
+
+  users.each_with_index do |user, index|
+    begin
+      client.messages.create(
+        from: ENV['TWILIO_PHONE_NUMBER'],
+        to: user.tel,
+        body: "Thank you for applying to the J Work job posting the other day. We will contact you about the job via LINE. Please register here: https://j-work.jp/line"
+      )
+
+      success_count += 1
+
+      # ★重要：レート制御（Twilio対策）
+      sleep(0.5)
+
+    rescue => e
+      Rails.logger.error "SMS送信失敗 user_id=#{user.id}: #{e.message}"
+      error_count += 1
+    end
+  end
+
+  redirect_to users_path,
+    notice: "SMS送信: 成功 #{success_count}件 / 失敗 #{error_count}件"
+end
+
   private
 
   def user_params

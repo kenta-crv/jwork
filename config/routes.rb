@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
+  # トップページ
+  root to: 'pages#index'
 
-  #root to: 'top#index' # クライアント側トップ
+  # 各ページ
+  get 'pages/cleaning',      to: 'pages#cleaning'
+  get 'pages/daily',         to: 'pages#daily'
+  get 'pages/housekeeping',  to: 'pages#housekeeping'
+  get 'pages/cargo',         to: 'pages#cargo'
+  get 'pages/logistics',     to: 'pages#logistics'
+  get 'pages/event',         to: 'pages#event'
+
   get "top/recruit" => 'top#recruit'  # クライアント側トップ
   get "top/recruit_jp" => 'top#recruit_jp'  # クライアント側トップ
   get "top/recruit_en" => 'top#recruit_en'  # クライアント側トップ
@@ -65,6 +74,7 @@ Rails.application.routes.draw do
       get :call
       post :confirm
       post :thanks
+      post :bulk_sms
     end
     member do
       post :send_sms

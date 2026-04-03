@@ -1,47 +1,40 @@
-- set_meta_tags title: '人材の業務委託・業務請負なら『OK Work』｜総合人材サービス'
-- set_meta_tags description: 'イベント・物流・清掃・建設・警備・軽貨物まで対応。人材の業務委託・業務請負なら総合サービス企業『OK Work』にお任せください。'
+- set_meta_tags title: 'イベントスタッフ請負・外注なら『OKイベントスタッフ』'
+- set_meta_tags description: 'イベントスタッフの業務請負・外注なら全国対応の『OKイベントスタッフ』。短期・スポット・大量動員にも対応可能。'
 
-section.hero-main-section.position-relative(style="background-image: url(#{asset_path('top-image.png')});")
+section.hero-main-section.position-relative(style="background-image: url(#{asset_path('event-image.png')});")
   .container
     .row.align-items-center.gy-4
       .col-lg-6
         .hero-main-left
           .hero-main-top
             button.hero-main-top-btn
-              | 人材不足でお困りの企業様へ
+              | イベントスタッフをお探しの企業様へ
           h1.hero-main-title.mt-4
             span.noto
-              | 業界屈指の人材力で
-              br
-              | 現場課題を解決
+              | 人材力でイベント現場を成功に導く
           h2.hero-main-subtitle.mt-3
             span.noto
-              | 人材の業務委託・業務請負なら『OK Work』
+              | イベントスタッフ請負なら『OKイベントスタッフ』
           .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
             button.hero-main-badge
-              | ✓ 総合対応
+              | ✓ 大量対応歓迎
             p.hero-main-badge-text
-              | 複数業界の人材手配を一括で対応
+              | 緊急の対応でも多くの人材を手配
           .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
             button.hero-main-badge
               | ✓ 全国対応
             p.hero-main-badge-text
-              | 全国各地の現場ニーズに柔軟に対応
+              | 全国主要都市から地方まで対応可能
           .d-flex.align-items-center.mt-4.hero-main-badges.gap-3
             button.hero-main-badge
-              | ✓ スポット・長期
+              | ✓ 短期・スポットOK
             p.hero-main-badge-text
-              | 単発案件から長期契約まで対応可能
+              | 単日・数日間のご依頼も対応可能
       .col-lg-6
-            .hero-main-right
-              h3.hero-main-trial.text-center
-                | ＼まずは無料で見積から／
-              = form_with model: @contract, url: contracts_path, local: true, html: { id: "hero-main-top", class: "hero-main-form mt-3 p-4 rounded-3" } do |f|
-                - if @contract.errors.any?
-                 .alert.alert-danger
-                   ul
-                      - @contract.errors.full_messages.each do |message|
-                          li = message
+        .hero-main-right.p-4.rounded-3
+          h3.hero-main-trial.text-center
+            | ＼まずはご相談ください！／
+          = form_with model: @contract, url: contracts_path, local: true, html: { id: "hero-main-top", class: "hero-main-form mt-3 p-4 rounded-3" } do |f|
                 .row.g-3
                   .col-12
                     label.form-label.hero-main-label
@@ -89,8 +82,8 @@ section.hero-main-section.position-relative(style="background-image: url(#{asset
                     = f.submit "まずは無料で見積から", class: "btn hero-main-submit w-100"
   .hero-main-overlay
 
-/ ブランドマーク表示はそのまま
-/section.brand-marquee-section.py-4
+/ ブランドマークはそのまま
+/ section.brand-marquee-section.py-4
   .brand-marquee
     .brand-track
       = image_tag "icon-1.png", alt: "Icon 1"
@@ -114,24 +107,17 @@ section.hero-main-section.position-relative(style="background-image: url(#{asset
       = image_tag "icon-9.png", alt: "Icon 9"
       = image_tag "icon-10.png", alt: "Icon 10"
 
-/ サービス紹介
 section#service.japan-notyo-section
   .japan-notyo-container
     .japan-notyo-column.japan-notyo-text-column
       h2.japan-notyo-heading
-        | 総合人材サービス『OK Work』とは？
-      h2.japan-notyo-heading
-        | 
+        | イベントスタッフ請負の『OKイベントスタッフ』とは？
       p.japan-notyo-description
-        | 『OK Work』は、イベント・物流・清掃・建設・警備・軽貨物など、
+        | 『OKイベントスタッフ』は、展示会・催事・イベント現場に特化したスタッフ請負サービスです。
         br
-        | 幅広い業界における人材の業務委託・業務請負を行う総合サービス企業です。
-        br
-        | 人材紹介事業を基盤に培った集客力とマッチング力を活かし、
-        br
-        | 現場ごとの課題や条件に最適な人材を迅速にご提供いたします。
+        | イベント経験者を中心に、受付・誘導・設営補助など幅広い業務に対応可能です。
     .japan-notyo-column.japan-notyo-image-column
-      = image_tag "image.png", class: "japan-notyo-image", alt: "OK Work"
+      = image_tag "image.png", class: "japan-notyo-image", alt: "Tool illustration"
 
 section.jap-notto-section
   .jap-notto-container
@@ -139,25 +125,22 @@ section.jap-notto-section
       | こんなお悩みはありませんか？
     .jap-notto-semicircle-wrapper
       .jap-notto-image-container.jap-notto-image-1
-        = image_tag "mainn-1.png", class: "jap-notto-image"
+        = image_tag "mainn-1.png", class: "jap-notto-image", alt: "Issue 1"
       .jap-notto-image-container.jap-notto-image-2
-        = image_tag "mainn-2.png", class: "jap-notto-image"
+        = image_tag "mainn-2.png", class: "jap-notto-image", alt: "Issue 2"
       .jap-notto-image-container.jap-notto-image-3
-        = image_tag "mainn-3.png", class: "jap-notto-image"
+        = image_tag "mainn-3.png", class: "jap-notto-image", alt: "Issue 3"
       .jap-notto-image-container.jap-notto-image-4
-        = image_tag "mainn-4.png", class: "jap-notto-image"
+        = image_tag "mainn-4.png", class: "jap-notto-image", alt: "Issue 4"
       .jap-notto-image-container.jap-notto-image-5
-        = image_tag "mainn-5.png", class: "jap-notto-image"
+        = image_tag "mainn-5.png", class: "jap-notto-image", alt: "Issue 5"
       .jap-notto-center-image
-        = image_tag "mainn-7.png", class: "jap-notto-center-img"
+        = image_tag "mainn-7.png", class: "jap-notto-center-img", alt: "Center Image"
 
 section#business.ser-mos-section[style="background-image: url('#{asset_path('bg-services.png')}');"]
   .container.py-5.text-center
-    .ser-mos-headings.mb-4
-      .ser-mos-kicker
-        | 
-      h2.ser-mos-title
-        | OK Workの事業内容
+    h2.ser-mos-title
+      | イベントスタッフ請負サービス内容
     .ser-mos-panel.mx-auto.p-4.rounded-4
       .row.g-4
         .col-lg-6
@@ -165,123 +148,76 @@ section#business.ser-mos-section[style="background-image: url('#{asset_path('bg-
             .ser-mos-card-media
               = image_tag "ser-event1.png", class: "ser-mos-card-img", alt: "Service 1"
             h3.ser-mos-card-title
-              | イベントスタッフ請負
+              | イベントスタッフ手配
             p.ser-mos-card-desc
-              | 展示会・催事・各種イベントにおける受付、誘導、設営・撤去補助など、
-              br
-              | 即戦力となるイベントスタッフを業務請負にてご提供いたします。
+              | 展示会・催事・イベント現場に必要なスタッフを請負で手配します。
         .col-lg-6
           article.ser-mos-card
             .ser-mos-card-media
-              = image_tag "ser-logistics1.png", class: "ser-mos-card-img", alt: "Service 1"
+              = image_tag "ser-event2.png", class: "ser-mos-card-img", alt: "Service 2"
             h3.ser-mos-card-title
-              | 物流・倉庫作業請負
+              | 受付・誘導スタッフ
             p.ser-mos-card-desc
-              | 仕分け、ピッキング、入出庫作業など、
-              br
-              | 物流現場の安定稼働を支える人材を柔軟に手配いたします。
+              | 来場者対応・受付・導線誘導など、現場対応スタッフを手配可能です。
         .col-lg-6
           article.ser-mos-card
             .ser-mos-card-media
-              = image_tag "ser-cleaning1.png", class: "ser-mos-card-img", alt: "Service 1"
+              = image_tag "ser-event3.png", class: "ser-mos-card-img", alt: "Service 3"
             h3.ser-mos-card-title
-              | 清掃業務請負
+              | 設営・撤去補助
             p.ser-mos-card-desc
-              | ビル・施設・ホテルなどの清掃業務を、
-              br
-              | 経験豊富な人材により高品質で対応いたします。
+              | 会場設営・撤去作業の補助スタッフも対応します。
         .col-lg-6
           article.ser-mos-card
             .ser-mos-card-media
-              = image_tag "ser-construction1.png", class: "ser-mos-card-img", alt: "Service 1"
+              = image_tag "ser-event4.png", class: "ser-mos-card-img", alt: "Service 4"
             h3.ser-mos-card-title
-              | 建設・建築関連人材
+              | 短期・大量動員
             p.ser-mos-card-desc
-              | 建設現場における作業員・補助業務など、
-              br
-              | 人手不足の解消を目的とした人材を請負で提供いたします。
-        .col-lg-6
-          article.ser-mos-card
-            .ser-mos-card-media
-              = image_tag "ser-security1.png", class: "ser-mos-card-img", alt: "Service 1"
-            h3.ser-mos-card-title
-              | 警備業務請負
-            p.ser-mos-card-desc
-              | 施設警備・交通誘導・イベント警備など、
-              br
-              | 安全確保を目的とした警備人材を手配いたします。
-        .col-lg-6
-          article.ser-mos-card
-            .ser-mos-card-media
-              = image_tag "sec-delivery.png", class: "ser-mos-card-img", alt: "Service 1"
-            h3.ser-mos-card-title
-              | 軽貨物・配送業務請負
-            p.ser-mos-card-desc
-              | 軽貨物ドライバーによる配送業務を、
-              br
-              | 業務請負にて安定的にサポートいたします。
+              | 繁忙期や急なイベントでも柔軟に人員を確保します。
 
 section.main-moss-section
   .container.text-center.main-moss-header
     h2.main-moss-title
-      | OK Workが選ばれる理由
+      | イベント現場を支える
     h3.main-moss-subtitle
-      | 総合人材サービスとしての強み
+      | 『OKイベントスタッフ』の強み
   .container-fluid.main-moss-block
     .row.align-items-center
       .col-lg-6.text-center
-        = image_tag "main-cargo1.png", class: "main-moss-img img-fluid"
+        = image_tag "main-cargo1.png", class: "main-moss-img img-fluid", alt: "Feature Image"
       .col-lg-6.text-center.main-moss-content
         h3.main-moss-block-title
-          | 現場に最適な人材を迅速に手配
+          | 経験豊富なスタッフを手配
         p.main-moss-block-desc
-          | 業界・業務内容・期間に応じた最適な人材をスピーディーにご提供いたします。
+          | イベント経験者を中心に、案件内容に応じて最適なスタッフを手配します。
   .container-fluid.main-moss-block
     .row.align-items-center.flex-row-reverse
       .col-lg-6.text-center
-        = image_tag "main-cargo2.png", class: "main-moss-img img-fluid"
+        = image_tag "main-cargo2.png", class: "main-moss-img img-fluid", alt: "Feature Image"
       .col-lg-6.text-center.main-moss-content
         h3.main-moss-block-title
-          | スポットから長期契約まで対応
+          | 全国対応・短期・スポットOK
         p.main-moss-block-desc
-          | 単発案件から常駐型まで柔軟に対応可能です。
+          | 全国の主要都市を中心に柔軟なスタッフ手配が可能です。
   .container-fluid.main-moss-block
     .row.align-items-center
       .col-lg-6.text-center
-        = image_tag "main-cargo3.png", class: "main-moss-img img-fluid"
+        = image_tag "main-cargo3.png", class: "main-moss-img img-fluid", alt: "Feature Image"
       .col-lg-6.text-center.main-moss-content
         h3.main-moss-block-title
-          | 全国対応の人材ネットワーク
+          | 多様な業務対応
         p.main-moss-block-desc
-          | 各地域の人材ネットワークを活かし、全国対応を実現しております。
+          | 受付・誘導・設営補助など幅広い業務に対応できます。
   .container-fluid.main-moss-block
     .row.align-items-center.flex-row-reverse
       .col-lg-6.text-center
         = image_tag 'main-cleaning4.png', alt: 'Feature Image', class: 'main-moss-img img-fluid'
       .col-lg-6.text-center.main-moss-content
         h3.main-moss-block-title
-          | 地方の人材・現場構築も対応
+          | 地方のイベント現場も対応
         p.main-moss-block-desc
-          | 地方で多数人材が必要な場合でも、早期にスタッフを手配し、地方構築をサポートします。
-
-
-section#case.cards-moos-section.py-5
-  .container.text-center
-    h2.cards-moos-title.mb-5
-      | 記事一覧
-    .row.g-4.cards-moos-row.d-none.d-md-flex
-      - Column.order(created_at: :desc).limit(3).each do |column|
-        .col-lg-4.col-md-6
-          = link_to column_path(column) do
-            .cards-moos-card
-              - if column.file.present?
-               = image_tag column.file.to_s, width:"100%", class: 'column-thumb', alt: column.title
-              h3.cards-moos-heading
-                = column.title
-              p.cards-moos-desc
-                = truncate(column.description, length: 200)
-    .mt-4
-      = link_to "Column一覧", columns_path, class:"btn btn-primary"
+          | 地方開催のイベントでも、経験豊富なスタッフを手配し、運営をサポートします。
 
 section.faq-japan-section.py-5
   .container.text-center
@@ -290,50 +226,60 @@ section.faq-japan-section.py-5
     .faq-japan-container
       .faq-japan-item
         .faq-japan-question.d-flex.align-items-center.justify-content-between
-          p 対応エリアはどこまでですか？
+          p
+            | 対応可能なエリアはどこですか？
           = image_tag "closee.png", class: "faq-japan-icon", alt: "toggle icon"
         .faq-japan-answer
-          p 全国対応可能です。地域や業種により条件が異なりますのでご相談ください。
+          p
+            | 全国対応可能です。エリアにより条件が異なりますのでご相談ください。
       .faq-japan-item
         .faq-japan-question.d-flex.align-items-center.justify-content-between
-          p 複数事業をまとめて依頼できますか？
+          p
+            | 単日や短期間のイベントにも対応できますか？
           = image_tag "closee.png", class: "faq-japan-icon", alt: "toggle icon"
         .faq-japan-answer
-          p はい、複数業種を一括でご依頼いただけます。
+          p
+            | はい、単日・短期イベントにも柔軟に対応可能です。
+      .faq-japan-item
+        .faq-japan-question.d-flex.align-items-center.justify-content-between
+          p
+            | 何名から依頼できますか？
+          = image_tag "closee.png", class: "faq-japan-icon", alt: "toggle icon"
+        .faq-japan-answer
+          p
+            | 1名から大人数まで、案件内容に応じて手配可能です。
+      .faq-japan-item
+        .faq-japan-question.d-flex.align-items-center.justify-content-between
+          p
+            | どんな業務経験者がいますか？
+          = image_tag "closee.png", class: "faq-japan-icon", alt: "toggle icon"
+        .faq-japan-answer
+          p
+            | 受付・誘導・設営補助など、幅広いイベント経験スタッフが在籍しています。
+
+    .section#case.cards-moos-section.py-5
+      .container.text-center
+        h2.cards-moos-title.mb-5
+          | イベント業記事一覧
+        .row.g-4.cards-moos-row.d-none.d-md-flex
+          - Column.where(genre: "event").order(created_at: :desc).limit(3).each do |column|
+            .col-lg-4.col-md-6
+              = link_to column_path(column) do
+                .cards-moos-card
+                  - if column.file.present?
+                   = image_tag column.file.to_s, width:"100%", class: 'column-thumb', alt: column.title
+                  h3.cards-moos-heading
+                    = column.title
+                  p.cards-moos-desc
+                    = truncate(column.description, length: 200)
+        .mt-4
+          = columns_index_link("event", "イベント業の記事一覧を見る")
 
 section#case.cards-moos-section.py-5
   .container.text-center
     h2.cards-moos-title.mb-5
       | 導入事例
     .row.g-4.cards-moos-row.d-none.d-md-flex
-      .col-lg-4.col-md-6
-            .cards-moos-card
-              = image_tag "image-cargo1.png", class: "cards-moos-img", alt: "Case Study 1"
-              h3.cards-moos-heading
-                | 製造業A社様
-              p.cards-moos-desc
-                |  定期便の依頼でしたが、ドライバーさんの対応も丁寧で安心できました。納品も予定通りで助かりました。
-      .col-lg-4.col-md-6
-            .cards-moos-card
-              = image_tag "image-security2.png", class: "cards-moos-img", alt: "Case Study 1"
-              h3.cards-moos-heading
-                | 施設ビル様
-              p.cards-moos-desc
-                |  ビルのメンテナンス清掃の依頼でしたが、スムーズに作業に当たっていただき助かりました。
-      .col-lg-4.col-md-6
-            .cards-moos-card
-              = image_tag "image_construction1.png", class: "cards-moos-img", alt: "Case Study 1"
-              h3.cards-moos-heading
-                | 工務店A様
-              p.cards-moos-desc
-                |  建設現場で人材を集めるのに苦労している中で、OK建設さんをご紹介頂きました。即日３名をご紹介いただき大変驚くと共に助かりました。
-      .col-lg-4.col-md-6
-        .cards-moos-card
-          = image_tag "image-security4.png", class: "cards-moos-img", alt: "Case Study 4"
-          h3.cards-moos-heading
-            | 建設現場D様
-          p.cards-moos-desc
-            | 建設関連人材請負で人手不足を解消し、スケジュール通りに作業が進みました。
       .col-lg-4.col-md-6
         .cards-moos-card
           = image_tag "image-event1.png", class: "cards-moos-img", alt: "Case Study 1"
@@ -343,19 +289,25 @@ section#case.cards-moos-section.py-5
             | 展示会の受付・誘導スタッフを短期間で手配し、スムーズな運営を実現しました。
       .col-lg-4.col-md-6
         .cards-moos-card
-          = image_tag "image-logistics1.png", class: "cards-moos-img", alt: "Case Study 1"
+          = image_tag "image-event2.png", class: "cards-moos-img", alt: "Case Study 2"
           h3.cards-moos-heading
-            | EC物流企業様
+            | 大型イベント運営会社様
           p.cards-moos-desc
-            | ピッキング・梱包スタッフを短期間で手配し、繁忙期の作業効率を向上しました。
+            | 設営補助や誘導スタッフを短期で手配し、イベント成功に貢献しました。
       .col-lg-4.col-md-6
-            .cards-moos-card
-              = image_tag "image-security2.png", class: "cards-moos-img", alt: "Case Study 1"
-              h3.cards-moos-heading
-                | 大型病院様
-              p.cards-moos-desc
-                |  深夜警備の強化に警備業を依頼しましたが、真面目に働いて頂いています。
-
+        .cards-moos-card
+          = image_tag "image-event3.png", class: "cards-moos-img", alt: "Case Study 3"
+          h3.cards-moos-heading
+            | 学園祭・企業展示会様
+          p.cards-moos-desc
+            | イベント経験豊富なスタッフを中心に手配し、円滑な進行をサポートしました。
+      .col-lg-4.col-md-6
+        .cards-moos-card
+          = image_tag "image-event4.png", class: "cards-moos-img", alt: "Case Study 4"
+          h3.cards-moos-heading
+            | 地方イベント主催企業様
+          p.cards-moos-desc
+            | 地方開催のイベントでも、必要人数を迅速に手配し、スムーズな運営を実現しました。
 
 section#inquiry
   .container
@@ -409,41 +361,6 @@ section#inquiry
                     = f.text_area :message, class: "form-control hero-main-input", placeholder:"（例）お問い合わせ内容"
                   .col-12
                     = f.submit "まずは無料で見積から", class: "btn hero-main-submit w-100"
-
-
-/ company overview block
-.section-company
-  .company-card
-    h2.section-title 会社概要
-    p.section-lead 業界屈指の人材力で、現場の課題を解決します。
-
-    table.company-table
-      tr
-        th 会社名
-        td 株式会社セールスプロ
-      tr
-        th 設立
-        td 2023年8月18日
-      tr
-        th 代表者
-        td 代表取締役 奥山　健太
-      tr
-        th 資本金
-        td 5,000,000円
-      tr
-        th 所在地
-        td 東京都港区芝5-27-3 MBC・Aー9
-      tr
-        th 事業内容
-        td
-          | テレマーケティング代行
-          br
-          | 有料職業紹介
-          br/
-          | 軽貨物・配送業務請負
-          br/
-          | 清掃業務請負
-
 
 
 script[src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"]

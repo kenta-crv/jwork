@@ -14,7 +14,7 @@
           = f.label :account_name_cont, "LINEアカウント"
           = f.text_field :account_name_cont, class: "form-control", placeholder: "LINEアカウントを入力"
         td
-          = f.label :email_cont, "電話番号 [Mail]"
+          = f.label :email_cont, "メールアドレス [Mail]"
           = f.text_field :email_cont, class: "form-control", placeholder: "メールアドレスを入力 [Enter Mail]"
         td
           = f.label :status_eq, "ステータス"
@@ -36,6 +36,14 @@
 
 br/
 br/
+
+= button_to "選択ユーザーにSMS送信",
+            bulk_sms_users_path,
+            method: :post,
+            params: {},
+            form: { id: "bulk_sms_form" },
+            class: "btn btn-warning",
+            data: { confirm: "選択したユーザーにSMS送信します。よろしいですか？" }
 
 - if @users.present?
   - total_count = @users.respond_to?(:total_count) ? @users.total_count : @users.count
@@ -66,6 +74,7 @@ br/
         col style="width: 16%;"
       thead
         tr
+          th = check_box_tag "select_all", "", false, id: "select_all"
           th User_name
           th Phone_number
           th Status
@@ -76,6 +85,7 @@ br/
       tbody
         - @users.each do |user|
           tr
+            td= check_box_tag "user_ids[]", user.id, false, class: "user-checkbox"
             td= link_to user.name, user_path(user)
             td= user.tel
 
@@ -160,6 +170,35 @@ script
   |         },
   |         body: JSON.stringify({ user: { account_name: value } })
   |       });
+  |     });
+  |   });
+  | });
+
+script
+  | document.addEventListener("DOMContentLoaded", function() {
+  |   const form = document.getElementById("bulk_sms_form");
+  |
+  |   form.addEventListener("submit", function(e) {
+  |     const checked = document.querySelectorAll(".user-checkbox:checked");
+  |
+  |     if (checked.length === 0) {
+  |       e.preventDefault();
+  |       alert("ユーザーを選択してください");
+  |       return;
+  |     }
+  |
+  |     checked.forEach(cb => {
+  |       const input = document.createElement("input");
+  |       input.type = "hidden";
+  |       input.name = "user_ids[]";
+  |       input.value = cb.value;
+  |       form.appendChild(input);
+  |     });
+  |   });
+  |
+  |   document.getElementById("select_all").addEventListener("change", function() {
+  |     document.querySelectorAll(".user-checkbox").forEach(cb => {
+  |       cb.checked = this.checked;
   |     });
   |   });
   | });
