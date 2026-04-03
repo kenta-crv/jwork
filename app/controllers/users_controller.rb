@@ -130,34 +130,42 @@ end
     redirect_to users_path, alert: "削除しました"
   end
 
-def bulk_sms
-  # IDが届いているかログで確認
-  Rails.logger.info "--- DEBUG: user_ids = #{params[:user_ids].inspect} ---"
-  
-  users = User.where(id: params[:user_ids])
-  return redirect_to users_path, alert: "ユーザーを選択してください" if users.empty?
+def send_sms
+    user = User.find(params[:id])
+    
+    if user.tel.present?
+      begin
+        # 番号整形: 080... -> +8180...
+        raw_tel = user.tel.to_s.strip.sub(/^p:/, '').gsub(/[^\d+]/, '')
+        
+        if raw_tel.match?(/^0\d{9,11}$/)
+          to_number = "+81#{raw_tel[1..-1]}"
+        elsif raw_tel.match?(/^81\d{9,11}$/)
+          to_number = "+#{raw_tel}"
+        else
+          to_number = raw_tel
+        end
 
-  client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
+        client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
+        message_body = "Interviews are conducted on LINE. Please register here: https://j-work.jp/line\n面接はLINEで行います。こちらから登録してください: https://j-work.jp/line"
+        
+        client.messages.create(
+          from: ENV['TWILIO_PHONE_NUMBER'],
+          to: to_number,
+          body: message_body
+        )
 
-  users.each do |user|
-    next if user.tel.blank?
-    begin
-      # ★個別送信と同じ整形ロジックを必ず入れる（これがないと本番は 20404 で死ぬ）
-      raw_tel = user.tel.to_s.gsub(/[^\d+]/, '')
-      to_number = raw_tel.start_with?('0') ? "+81#{raw_tel[1..-1]}" : "+#{raw_tel}"
-
-      client.messages.create(
-        from: ENV['TWILIO_PHONE_NUMBER'],
-        to: to_number,
-        body: "..."
-      )
-      sleep(0.5)
-    rescue => e
-      Rails.logger.error "失敗: #{user.id}: #{e.message}"
+        flash[:notice] = "#{user.name} に SMS を送信しました。(To: #{to_number})"
+      rescue => e
+        flash[:alert] = "SMS送信に失敗しました: #{e.message}"
+      end
+    else
+      flash[:alert] = "電話番号が設定されていません"
     end
+
+    redirect_to users_path
   end
-  redirect_to users_path, notice: "送信完了"
-end
+
   # ==========================================
   # 2. IVR単体発信 (080... を +81... に変換)
   # ==========================================

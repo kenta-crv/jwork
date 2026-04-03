@@ -82,7 +82,7 @@ br/
       tbody
         - @users.each do |user|
           tr
-            tdtd = check_box_tag "user_ids[]", user.id, false, class: "user-checkbox", form: "bulk_sms_form"
+            td = check_box_tag "user_ids[]", user.id, false, class: "user-checkbox", form: "bulk_sms_form"
             td= link_to user.name, user_path(user)
             td= user.tel
 
@@ -171,3 +171,31 @@ script
   |   });
   | });
 
+script
+  | document.addEventListener("DOMContentLoaded", function() {
+  |   const form = document.getElementById("bulk_sms_form");
+  |
+  |   form.addEventListener("submit", function(e) {
+  |     const checked = document.querySelectorAll(".user-checkbox:checked");
+  |
+  |     if (checked.length === 0) {
+  |       e.preventDefault();
+  |       alert("ユーザーを選択してください");
+  |       return;
+  |     }
+  |
+  |     checked.forEach(cb => {
+  |       const input = document.createElement("input");
+  |       input.type = "hidden";
+  |       input.name = "user_ids[]";
+  |       input.value = cb.value;
+  |       form.appendChild(input);
+  |     });
+  |   });
+  |
+  |   document.getElementById("select_all").addEventListener("change", function() {
+  |     document.querySelectorAll(".user-checkbox").forEach(cb => {
+  |       cb.checked = this.checked;
+  |     });
+  |   });
+  | });
