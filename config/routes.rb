@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
   # トップページ
-  root to: 'pages#index'
+  root to: 'top#index'
 
   # 各ページ
   get 'pages/cleaning',      to: 'pages#cleaning'
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get "top/recruit_clean" => 'top#recruit_clean'  # クライアント側トップ
   get "top/calculation" => 'top#calculation'  
 
-  get "top/start" => 'top#start'  
+  get "top/start" => 'top#start '  
 
   get 'information' => 'top#information' #社外周知
 
