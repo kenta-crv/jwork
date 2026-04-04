@@ -3,6 +3,7 @@ h3 Interviewed ユーザー表示
 table.list
   thead
     tr
+      th = check_box_tag "select_all", "", false, id: "select_all"
       th User_name
       th Phone_number
       th Status
@@ -13,7 +14,7 @@ table.list
   tbody
     - @users.each do |user|
       - latest_comment = user.comments.order(created_at: :desc).first
-      
+      td= check_box_tag "user_ids[]", user.id, false, class: "user-checkbox"
       tr id="user-row-#{user.id}"
         / ユーザー名
         td= link_to user.name, user_path(user)
