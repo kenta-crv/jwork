@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get "top/recruit_clean" => 'top#recruit_clean'  # クライアント側トップ
   get "top/calculation" => 'top#calculation'  
 
-  get "top/start" => 'top#start '  
+  get "top/start" => 'top#start'  
 
   get 'information' => 'top#information' #社外周知
 
@@ -86,7 +86,7 @@ Rails.application.routes.draw do
       get "conclusion"
       get "payment"
       get "calendar"
-      get "start"
+      #get "start"
       post :call_ivr
       match 'show_ivr', to: 'ivr#show', as: :show_ivr, via: [:get, :post]
       post 'handle_choice_ivr', to: 'ivr#handle_choice', as: :handle_choice_ivr

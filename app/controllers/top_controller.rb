@@ -42,7 +42,8 @@ class TopController < ApplicationController
 
   def information
   end
-
+  def start
+  end
 =begin
    def redirect
     line_url = "https://lin.ee/yVI3ClY"
