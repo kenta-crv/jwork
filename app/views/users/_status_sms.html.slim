@@ -14,9 +14,9 @@ table.list
   tbody
     - @users.each do |user|
       - latest_comment = user.comments.order(created_at: :desc).first
-      td= check_box_tag "user_ids[]", user.id, false, class: "user-checkbox"
       tr id="user-row-#{user.id}"
         / ユーザー名
+        td= check_box_tag "user_ids[]", user.id, false, class: "user-checkbox"
         td= link_to user.name, user_path(user)
 
         / 電話番号
