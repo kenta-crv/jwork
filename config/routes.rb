@@ -4,14 +4,6 @@ Rails.application.routes.draw do
   # トップページ
   root to: 'top#index'
 
-  # 各ページ
-  get 'pages/cleaning',      to: 'pages#cleaning'
-  get 'pages/daily',         to: 'pages#daily'
-  get 'pages/housekeeping',  to: 'pages#housekeeping'
-  get 'pages/cargo',         to: 'pages#cargo'
-  get 'pages/logistics',     to: 'pages#logistics'
-  get 'pages/event',         to: 'pages#event'
-
   get "top/recruit" => 'top#recruit'  # クライアント側トップ
   get "top/recruit_jp" => 'top#recruit_jp'  # クライアント側トップ
   get "top/recruit_en" => 'top#recruit_en'  # クライアント側トップ

@@ -101,14 +101,15 @@ end
     previous_agree = @user.agree
 
     if @user.update(user_params)
-      if @user.agree == "Agree" && previous_agree != "Agree"
+      if (@user.agree == "Agree" || @user.agree == "1") &&
+        (previous_agree != "Agree" && previous_agree != "1")
         UserMailer.contract_received_email(@user).deliver_now
         UserMailer.contract_send_email(@user).deliver_now
         flash[:notice] = "契約が完了しました"
       end
 
       respond_to do |format|
-        format.html { redirect_to(current_admin.present? ? users_path : info_user_path(@user)) }
+        format.html { redirect_to info_user_path(@user) }
         format.json { render json: { status: :ok, message: 'Status updated successfully.', new_status: @user.status } }
       end
     else

@@ -1,3 +1,7 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
 .sp-corp-wrapper {
   --brand-blue: #0055ff;
   --bg-light: #f8f9fa;
@@ -174,4 +178,416 @@
   .sp-news-row { flex-direction: column; align-items: flex-start; gap: 10px; }
   .sp-th { width: 100px; }
   .sp-company { padding: 30px 20px; }
+}
+
+
+
+
+
+
+:root {
+  --primary-blue: #0066ff;
+  --primary-hover: #0052cc;
+  --bg-slate: #f8fafc;
+  --border-color: #e2e8f0;
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --radius-lg: 1.5rem;
+  --shadow-main: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.contract-wrapper {
+  max-width: 860px;
+  margin: 3rem auto;
+  padding: 3.5rem;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-main);
+  font-family: "Inter", "Hiragino Sans", "Meiryo", sans-serif;
+  color: var(--text-dark);
+}
+
+/* ヘッダーデザイン */
+.contract-header {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  .contract-subtitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .contract-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* 契約書本文ボックス */
+.contract-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  margin-bottom: 3.5rem;
+
+  .contract-inner {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 3rem;
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #334155;
+
+    h4 {
+      font-size: 1.3rem;
+      color: #1e293b;
+      margin: 2.5rem 0 1rem;
+      font-weight: 800;
+      border-left: 6px solid #0055ff;
+      padding-left: 1rem;
+    }
+
+    /* スクロールバー */
+    &::-webkit-scrollbar { width: 8px; }
+    &::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  }
+}
+
+/* 単価・条件のグリッド */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.info-card {
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 1.25rem;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-blue);
+  }
+
+  .info-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    text-align:center;
+  }
+}
+
+.price-list {
+  list-style: none;
+  padding: 0;
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--bg-slate);
+    
+    .vehicle { color: var(--text-muted); font-size: 0.9rem; }
+    .amount { 
+      font-weight: 800; 
+      color: var(--text-dark);
+      span { font-size: 0.7rem; margin-left: 2px; }
+    }
+  }
+}
+
+.schedule-item {
+  margin-bottom: 1rem;
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    background: var(--primary-blue);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    &.outline {
+      background: transparent;
+      border: 1px solid var(--primary-blue);
+      color: var(--primary-blue);
+    }
+  }
+  p { font-size: 0.85rem; font-weight: 600; margin: 0; }
+}
+
+/* 同意エリア & ボタン */
+.action-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  background: var(--bg-slate);
+  border-radius: 100px;
+  transition: all 0.2s ease;
+
+  &:hover { background: #eff6ff; }
+
+  input { display: none; }
+
+  .checkmark {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--primary-blue);
+    border-radius: 50%;
+    position: relative;
+    background: white;
+    transition: all 0.2s;
+  }
+
+  input:checked + .checkmark {
+    background: var(--primary-blue);
+    &::after {
+      content: '✓';
+      color: white;
+      position: absolute;
+      left: 5px;
+      top: 0;
+      font-size: 14px;
+      font-weight: 900;
+    }
+  }
+
+  .label-text { font-weight: 700; font-size: 1rem; }
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 1rem;
+}
+
+#submitBtn {
+  width: 100%;
+  padding: 1.25rem;
+  border-radius: 100px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, #0044cc 100%);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 10px 15px -3px rgba(0, 102, 255, 0.3);
+
+  &:disabled {
+    background: #cbd5e1;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 102, 255, 0.4);
+  }
+}
+
+#translate {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.75rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  
+  &:hover {
+    background: var(--bg-slate);
+    color: var(--text-dark);
+  }
+}
+
+/* レスポンシブ */
+@media (max-width: 640px) {
+  .contract-wrapper { padding: 2rem 1.5rem; }
+  .info-grid { grid-template-columns: 1fr; }
+  .contract-title { font-size: 1.5rem; }
+}
+
+
+/* 日付フィールド全体のコンテナ */
+.date-field {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  border: 2px solid var(--border-color);
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: fit-content;
+  min-width: 300px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  /* 入力中・クリック時の青い強調 */
+  &:focus-within {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
+    
+    /* フォーカス時にアイコンも少し強調 */
+    .icon-calendar-blue {
+      transform: scale(1.05);
+    }
+  }
+
+  /* --- CSS描画のモダンなカレンダーアイコン --- */
+  .icon-calendar-blue {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--primary-blue);
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+
+    /* カレンダー上部の突起 */
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      width: 2px;
+      height: 5px;
+      background: var(--primary-blue);
+      border-radius: 1px;
+    }
+    &::before { left: 4px; }
+    &::after { right: 4px; }
+
+    /* カレンダー内部の横線（デザインアクセント） */
+    span {
+      position: absolute;
+      top: 6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary-blue);
+      opacity: 0.3;
+    }
+  }
+
+  /* --- テキスト入力エリア --- */
+  .date-input-group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0;
+    }
+
+    .styled-date-input {
+      border: none;
+      outline: none !important;
+      background: transparent;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      font-family: inherit;
+      cursor: pointer;
+      width: 100%;
+      padding: 0;
+
+      /* 標準のピッカーアイコンも青色へ(Chrome用) */
+      &::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        filter: invert(21%) sepia(100%) saturate(2514%) hue-rotate(212deg) brightness(97%) contrast(101%);
+        opacity: 0.6;
+        &:hover { opacity: 1; }
+      }
+    }
+  }
+}
+
+/* 調整：action-area内での中央揃え */
+.action-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+
+
+
+
+
+
+
+
+/* --- おしゃれなモダンボタン --- */
+.sp-card-body .sp-btn-modern.btn-primary {
+  // 1. カラーと基本設定
+  background-color: #0066ff; /* テーマカラー */
+  border: none;
+  color: #ffffff;
+  
+  // 2. フォルム (丸みを抑えてシャープに)
+  border-radius: 4px; /* ここがポイント */
+  padding: 12px 20px;
+  width: 100%;
+  
+  // 3. テキスト (ミニマル・都会的)
+  font-weight: 700;
+  text-transform: uppercase; /* すべて大文字に */
+  letter-spacing: 0.12em; /* 文字間を少し広げる */
+  font-size: 0.85rem;
+  
+  // 4. トランジション (なめらかに)
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* 軽い影 */
+}
+
+/* ホバー時の洗練されたアニメーション */
+.sp-card-body .sp-btn-modern.btn-primary:hover,
+.sp-card-body .sp-btn-modern.btn-primary:focus {
+  background-color: #0044cc; /* 少し暗く */
+  transform: translateY(-3px); /* 少し上に持ち上げる */
+  box-shadow: 0 10px 20px rgba(0, 102, 255, 0.3); /* 青白い光のような影を強く */
+  text-decoration: none; /* 下線を消す */
+  color: #ffffff;
 }

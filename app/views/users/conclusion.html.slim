@@ -1,10 +1,6 @@
 -if @user.hope_work == "Driver"
  = render 'conclusion_driver'
--elsif @user.hope_work == "Cleaning"
- = render 'conclusion_cleaning'
--elsif @user.hope_work == "Food"
- = render 'conclusion_food'
-.contract-wrapper  
+ .contract-wrapper  
   h3.headline 契約名義
   .text 甲：
   .text #{@user.address}
@@ -57,3 +53,62 @@
 
          td colspan="4"
            = f.submit "Enter into a contract", class:"btn btn-danger"
+
+-elsif @user.hope_work == "Cleaning"
+ = render 'conclusion_cleaning'
+ .contract-wrapper  
+  h3.headline 契約名義
+  .text 甲：
+  .text #{@user.address}
+  .text #{@user.name}
+  br/
+  .text 乙：
+  .text 東京都港区芝5-27-3 MBC・Aー9
+  .text 株式会社セールスプロ
+  .text 奥山　健太
+ 
+  h3.headline 単価表
+  table.company.responsive-table
+     tr 
+       th ほうしゅうじょうけん[Reward Conditions]
+     tr
+       td #{@user.deliver}
+     tr 
+       th しゅっきんじょうけん[Working conditions]
+     tr 
+       td #{@user.day_off}
+
+
+  h2.headline 約款に同意する
+  br
+  = form_with model: @user, url: user_path(@user), local: true do |f|
+     table.company.responsive-table
+      colgroup
+         col.col-1
+         col.col-2
+         col.col-3
+      tr
+        td.label-cell
+           strong.label Required
+        td.arrow_box
+          | その他（そのた）契約約款（けいやくやっかん）に同意（どうい）します。 [I agree to the other terms and conditions of the contract.]
+        td
+           = f.select(:agree, [ \
+             ["Select","Select"],      \
+             ["Agree","Agree"],      \
+             ])
+      tr 
+        td.label-cell
+           strong.label Required
+        td.arrow_box
+          | 契約日（けいやくび） [Contract date]
+        td
+           = f.date_field :contract_date, value: @user.contract_date || Date.today, class: 'input'
+       
+      tr
+
+         td colspan="4"
+           = f.submit "Enter into a contract", class:"btn btn-danger"
+
+-elsif @user.hope_work == "Food"
+ = render 'conclusion_food'
