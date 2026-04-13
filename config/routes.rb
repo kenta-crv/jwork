@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get "top/start" => 'top#start'  
 
   get 'information' => 'top#information' #社外周知
-
   
   get "top/flow" => 'top#flow'
   get "top/entry" => 'top#entry'

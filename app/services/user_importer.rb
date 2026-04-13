@@ -28,24 +28,29 @@ class UserImporter
       next if row.blank?
 
       begin
-        email = row[index['email']]
+        # index[key]がnilの場合にrow[nil]でTypeErrorにならないためのガード
+        get_val = ->(key) {
+          idx = index[key]
+          idx ? row[idx] : nil
+        }
+
+        email = get_val.call('email')
         next if email.blank?
 
-        # ★ここが変更ポイント（上書き対応）
+        # 上書き対応
         user = User.find_or_initialize_by(email: email)
 
         user.assign_attributes(
-          name: row[index['full_name']],
-          tel: row[index['phone_number']],
-          age: row[index['date_of_birth']],
-          address: row[index['city']],
-
-          past_year: row[index['how_long_years_have_you_been_working_in_japan?（にほんでなんねんかんはたらきましたか？）']],
-          work_range: row[index['please_tell_me_your_status_of_residence（visaのしゅるいをおしえてください）']],
-          hope_work: row[index['ad_name']],
-          period: row[index['when_are_you_available_to_work?（あなたはいつからはたらけますか？）']],
-          speak_japanese: row[index['can_you_speak_japanese?（あなたはにほんごをはなすことができますか？）']],
-          gender: row[index['gender']],
+          name:           get_val.call('full_name'),
+          tel:            get_val.call('phone_number'),
+          age:            get_val.call('date_of_birth'),
+          address:        get_val.call('city'),
+          past_year:      get_val.call('how_long_years_have_you_been_working_in_japan?（にほんでなんねんかんはたらきましたか？）'),
+          work_range:     get_val.call('please_tell_me_your_status_of_residence（visaのしゅるいをおしえてください）'),
+          hope_work:      get_val.call('ad_name'),
+          period:         get_val.call('when_are_you_available_to_work?（あなたはいつからはたらけますか？）'),
+          speak_japanese: get_val.call('can_you_speak_japanese?（あなたはにほんごをはなすことができますか？）'),
+          gender:         get_val.call('gender'),
 
           password: '11111111',
           password_confirmation: '11111111'
