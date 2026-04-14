@@ -1,0 +1,90 @@
+.card.border-0.shadow-sm
+  .card-body.p-0
+    / ヘッダー：タイトルと概要
+    .p-4.bg-white
+      span.badge.bg-primary.mb-2 案件詳細
+      - if @recruit.point.present?
+              span.badge.bg-warning.text-dark = "★ #{@recruit.point}"
+      - else
+              span.text-muted 未設定
+      h2.h4.fw-bold.mb-3 
+      = @recruit.title
+      .text-muted.small.bg-light.p-3.rounded
+        = simple_format(@recruit.description)
+
+
+    / メイン情報：表形式でスッキリ整理
+    table.table.table-bordered.mb-0
+      tbody
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle width="30%" 単価
+          td.align-middle.py-3
+            .red 
+              span.h5.fw-bold.text-dark = @recruit.unit_price
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 報酬・インセンティブ
+          td.align-middle.py-3
+            span.fw-bold.text-danger = simple_format(@recruit.reward)
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 勤務時間
+          td.align-middle = simple_format(@recruit.working_hours)
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 勤務日数
+          td.align-middle = simple_format(@recruit.working_days)
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 勤務地
+          td.align-middle = simple_format(@recruit.area)
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 支払条件
+          td.align-middle.text-danger = simple_format(@recruit.payment)
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 日本語レベル
+          td.align-middle = simple_format(@recruit.japanese_skill)
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 応募要件
+          td.align-middle = simple_format(@recruit.require)
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 契約形態
+          td.align-middle = simple_format(@recruit.contract_type)
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 車両詳細
+          td.align-middle.text-danger.fw-bold = simple_format(@recruit.car_details)
+
+        / ===== 追加カラム（フォーム側に存在）=====
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle おすすめポイント
+          td.align-middle = simple_format(@recruit.recommend)
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle ジャンル
+          td.align-middle
+            span.badge.bg-secondary = @recruit.genre
+
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 応募可能ビザ
+          td.align-middle
+            = simple_format(Array(@recruit.visa).join("\n"))
+
+        / ===== 既存 =====
+        tr
+          th.bg-light.text-muted.fw-normal.align-middle 備考
+          td.align-middle = simple_format(@recruit.remarks)
+
+  / 操作エリア
+  .card-footer.bg-light.p-3
+    .d-grid.gap-2.d-md-flex.justify-content-md-end
+      = link_to "戻る", recruits_path, class: "btn btn-outline-secondary px-4"
+      = link_to "編集する", edit_recruit_path(@recruit), class: "btn btn-warning px-4"
+      = link_to "削除", recruit_path(@recruit),
+        method: :delete,
+        data: { confirm: "本当に削除しますか？" },
+        class: "btn btn-danger px-4"

@@ -22,11 +22,10 @@ Rails.application.routes.draw do
 
   get "top/policy" => 'top#policy'  
 
-  get "/database" => 'top#database' # ユーザー側トップ
+  #get "/database" => 'top#database' # ユーザー側トップ
   get '/redirect', to: 'top#redirect'
   get 'users/thanks', to: 'users#thanks'
   get 'lp', to: 'top#lp'
-  resources :access_logs, only: [:index]
    
   get 'line', to: 'top#line'
 
@@ -59,9 +58,6 @@ Rails.application.routes.draw do
   }
   resources :users do
     resources :comments
-    resources :journals
-    resources :alcohols
-    resources :inspections
     collection do
       post :bulk_call_ivr # 一括発信用
       get :call
@@ -91,4 +87,6 @@ Rails.application.routes.draw do
     post :handle_choice  # 選択の受信
    end
   end
+
+  resources :recruits
 end

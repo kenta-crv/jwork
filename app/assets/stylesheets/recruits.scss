@@ -1,0 +1,79 @@
+// Place all the styles related to the recruits controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/* 案件一覧専用の洗練スタイル */
+.recruit-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05); // ほぼ見えないくらいの薄い線
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); // 柔らかい影
+  transition: all 0.3s ease;
+  height: 100%;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .recruit-card-body {
+    padding: 1.5rem;
+  }
+
+  .recruit-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* 単価などのラベルデザイン */
+  .meta-item {
+    .label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: #adb5bd;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #212529;
+    }
+  }
+
+  /* バッジ (原色を避ける) */
+  .badge-soft-primary {
+    background-color: #f0f4ff;
+    color: #3b82f6;
+    font-weight: 600;
+    padding: 0.4em 0.8em;
+    border-radius: 8px;
+  }
+
+  /* ボタンのカスタマイズ */
+  .btn-detail {
+    background: #212529; // 真っ赤を避けてダークトーンに
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+    &:hover { background: #000; color: #fff; }
+  }
+
+  .btn-edit {
+    background: #f8f9fa;
+    color: #6c757d;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    &:hover { background: #e9ecef; color: #212529; }
+  }
+}

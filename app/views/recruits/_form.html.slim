@@ -1,0 +1,76 @@
+.container.py-5
+  .row.justify-content-center
+    .col-lg-8
+      .card.shadow-sm.border-0.rounded-4
+        .card-body.p-4.p-md-5
+          h2.text-center.fw-bold.mb-4.text-dark 案件登録・編集
+          
+          = form_with model: @recruit, local: true, class: "needs-validation" do |f|
+            .mb-4
+              = f.label :title, "案件名", class: "form-label fw-semibold text-secondary"
+              = f.text_field :title, class: "form-control form-control-lg bg-light border-0", placeholder: "例: 🍖 Rocket Now フードデリバリー"
+            .mb-4
+              = f.label :description, "案件概要", class: "form-label fw-semibold text-secondary"
+              = f.text_area :description, class: "form-control bg-light border-0", rows: 4, placeholder: "仕事の内容を詳しく..."
+
+            .mb-4
+              = f.label :recommend, "recommend", class: "form-label fw-semibold text-secondary"
+              = f.text_area :recommend, class: "form-control bg-light border-0", rows: 4, placeholder: "仕事の内容を詳しく..."
+
+            .mb-4
+              = f.label :point, "ポイント", class: "form-label fw-semibold text-secondary"
+              = f.select :point, (1..5).to_a, {}, { class: "form-select bg-light border-0" }
+
+            .mb-4
+              = f.label :genre, "genre", class: "form-label fw-semibold text-secondary"
+              = f.select :genre, [["cleaning", "cleaning"], ["driver", "driver"]], { include_blank: "選択してください" }, { class: "form-select bg-light border-0" }
+      
+            .mb-4
+                = f.label :unit_price, "日給例", class: "form-label fw-semibold text-secondary"
+                = f.text_field :unit_price, class: "form-control bg-light border-0", placeholder: "500円/件"
+            .mb-4
+              = f.label :reward, "報酬例（計算式など）", class: "form-label fw-semibold text-secondary"
+              = f.text_area :reward, class: "form-control bg-light border-0", rows: 3
+
+            .mb-4
+                = f.label :working_hours, "勤務時間", class: "form-label fw-semibold text-secondary"
+                = f.text_area :working_hours, class: "form-control bg-light border-0"
+            .mb-4
+                = f.label :working_days, "勤務日数", class: "form-control-label fw-semibold text-secondary"
+                = f.text_area :working_days, class: "form-control bg-light border-0"
+
+            .mb-4
+                = f.label :area, "エリア", class: "form-control-label fw-semibold text-secondary"
+                = f.text_area :area, class: "form-control bg-light border-0"
+
+            .mb-4
+                = f.label :payment, "支払い日", class: "form-control-label fw-semibold text-secondary"
+                = f.text_area :payment, class: "form-control bg-light border-0"
+
+            .mb-4
+                = f.label :japanese_skill, "japanese_skill", class: "form-control-label fw-semibold text-secondary"
+                = f.text_area :japanese_skill, class: "form-control bg-light border-0"
+
+            .mb-4
+                = f.label :require, "require", class: "form-control-label fw-semibold text-secondary"
+                = f.text_area :require, class: "form-control bg-light border-0"
+
+            .mb-4
+                = f.label :contract_type, "contract_type", class: "form-control-label fw-semibold text-secondary"
+                = f.text_area :contract_type, class: "form-control bg-light border-0"
+
+            .mb-4
+              = f.label :visa, "visa", class: "form-control-label fw-semibold text-secondary"
+              = f.select :visa, ["日本国籍", "永住ビザ", "長期滞在ビザ", "定住ビザ", "難民ビザ", "家族滞在ビザ", "留学ビザ"], {}, class: "form-control bg-light border-0", multiple: true
+
+            .mb-4
+                = f.label :car_details, "car_details", class: "form-control-label fw-semibold text-secondary"
+                = f.text_area :car_details, class: "form-control bg-light border-0"
+
+            .mb-4
+              = f.label :remarks, "備考・注意事項", class: "form-label fw-semibold text-secondary"
+              = f.text_area :remarks, class: "form-control bg-light border-0", rows: 4
+
+            .d-grid.gap-2.mt-5
+              = f.submit "この内容で保存する", class: "btn btn-dark btn-lg rounded-pill fw-bold"
+              = link_to "キャンセルして戻る", recruits_path, class: "btn btn-link text-muted"

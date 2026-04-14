@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_22_134613) do
+ActiveRecord::Schema.define(version: 2026_04_13_085316) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -199,18 +199,24 @@ ActiveRecord::Schema.define(version: 2026_03_22_134613) do
 
   create_table "recruits", force: :cascade do |t|
     t.string "title"
-    t.string "work_contents"
-    t.string "salary"
-    t.string "genre"
-    t.string "work_time"
-    t.string "work_time_total"
-    t.string "day_off"
-    t.string "address"
-    t.string "traning"
-    t.string "qualification_1"
-    t.string "qualification_2"
+    t.string "description"
+    t.string "unit_price"
+    t.string "reward"
+    t.string "working_hours"
+    t.string "working_days"
+    t.string "area"
+    t.string "payment"
+    t.string "japanese_skill"
+    t.string "require"
+    t.string "contract_type"
+    t.string "car_details"
+    t.string "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "recommend"
+    t.integer "point"
+    t.string "genre"
+    t.string "visa"
   end
 
   create_table "situations", force: :cascade do |t|
