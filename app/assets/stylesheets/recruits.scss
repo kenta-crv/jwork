@@ -77,3 +77,68 @@
     &:hover { background: #e9ecef; color: #212529; }
   }
 }
+
+/* カードが浮き上がるようなデザイン */
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+
+  &:hover {
+    transform: translateY(-5px); // 上に少し浮く
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); // 影を強くする
+    cursor: pointer;
+  }
+}
+
+/* 日給例の金額スタイル */
+.price-text {
+  color: #dc3545;    /* 赤色 (Bootstrapのdanger相当) */
+  font-size: 2.2rem; /* 文字を大きく */
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* 今回のエリア表示専用の新しい定義 */
+.area-btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;      /* ボタン同士の隙間 */
+  margin-top: 8px;
+  position: relative;
+  z-index: 5;    /* 全体リンクより上に配置 */
+}
+
+.area-btn-outline {
+  background-color: #ffffff; /* 背景白 */
+  border: 1px solid #007bff; /* 縁の色（青） */
+  color: #007bff;            /* 文字の色（青） */
+  font-size: 12px;           /* 小さめのサイズ */
+  padding: 2px 10px;         /* 内側の余白 */
+  border-radius: 4px;        /* 軽く角を丸める */
+  white-space: nowrap;       /* 文字の重なりを防ぐ */
+  display: inline-block;
+  line-height: 1.5;
+}
+
+/* おすすめ表示専用の新しい定義 */
+.recommend-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+  position: relative;
+  z-index: 5;
+}
+
+.recommend-tag {
+  background-color: #ffffff; /* 背景白 */
+  border: 1px solid #28a745; /* 縁の色（緑） */
+  color: #28a745;            /* 文字の色（緑） */
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  display: inline-block;
+  line-height: 1.5;
+  font-weight: 600;
+}
