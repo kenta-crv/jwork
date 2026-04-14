@@ -34,7 +34,7 @@ h2 案件一覧
         / --- 下部に配置するエリア ---
         .mt-auto.pt-3
           / Detailボタンを横いっぱいに表示
-          = link_to "詳細を見る", recruit_path(recruit), class: "btn btn-danger w-100 fw-bold mb-2"
+          = link_to "Detail", recruit_path(recruit), class: "btn btn-danger w-100 fw-bold mb-2"
           
           - if admin_signed_in?
             / 管理者用ボタン
