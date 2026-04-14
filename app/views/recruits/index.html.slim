@@ -6,33 +6,37 @@ h2 案件一覧
 .row
   - @recruits.each do |recruit|
     .col-md-6.mb-4
-      .job-card.p-3.border.rounded.h-100.position-relative.hover-card
+      / d-flex.flex-column を追加して中身を縦に並べ、ボタンを下に固定
+      .job-card.p-3.border.rounded.h-100.d-flex.flex-column.position-relative.hover-card
         - if recruit.point.present?
-          span.badge.bg-warning.text-dark = "★ #{recruit.point}"
+          div
+            span.badge.bg-warning.text-dark = "★ #{recruit.point}"
         
-        h3 = recruit.title
-        p = truncate(recruit.description, length: 100)
+        h3.mt-2 = recruit.title
+        p.text-muted = truncate(recruit.description, length: 100)
         
         .mt-2
           strong Price: 
           span.price-text = recruit.unit_price
+
         / --- エリア表示（青） ---
         - if recruit.area.present?
           .area-btn-container
             - recruit.area.split('・').each do |a|
-              span.area-btn-outline
-                = a
+              span.area-btn-outline = a
 
         / --- おすすめ表示（緑） ---
         - if recruit.recommend.present?
           .recommend-container
             - recruit.recommend.split('・').each do |r|
-              span.recommend-tag
-                = r
+              span.recommend-tag = r
         
-        
-        .mt-3.d-flex.align-items-center
-          = link_to "", recruit_path(recruit), class: "stretched-link"
+        / --- 下部に配置するエリア ---
+        .mt-auto.pt-3
+          / Detailボタンを横いっぱいに表示
+          = link_to "詳細を見る", recruit_path(recruit), class: "btn btn-danger w-100 fw-bold mb-2"
           
           - if admin_signed_in?
-            = link_to "編集", edit_recruit_path(recruit), class: "btn btn-warning btn-sm position-relative", style: "z-index: 2;"
+            / 管理者用ボタン
+            .d-flex.justify-content-end
+              = link_to "編集", edit_recruit_path(recruit), class: "btn btn-warning btn-sm"
