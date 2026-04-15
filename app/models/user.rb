@@ -85,15 +85,15 @@ class User < ApplicationRecord
 
   private
 
-  #def schedule_step_mails
-  #  # 登録直後のウェルカムメール
-  #  UserMailer.welcome_email(self).deliver_now
+  def schedule_step_mails
+    # 登録直後のウェルカムメール
+    UserMailer.welcome_email(self).deliver_now
 
-  #  # ステータスが nil または sms なら予約作成
-  #  if status.nil? || status == "sms"
-  #    schedule_followup_mails
-  #  end
-  #end
+    # ステータスが nil または sms なら予約作成
+    if status.nil? || status == "sms"
+      schedule_followup_mails
+    end
+  end
 
   def schedule_step_mails_if_sms
     # ステータスに変更がない場合は何もしない
