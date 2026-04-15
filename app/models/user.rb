@@ -4,9 +4,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :comments, dependent: :destroy
-  has_many :alcohols, dependent: :destroy
-  has_many :inspections, dependent: :destroy
-  has_many :journals, dependent: :destroy
   has_many :user_step_mails, dependent: :destroy
 
   mount_uploader :image_1, ImagesUploader
