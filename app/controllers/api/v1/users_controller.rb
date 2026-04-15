@@ -10,15 +10,18 @@ module Api
 
         user_data = params[:user] || {}
 
-        # ユーザー作成
-        user = User.new(
-          email:          user_data['email'],
+        # ================================
+        # 修正ポイント：重複防止
+        # ================================
+        user = User.find_or_initialize_by(email: user_data['email'])
+
+        user.assign_attributes(
           name:           user_data['full_name'],
           tel:            user_data['phone_number'],
           age:            user_data['date_of_birth'],
           address:        user_data['city'],
           nationality:    user_data['what_is_your_nationality?（あなたの国籍はどこですか？）'],
-          drivers_lisence:  user_data["do_you_have_a_driver's_lisence?（うんてんめんきょしょうはもっていますか？）"],
+          drivers_lisence: user_data["do_you_have_a_driver's_lisence?（うんてんめんきょしょうはもっていますか？）"],
           password:       '11111111',
           password_confirmation: '11111111',
           work_range:     user_data['please_tell_me_your_status_of_residence（visaのしゅるいをおしえてください）'],
@@ -29,12 +32,11 @@ module Api
           gender:         user_data['gender']
         )
 
-
         if user.save(validate: false)
           Rails.logger.info "=== User saved successfully ==="
 
           # -------------------------------
-          # メール送信（同期で確実に送る）
+          # メール送信
           # -------------------------------
           begin
             UserMailer.send_email(user).deliver_now!
@@ -44,7 +46,7 @@ module Api
           end
 
           # -------------------------------
-          # SMS 送信（同期で即送信）
+          # SMS送信
           # -------------------------------
           begin
             SendSmsJob.perform_now(user.id)
@@ -53,7 +55,7 @@ module Api
             Rails.logger.error "=== SMS delivery failed for #{user.id}: #{e.message} ==="
           end
 
-          render json: { status: "ok", message: "User created, mail and SMS sent" }, status: :created
+          render json: { status: "ok", message: "User created/updated, mail and SMS sent" }, status: :created
         else
           Rails.logger.error "=== User save failed ==="
           Rails.logger.error user.errors.full_messages
@@ -63,7 +65,6 @@ module Api
 
       private
 
-      # 取り込み時に必要なパラメータだけ許可
       def user_params
         params.require(:user).permit(
           :email, :full_name, :phone_number, :date_of_birth, :what_is_your_nationality,
