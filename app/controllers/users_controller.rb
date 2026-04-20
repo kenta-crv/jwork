@@ -148,7 +148,7 @@ def send_sms
         end
 
         client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
-        message_body = "Interviews are conducted on LINE. Please register here: https://j-work.jp/line\n面接はLINEで行います。こちらから登録してください: https://j-work.jp/line"
+        message_body = "Thank you for your inquiry about our job. Contact us via LINE: https://lin.ee/yVI3ClY"
         
         client.messages.create(
           from: ENV['TWILIO_PHONE_NUMBER'],
