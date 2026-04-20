@@ -30,8 +30,8 @@ h2 案件一覧
               span.recommend-tag = r
         
         / --- LINE メッセージ付きURL ---
-        - message = "I would like to apply for #{recruit.title}."
-        - encoded_message = CGI.escape(message)
+        - message = "I would like to apply for an interview for #{recruit.title}."
+        - encoded_message = ERB::Util.url_encode(message)
         - line_url = "https://line.me/R/oaMessage/@522jmsbm/?#{encoded_message}"
 
         .mt-auto.pt-3
