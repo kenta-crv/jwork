@@ -1,17 +1,25 @@
+- message = "I would like to apply for an interview for #{@recruit.title}."
+- encoded_message = ERB::Util.url_encode(message)
+- line_url = "https://line.me/R/oaMessage/@522jmsbm/?#{encoded_message}"
+
 .card.border-0.shadow-sm
   .card-body.p-0
     / Header: Title and Overview
     .p-4.bg-white
       span.badge.bg-primary.mb-2 Job Details
       - if @recruit.point.present?
-              span.badge.bg-warning.text-dark = "★ #{@recruit.point}"
+        span.badge.bg-warning.text-dark = "★ #{@recruit.point}"
       - else
-              span.text-muted Not Specified
-      h2.h4.fw-bold.mb-3 
-      = @recruit.title
+        span.text-muted Not Specified
+
+      h2.h4.fw-bold.mb-3 = @recruit.title
+
+      / --- 上部LINEボタン追加 ---
+      .mb-3
+        = link_to "Apply via LINE", line_url, class: "btn btn-success w-100 fw-bold"
+
       .text-muted.small.bg-light.p-3.rounded
         = simple_format(@recruit.description)
-
 
     / Main Info: Organized Table Format
     table.table.table-bordered.mb-0
@@ -19,7 +27,7 @@
         tr
           th.bg-light.text-muted.fw-normal.align-middle width="30%" Base Pay / Unit Price
           td.align-middle.py-3
-            .red 
+            .red
               span.h5.fw-bold.text-dark = @recruit.unit_price
 
         tr
@@ -59,7 +67,6 @@
           th.bg-light.text-muted.fw-normal.align-middle Vehicle Details
           td.align-middle.text-danger.fw-bold = simple_format(@recruit.car_details)
 
-        / ===== Additional Columns =====
         tr
           th.bg-light.text-muted.fw-normal.align-middle Why We Recommend
           td.align-middle = simple_format(@recruit.recommend)
@@ -74,18 +81,21 @@
           td.align-middle
             = simple_format(Array(@recruit.visa).join("\n"))
 
-        / ===== Existing =====
         tr
           th.bg-light.text-muted.fw-normal.align-middle Additional Notes
           td.align-middle = simple_format(@recruit.remarks)
 
+  / --- 下部LINEボタン（既存） ---
+  .p-3
+    = link_to "Apply via LINE", line_url, class: "btn btn-success w-100 fw-bold"
+
   / Action Area
   - if admin_signed_in?
-   .card-footer.bg-light.p-3
-    .d-grid.gap-2.d-md-flex.justify-content-md-end
-      = link_to "Back", recruits_path, class: "btn btn-outline-secondary px-4"
-      = link_to "Edit", edit_recruit_path(@recruit), class: "btn btn-warning px-4"
-      = link_to "Delete", recruit_path(@recruit),
-        method: :delete,
-        data: { confirm: "Are you sure you want to delete this job post?" },
-        class: "btn btn-danger px-4"
+    .card-footer.bg-light.p-3
+      .d-grid.gap-2.d-md-flex.justify-content-md-end
+        = link_to "Back", recruits_path, class: "btn btn-outline-secondary px-4"
+        = link_to "Edit", edit_recruit_path(@recruit), class: "btn btn-warning px-4"
+        = link_to "Delete", recruit_path(@recruit),
+          method: :delete,
+          data: { confirm: "Are you sure you want to delete this job post?" },
+          class: "btn btn-danger px-4"
