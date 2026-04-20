@@ -1,4 +1,5 @@
 h2 案件一覧
+
 - if admin_signed_in?
   .mb-3
     = link_to "新規案件登録", new_recruit_path, class: "btn btn-success"
@@ -6,7 +7,6 @@ h2 案件一覧
 .row
   - @recruits.each do |recruit|
     .col-md-6.mb-4
-      / d-flex.flex-column を追加して中身を縦に並べ、ボタンを下に固定
       .job-card.p-3.border.rounded.h-100.d-flex.flex-column.position-relative.hover-card
         - if recruit.point.present?
           div
@@ -16,27 +16,29 @@ h2 案件一覧
         p.text-muted = truncate(recruit.description, length: 100)
         
         .mt-2
-          strong Price: 
+          strong Price:
           span.price-text = recruit.unit_price
 
-        / --- エリア表示（青） ---
         - if recruit.area.present?
           .area-btn-container
             - recruit.area.split('・').each do |a|
               span.area-btn-outline = a
 
-        / --- おすすめ表示（緑） ---
         - if recruit.recommend.present?
           .recommend-container
             - recruit.recommend.split('・').each do |r|
               span.recommend-tag = r
         
-        / --- 下部に配置するエリア ---
+        / --- LINE メッセージ付きURL ---
+        - message = "I would like to apply for #{recruit.title}."
+        - encoded_message = CGI.escape(message)
+        - line_url = "https://line.me/R/oaMessage/@522jmsbm/?#{encoded_message}"
+
         .mt-auto.pt-3
-          / Detailボタンを横いっぱいに表示
           = link_to "Detail", recruit_path(recruit), class: "btn btn-danger w-100 fw-bold mb-2"
           
+          = link_to "Apply via LINE", line_url, class: "btn btn-success w-100 fw-bold mb-2"
+
           - if admin_signed_in?
-            / 管理者用ボタン
             .d-flex.justify-content-end
               = link_to "編集", edit_recruit_path(recruit), class: "btn btn-warning btn-sm"
