@@ -1,6 +1,6 @@
 class RecruitsController < ApplicationController
   def index
-    @recruits = Recruit.order(updated_at: :desc)
+    @recruits = Recruit.where.not(point: "0").order(updated_at: :desc)
   end
 
   def new

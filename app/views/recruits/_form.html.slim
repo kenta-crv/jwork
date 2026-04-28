@@ -19,7 +19,7 @@
 
             .mb-4
               = f.label :point, "ポイント", class: "form-label fw-semibold text-secondary"
-              = f.select :point, (1..5).to_a, {}, { class: "form-select bg-light border-0" }
+              = f.select :point, (0..5).to_a, {}, { class: "form-select bg-light border-0" }
 
             .mb-4
               = f.label :genre, "genre", class: "form-label fw-semibold text-secondary"
