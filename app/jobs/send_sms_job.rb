@@ -32,7 +32,7 @@ class SendSmsJob < ApplicationJob
     client.messages.create(
       from: ENV['TWILIO_PHONE_NUMBER'],
       to: to_number,
-      body: "#{user.name}さん！Thank you for choosing J Work, a job search site for foreigners. https://lin.ee/gIX2fUT We are introducing our jobs on LINE, so please use LINE and send us a message."
+      body: "Thank you for your inquiry about our job. Contact us via LINE: https://lin.ee/yVI3ClY"
     )
   rescue => e
     Rails.logger.error "SMS送信失敗(User:#{user_id}): #{e.message}"
