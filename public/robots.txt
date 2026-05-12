@@ -2,3 +2,5 @@
 
 User-agent: *
 Disallow:
+
+Sitemap: https://j-work.jp/sitemaps/sitemap.xml.gz

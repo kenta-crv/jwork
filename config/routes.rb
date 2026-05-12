@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get "top/policy" => 'top#policy'  
 
   get 'cargo', to: 'pages#cargo'
-  get 'human',  to: 'pageos#human'
+  get 'human',  to: 'pages#human'
   get 'logstic',  to: 'pages#logstic'
   get 'event',       to: 'pages#event'
 
