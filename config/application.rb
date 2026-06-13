@@ -10,6 +10,7 @@ module Bookkeeping
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    config.hosts << "210.131.214.36"
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
     config.time_zone = 'Tokyo'
     config.active_job.queue_adapter = :async
