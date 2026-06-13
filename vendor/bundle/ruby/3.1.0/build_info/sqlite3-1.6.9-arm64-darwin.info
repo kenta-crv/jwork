@@ -1,0 +1,4 @@
+--with-sqlite3-dir=/opt/homebrew/opt/sqlite
+--with-cflags=-Wno-error=implicit-function-declaration
+-Wno-error=incompatible-function-pointer-types
+-Wno-error=int-conversion

@@ -1,0 +1,149 @@
+current directory: /Users/okuyamakenta/Program/jwork/vendor/bundle/ruby/3.1.0/gems/puma-3.12.6/ext/puma_http11
+/Users/okuyamakenta/.rbenv/versions/3.1.6/bin/ruby -I /Users/okuyamakenta/.rbenv/versions/3.1.6/lib/ruby/3.1.0 extconf.rb
+checking for BIO_read() in -lcrypto... yes
+checking for SSL_CTX_new() in -lssl... yes
+checking for openssl/bio.h... yes
+creating Makefile
+
+current directory: /Users/okuyamakenta/Program/jwork/vendor/bundle/ruby/3.1.0/gems/puma-3.12.6/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20260611-37280-qanqbb sitelibdir\=./.gem.20260611-37280-qanqbb clean
+
+current directory: /Users/okuyamakenta/Program/jwork/vendor/bundle/ruby/3.1.0/gems/puma-3.12.6/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20260611-37280-qanqbb sitelibdir\=./.gem.20260611-37280-qanqbb
+compiling http11_parser.c
+In file included from ext/puma_http11/http11_parser.rl:6:
+In file included from ./http11_parser.h:11:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby.h:38:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/ruby.h:27:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic.h:23:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic/char.h:29:
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rstring.h:464:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  464 |         struct RString retval;
+      |                        ^
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rbasic.h:88:17: note: member 'klass' declared 'const' here
+   88 |     const VALUE klass;
+      |                 ^
+ext/puma_http11/http11_parser.c:44:18: warning: unused variable 'puma_parser_en_main' [-Wunused-const-variable]
+   44 | static const int puma_parser_en_main = 1;
+      |                  ^~~~~~~~~~~~~~~~~~~
+2 warnings generated.
+compiling io_buffer.c
+In file included from io_buffer.c:2:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby.h:38:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/ruby.h:27:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic.h:23:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic/char.h:29:
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rstring.h:464:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  464 |         struct RString retval;
+      |                        ^
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rbasic.h:88:17: note: member 'klass' declared 'const' here
+   88 |     const VALUE klass;
+      |                 ^
+1 warning generated.
+compiling mini_ssl.c
+In file included from mini_ssl.c:3:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby.h:38:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/ruby.h:27:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic.h:23:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic/char.h:29:
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rstring.h:464:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  464 |         struct RString retval;
+      |                        ^
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rbasic.h:88:17: note: member 'klass' declared 'const' here
+   88 |     const VALUE klass;
+      |                 ^
+mini_ssl.c:89:8: warning: 'DH_new' is deprecated [-Wdeprecated-declarations]
+   89 |   dh = DH_new();
+      |        ^
+/opt/homebrew/opt/openssl@3/include/openssl/dh.h:210:1: note: 'DH_new' has been explicitly marked deprecated here
+  210 | OSSL_DEPRECATEDIN_3_0 DH *DH_new(void);
+      | ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:229:31: note: expanded from macro 'OSSL_DEPRECATEDIN_3_0'
+  229 | #define OSSL_DEPRECATEDIN_3_0 OSSL_DEPRECATED(3.0)
+      |                               ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:61:47: note: expanded from macro 'OSSL_DEPRECATED'
+   61 | #define OSSL_DEPRECATED(since) __attribute__((deprecated))
+      |                                               ^
+mini_ssl.c:104:34: warning: 'DH_set0_pqg' is deprecated [-Wdeprecated-declarations]
+  104 |   if (p == NULL || g == NULL || !DH_set0_pqg(dh, p, NULL, g)) {
+      |                                  ^
+/opt/homebrew/opt/openssl@3/include/openssl/dh.h:266:1: note: 'DH_set0_pqg' has been explicitly marked deprecated here
+  266 | OSSL_DEPRECATEDIN_3_0 int DH_set0_pqg(DH *dh, BIGNUM *p, BIGNUM *q, BIGNUM *g);
+      | ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:229:31: note: expanded from macro 'OSSL_DEPRECATEDIN_3_0'
+  229 | #define OSSL_DEPRECATEDIN_3_0 OSSL_DEPRECATED(3.0)
+      |                               ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:61:47: note: expanded from macro 'OSSL_DEPRECATED'
+   61 | #define OSSL_DEPRECATED(since) __attribute__((deprecated))
+      |                                               ^
+mini_ssl.c:105:5: warning: 'DH_free' is deprecated [-Wdeprecated-declarations]
+  105 |     DH_free(dh);
+      |     ^
+/opt/homebrew/opt/openssl@3/include/openssl/dh.h:211:1: note: 'DH_free' has been explicitly marked deprecated here
+  211 | OSSL_DEPRECATEDIN_3_0 void DH_free(DH *dh);
+      | ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:229:31: note: expanded from macro 'OSSL_DEPRECATEDIN_3_0'
+  229 | #define OSSL_DEPRECATEDIN_3_0 OSSL_DEPRECATED(3.0)
+      |                               ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:61:47: note: expanded from macro 'OSSL_DEPRECATED'
+   61 | #define OSSL_DEPRECATED(since) __attribute__((deprecated))
+      |                                               ^
+mini_ssl.c:193:18: warning: 'EC_KEY_new_by_curve_name' is deprecated [-Wdeprecated-declarations]
+  193 |   EC_KEY *ecdh = EC_KEY_new_by_curve_name(NID_secp521r1);
+      |                  ^
+/opt/homebrew/opt/openssl@3/include/openssl/ec.h:1009:1: note: 'EC_KEY_new_by_curve_name' has been explicitly marked deprecated here
+ 1009 | OSSL_DEPRECATEDIN_3_0 EC_KEY *EC_KEY_new_by_curve_name(int nid);
+      | ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:229:31: note: expanded from macro 'OSSL_DEPRECATEDIN_3_0'
+  229 | #define OSSL_DEPRECATEDIN_3_0 OSSL_DEPRECATED(3.0)
+      |                               ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:61:47: note: expanded from macro 'OSSL_DEPRECATED'
+   61 | #define OSSL_DEPRECATED(since) __attribute__((deprecated))
+      |                                               ^
+mini_ssl.c:196:5: warning: 'EC_KEY_free' is deprecated [-Wdeprecated-declarations]
+  196 |     EC_KEY_free(ecdh);
+      |     ^
+/opt/homebrew/opt/openssl@3/include/openssl/ec.h:1014:1: note: 'EC_KEY_free' has been explicitly marked deprecated here
+ 1014 | OSSL_DEPRECATEDIN_3_0 void EC_KEY_free(EC_KEY *key);
+      | ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:229:31: note: expanded from macro 'OSSL_DEPRECATEDIN_3_0'
+  229 | #define OSSL_DEPRECATEDIN_3_0 OSSL_DEPRECATED(3.0)
+      |                               ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:61:47: note: expanded from macro 'OSSL_DEPRECATED'
+   61 | #define OSSL_DEPRECATED(since) __attribute__((deprecated))
+      |                                               ^
+mini_ssl.c:220:27: warning: 'DTLSv1_method' is deprecated [-Wdeprecated-declarations]
+  220 |   conn->ctx = SSL_CTX_new(DTLSv1_method());
+      |                           ^
+/opt/homebrew/opt/openssl@3/include/openssl/ssl.h:2094:1: note: 'DTLSv1_method' has been explicitly marked deprecated here
+ 2094 | OSSL_DEPRECATEDIN_1_1_0 __owur const SSL_METHOD *DTLSv1_method(void); /* DTLSv1.0 */
+      | ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:251:33: note: expanded from macro 'OSSL_DEPRECATEDIN_1_1_0'
+  251 | #define OSSL_DEPRECATEDIN_1_1_0 OSSL_DEPRECATED(1.1.0)
+      |                                 ^
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:61:47: note: expanded from macro 'OSSL_DEPRECATED'
+   61 | #define OSSL_DEPRECATED(since) __attribute__((deprecated))
+      |                                               ^
+mini_ssl.c:250:40: warning: function 'raise_error' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+  250 | void raise_error(SSL* ssl, int result) {
+      |                                        ^
+8 warnings generated.
+compiling puma_http11.c
+In file included from puma_http11.c:9:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby.h:38:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/ruby.h:27:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic.h:23:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic/char.h:29:
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rstring.h:464:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  464 |         struct RString retval;
+      |                        ^
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rbasic.h:88:17: note: member 'klass' declared 'const' here
+   88 |     const VALUE klass;
+      |                 ^
+1 warning generated.
+linking shared-object puma/puma_http11.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.1'
+
+current directory: /Users/okuyamakenta/Program/jwork/vendor/bundle/ruby/3.1.0/gems/puma-3.12.6/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20260611-37280-qanqbb sitelibdir\=./.gem.20260611-37280-qanqbb install
+/opt/homebrew/bin/ginstall -c -m 0755 puma_http11.bundle ./.gem.20260611-37280-qanqbb/puma

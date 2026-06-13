@@ -1,0 +1,85 @@
+current directory: /Users/okuyamakenta/Program/jwork/vendor/bundle/ruby/3.1.0/gems/byebug-12.0.0/ext/byebug
+/Users/okuyamakenta/.rbenv/versions/3.1.6/bin/ruby -I /Users/okuyamakenta/.rbenv/versions/3.1.6/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/okuyamakenta/Program/jwork/vendor/bundle/ruby/3.1.0/gems/byebug-12.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20260611-37280-l3050m sitelibdir\=./.gem.20260611-37280-l3050m clean
+
+current directory: /Users/okuyamakenta/Program/jwork/vendor/bundle/ruby/3.1.0/gems/byebug-12.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20260611-37280-l3050m sitelibdir\=./.gem.20260611-37280-l3050m
+compiling breakpoint.c
+In file included from breakpoint.c:1:
+In file included from ./byebug.h:4:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby.h:38:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/ruby.h:27:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic.h:23:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic/char.h:29:
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rstring.h:464:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  464 |         struct RString retval;
+      |                        ^
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rbasic.h:88:17: note: member 'klass' declared 'const' here
+   88 |     const VALUE klass;
+      |                 ^
+1 warning generated.
+compiling byebug.c
+In file included from byebug.c:1:
+In file included from ./byebug.h:4:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby.h:38:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/ruby.h:27:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic.h:23:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic/char.h:29:
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rstring.h:464:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  464 |         struct RString retval;
+      |                        ^
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rbasic.h:88:17: note: member 'klass' declared 'const' here
+   88 |     const VALUE klass;
+      |                 ^
+1 warning generated.
+compiling context.c
+In file included from context.c:1:
+In file included from ./byebug.h:4:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby.h:38:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/ruby.h:27:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic.h:23:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic/char.h:29:
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rstring.h:464:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  464 |         struct RString retval;
+      |                        ^
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rbasic.h:88:17: note: member 'klass' declared 'const' here
+   88 |     const VALUE klass;
+      |                 ^
+1 warning generated.
+compiling locker.c
+In file included from locker.c:1:
+In file included from ./byebug.h:4:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby.h:38:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/ruby.h:27:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic.h:23:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic/char.h:29:
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rstring.h:464:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  464 |         struct RString retval;
+      |                        ^
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rbasic.h:88:17: note: member 'klass' declared 'const' here
+   88 |     const VALUE klass;
+      |                 ^
+1 warning generated.
+compiling threads.c
+In file included from threads.c:1:
+In file included from ./byebug.h:4:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby.h:38:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/ruby.h:27:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic.h:23:
+In file included from /Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/arithmetic/char.h:29:
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rstring.h:464:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  464 |         struct RString retval;
+      |                        ^
+/Users/okuyamakenta/.rbenv/versions/3.1.6/include/ruby-3.1.0/ruby/internal/core/rbasic.h:88:17: note: member 'klass' declared 'const' here
+   88 |     const VALUE klass;
+      |                 ^
+1 warning generated.
+linking shared-object byebug/byebug.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.1'
+
+current directory: /Users/okuyamakenta/Program/jwork/vendor/bundle/ruby/3.1.0/gems/byebug-12.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20260611-37280-l3050m sitelibdir\=./.gem.20260611-37280-l3050m install
+/opt/homebrew/bin/ginstall -c -m 0755 byebug.bundle ./.gem.20260611-37280-l3050m/byebug
