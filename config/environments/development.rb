@@ -5,7 +5,7 @@ Rails.application.configure do
 
   # 2. エラー表示：開発環境では詳細なエラーを表示する
   config.consider_all_requests_local = true
-
+  config.hosts << "210.131.214.36"
   # 3. キャッシュ設定：tmp/caching-dev.txt があれば有効、なければ無効
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
