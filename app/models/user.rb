@@ -34,15 +34,18 @@ class User < ApplicationRecord
   # Ransackで検索を許可する属性（カラム）のホワイトリスト定義
   def self.ransackable_attributes(auth_object = nil)
     [
-      "name", 
-      "tel", 
-      "account_name", 
-      "email", 
-      "status", 
-      "hope_work", 
-      "agree",
-      "created_at",
-      "updated_at"
+      "account_name", "address", "address_detail", "age", "agree", "available",
+      "bank", "bank_name", "bank_number", "branch", "call_available", "call_check",
+      "call_impressions", "car", "change_the_address", "change_the_address_check",
+      "check_1", "check_2", "check_3", "check_4", "check_5", "check_6", "check_7",
+      "contract_date", "conversation", "created_at", "day_off", "deliver", "different",
+      "drivers_lisence", "drivers_up", "email", "emergency_name", "emergency_relationships",
+      "emergency_tel", "experience", "gender", "hope_other", "hope_work",
+      "image_1", "image_2", "image_3", "image_4", "image_5", "image_6",
+      "japanese_level", "kanzi", "line", "name", "nationality", "next_call_at",
+      "past_business", "past_genre", "past_year", "period", "qualifications",
+      "recommend", "remarks", "resume", "speak_japanese", "start", "status", "tel",
+      "updated_at", "user_name", "visiting_in_japan", "which_visa", "work_now", "work_range"
     ]
   end
 

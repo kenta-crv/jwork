@@ -4,7 +4,7 @@
   p 登録するID/PASSを入力して下さい。
 
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-    = devise_error_messages!
+    = render "users/shared/error_messages", resource: resource
 
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       div 現在の確認待ち: = resource.unconfirmed_email

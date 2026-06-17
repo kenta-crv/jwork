@@ -4,7 +4,7 @@
           <div class="heading"><h2>アカウント情報編集</h2>
           <p>登録するID/PASSを入力して下さい。</p></div>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render "admins/shared/error_messages", resource: resource %>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

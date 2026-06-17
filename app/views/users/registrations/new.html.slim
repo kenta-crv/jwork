@@ -3,7 +3,7 @@
   h2.headline 日本語で情報を入力してください。[Please enter the information in Japanese.]
 
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = devise_error_messages!
+    = render "users/shared/error_messages", resource: resource
 
     table.company
       tbody
