@@ -31,6 +31,31 @@ class User < ApplicationRecord
     recruitment: "recruitment", 
   }
 
+  # Ransackで検索を許可する属性（カラム）のホワイトリスト定義
+  def self.ransackable_attributes(auth_object = nil)
+    [
+      "name", 
+      "tel", 
+      "account_name", 
+      "email", 
+      "status", 
+      "hope_work", 
+      "agree",
+      "created_at",
+      "updated_at"
+    ]
+  end
+
+  # スコープによる検索を許可する定義
+  def self.ransackable_scopes(_auth_object = nil)
+    [:visa_group_eq]
+  end
+
+  # アソシエーションによる検索を制限（必要に応じて追加可能）
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   def status_label
     I18n.t("activerecord.attributes.user.status.#{status}")
   end
@@ -78,10 +103,6 @@ class User < ApplicationRecord
     where("work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ? OR work_range LIKE ?", 
           "%永住%", "%Permanent%", "%定住%", "%Long-term%", "%配偶者%", "%Spouse%")
   }
-
-  def self.ransackable_scopes(_auth_object = nil)
-    [:visa_group_eq]
-  end
 
   private
 
