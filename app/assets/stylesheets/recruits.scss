@@ -2,143 +2,631 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 /* 案件一覧専用の洗練スタイル */
-.recruit-card {
-  background: #fff;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.05); // ほぼ見えないくらいの薄い線
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); // 柔らかい影
-  transition: all 0.3s ease;
-  height: 100%;
-  overflow: hidden;
+/* ==========================================================================
+   Modern Job Detail Card Design (2026 Theme) - Smartphone Ultra-Large Edition
+   ========================================================================== */
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    border-color: rgba(0, 0, 0, 0.1);
-  }
-
-  .recruit-card-body {
-    padding: 1.5rem;
-  }
-
-  .recruit-description {
-    color: #6c757d;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: 0;
-  }
-
-  /* 単価などのラベルデザイン */
-  .meta-item {
-    .label {
-      display: block;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      color: #adb5bd;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    .value {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #212529;
-    }
-  }
-
-  /* バッジ (原色を避ける) */
-  .badge-soft-primary {
-    background-color: #f0f4ff;
-    color: #3b82f6;
-    font-weight: 600;
-    padding: 0.4em 0.8em;
-    border-radius: 8px;
-  }
-
-  /* ボタンのカスタマイズ */
-  .btn-detail {
-    background: #212529; // 真っ赤を避けてダークトーンに
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: background 0.2s;
-    &:hover { background: #000; color: #fff; }
-  }
-
-  .btn-edit {
-    background: #f8f9fa;
-    color: #6c757d;
-    padding: 10px 15px;
-    border-radius: 10px;
-    text-decoration: none;
-    &:hover { background: #e9ecef; color: #212529; }
-  }
+:root {
+  /* カラーパレット（高コントラスト） */
+  --job-primary: #0a58ca;
+  --job-primary-hover: #084298;
+  --job-success: #146c43;
+  --job-warning: #997404;
+  --job-danger: #b02a37;
+  
+  /* テキスト・背景（完全な漆黒・純白で視認性最大） */
+  --job-text-main: #000000;
+  --job-text-muted: #1a202c;
+  --job-text-light: #2d3748;
+  --job-bg-card: #ffffff;
+  --job-bg-body: #f8f9fa;
+  --job-border-color: #a0aec0; /* 枠線も濃くして見やすく */
+  
+  --job-highlight-red-bg: #fff5f5;
+  --job-highlight-red-text: #c92a2a;
+  --job-line-green: #06c755;
+  --job-line-green-hover: #05b34c;
+  
+  --job-radius-lg: 16px;
+  --job-radius-md: 10px;
+  --job-radius-sm: 6px;
+  --job-shadow-md: 0 12px 36px rgba(0, 0, 0, 0.12);
+  --job-transition: all 0.2s ease;
 }
 
-/* カードが浮き上がるようなデザイン */
-.hover-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* --- カスタム通知ツールチップ --- */
+#custom-notice {
+  font-size: 18px !important; /* スマホでも特大表示 */
+  padding: 12px 20px !important;
+  max-width: 340px !important;
+  line-height: 1.5 !important;
+}
+
+/* --- メインカードコンテナ --- */
+.job-detail-card {
+  background-color: var(--job-bg-card);
+  border-radius: var(--job-radius-lg);
+  box-shadow: var(--job-shadow-md);
+  border: 2px solid var(--job-border-color);
+  /* 【修正】見切れ防止のため上部にしっかり内側パディングを確保 */
+  padding: 30px 30px 40px 30px;
+  max-width: 850px;
+  /* 【修正】上部ナビゲーションバー（ヘッダー）の被りを回避する余白を確保 */
+  margin: 90px auto 40px auto;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--job-text-main);
+  box-sizing: border-box;
+}
+
+/* ===== ヘッダーセクション ===== */
+.job-header {
+  border-bottom: 4px solid var(--job-bg-body);
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.job-header-badges {
+  display: flex;
+  gap: 10px;
+  /* 【修正】バッジとタイトルの間の無駄な隙間が出ないようマージンを調整 */
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+[class^="badge-pill-"] {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 16px !important; /* 文字を巨大化 */
+  font-weight: 900;
+  border-radius: 30px;
+}
+
+.badge-pill-primary {
+  background-color: rgba(10, 88, 202, 0.15);
+  color: var(--job-primary);
+}
+
+.badge-pill-warning {
+  background-color: rgba(255, 193, 7, 0.25);
+  color: var(--job-warning);
+}
+
+.job-title {
+  font-size: 36px !important; /* 超特大タイトル */
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--job-text-main);
+  /* 【修正】タイトル上下の余白を適切にコントロール */
+  margin: 0 0 16px 0;
+}
+
+.job-description {
+  font-size: 20px !important; /* 圧倒的に読みやすいサイズ */
+  line-height: 1.8;
+  color: var(--job-text-muted);
+}
+
+/* ===== 単価（最重要項目） ===== */
+.job-price-section {
+  background: #f1f3f5;
+  border-left: 8px solid var(--job-primary);
+  border-radius: var(--job-radius-md);
+  padding: 24px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.job-price-label {
+  font-size: 18px !important;
+  color: var(--job-text-light);
+  font-weight: 800;
+}
+
+.job-price-value {
+  font-size: 28px !important; /* 目に飛び込んでくるサイズ */
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ===== 詳細情報リスト ===== */
+.job-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.job-info-item {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  align-items: start;
+  padding: 24px;
+  background-color: var(--job-bg-body);
+  border-radius: var(--job-radius-md);
+  border: 1px solid var(--job-border-color);
+}
+
+.job-info-label {
+  font-size: 20px !important; /* 項目名も巨大化 */
+  font-weight: 800;
+  color: var(--job-text-main);
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+}
+
+.job-info-value {
+  font-size: 20px !important; /* 値の文字サイズも完全保証 */
+  line-height: 1.7;
+  color: var(--job-text-muted);
+}
+
+.job-info-value.highlight-red {
+  background-color: var(--job-highlight-red-bg);
+  color: var(--job-highlight-red-text);
+  padding: 12px 16px;
+  border-radius: var(--job-radius-sm);
+  font-weight: 800;
+  display: block;
+  border: 2px solid rgba(199, 42, 42, 0.2);
+}
+
+.badge-category {
+  background-color: #dee2e6;
+  color: #000000;
+  padding: 6px 16px;
+  border-radius: var(--job-radius-sm);
+  font-size: 18px !important;
+  font-weight: 800;
+  display: inline-block;
+}
+
+/* ===== チェックボックスエリア ===== */
+.job-confirm-area {
+  background-color: #fff9db;
+  border: 3px dashed #f59f00;
+  border-radius: var(--job-radius-md);
+  padding: 24px 16px;
+  margin-bottom: 24px;
+}
+
+.job-confirm-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-weight: 800;
+  font-size: 22px !important; /* チェック文言を特大に */
+  color: #664d03;
+  width: 100%;
+}
+
+/* 押し間違いのない巨大チェックボックス */
+.recruit-confirm-check {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 32px !important; /* 32pxの巨大サイズに固定 */
+  height: 32px !important;
+  border: 4px solid #f59f00 !important;
+  border-radius: var(--job-radius-sm);
   background-color: #fff;
+  display: inline-grid;
+  place-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
 
-  &:hover {
-    transform: translateY(-5px); // 上に少し浮く
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); // 影を強くする
-    cursor: pointer;
+.recruit-confirm-check:checked {
+  background-color: #f59f00;
+}
+
+.recruit-confirm-check:checked::before {
+  content: "";
+  width: 14px;
+  height: 8px;
+  border-left: 4px solid #fff;
+  border-bottom: 4px solid #fff;
+  transform: rotate(-45deg) translate(1px, -2px);
+}
+
+/* ===== LINEボタンエリア ===== */
+.job-apply-area {
+  margin-bottom: 40px;
+}
+
+.btn-line-apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: var(--job-line-green);
+  color: #ffffff !important;
+  text-decoration: none !important;
+  padding: 24px; /* 極厚パディング */
+  border-radius: var(--job-radius-md);
+  font-size: 26px !important; /* ボタン文字を圧倒的サイズに */
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(6, 199, 85, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-line-apply:hover {
+  background-color: var(--job-line-green-hover);
+}
+
+.btn-line-icon svg {
+  width: 36px !important; /* アイコンも連動して巨大化 */
+  height: 36px !important;
+}
+
+/* ===== フッター ===== */
+.job-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 3px solid var(--job-border-color);
+  padding-top: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.btn-back {
+  color: var(--job-text-light);
+  text-decoration: none;
+  font-size: 18px !important;
+  font-weight: 700;
+}
+
+.job-admin-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-admin-edit,
+.btn-admin-delete {
+  padding: 12px 24px;
+  font-size: 18px !important;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--job-radius-sm);
+}
+
+.btn-admin-edit {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.btn-admin-delete {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--job-danger);
+}
+
+
+/* ==========================================================================
+   【重要】スマートフォン表示最適化（絶対に文字を縮小させない）
+   ========================================================================== */
+@media (max-width: 768px) {
+  .job-detail-card {
+    /* 【修正】スマホ画面でもヘッダー被りと見切れを完全に防ぐマージンとパディング設定 */
+    padding: 20px 16px 30px 16px;
+    margin: 80px 10px 30px 10px;
+    border-radius: var(--job-radius-md);
+  }
+
+  /* タイトルはスマホ画面幅に合わせて最適化するが、十分に巨大 */
+  .job-title {
+    font-size: 28px !important; 
+    line-height: 1.4;
+  }
+
+  /* 本文・詳細リストの文字サイズはスマホでも20pxを「完全維持」 */
+  .job-description {
+    font-size: 20px !important;
+  }
+
+  .job-price-value {
+    font-size: 32px !important;
+  }
+
+  /* スマホ時は縦並びにするが、文字サイズは一切落とさない */
+  .job-info-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .job-info-label {
+    font-size: 20px !important;
+  }
+
+  .job-info-value {
+    font-size: 20px !important;
+  }
+  
+  /* チェックボックス文言もスマホで潰さない */
+  .job-confirm-label {
+    font-size: 18px !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  /* LINEボタンは極太・極大を維持して誤タップ防止 */
+  .btn-line-apply {
+    font-size: 22px !important;
+    padding: 20px 12px;
+  }
+
+  .job-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .job-admin-actions {
+    justify-content: stretch;
+  }
+  
+  .job-admin-actions > a {
+    flex: 1;
+    text-align: center;
+    padding: 16px;
+    font-size: 18px !important;
   }
 }
 
-/* 日給例の金額スタイル */
-.price-text {
-  color: #dc3545;    /* 赤色 (Bootstrapのdanger相当) */
-  font-size: 2.2rem; /* 文字を大きく */
-  font-weight: bold;
-  margin-left: 5px;
+
+
+/* ==========================================================================
+   Modern Job Index (List) Design - Compact High-Visibility Edition
+   ========================================================================== */
+
+/* ページタイトル */
+.recruit-index-page-title {
+  font-size: 28px !important; /* 少しコンパクトに */
+  font-weight: 900 !important;
+  color: var(--job-text-main, #000000) !important;
+  margin: 90px auto 20px auto !important;
+  max-width: 1200px !important;
+  padding: 0 15px !important;
+  border-left: 6px solid var(--job-primary, #0a58ca) !important;
+  padding-left: 12px !important;
+  line-height: 1.2 !important;
 }
 
-/* 今回のエリア表示専用の新しい定義 */
-.area-btn-container {
+/* 管理者ボタンコンテナ */
+.recruit-admin-header-area {
+  max-width: 1200px !important;
+  margin: 0 auto 16px auto !important;
+  padding: 0 15px !important;
+}
+.btn-recruit-admin-create {
+  display: inline-block !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  padding: 8px 18px !important;
+  border-radius: var(--job-radius-md, 10px) !important;
+  background-color: var(--job-success, #146c43) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* Gridコンテナの隙間を適正化 */
+.recruit-index-custom-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 16px !important; /* 24pxから16pxに狭めて詰める */
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 15px 30px 15px !important;
+  box-sizing: border-box !important;
+}
+
+.recruit-card-grid-item {
+  height: 100% !important;
+}
+
+/* ===== 案件カード本体（余白を大幅にスリム化） ===== */
+.recruit-index-main-card {
+  background-color: var(--job-bg-card, #ffffff) !important;
+  border-radius: 12px !important; /* 少しシャープに */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important; /* 軽めの影で圧迫感を減らす */
+  border: 1px solid var(--job-border-color, #a0aec0) !important;
+  padding: 20px !important; /* 30pxから20pxに縮小して内側をすっきり */
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.recruit-index-main-card.recruit-hover-action-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12) !important;
+  border-color: var(--job-primary, #0a58ca) !important;
+}
+
+/* ヘッダー行 */
+.recruit-card-header-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;      /* ボタン同士の隙間 */
-  margin-top: 8px;
-  position: relative;
-  z-index: 5;    /* 全体リンクより上に配置 */
+  align-items: center;
+  justify-content:间-between;
+  margin-bottom: 4px;
 }
 
-.area-btn-outline {
-  background-color: #ffffff; /* 背景白 */
-  border: 1px solid #007bff; /* 縁の色（青） */
-  color: #007bff;            /* 文字の色（青） */
-  font-size: 12px;           /* 小さめのサイズ */
-  padding: 2px 10px;         /* 内側の余白 */
-  border-radius: 4px;        /* 軽く角を丸める */
-  white-space: nowrap;       /* 文字の重なりを防ぐ */
-  display: inline-block;
-  line-height: 1.5;
+/* ポイントバッジ */
+.recruit-index-main-card .badge-pill-warning {
+  display: inline-flex !important;
+  padding: 4px 10px !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  border-radius: 4px !important;
+  background-color: rgba(255, 193, 7, 0.2) !important;
+  color: var(--job-warning, #997404) !important;
 }
 
-/* おすすめ表示専用の新しい定義 */
-.recommend-container {
+/* 案件タイトル */
+.recruit-card-main-title {
+  font-size: 20px !important; /* 26pxから20pxに調整し、一覧性を向上 */
+  font-weight: 800 !important;
+  line-height: 1.4 !important;
+  color: #000000 !important;
+  margin: 6px 0 10px 0 !important;
+}
+
+/* 案件説明文 */
+.recruit-card-body-description {
+  font-size: 16px !important; /* 18pxから16pxへ。読みやすさとコンパクトさの両立 */
+  line-height: 1.6 !important;
+  color: #2d3748 !important;
+  margin: 0 0 14px 0 !important;
+}
+
+/* 単価（Price）表示ブロック（高さを低くスマートに） */
+.recruit-card-price-block {
+  background-color: #f1f3f5 !important;
+  padding: 8px 14px !important; /* 上下をギュッと詰めました */
+  border-radius: 6px !important;
+  border-left: 4px solid var(--job-primary, #0a58ca) !important;
+  margin-bottom: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.recruit-price-meta-label {
+  font-size: 14px !important;
+  color: #4a5568 !important;
+  font-weight: 800 !important;
+}
+.recruit-price-num-value {
+  font-size: 18px !important; /* 24pxから18pxへ */
+  font-weight: 900 !important;
+  color: var(--job-primary, #0a58ca) !important;
+}
+
+/* タグまとめエリア */
+.recruit-card-tags-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 8px;
-  position: relative;
-  z-index: 5;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
 }
 
-.recommend-tag {
-  background-color: #ffffff; /* 背景白 */
-  border: 1px solid #28a745; /* 縁の色（緑） */
-  color: #28a745;            /* 文字の色（緑） */
-  font-size: 12px;
-  padding: 2px 10px;
-  border-radius: 4px;
-  white-space: nowrap;
-  display: inline-block;
-  line-height: 1.5;
-  font-weight: 600;
+/* 各種タグコンテナ */
+.recruit-card-tag-wrapper-box {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+
+/* エリアタグ */
+.recruit-tag-outline-pill {
+  display: inline-block !important;
+  background-color: #e2e8f0 !important;
+  color: #000000 !important;
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+/* おすすめタグ */
+.recruit-tag-recommend-pill {
+  display: inline-block !important;
+  background-color: var(--job-highlight-red-bg, #fff5f5) !important;
+  color: var(--job-highlight-red-text, #c92a2a) !important;
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(199, 42, 42, 0.15) !important;
+}
+
+/* フッター・アクションボタン配置用 */
+.recruit-card-bottom-action-bar {
+  margin-top: auto !important;
+  border-top: 1px solid #e2e8f0 !important;
+  padding-top: 14px !important;
+}
+
+/* 詳細（Detail）ボタン */
+.btn-recruit-card-to-detail {
+  display: block !important;
+  text-align: center !important;
+  background-color: var(--job-primary, #0a58ca) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  padding: 10px 14px !important; /* 縦幅をスマートに */
+  font-size: 16px !important; /* ボタン文字サイズも適正化 */
+  font-weight: 800 !important;
+  border-radius: 6px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 管理者操作エリア */
+.recruit-card-admin-control-box {
+  display: flex !important;
+  justify-content: flex-end !important;
+  margin-top: 8px !important;
+}
+.btn-recruit-admin-edit-sm {
+  background-color: #e9ecef !important;
+  color: #495057 !important;
+  border: 1px solid #ced4da !important;
+  padding: 4px 10px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+}
+
+
+/* ==========================================================================
+   【重要】一覧画面のスマートフォン表示最適化（スクロール量を抑える調整）
+   ========================================================================== */
+@media (max-width: 768px) {
+  .recruit-index-page-title {
+    font-size: 24px !important;
+    margin: 80px auto 16px auto !important;
+  }
+
+  .recruit-index-custom-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important; /* スマホではさらにカード間隔を詰めて一覧性を重視 */
+    padding: 0 8px 20px 8px !important;
+  }
+
+  .recruit-index-main-card {
+    padding: 16px !important; /* スマホでも1画面に入る量を増やすために引き締め */
+  }
+
+  .recruit-card-main-title {
+    font-size: 18px !important;
+  }
+
+  .recruit-card-body-description {
+    font-size: 15px !important; /* スマホ一覧として最適なサイズ */
+    margin-bottom: 10px !important;
+  }
+
+  .recruit-price-num-value {
+    font-size: 16px !important;
+  }
+
+  .recruit-tag-outline-pill,
+  .recruit-tag-recommend-pill {
+    font-size: 13px !important;
+    padding: 3px 8px !important;
+  }
+
+  .btn-recruit-card-to-detail {
+    font-size: 16px !important;
+    padding: 10px !important;
+  }
 }

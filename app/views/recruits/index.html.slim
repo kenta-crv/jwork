@@ -1,44 +1,42 @@
-h2 案件一覧
+h2.recruit-index-page-title 案件一覧
 
 - if admin_signed_in?
-  .mb-3
-    = link_to "新規案件登録", new_recruit_path, class: "btn btn-success"
+  .recruit-admin-header-area
+    = link_to "新規案件登録", new_recruit_path, class: "btn-recruit-admin-create"
 
-.row
+.recruit-index-custom-grid
   - @recruits.each do |recruit|
-    .col-md-6.mb-4
-      .job-card.p-3.border.rounded.h-100.d-flex.flex-column.position-relative.hover-card
-        - if recruit.point.present?
-          div
-            span.badge.bg-warning.text-dark = "★ #{recruit.point}"
+    .recruit-card-grid-item
+      .recruit-index-main-card.recruit-hover-action-card
+        .recruit-card-header-row
+          - if recruit.point.present?
+            span.badge-pill-warning = "★ #{recruit.point}"
         
-        h3.mt-2 = recruit.title
-        p.text-muted = truncate(recruit.description, length: 100)
+        h3.recruit-card-main-title = recruit.title
+        p.recruit-card-body-description = truncate(recruit.description, length: 100)
         
-        .mt-2
-          strong Price:
-          span.price-text = recruit.unit_price
+        .recruit-card-price-block
+          strong.recruit-price-meta-label Price:
+          span.recruit-price-num-value = recruit.unit_price
 
-        - if recruit.area.present?
-          .area-btn-container
-            - recruit.area.split('・').each do |a|
-              span.area-btn-outline = a
+        .recruit-card-tags-container
+          - if recruit.area.present?
+            .recruit-card-tag-wrapper-box
+              - recruit.area.split('・').each do |a|
+                span.recruit-tag-outline-pill = a
 
-        - if recruit.recommend.present?
-          .recommend-container
-            - recruit.recommend.split('・').each do |r|
-              span.recommend-tag = r
+          - if recruit.recommend.present?
+            .recruit-card-tag-wrapper-box
+              - recruit.recommend.split('・').each do |r|
+                span.recruit-tag-recommend-pill = r
         
-        / --- LINE メッセージ付きURL ---
         - message = "I would like to apply for an interview for #{recruit.title}."
         - encoded_message = ERB::Util.url_encode(message)
         - line_url = "https://line.me/R/oaMessage/@522jmsbm/?#{encoded_message}"
 
-        .mt-auto.pt-3
-          = link_to "Detail", recruit_path(recruit), class: "btn btn-danger w-100 fw-bold mb-2"
-          
-          /= link_to "Apply via LINE", line_url, class: "btn btn-success w-100 fw-bold mb-2"
+        .recruit-card-bottom-action-bar
+          = link_to "Detail", recruit_path(recruit), class: "btn-recruit-card-to-detail"
 
           - if admin_signed_in?
-            .d-flex.justify-content-end
-              = link_to "編集", edit_recruit_path(recruit), class: "btn btn-warning btn-sm"
+            .recruit-card-admin-control-box
+              = link_to "編集", edit_recruit_path(recruit), class: "btn-recruit-admin-edit-sm"

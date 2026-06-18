@@ -15,11 +15,7 @@ html
            = link_to "/"
             =image_tag "rogo.webp", width: "220px", class:"header-image"
         .col-xs-8
-        .col-xs-2.set-devise
-            - if admin_signed_in?
-              = link_to "管理者マイページ", admin_path(current_admin), class: "btn btn-primary"
-            - if user_signed_in?
-              = link_to "ユーザーマイページ", user_path(current_user), class: "btn btn-primary"
+
       .row.navi
        .col-xs-12.center
            br/

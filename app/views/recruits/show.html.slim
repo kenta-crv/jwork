@@ -3,225 +3,215 @@
 - line_url = "https://line.me/R/oaMessage/@522jmsbm/?#{encoded_message}"
 
 / --- カスタム通知ツールチップ (Notice Tooltip) ---
-/ JSがクリックされたボタンの位置を基準に動的配置する。テンプレートは雛形のみ。
 #custom-notice role="alert" style="display:none; position:absolute; z-index:2147483647; min-width:220px; max-width:280px; background-color:#842029; color:#fff; border-radius:0.5rem; padding:0.6rem 0.9rem; box-shadow:0 0.4rem 0.8rem rgba(0,0,0,0.3); font-weight:bold; font-size:0.85rem; text-align:center; line-height:1.4;"
   | Before applying via LINE, please be sure to check the job details and recruitment area.
   span#custom-notice-arrow style="position:absolute; bottom:-7px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:7px solid transparent; border-right:7px solid transparent; border-top:7px solid #842029;"
 
-.card.border-0.shadow-sm.job-card
-  .card-body.p-0
-    / Header: Title and Overview
-    .p-4.bg-white
-      span.badge.bg-primary.mb-2.rounded-pill Job Details
+.job-detail-card
+  / ===== ヘッダーセクション =====
+  .job-header
+    .job-header-badges
+      span.badge-pill-primary Job Details
       - if @recruit.point.present?
-        span.badge.bg-warning.text-dark.ms-1.rounded-pill = "★ #{@recruit.point}"
-      - else
-        span.text-muted.small.ms-1 Not Specified
+        span.badge-pill-warning = "★ #{@recruit.point}"
 
-      h2.h4.fw-bold.mb-3 = @recruit.title
+    h2.job-title = @recruit.title
 
-      .text-muted.small.bg-light.p-3.rounded-3
-        = simple_format(@recruit.description)
+    .job-description
+      = simple_format(@recruit.description)
 
-    / Main Info: Organized Table Format
-    .table-responsive
-      table.table.table-bordered.mb-0
-        tbody
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle width="30%" Base Pay / Unit Price
-            td.align-middle.py-3
-              .red
-                span.h5.fw-bold.text-danger = @recruit.unit_price
+  / ===== 単価（ハイライト） =====
+  .job-price-section
+    .job-price-label Base Pay / Unit Price
+    .job-price-value = @recruit.unit_price
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Rewards & Incentives
-            td.align-middle.py-3
-              span.fw-bold.text-danger = simple_format(@recruit.reward)
+  / ===== 詳細情報リスト =====
+  .job-info-list
+    .job-info-item
+      .job-info-label 🎁 Rewards & Incentives
+      .job-info-value.highlight-red = simple_format(@recruit.reward)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Working Hours
-            td.align-middle = simple_format(@recruit.working_hours)
+    .job-info-item
+      .job-info-label 🕐 Working Hours
+      .job-info-value = simple_format(@recruit.working_hours)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Working Days
-            td.align-middle = simple_format(@recruit.working_days)
+    .job-info-item
+      .job-info-label 📅 Working Days
+      .job-info-value = simple_format(@recruit.working_days)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Job Location
-            td.align-middle = simple_format(@recruit.area)
+    .job-info-item
+      .job-info-label 📍 Job Location
+      .job-info-value = simple_format(@recruit.area)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Payment Terms
-            td.align-middle.text-danger = simple_format(@recruit.payment)
+    .job-info-item
+      .job-info-label 💴 Payment Terms
+      .job-info-value.highlight-red = simple_format(@recruit.payment)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Japanese Proficiency
-            td.align-middle = simple_format(@recruit.japanese_skill)
+    .job-info-item
+      .job-info-label 🇯🇵 Japanese Proficiency
+      .job-info-value = simple_format(@recruit.japanese_skill)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Requirements
-            td.align-middle = simple_format(@recruit.require)
+    .job-info-item
+      .job-info-label ✅ Requirements
+      .job-info-value = simple_format(@recruit.require)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Employment Type
-            td.align-middle = simple_format(@recruit.contract_type)
+    .job-info-item
+      .job-info-label 📄 Employment Type
+      .job-info-value = simple_format(@recruit.contract_type)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Vehicle Details
-            td.align-middle.text-danger.fw-bold = simple_format(@recruit.car_details)
+    .job-info-item
+      .job-info-label 🚗 Vehicle Details
+      .job-info-value.highlight-red.fw-bold = simple_format(@recruit.car_details)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Why We Recommend
-            td.align-middle = simple_format(@recruit.recommend)
+    .job-info-item
+      .job-info-label 💡 Why We Recommend
+      .job-info-value = simple_format(@recruit.recommend)
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Category
-            td.align-middle
-              span.badge.bg-secondary.rounded-pill = @recruit.genre
+    .job-info-item
+      .job-info-label 🏷️ Category
+      .job-info-value
+        span.badge-category = @recruit.genre
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Eligible Visas
-            td.align-middle
-              = simple_format(Array(@recruit.visa).join("\n"))
+    .job-info-item
+      .job-info-label 📋 Eligible Visas
+      .job-info-value = simple_format(Array(@recruit.visa).join("\n"))
 
-          tr
-            th.bg-light.text-muted.fw-normal.align-middle Additional Notes
-            td.align-middle = simple_format(@recruit.remarks)
+    .job-info-item
+      .job-info-label 📝 Additional Notes
+      .job-info-value = simple_format(@recruit.remarks)
 
-  / --- 閲覧確認用チェックボックス（下部） ---
-  .px-3.pt-3
-    .confirmation-box
+  / ===== チェックボックス =====
+  .job-confirm-area
+    label.job-confirm-label
       input type="checkbox" id="check-bottom-#{@recruit.id}" class="recruit-confirm-check" data-group="recruit-check"
-      label for="check-bottom-#{@recruit.id}" I checked the job postings and recruitment areas.
+      span.job-confirm-text I checked the job postings and recruitment areas.
 
-  / --- 下部LINEボタン（既存） ---
-  .p-3
-    = link_to "Apply via LINE", line_url, class: "btn btn-success w-100 fw-bold rounded-btn action-link", data: { recruit_id: @recruit.id }, target: "_blank", rel: "noopener"
+  / ===== LINEボタン =====
+  .job-apply-area
+    = link_to line_url, class: "btn-line-apply action-link", data: { recruit_id: @recruit.id }, target: "_blank", rel: "noopener" do
+      span.btn-line-icon
+        / LINE icon SVG
+        svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"
+          path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"
+      span Apply via LINE
 
-  / Action Area
-  .card-footer.bg-light.p-3.rounded-bottom-4
-    .d-md-flex.justify-content-between.align-items-center
-      = link_to "Back to List", recruits_path, class: "btn btn-outline-secondary px-4 rounded-btn mb-2 mb-md-0"
+  / ===== フッター =====
+  .job-footer
+    = link_to "← Back to List", recruits_path, class: "btn-back"
 
-      - if admin_signed_in?
-        .d-grid.gap-2.d-md-flex.justify-content-md-end
-          = link_to "Edit", edit_recruit_path(@recruit), class: "btn btn-warning px-4 rounded-btn"
-          = link_to "Delete", recruit_path(@recruit),
-            method: :delete,
-            data: { confirm: "Are you sure you want to delete this job post?" },
-            class: "btn btn-danger px-4 rounded-btn"
+    - if admin_signed_in?
+      .job-admin-actions
+        = link_to "Edit", edit_recruit_path(@recruit), class: "btn-admin-edit"
+        = link_to "Delete", recruit_path(@recruit),
+          method: :delete,
+          data: { confirm: "Are you sure you want to delete this job post?" },
+          class: "btn-admin-delete"
 
 / LINE応募確認・チェック連動スクリプト
 javascript:
-  document.addEventListener('DOMContentLoaded', () => {
-    const actionLinks = document.querySelectorAll('.action-link');
-    const checkboxes = document.querySelectorAll('[data-group="recruit-check"]');
-    const noticeBanner = document.getElementById('custom-notice');
-    const noticeArrow = document.getElementById('custom-notice-arrow');
-    let hideTimer;
+  (() => {
+    const initRecruitShow = () => {
+      const actionLinks = document.querySelectorAll('.action-link');
+      const checkboxes = document.querySelectorAll('[data-group="recruit-check"]');
+      const noticeBanner = document.getElementById('custom-notice');
+      const noticeArrow = document.getElementById('custom-notice-arrow');
+      
+      // この画面に必要な主要要素がない場合は処理をスキップ（他画面でのエラー巻き込み防止）
+      if (actionLinks.length === 0 && checkboxes.length === 0) return;
+      
+      let hideTimer;
 
-    if (!noticeBanner) {
-      console.error('custom-notice element not found in DOM');
-    }
-    if (checkboxes.length === 0) {
-      console.error('recruit-confirm-check checkboxes not found in DOM');
-    }
+      function showNoticeNear(targetEl) {
+        if (!noticeBanner || !targetEl) return;
+        clearTimeout(hideTimer);
+        noticeBanner.style.display = 'block';
+        noticeBanner.style.opacity = '1';
 
-    function showNoticeNear(targetEl) {
-      if (!noticeBanner || !targetEl) return;
-      clearTimeout(hideTimer);
+        const rect = targetEl.getBoundingClientRect();
+        const scrollX = window.scrollX || window.pageXOffset;
+        const scrollY = window.scrollY || window.pageYOffset;
+        const noticeRect = noticeBanner.getBoundingClientRect();
 
-      // いったん表示してサイズを測れる状態にする
-      noticeBanner.style.display = 'block';
-      noticeBanner.style.opacity = '1';
+        let top = rect.top + scrollY - noticeRect.height - 14;
+        let left = rect.left + scrollX + (rect.width / 2) - (noticeRect.width / 2);
 
-      const rect = targetEl.getBoundingClientRect();
-      const scrollX = window.scrollX || window.pageXOffset;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const noticeRect = noticeBanner.getBoundingClientRect();
-
-      // ボタンの中央上に吹き出しを配置（ページ全体の絶対座標で計算）
-      let top = rect.top + scrollY - noticeRect.height - 14;
-      let left = rect.left + scrollX + (rect.width / 2) - (noticeRect.width / 2);
-
-      // 画面上端からはみ出る場合はボタンの下に表示する
-      let arrowOnBottom = true;
-      if (rect.top < noticeRect.height + 20) {
-        top = rect.bottom + scrollY + 14;
-        arrowOnBottom = false;
-      }
-
-      // 画面左右からはみ出ないように補正
-      const minLeft = scrollX + 8;
-      const maxLeft = scrollX + document.documentElement.clientWidth - noticeRect.width - 8;
-      if (left < minLeft) left = minLeft;
-      if (left > maxLeft) left = maxLeft;
-
-      noticeBanner.style.top = top + 'px';
-      noticeBanner.style.left = left + 'px';
-
-      // 矢印の位置をボタンの中心に合わせる
-      if (noticeArrow) {
-        const arrowLeft = (rect.left + scrollX + rect.width / 2) - left;
-        noticeArrow.style.left = arrowLeft + 'px';
-        if (arrowOnBottom) {
-          noticeArrow.style.bottom = '-7px';
-          noticeArrow.style.top = 'auto';
-          noticeArrow.style.borderTop = '7px solid #842029';
-          noticeArrow.style.borderBottom = 'none';
-        } else {
-          noticeArrow.style.top = '-7px';
-          noticeArrow.style.bottom = 'auto';
-          noticeArrow.style.borderBottom = '7px solid #842029';
-          noticeArrow.style.borderTop = 'none';
+        let arrowOnBottom = true;
+        if (rect.top < noticeRect.height + 20) {
+          top = rect.bottom + scrollY + 14;
+          arrowOnBottom = false;
         }
+
+        const minLeft = scrollX + 8;
+        const maxLeft = scrollX + document.documentElement.clientWidth - noticeRect.width - 8;
+        if (left < minLeft) left = minLeft;
+        if (left > maxLeft) left = maxLeft;
+
+        noticeBanner.style.top = top + 'px';
+        noticeBanner.style.left = left + 'px';
+
+        if (noticeArrow) {
+          const arrowLeft = (rect.left + scrollX + rect.width / 2) - left;
+          noticeArrow.style.left = arrowLeft + 'px';
+          if (arrowOnBottom) {
+            noticeArrow.style.bottom = '-7px';
+            noticeArrow.style.top = 'auto';
+            noticeArrow.style.borderTop = '7px solid #842029';
+            noticeArrow.style.borderBottom = 'none';
+          } else {
+            noticeArrow.style.top = '-7px';
+            noticeArrow.style.bottom = 'auto';
+            noticeArrow.style.borderBottom = '7px solid #842029';
+            noticeArrow.style.borderTop = 'none';
+          }
+        }
+
+        hideTimer = setTimeout(() => {
+          noticeBanner.style.display = 'none';
+        }, 3500);
       }
 
-      hideTimer = setTimeout(() => {
-        noticeBanner.style.display = 'none';
-      }, 3500);
-    }
+      function shakeCheckbox() {
+        if (checkboxes.length === 0) return;
+        const box = checkboxes[0].closest('.job-confirm-area') || checkboxes[0];
+        if (!box) return;
+        box.style.transition = 'box-shadow 0.2s ease';
+        box.style.boxShadow = '0 0 0 3px rgba(220,53,69,0.6)';
+        box.style.borderRadius = '0.4rem';
+        setTimeout(() => {
+          box.style.boxShadow = 'none';
+        }, 1200);
+      }
 
-    function shakeCheckbox() {
-      if (checkboxes.length === 0) return;
-      const box = checkboxes[0].closest('.confirmation-box') || checkboxes[0];
-      box.style.transition = 'box-shadow 0.2s ease';
-      box.style.boxShadow = '0 0 0 3px rgba(220,53,69,0.6)';
-      box.style.borderRadius = '0.4rem';
-      setTimeout(() => {
-        box.style.boxShadow = 'none';
-      }, 1200);
-    }
-
-    // 上下のチェックボックスの選択状態を同期させる
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', (e) => {
-        checkboxes.forEach(cb => {
-          cb.checked = e.target.checked;
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+          checkboxes.forEach(cb => { cb.checked = e.target.checked; });
         });
       });
-    });
 
-    // 応募ボタンクリック時の制御
-    actionLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const isChecked = checkboxes.length > 0 && Array.from(checkboxes).some(cb => cb.checked);
-
-        if (!isChecked) {
-          e.preventDefault();
-          showNoticeNear(link);
-          shakeCheckbox();
-        }
+      actionLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const isChecked = checkboxes.length > 0 && Array.from(checkboxes).some(cb => cb.checked);
+          if (!isChecked) {
+            e.preventDefault();
+            showNoticeNear(link);
+            shakeCheckbox();
+          }
+        });
       });
-    });
 
-    // リサイズ・スクロール時は表示中の通知を隠す（位置ズレ防止）
-    window.addEventListener('scroll', () => {
-      if (noticeBanner && noticeBanner.style.display === 'block') {
-        noticeBanner.style.display = 'none';
-        clearTimeout(hideTimer);
-      }
-    }, { passive: true });
-  });
+      // スクロール時にツールチップを消す安全処理
+      const handleScroll = () => {
+        if (noticeBanner && noticeBanner.style.display === 'block') {
+          noticeBanner.style.display = 'none';
+          clearTimeout(hideTimer);
+        }
+      };
+      window.removeEventListener('scroll', handleScroll);
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    };
 
-
+    // Turbo / Turbolinks / 通常ロードのすべてに対応
+    document.addEventListener('DOMContentLoaded', initRecruitShow);
+    document.addEventListener('turbo:load', initRecruitShow);
+    document.addEventListener('turbolinks:load', initRecruitShow);
+  })();
