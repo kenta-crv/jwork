@@ -2,100 +2,226 @@
 - encoded_message = ERB::Util.url_encode(message)
 - line_url = "https://line.me/R/oaMessage/@522jmsbm/?#{encoded_message}"
 
-.card.border-0.shadow-sm
+/ --- カスタム通知ツールチップ (Notice Tooltip) ---
+/ JSがクリックされたボタンの位置を基準に動的配置する。テンプレートは雛形のみ。
+#custom-notice role="alert" style="display:none; position:absolute; z-index:2147483647; min-width:220px; max-width:280px; background-color:#842029; color:#fff; border-radius:0.5rem; padding:0.6rem 0.9rem; box-shadow:0 0.4rem 0.8rem rgba(0,0,0,0.3); font-weight:bold; font-size:0.85rem; text-align:center; line-height:1.4;"
+  | Before applying via LINE, please be sure to check the job details and recruitment area.
+  span#custom-notice-arrow style="position:absolute; bottom:-7px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:7px solid transparent; border-right:7px solid transparent; border-top:7px solid #842029;"
+
+.card.border-0.shadow-sm.job-card
   .card-body.p-0
     / Header: Title and Overview
     .p-4.bg-white
-      span.badge.bg-primary.mb-2 Job Details
+      span.badge.bg-primary.mb-2.rounded-pill Job Details
       - if @recruit.point.present?
-        span.badge.bg-warning.text-dark = "★ #{@recruit.point}"
+        span.badge.bg-warning.text-dark.ms-1.rounded-pill = "★ #{@recruit.point}"
       - else
-        span.text-muted Not Specified
+        span.text-muted.small.ms-1 Not Specified
 
       h2.h4.fw-bold.mb-3 = @recruit.title
 
-      / --- 上部LINEボタン追加 ---
-      .mb-3
-        = link_to "Apply via LINE", line_url, class: "btn btn-success w-100 fw-bold"
-
-      .text-muted.small.bg-light.p-3.rounded
+      .text-muted.small.bg-light.p-3.rounded-3
         = simple_format(@recruit.description)
 
     / Main Info: Organized Table Format
-    table.table.table-bordered.mb-0
-      tbody
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle width="30%" Base Pay / Unit Price
-          td.align-middle.py-3
-            .red
-              span.h5.fw-bold.text-dark = @recruit.unit_price
+    .table-responsive
+      table.table.table-bordered.mb-0
+        tbody
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle width="30%" Base Pay / Unit Price
+            td.align-middle.py-3
+              .red
+                span.h5.fw-bold.text-danger = @recruit.unit_price
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Rewards & Incentives
-          td.align-middle.py-3
-            span.fw-bold.text-danger = simple_format(@recruit.reward)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Rewards & Incentives
+            td.align-middle.py-3
+              span.fw-bold.text-danger = simple_format(@recruit.reward)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Working Hours
-          td.align-middle = simple_format(@recruit.working_hours)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Working Hours
+            td.align-middle = simple_format(@recruit.working_hours)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Working Days
-          td.align-middle = simple_format(@recruit.working_days)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Working Days
+            td.align-middle = simple_format(@recruit.working_days)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Job Location
-          td.align-middle = simple_format(@recruit.area)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Job Location
+            td.align-middle = simple_format(@recruit.area)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Payment Terms
-          td.align-middle.text-danger = simple_format(@recruit.payment)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Payment Terms
+            td.align-middle.text-danger = simple_format(@recruit.payment)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Japanese Proficiency
-          td.align-middle = simple_format(@recruit.japanese_skill)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Japanese Proficiency
+            td.align-middle = simple_format(@recruit.japanese_skill)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Requirements
-          td.align-middle = simple_format(@recruit.require)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Requirements
+            td.align-middle = simple_format(@recruit.require)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Employment Type
-          td.align-middle = simple_format(@recruit.contract_type)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Employment Type
+            td.align-middle = simple_format(@recruit.contract_type)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Vehicle Details
-          td.align-middle.text-danger.fw-bold = simple_format(@recruit.car_details)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Vehicle Details
+            td.align-middle.text-danger.fw-bold = simple_format(@recruit.car_details)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Why We Recommend
-          td.align-middle = simple_format(@recruit.recommend)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Why We Recommend
+            td.align-middle = simple_format(@recruit.recommend)
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Category
-          td.align-middle
-            span.badge.bg-secondary = @recruit.genre
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Category
+            td.align-middle
+              span.badge.bg-secondary.rounded-pill = @recruit.genre
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Eligible Visas
-          td.align-middle
-            = simple_format(Array(@recruit.visa).join("\n"))
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Eligible Visas
+            td.align-middle
+              = simple_format(Array(@recruit.visa).join("\n"))
 
-        tr
-          th.bg-light.text-muted.fw-normal.align-middle Additional Notes
-          td.align-middle = simple_format(@recruit.remarks)
+          tr
+            th.bg-light.text-muted.fw-normal.align-middle Additional Notes
+            td.align-middle = simple_format(@recruit.remarks)
+
+  / --- 閲覧確認用チェックボックス（下部） ---
+  .px-3.pt-3
+    .confirmation-box
+      input type="checkbox" id="check-bottom-#{@recruit.id}" class="recruit-confirm-check" data-group="recruit-check"
+      label for="check-bottom-#{@recruit.id}" I checked the job postings and recruitment areas.
 
   / --- 下部LINEボタン（既存） ---
   .p-3
-    = link_to "Apply via LINE", line_url, class: "btn btn-success w-100 fw-bold"
+    = link_to "Apply via LINE", line_url, class: "btn btn-success w-100 fw-bold rounded-btn action-link", data: { recruit_id: @recruit.id }, target: "_blank", rel: "noopener"
 
   / Action Area
-  - if admin_signed_in?
-    .card-footer.bg-light.p-3
-      .d-grid.gap-2.d-md-flex.justify-content-md-end
-        = link_to "Back", recruits_path, class: "btn btn-outline-secondary px-4"
-        = link_to "Edit", edit_recruit_path(@recruit), class: "btn btn-warning px-4"
-        = link_to "Delete", recruit_path(@recruit),
-          method: :delete,
-          data: { confirm: "Are you sure you want to delete this job post?" },
-          class: "btn btn-danger px-4"
+  .card-footer.bg-light.p-3.rounded-bottom-4
+    .d-md-flex.justify-content-between.align-items-center
+      = link_to "Back to List", recruits_path, class: "btn btn-outline-secondary px-4 rounded-btn mb-2 mb-md-0"
+
+      - if admin_signed_in?
+        .d-grid.gap-2.d-md-flex.justify-content-md-end
+          = link_to "Edit", edit_recruit_path(@recruit), class: "btn btn-warning px-4 rounded-btn"
+          = link_to "Delete", recruit_path(@recruit),
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete this job post?" },
+            class: "btn btn-danger px-4 rounded-btn"
+
+/ LINE応募確認・チェック連動スクリプト
+javascript:
+  document.addEventListener('DOMContentLoaded', () => {
+    const actionLinks = document.querySelectorAll('.action-link');
+    const checkboxes = document.querySelectorAll('[data-group="recruit-check"]');
+    const noticeBanner = document.getElementById('custom-notice');
+    const noticeArrow = document.getElementById('custom-notice-arrow');
+    let hideTimer;
+
+    if (!noticeBanner) {
+      console.error('custom-notice element not found in DOM');
+    }
+    if (checkboxes.length === 0) {
+      console.error('recruit-confirm-check checkboxes not found in DOM');
+    }
+
+    function showNoticeNear(targetEl) {
+      if (!noticeBanner || !targetEl) return;
+      clearTimeout(hideTimer);
+
+      // いったん表示してサイズを測れる状態にする
+      noticeBanner.style.display = 'block';
+      noticeBanner.style.opacity = '1';
+
+      const rect = targetEl.getBoundingClientRect();
+      const scrollX = window.scrollX || window.pageXOffset;
+      const scrollY = window.scrollY || window.pageYOffset;
+      const noticeRect = noticeBanner.getBoundingClientRect();
+
+      // ボタンの中央上に吹き出しを配置（ページ全体の絶対座標で計算）
+      let top = rect.top + scrollY - noticeRect.height - 14;
+      let left = rect.left + scrollX + (rect.width / 2) - (noticeRect.width / 2);
+
+      // 画面上端からはみ出る場合はボタンの下に表示する
+      let arrowOnBottom = true;
+      if (rect.top < noticeRect.height + 20) {
+        top = rect.bottom + scrollY + 14;
+        arrowOnBottom = false;
+      }
+
+      // 画面左右からはみ出ないように補正
+      const minLeft = scrollX + 8;
+      const maxLeft = scrollX + document.documentElement.clientWidth - noticeRect.width - 8;
+      if (left < minLeft) left = minLeft;
+      if (left > maxLeft) left = maxLeft;
+
+      noticeBanner.style.top = top + 'px';
+      noticeBanner.style.left = left + 'px';
+
+      // 矢印の位置をボタンの中心に合わせる
+      if (noticeArrow) {
+        const arrowLeft = (rect.left + scrollX + rect.width / 2) - left;
+        noticeArrow.style.left = arrowLeft + 'px';
+        if (arrowOnBottom) {
+          noticeArrow.style.bottom = '-7px';
+          noticeArrow.style.top = 'auto';
+          noticeArrow.style.borderTop = '7px solid #842029';
+          noticeArrow.style.borderBottom = 'none';
+        } else {
+          noticeArrow.style.top = '-7px';
+          noticeArrow.style.bottom = 'auto';
+          noticeArrow.style.borderBottom = '7px solid #842029';
+          noticeArrow.style.borderTop = 'none';
+        }
+      }
+
+      hideTimer = setTimeout(() => {
+        noticeBanner.style.display = 'none';
+      }, 3500);
+    }
+
+    function shakeCheckbox() {
+      if (checkboxes.length === 0) return;
+      const box = checkboxes[0].closest('.confirmation-box') || checkboxes[0];
+      box.style.transition = 'box-shadow 0.2s ease';
+      box.style.boxShadow = '0 0 0 3px rgba(220,53,69,0.6)';
+      box.style.borderRadius = '0.4rem';
+      setTimeout(() => {
+        box.style.boxShadow = 'none';
+      }, 1200);
+    }
+
+    // 上下のチェックボックスの選択状態を同期させる
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', (e) => {
+        checkboxes.forEach(cb => {
+          cb.checked = e.target.checked;
+        });
+      });
+    });
+
+    // 応募ボタンクリック時の制御
+    actionLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const isChecked = checkboxes.length > 0 && Array.from(checkboxes).some(cb => cb.checked);
+
+        if (!isChecked) {
+          e.preventDefault();
+          showNoticeNear(link);
+          shakeCheckbox();
+        }
+      });
+    });
+
+    // リサイズ・スクロール時は表示中の通知を隠す（位置ズレ防止）
+    window.addEventListener('scroll', () => {
+      if (noticeBanner && noticeBanner.style.display === 'block') {
+        noticeBanner.style.display = 'none';
+        clearTimeout(hideTimer);
+      }
+    }, { passive: true });
+  });
+
+

@@ -39,7 +39,7 @@ module Api
           # メール送信
           # -------------------------------
           begin
-            UserMailer.send_email(user).deliver_now!
+            UserMailer.send_email(user).deliver_now
             Rails.logger.info "=== Mail sent successfully to #{user.email} ==="
           rescue => e
             Rails.logger.error "=== Mail delivery failed for #{user.email}: #{e.message} ==="
