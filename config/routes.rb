@@ -90,4 +90,6 @@ Rails.application.routes.draw do
   end
 
   resources :recruits
+  get 'columns',         to: 'top#columns'
+
 end

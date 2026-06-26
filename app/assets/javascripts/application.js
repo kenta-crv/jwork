@@ -37,31 +37,34 @@ document.addEventListener("turbolinks:load", function() {
   var totalExpenseEl = document.getElementById("total_expense");
   var netIncomeEl = document.getElementById("net_income");
 
-  function calculate() {
-    var unitPrice = parseFloat(unitPriceInput.value) || 0;
-    var quantity = parseFloat(quantityInput.value) || 0;
-    var days = parseFloat(daysInput.value) || 0;
+  // すべての要素が存在する場合のみ実行（Nullガード）
+  if (unitPriceInput && quantityInput && daysInput && totalRewardEl && totalExpenseEl && netIncomeEl) {
+    function calculate() {
+      var unitPrice = parseFloat(unitPriceInput.value) || 0;
+      var quantity = parseFloat(quantityInput.value) || 0;
+      var days = parseFloat(daysInput.value) || 0;
 
-    var totalReward = unitPrice * quantity * days;
-    var totalExpense = 25000 + 25000 + 1500;
-    var netIncome = totalReward - totalExpense;
+      var totalReward = unitPrice * quantity * days;
+      var totalExpense = 25000 + 25000 + 1500;
+      var netIncome = totalReward - totalExpense;
 
-    totalRewardEl.textContent = totalReward.toLocaleString();
-    totalExpenseEl.textContent = totalExpense.toLocaleString();
-    netIncomeEl.textContent = netIncome.toLocaleString();
+      totalRewardEl.textContent = totalReward.toLocaleString();
+      totalExpenseEl.textContent = totalExpense.toLocaleString();
+      netIncomeEl.textContent = netIncome.toLocaleString();
+    }
+
+    [unitPriceInput, quantityInput, daysInput].forEach(function(input) {
+      input.addEventListener("input", calculate);
+    });
+
+    // 初期計算
+    calculate();
   }
-
-  [unitPriceInput, quantityInput, daysInput].forEach(function(input) {
-    input.addEventListener("input", calculate);
-  });
-
-  // 初期計算
-  calculate();
 });
 
 
-// app/javascript/packs/application.js または index用JS
-document.addEventListener('DOMContentLoaded', () => {
+// コピーボタン処理（Turbolinks環境に対応）
+document.addEventListener('turbolinks:load', () => {
   const copyButtons = document.querySelectorAll('.copy-btn');
 
   copyButtons.forEach(btn => {
@@ -110,24 +113,29 @@ $(document).on('change', '.update-status', function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
+// チェックボックスによるボタン活性・非活性制御（エラー修正箇所）
+document.addEventListener('turbolinks:load', () => {
   const checks = document.querySelectorAll('.confirm-check');
   const nextButton = document.getElementById('next-button');
 
-  const toggleButton = () => {
-    const allChecked = Array.from(checks).every(c => c.checked);
-    if (allChecked) {
-      nextButton.classList.remove('disabled');
-      nextButton.style.pointerEvents = 'auto';
-    } else {
-      nextButton.classList.add('disabled');
-      nextButton.style.pointerEvents = 'none';
-    }
-  };
+  // ページ内に「next-button」が存在する場合のみ処理を実行する（Nullガード）
+  if (nextButton) {
+    const toggleButton = () => {
+      const allChecked = Array.from(checks).every(c => c.checked);
+      if (allChecked) {
+        nextButton.classList.remove('disabled');
+        nextButton.style.pointerEvents = 'auto';
+      } else {
+        nextButton.classList.add('disabled');
+        nextButton.style.pointerEvents = 'none';
+      }
+    };
 
-  checks.forEach(check => {
-    check.addEventListener('change', toggleButton);
-  });
+    checks.forEach(check => {
+      check.addEventListener('change', toggleButton);
+    });
 
-  toggleButton();
+    // 初期状態の判定を実行
+    toggleButton();
+  }
 });

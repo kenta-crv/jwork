@@ -18,7 +18,7 @@ SitemapGenerator::Sitemap.create do
     next unless column.code.present?   # code があるものだけ追加
     lp = column.genre # 例: "cleaning"
 
-    add "/columns/#{column.code}",
+    add "/columns?column=#{column.code}",
         lastmod: column.updated_at,
         priority: 0.5
   end
