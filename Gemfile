@@ -104,3 +104,5 @@ gem 'twilio-ruby'
 gem 'enum_help'
 
 gem 'sitemap_generator'
+
+gem 'nokogiri'

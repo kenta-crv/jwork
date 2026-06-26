@@ -1,3 +1,6 @@
+require 'net/http'
+require 'nokogiri'
+
 SitemapGenerator::Sitemap.default_host = "https://j-work.jp"
 
 SitemapGenerator::Sitemap.create do
@@ -5,21 +8,38 @@ SitemapGenerator::Sitemap.create do
   add root_path, changefreq: 'hourly', priority: 1.0
 
   # 各ジャンルLP
-  tops = %w[
-    cargo
-  ]
-
-  top.each do |top|
+  tops = %w[cargo]
+  tops.each do |top|
     add "/#{top}", changefreq: 'monthly', priority: 0.7
   end
 
-  # Column（LP配下）
-  Column.find_each do |column|
-    next unless column.code.present?   # code があるものだけ追加
-    lp = column.genre # 例: "cleaning"
+  # Column一覧ページ
+  add "/columns", changefreq: 'daily', priority: 0.6
 
-    add "/columns?column=#{column.code}",
-        lastmod: column.updated_at,
+  # ---- Column詳細ページをdrafity.pro経由(j-work.jp/columns)からスクレイピングして収集 ----
+  column_codes = []
+  page = 1
+
+  loop do
+    uri = URI("https://j-work.jp/columns?page=#{page}")
+    res = Net::HTTP.get_response(uri)
+    break unless res.is_a?(Net::HTTPSuccess)
+
+    doc = Nokogiri::HTML(res.body)
+    links = doc.css('a[href^="/columns/"]').map { |a| a['href'] }
+                .reject { |href| href == '/columns' }
+                .map { |href| href.sub('/columns/', '') }
+
+    break if links.empty?
+
+    column_codes.concat(links)
+    page += 1
+    break if page > 100 # 安全装置(無限ループ防止)
+  end
+
+  column_codes.uniq.each do |code|
+    add "/columns/#{code}",
+        changefreq: 'weekly',
         priority: 0.5
   end
 end
