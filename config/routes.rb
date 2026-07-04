@@ -91,5 +91,5 @@ Rails.application.routes.draw do
 
   resources :recruits
   #get 'columns',         to: 'top#columns'
-
+  resources :contracts
 end

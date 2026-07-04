@@ -1,0 +1,32 @@
+.contract-list-wrapper
+
+  .contract-list-container
+    table.contract-list-table
+      thead
+        tr
+          th.contract-list-table__th 会社名
+          th.contract-list-table__th 担当者
+          th.contract-list-table__th 電話
+          th.contract-list-table__th メール
+          th.contract-list-table__th 日付
+          th.contract-list-table__th.contract-list-table__th--end 操作
+
+      tbody.contract-list-table__body
+        - @contracts.each do |contract|
+          tr
+            td.contract-list-table__td.contract-list-table__td--semibold = contract.company
+            td.contract-list-table__td = contract.name
+            td.contract-list-table__td = contract.tel
+            td.contract-list-table__td = contract.email
+            td.contract-list-table__td.contract-list-table__td--muted = contract.created_at.strftime("%Y-%m-%d")
+
+            td.contract-list-table__td.contract-list-table__td--end
+              = link_to "詳細", contract_path(contract), class: "contract-action-btn contract-action-btn--detail"
+              = link_to "編集", edit_contract_path(contract), class: "contract-action-btn contract-action-btn--edit"
+              = link_to "削除", contract_path(contract),
+                method: :delete,
+                data: { confirm: "本当に削除しますか？" },
+                class: "contract-action-btn contract-action-btn--delete"
+
+  .contract-list-pagination
+    = paginate @contracts

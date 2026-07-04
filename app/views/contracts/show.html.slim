@@ -1,0 +1,50 @@
+.contract-module-container
+
+  .contract-module-card
+    .contract-module-card__body
+      table.contract-module-table
+        tr
+          th.contract-module-table__th 会社名
+          td.contract-module-table__td = @contract.company
+
+        tr
+          th.contract-module-table__th 担当者
+          td.contract-module-table__td = @contract.name
+
+        tr
+          th.contract-module-table__th 電話番号
+          td.contract-module-table__td = @contract.tel
+
+        tr
+          th.contract-module-table__th メール
+          td.contract-module-table__td = @contract.email
+
+        tr
+          th.contract-module-table__th 所在地
+          td.contract-module-table__td = @contract.address
+
+        tr
+          th.contract-module-table__th URL
+          td.contract-module-table__td
+            - if @contract.url.present?
+              = link_to @contract.url, @contract.url, target: "_blank", class: "contract-module-link"
+
+        tr
+          th.contract-module-table__th 導入時期
+          td.contract-module-table__td = @contract.period
+
+        tr
+          th.contract-module-table__th 備考
+          td.contract-module-table__td = @contract.message
+
+        tr
+          th.contract-module-table__th 作成日
+          td.contract-module-table__td.contract-module-table__td--muted = @contract.created_at.strftime("%Y-%m-%d")
+
+    .contract-module-card__footer
+      = link_to "編集", edit_contract_path(@contract), class: "contract-module-btn contract-module-btn--success"
+      = link_to "削除", contract_path(@contract),
+        method: :delete,
+        data: { confirm: "本当に削除しますか？" },
+        class: "contract-module-btn contract-module-btn--danger"
+      = link_to "一覧へ", contracts_path, class: "contract-module-btn contract-module-btn--secondary"

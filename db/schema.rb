@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_04_13_085316) do
+ActiveRecord::Schema.define(version: 2026_07_04_095252) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -73,41 +73,17 @@ ActiveRecord::Schema.define(version: 2026_04_13_085316) do
   end
 
   create_table "contracts", force: :cascade do |t|
-    t.string "agree"
-    t.string "co"
-    t.string "president_first"
-    t.string "president_last"
+    t.string "company"
+    t.string "name"
     t.string "tel"
+    t.string "email"
     t.string "address"
     t.string "url"
-    t.string "recruit_url"
-    t.string "work"
-    t.string "qualifications"
-    t.string "number"
+    t.string "service"
     t.string "period"
-    t.string "remarks"
-    t.string "person_first"
-    t.string "person_last"
-    t.string "email"
-    t.string "cc"
-    t.string "post_title"
-    t.string "experience"
-    t.string "recruit_url_2"
-    t.string "pdf"
-    t.string "contract_date"
-    t.string "unit_price"
-    t.string "refund"
-    t.string "payment"
-    t.string "salary"
-    t.string "employment_conditions"
-    t.string "document_screening"
-    t.string "conversion"
-    t.string "application"
-    t.string "driver_licence"
-    t.string "housing"
-    t.string "age"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "inspections", force: :cascade do |t|

@@ -1,0 +1,40 @@
+.contract-module-form-wrapper
+  = form_with model: @contract, local: true do |f|
+    .contract-module-card
+      .contract-module-card__body
+        .contract-module-form-stack
+          .contract-module-form-group
+            = f.label :company, "会社名", class: "contract-module-form-label"
+            = f.text_field :company, class: "contract-module-form-control"
+
+          .contract-module-form-group
+            = f.label :name, "担当者", class: "contract-module-form-label"
+            = f.text_field :name, class: "contract-module-form-control"
+
+          .contract-module-form-group
+            = f.label :tel, "電話番号", class: "contract-module-form-label"
+            = f.text_field :tel, class: "contract-module-form-control"
+
+          .contract-module-form-group
+            = f.label :email, "メールアドレス", class: "contract-module-form-label"
+            = f.email_field :email, class: "contract-module-form-control"
+
+          .contract-module-form-group
+            = f.label :address, "所在地", class: "contract-module-form-label"
+            = f.text_field :address, class: "contract-module-form-control"
+
+          .contract-module-form-group
+            = f.label :url, "URL", class: "contract-module-form-label"
+            = f.text_field :url, class: "contract-module-form-control"
+
+          .contract-module-form-group
+            = f.label :period, "導入時期", class: "contract-module-form-label"
+            = f.text_field :period, class: "contract-module-form-control"
+
+          .contract-module-form-group
+            = f.label :message, "備考", class: "contract-module-form-label"
+            = f.text_area :message, rows: 4, class: "contract-module-form-control contract-module-form-control--textarea"
+
+      .contract-module-card__footer
+        = f.submit "保存", class: "contract-module-btn contract-module-btn--primary"
+        = link_to "戻る", contracts_path, class: "contract-module-btn contract-module-btn--secondary"
