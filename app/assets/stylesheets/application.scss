@@ -2009,6 +2009,149 @@ table.right {margin:5px 50px 5px 0px;}
   background: #3949ab;
 }
 
+/* info ページ：ご利用の流れ（process-container） */
+.section.process {
+  .process-title {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #1a237e;
+    margin: 0 0 8px;
+  }
+
+  .process-sub {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a237e;
+    margin: 0 0 40px;
+  }
+
+  .process-container {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-left: 8px;
+  }
+
+  .process-container::before {
+    content: "";
+    position: absolute;
+    left: 28px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: #d1d5db;
+  }
+
+  .process-step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .process-step .num {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #1a237e;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 44px;
+    text-align: center;
+  }
+
+  .process-step .content {
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: left;
+  }
+
+  .process-step .content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: #1a237e;
+  }
+
+  .process-step .content h3 a {
+    color: #1a237e;
+    text-decoration: none;
+  }
+
+  .process-step .content h3 a:hover {
+    opacity: 0.7;
+  }
+
+  .process-step .content p {
+    font-size: 1.2rem;
+    color: #444;
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+
+  .process-step .content .row {
+    margin-left: -5px;
+    margin-right: -5px;
+    margin-bottom: 6px;
+  }
+
+  .process-step .content [class*="col-"] {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 8px;
+  }
+
+  .process-step .btn-process,
+  .process-step a.btn-process {
+    display: block;
+    width: 100%;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.35;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .process-sub {
+      font-size: 1.5rem;
+    }
+
+    .process-container {
+      max-width: 100%;
+    }
+
+    .process-container::before {
+      left: 21px;
+    }
+
+    .process-step .num {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      font-size: 0.95rem;
+    }
+
+    .process-step .content h3 {
+      font-size: 1.3rem;
+    }
+
+    .process-step .content p {
+      font-size: 1.05rem;
+    }
+  }
+}
+
 
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;

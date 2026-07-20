@@ -1,57 +1,8 @@
 - set_meta_tags title: 'Process a food delivery'
 - set_meta_tags noindex: true
 
-- if @user.hope_work = "Food"
 
- .section.process
-  .header
-    h2.title Getting Started
-    p.subtitle Workflow until you begin work
-
-  .timeline
-    .step
-      .circle 01
-      .card
-        h3 Contract
-        p We conclude contracts online. Please proceed to conclude the contract via the following URL.
-        = link_to "Sign the contract", conclusion_user_path(@user), class: "btn-process", target: "_blank"
-
-    .step
-      .circle 02
-      .card
-        h3 Work Preparation
-        p Please arrange parking near your home if required.
-        = link_to "Need a black license plate?", top_black_path, class: "btn-process"
-        = link_to "Need to rent a scooter?", "https://teito-ms.co.jp/rental-bike/", class: "btn-process", target: "_blank"
-        ul.doc-list
-         li The above applies only to Tokyo, Kanagawa, Saitama, Chiba, and Aichi prefectures.
-         li For other areas, please contact us via LINE.
-    .step
-      .circle 03
-      .card
-        h3 = link_to "Upload your information", edit_user_path(@user)
-        p Please click on the appropriate option below and upload your documents.
-        p All required documents:
-        ul.doc-list
-         li Residence card
-         li Driver's license
-        = link_to "Already have a black plate", edit_user_path(@user), class: "btn-process", target: "_blank"
-        ul.doc-list
-         li black license plate photo
-        = link_to "Already have a scooter", edit_user_path(@user), class: "btn-process", target: "_blank"
-        ul.doc-list
-         li scooter pictures
-        = link_to "Working with a bicycle", edit_user_path(@user), class: "btn-process", target: "_blank"
-        ul.doc-list
-         li Photo of the bicycle's anti-theft number.
-
-    .step
-      .circle 04
-      .card
-        h3 Registration briefing session
-        p You can register for the app at the registration briefing session and start working as early as the following week. (*Punctuality is essential.)
-- else
- .section.process
+.section.process
   .process-title PROCESS
   .process-sub ご利用の流れ
 
@@ -71,8 +22,7 @@
          = link_to "Conclusion of contract", conclusion_user_path(@user)
         p You will enter into a business outsourcing contract with us.
     
-    -if @user.hope_work == "Driver"
-     .process-step
+    .process-step
       .num 03
       .content
         h3 Car rental 
@@ -100,7 +50,7 @@
 
 
 
-     .process-step
+    .process-step
       .num 04
       .content
         h3 駐車場
@@ -113,7 +63,7 @@
          .col-xs-4
           = link_to "TimesParking", "https://times-info.net/", class:"btn btn-process", target: "_blank"
 
-     .process-step
+    .process-step
       .num 05
       .content
         h3 保険加入
