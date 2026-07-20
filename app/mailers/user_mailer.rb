@@ -1,5 +1,6 @@
 class UserMailer < ActionMailer::Base
   default from: "info@j-work.jp"
+  NOREPLY_FROM = "noreply@j-work.jp"
 
   def received_email(user)
     @user = user
@@ -113,6 +114,7 @@ end
     @user = user
     attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
     mail(
+      from: NOREPLY_FROM,
       to: @user.email,
       subject: 'METAよりおといあわせありがとうございます。'
     )
@@ -122,6 +124,7 @@ end
     @user = user
     attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
     mail(
+      from: NOREPLY_FROM,
       to: @user.email,
       subject: '📨 Our most popular job! Introducing our food driver position with a daily wage of 18,000 yen.'
     )
@@ -131,6 +134,7 @@ end
     @user = user
     attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
     mail(
+      from: NOREPLY_FROM,
       to: @user.email,
       subject: 'LINEへの登録はお済みですか？まずは面接を開始しましょう！'
     )
@@ -140,6 +144,7 @@ end
     @user = user
     attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
     mail(
+      from: NOREPLY_FROM,
       to: @user.email,
       subject: '📨 Work as an Amazon Driver in English！'
     )
@@ -149,6 +154,7 @@ end
     @user = user
     attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
     mail(
+      from: NOREPLY_FROM,
       to: @user.email,
       subject: 'LINEへの登録はお済みですか？月給40~70万円稼げるお仕事をご紹介'
     )
@@ -158,6 +164,7 @@ end
     @user = user
     attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
     mail(
+      from: NOREPLY_FROM,
       to: @user.email,
       subject: '【J Work】その後お仕事はお決まりでしょうか？'
     )
@@ -167,6 +174,7 @@ end
     @user = user
     attachments.inline['LINE.png'] = File.read(Rails.root.join('app/assets/images/LINE.png'))
     mail(
+      from: NOREPLY_FROM,
       to: @user.email,
       subject: 'いまのお仕事に満足していますか？稼げるドライバー職をご紹介！'
     )

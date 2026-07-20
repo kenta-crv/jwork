@@ -91,5 +91,12 @@ Rails.application.routes.draw do
 
   resources :recruits
   #get 'columns',         to: 'top#columns'
+
+  get '/pages/cargo',    to: 'pages#cargo'
+  get '/pages/human',    to: 'pages#human'
+  get '/pages/event',    to: 'pages#event'
+  get '/pages/cleaning', to: 'pages#cleaning'
+  get '/pages/logistic', to: 'pages#logistics'
+
   resources :contracts
 end

@@ -1,4 +1,7 @@
 class Contract < ApplicationRecord
+  # LPフォームから送られる送信元パス（カラム未追加のためメモリ保持のみ）
+  attr_accessor :origin
+
   validate :company_must_include_kaisha
 
   private
