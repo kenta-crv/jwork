@@ -4,30 +4,10 @@ Rails.application.routes.draw do
   # トップページ
   root to: 'top#index'
 
-  get "top/recruit" => 'top#recruit'  # クライアント側トップ
-  get "top/recruit_jp" => 'top#recruit_jp'  # クライアント側トップ
-  get "top/recruit_en" => 'top#recruit_en'  # クライアント側トップ
-  get "top/recruit_clean" => 'top#recruit_clean'  # クライアント側トップ
-  get "top/calculation" => 'top#calculation'  
+  get "top/policy" => 'top#policy'
 
-  get "top/start" => 'top#start'  
-
-  get 'information' => 'top#information' #社外周知
-  
-  get "top/flow" => 'top#flow'
-  get "top/entry" => 'top#entry'
-  get "top/attention" => 'top#attention'  
-  get "top/apply" => 'top#apply'  
-  get "top/black" => 'top#black'
-
-  get "top/policy" => 'top#policy'  
-
-
-  #get "/database" => 'top#database' # ユーザー側トップ
   get '/redirect', to: 'top#redirect'
   get 'users/thanks', to: 'users#thanks'
-  get 'lp', to: 'top#lp'
-   
   get 'line', to: 'top#line'
 
   # 管理者アカウント

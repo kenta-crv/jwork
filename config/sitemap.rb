@@ -7,16 +7,15 @@ SitemapGenerator::Sitemap.create do
   # トップページ
   add root_path, changefreq: 'hourly', priority: 1.0
 
-  # 各ジャンルLP
-  tops = %w[cargo]
-  tops.each do |top|
-    add "/#{top}", changefreq: 'monthly', priority: 0.7
+  # 各ジャンルLP（jwork内製）
+  %w[cargo human event cleaning logistic].each do |page|
+    add "/pages/#{page}", changefreq: 'monthly', priority: 0.7
   end
 
   # Column一覧ページ
   add "/columns", changefreq: 'daily', priority: 0.6
 
-  # ---- Column詳細ページをdrafity.pro経由(j-work.jp/columns)からスクレイピングして収集 ----
+  # ---- Column詳細ページを j-work.jp/columns から収集 ----
   column_codes = []
   page = 1
 

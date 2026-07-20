@@ -1,48 +1,13 @@
 class TopController < ApplicationController
-
   def index
   end
-  def black 
-  end
-  def recruit 
-  end
-  def recruit_jp
-  end
-  def recruit_en 
-  end
+
   def policy
-  end
-  def flow
-    @current_step = 1
-  end
-  def entry
-    @current_step = 2
-  end
-  def attention
-    @current_step = 3
-  end
-  def apply
-    @current_step = 4
-  end
-  def recruit_clean
-  end
-
-  def calculation
-  end
-
-  def database 
-  end 
-
-  def lp
   end
 
   def line
   end
 
-  def information
-  end
-  def start
-  end
   #def columns; end
 =begin
    def redirect
