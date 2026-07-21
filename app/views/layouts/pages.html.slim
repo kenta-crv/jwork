@@ -21,8 +21,8 @@ html lang="ja"
         = raw(breadcrumb_list_json_ld)
 
   body
-    .hero
-      nav.breadcrumbs
+    - if breadcrumbs.present?
+      nav.breadcrumbs aria-label="パンくず"
         = render_breadcrumbs separator: ' / '
 
     - if params[:sent] == '1'
