@@ -1,3 +1,30 @@
+// LP 切替時にブラウザ / Turbolinks が前ページのスクロール位置を復元し、
+// 「こんなお悩み」付近へ着地するのを防ぐ
+(function resetLpScrollOnVisit() {
+  const isLpPage = () => !!document.querySelector('.hero-main-section');
+
+  const forceTop = () => {
+    if (!isLpPage()) return;
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  forceTop();
+  document.addEventListener('DOMContentLoaded', forceTop);
+  document.addEventListener('turbolinks:load', forceTop);
+  document.addEventListener('turbo:load', forceTop);
+  window.addEventListener('pageshow', (e) => {
+    // bfcache 復帰時も先頭へ
+    if (e.persisted) forceTop();
+  });
+  requestAnimationFrame(forceTop);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   const mobileNavToggle = document.getElementById('mobile-nav-toggle');
   const mobileNavMenu = document.getElementById('mobile-nav-menu');

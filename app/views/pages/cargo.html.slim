@@ -326,6 +326,15 @@
               p.cards-moos-desc
                 |  取引開始より2週間で7名の人材を確保して頂けました。人材不足の業界でありながら、とても豊富な人材に驚きました。
 
+    section.sp-columns-seo
+      .sp-section-header
+        h2 お役立ち記事
+        p 軽貨物・Amazon配送に関する解説
+      ul.sp-columns-seo__list
+        - featured_columns_for(:cargo).each do |item|
+          li = link_to item[:title], item[:path]
+      p.sp-columns-seo__more
+        = link_to "記事一覧を見る", "/columns"
 
     section#inquiry
       .container

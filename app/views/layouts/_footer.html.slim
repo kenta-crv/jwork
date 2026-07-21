@@ -1,16 +1,13 @@
-footer
-  .heading.underline
-    | 弊社サービスページ
-  ul
-    li
-      = link_to "トップページ", "/"
-    li
-      = link_to  '記事一覧', '/posts'
-    li
-      = link_to  'よくある質問', '/question'
-    li
-      = link_to  '会社概要', '/company'
-    li
-      = link_to  '問い合わせフォーム', '/contact'
-    li
-      = link_to  'プライバシーポリシー', '/privacy'
+footer.jw-footer
+  .jw-footer__inner
+    p.jw-footer__heading 弊社サービスページ
+    ul.jw-footer__list
+      li = link_to "トップページ", "/", data: { turbolinks: false }
+      li = link_to "お役立ち記事", "/columns", data: { turbolinks: false }
+      li = link_to "軽貨物", "/pages/cargo", data: { turbolinks: false }
+      li = link_to "人材紹介", "/pages/human", data: { turbolinks: false }
+      li = link_to "清掃業", "/pages/cleaning", data: { turbolinks: false }
+      li = link_to "イベント", "/pages/event", data: { turbolinks: false }
+      li = link_to "物流業", "/pages/logistic", data: { turbolinks: false }
+      li = link_to "お問い合わせ", "/contracts/new", data: { turbolinks: false }
+  p.jw-footer__copy &copy; #{Time.current.year} J Work / 株式会社セールスプロ

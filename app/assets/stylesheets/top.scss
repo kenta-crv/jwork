@@ -759,3 +759,91 @@
     height: 180px;
   }
 }
+
+/* SEO: お役立ち記事 */
+.sp-columns-seo {
+  max-width: 920px;
+  margin: 56px auto 24px;
+  padding: 0 24px;
+}
+
+.sp-columns-seo__list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 12px;
+}
+
+.sp-columns-seo__list li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sp-columns-seo__list a {
+  display: block;
+  padding: 14px 0;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.sp-columns-seo__list a:hover {
+  color: #0a66c2;
+}
+
+.sp-columns-seo__more {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.sp-columns-seo__more a {
+  color: #0a66c2;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sp-columns-seo__more a:hover {
+  text-decoration: underline;
+}
+
+.jw-footer {
+  margin-top: 48px;
+  padding: 32px 24px 24px;
+  background: #111;
+  color: #f5f5f5;
+}
+
+.jw-footer__inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.jw-footer__heading {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.jw-footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.jw-footer__list a {
+  color: #dcecff;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.jw-footer__list a:hover {
+  color: #7ec8ff;
+}
+
+.jw-footer__copy {
+  max-width: 920px;
+  margin: 20px auto 0;
+  font-size: 0.8rem;
+  color: #999;
+}

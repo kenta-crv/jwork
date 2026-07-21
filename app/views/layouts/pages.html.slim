@@ -16,6 +16,10 @@ html lang="ja"
     - canonical_url = request.url
     link rel="canonical" href=canonical_url
 
+    - if breadcrumbs.present?
+      script type="application/ld+json"
+        = raw(breadcrumb_list_json_ld)
+
   body
     .hero
       nav.breadcrumbs
@@ -45,5 +49,7 @@ html lang="ja"
         = message
 
     = yield
+
+    = render "layouts/footer"
 
     = javascript_include_tag "pages", "data-turbolinks-track": "reload"

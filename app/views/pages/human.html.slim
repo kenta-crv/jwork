@@ -340,6 +340,15 @@ section#case.cards-moos-section.py-5
               p.cards-moos-desc
                 |  深夜警備の強化に警備業を依頼しましたが、真面目に働いて頂いています。
 
+section.sp-columns-seo
+  .sp-section-header
+    h2 お役立ち記事
+    p 外国人人材・配送現場に関する解説
+  ul.sp-columns-seo__list
+    - featured_columns_for(:human).each do |item|
+      li = link_to item[:title], item[:path]
+  p.sp-columns-seo__more
+    = link_to "記事一覧を見る", "/columns"
 
 section#inquiry
   .container
