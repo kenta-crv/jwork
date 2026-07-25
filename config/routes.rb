@@ -70,10 +70,11 @@ Rails.application.routes.draw do
   end
 
   resources :recruits
+  #get 'columns',         to: 'top#columns'
 
-  # Column: jwork が drafity HTML を取得し、自社 LINE 導線を注入して返す
-  get "/columns", to: "columns#index"
-  get "/columns/:id", to: "columns#show", constraints: { id: /[^\/]+/ }
+  # Column 記事は nginx → drafity。導線だけ jwork が JSON で返す
+  get "/column_line_cta", to: "column_line_ctas#show", defaults: { format: :json }
+  get "/column_line_cta.json", to: "column_line_ctas#show"
 
   get '/pages/cargo',    to: 'pages#cargo'
   get '/pages/human',    to: 'pages#human'

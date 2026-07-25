@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 # J Work 側で管理する Column 記事下部の LINE 導線。
-# nil / delivery_partner → 新規取引相談
-# driver_recruitment → お仕事の応募
+# drafity のコードは変更しない。
+#
+# 優先順位:
+# 1. 明示の sub_genre パラメータ（将来用）
+# 2. config/column_line_cta.yml の code 一覧
+# 3. デフォルト delivery_partner（新規取引相談）
 class ColumnLineCta
   CTAS = {
     "delivery_partner" => {
@@ -27,18 +31,38 @@ class ColumnLineCta
     }
   }.freeze
 
+  def self.resolve(code: nil, sub_genre: nil)
+    key = sub_genre.to_s
+    return for_sub_genre(key) if CTAS.key?(key)
+
+    code_str = code.to_s
+    return for_sub_genre("driver_recruitment") if code_str != "" && recruit_codes.include?(code_str)
+
+    for_sub_genre(default_sub_genre)
+  end
+
   def self.for_sub_genre(sub_genre)
     key = sub_genre.to_s
     key = "delivery_partner" unless CTAS.key?(key)
     CTAS[key]
   end
 
-  def self.extract_sub_genre(html)
-    return nil if html.nil? || html.empty?
+  def self.default_sub_genre
+    value = config["default_sub_genre"].to_s
+    value.empty? ? "delivery_partner" : value
+  end
 
-    match = html.match(/<meta[^>]*name=["']jwork-sub-genre["'][^>]*content=["']([^"']*)["']/i) ||
-            html.match(/<meta[^>]*content=["']([^"']*)["'][^>]*name=["']jwork-sub-genre["']/i)
-    value = match&.[](1)
-    value.nil? || value.empty? ? nil : value
+  def self.recruit_codes
+    Array(config["driver_recruitment_codes"]).map(&:to_s)
+  end
+
+  def self.config
+    path = Rails.root.join("config/column_line_cta.yml")
+    return {} unless File.exist?(path)
+
+    raw = YAML.safe_load(File.read(path), permitted_classes: [], aliases: false)
+    raw.is_a?(Hash) ? raw : {}
+  rescue StandardError
+    {}
   end
 end

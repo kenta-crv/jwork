@@ -1,0 +1,13 @@
+# Column LINE CTA の中ジャンル切り替え設定（jwork のみ）
+# drafity は変更不要。
+#
+# default_sub_genre:
+#   delivery_partner  → 新規取引相談
+#   driver_recruitment → お仕事の応募
+#
+# driver_recruitment_codes:
+#   求職者向けにしたい記事の code（URL の /columns/ここ）を列挙
+
+default_sub_genre: delivery_partner
+
+driver_recruitment_codes: []
