@@ -16,6 +16,7 @@ class ColumnLineCtaHtml
     banner = ERB::Util.html_escape(cta[:banner_path])
 
     <<~HTML
+      <div data-jwork-cta="1">
       <style>
         .jwork-line-cta{--line-green:#06c755;--line-green-deep:#05a849;--line-ink:#0f172a;position:relative;margin:56px 0 28px;padding:28px 24px;border-radius:22px;overflow:hidden;isolation:isolate;background:linear-gradient(145deg,rgba(6,199,85,.12) 0%,rgba(255,255,255,.95) 42%,#fff 100%);border:1px solid rgba(6,199,85,.22);box-shadow:0 18px 40px rgba(6,199,85,.1),0 2px 8px rgba(15,23,42,.04);animation:jwork-line-cta-in .55s ease both}
         .jwork-line-cta__glow{position:absolute;inset:auto -20% -40% 40%;height:70%;background:radial-gradient(circle,rgba(6,199,85,.22) 0%,transparent 68%);pointer-events:none;z-index:0}
@@ -40,7 +41,7 @@ class ColumnLineCtaHtml
         @keyframes jwork-line-cta-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         @media (max-width:768px){.jwork-line-cta{margin:40px 0 20px;padding:22px 18px}.jwork-line-cta__inner{grid-template-columns:1fr;gap:18px}.jwork-line-cta__banner-link{max-width:none}.jwork-line-cta__btn{width:100%}.jwork-line-cta__qr{justify-self:center;width:100%;max-width:220px}.jwork-line-cta__qr-img{width:132px;height:132px;margin:0 auto}}
       </style>
-      <section class="jwork-line-cta jwork-line-cta--#{kind}" data-jwork-cta="1">
+      <section class="jwork-line-cta jwork-line-cta--#{kind}">
         <div class="jwork-line-cta__glow" aria-hidden="true"></div>
         <div class="jwork-line-cta__inner">
           <div class="jwork-line-cta__copy">
@@ -63,6 +64,7 @@ class ColumnLineCtaHtml
           </div>
         </div>
       </section>
+      </div>
     HTML
   end
 end

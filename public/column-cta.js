@@ -11,22 +11,27 @@
 
     var wrapper = document.createElement("div");
     wrapper.innerHTML = html;
-    var node = wrapper.firstElementChild;
-    if (!node) return;
+
+    // <style> と <section> の両方が来るため、先頭要素だけだと見た目が出ない
+    var nodes = [];
+    while (wrapper.firstChild) {
+      nodes.push(wrapper.firstChild);
+      wrapper.removeChild(wrapper.firstChild);
+    }
+    if (!nodes.length) return;
 
     var footer = document.querySelector(".column-footer");
     if (footer && footer.parentNode) {
-      footer.parentNode.insertBefore(node, footer);
+      for (var i = 0; i < nodes.length; i++) {
+        footer.parentNode.insertBefore(nodes[i], footer);
+      }
       return;
     }
 
-    var body = document.querySelector(".blog-container .container") || document.querySelector(".blog-container");
-    if (body) {
-      body.appendChild(node);
-      return;
+    var body = document.querySelector(".blog-container .container") || document.querySelector(".blog-container") || document.body;
+    for (var j = 0; j < nodes.length; j++) {
+      body.appendChild(nodes[j]);
     }
-
-    document.body.appendChild(node);
   }
 
   function run() {
