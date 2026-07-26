@@ -14,6 +14,12 @@ script[src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"]
 == display_meta_tags(default_meta_tags)
 = favicon_link_tag('favicon.ico')
 
+- if controller_name == "top" && action_name == "index"
+  script type="application/ld+json"
+    = raw(organization_json_ld)
+  script type="application/ld+json"
+    = raw(website_json_ld)
+
 
 / Google Tag Manager
 script

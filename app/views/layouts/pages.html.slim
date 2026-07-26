@@ -24,6 +24,11 @@ html lang="ja"
         | nav.breadcrumbs,.breadcrumbs{position:absolute!important;top:16px!important;left:16px!important;right:auto!important;z-index:30!important;display:block!important;margin:0!important;padding:0!important;font-size:14px!important;line-height:1.5!important;background:transparent!important;border:none!important;pointer-events:auto!important;color:#111!important;text-shadow:0 1px 2px rgba(255,255,255,.9),0 0 6px rgba(255,255,255,.8)}
         | .breadcrumbs a{color:#111!important;text-decoration:underline!important;text-underline-offset:2px!important;pointer-events:auto!important}
 
+    - faq_ld = faq_page_json_ld(lp_faqs_for_current_page)
+    - if faq_ld.present?
+      script type="application/ld+json"
+        = raw(faq_ld)
+
   body
     - if breadcrumbs.present?
       nav.breadcrumbs aria-label="パンくず"

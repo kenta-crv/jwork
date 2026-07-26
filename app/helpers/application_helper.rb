@@ -46,7 +46,7 @@ module ApplicationHelper
 
   def default_meta_tags
     {
-      site: "外国人専門の人材提供ならJ Work｜株式会社セールスプロ",
+      site: "外国人専門の人材提供ならJ Work｜株式会社J Work",
       title: "合同会社ファクトル",
       reverse: true,
       separator: '|',
@@ -97,5 +97,106 @@ module ApplicationHelper
       "@type" => "BreadcrumbList",
       "itemListElement" => items
     }.to_json
+  end
+
+  def organization_json_ld
+    {
+      "@context" => "https://schema.org",
+      "@type" => "Organization",
+      "name" => "J Work",
+      "legalName" => "株式会社J Work",
+      "url" => "https://j-work.jp/",
+      "logo" => "https://j-work.jp#{image_path('favicon.ico')}",
+      "description" => "外国人専門の人材提供ならJ Work。軽貨物・配送・清掃など現場人材を支援します。",
+      "address" => {
+        "@type" => "PostalAddress",
+        "streetAddress" => "浜松町２丁目２番１５号２Ｆ",
+        "addressLocality" => "港区",
+        "addressRegion" => "東京都",
+        "addressCountry" => "JP"
+      }
+    }.to_json
+  end
+
+  def website_json_ld
+    {
+      "@context" => "https://schema.org",
+      "@type" => "WebSite",
+      "name" => "J Work",
+      "url" => "https://j-work.jp/",
+      "inLanguage" => "ja",
+      "publisher" => {
+        "@type" => "Organization",
+        "name" => "株式会社J Work"
+      }
+    }.to_json
+  end
+
+  def faq_page_json_ld(items)
+    entities = Array(items).filter_map do |item|
+      q = (item.is_a?(Array) ? item[0] : (item[:q] || item["q"])).to_s.strip
+      a = (item.is_a?(Array) ? item[1] : (item[:a] || item["a"])).to_s.strip
+      next if q.blank? || a.blank?
+
+      {
+        "@type" => "Question",
+        "name" => q,
+        "acceptedAnswer" => {
+          "@type" => "Answer",
+          "text" => a
+        }
+      }
+    end
+    return if entities.blank?
+
+    {
+      "@context" => "https://schema.org",
+      "@type" => "FAQPage",
+      "mainEntity" => entities
+    }.to_json
+  end
+
+  def lp_faqs_for_current_page
+    case action_name
+    when "cargo"
+      [
+        { q: "どの地域まで対応可能ですか？", a: "名古屋・大阪・関東・福岡を中心に対応しています。条件によりその他のエリアもご相談いただけます。" },
+        { q: "スポット対応は可能ですか？", a: "はい、案件内容に応じて一時的なご依頼にも対応いたします。" },
+        { q: "夜間や早朝の配送にも対応できますか？", a: "はい、事前にご相談いただければ対応可能です。配送時間や曜日など柔軟に調整いたします。" },
+        { q: "定期的な配送契約は可能ですか？", a: "可能です。週単位・月単位など、ご希望のスケジュールに合わせた契約形態で対応いたします。" },
+        { q: "どんな荷物を運べますか？", a: "軽貨物車両で運べる範囲（小口荷物・書類・商品・資材など）に対応しています。内容によっては確認が必要な場合があります。" },
+        { q: "特に人材な豊富なエリアはありますか？", a: "愛知県・埼玉県・神奈川県・千葉県・大阪府は特に人材が豊富におります。" }
+      ]
+    when "cleaning"
+      [
+        { q: "どの地域まで対応可能ですか？", a: "名古屋・大阪・関東・福岡を中心に対応しています。条件によりその他のエリアもご相談いただけます。" },
+        { q: "スポット対応は可能ですか？", a: "はい、案件内容に応じて一時的なご依頼にも対応いたします。" },
+        { q: "夜間や早朝の清掃にも対応できますか？", a: "はい、事前にご相談いただければ対応可能です。清掃時間や曜日など柔軟に調整いたします。" },
+        { q: "定期的な清掃契約は可能ですか？", a: "可能です。年単位・月単位など、ご希望のスケジュールに合わせた契約形態で対応いたします。" },
+        { q: "どんな清掃業務経験者がいますか？", a: "当社ではホテル清掃・公共清掃・屋内施設清掃と幅広い経験スタッフが在籍しております。" },
+        { q: "特に人材な豊富なエリアはありますか？", a: "愛知県・埼玉県・神奈川県・千葉県・大阪府は特に人材が豊富におります。" }
+      ]
+    when "human"
+      [
+        { q: "対応エリアはどこまでですか？", a: "全国対応可能です。地域や業種により条件が異なりますのでご相談ください。" },
+        { q: "複数事業をまとめて依頼できますか？", a: "はい、複数業種を一括でご依頼いただけます。" }
+      ]
+    when "event"
+      [
+        { q: "対応可能なエリアはどこですか？", a: "全国対応可能です。エリアにより条件が異なりますのでご相談ください。" },
+        { q: "単日や短期間のイベントにも対応できますか？", a: "はい、単日・短期イベントにも柔軟に対応可能です。" },
+        { q: "何名から依頼できますか？", a: "1名から大人数まで、案件内容に応じて手配可能です。" },
+        { q: "どんな業務経験者がいますか？", a: "受付・誘導・設営補助など、幅広いイベント経験スタッフが在籍しています。" }
+      ]
+    when "logistics"
+      [
+        { q: "対応可能なエリアはどこですか？", a: "全国対応可能です。拠点により条件が異なりますのでご相談ください。" },
+        { q: "単日や短期の作業にも対応できますか？", a: "はい、短期・スポット作業にも柔軟に対応可能です。" },
+        { q: "何名から依頼できますか？", a: "1名から大量人員まで、案件内容に応じて手配可能です。" },
+        { q: "どんな業務経験者がいますか？", a: "ピッキング・梱包・入出庫・検品経験者など、幅広い物流作業スタッフが在籍しています。" }
+      ]
+    else
+      []
+    end
   end
 end
