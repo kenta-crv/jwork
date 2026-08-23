@@ -1,114 +1,131 @@
-- set_meta_tags title: "外国人材の採用と、日本で働く人の情報"
-- set_meta_tags description: "登録3,000人・毎月約500人増。企業の外国人採用と、在留外国人の仕事・暮らしの情報。J Work。"
-
+/ --- 統制されたデザインパッケージ ---
 .sp-corp-wrapper
+  / 1. HERO：ここだけ画面横いっぱいに広がる
   .sp-hero-fullwide
     .sp-hero-container
-      .sp-badge 外国人材プラットフォーム
-      h1.sp-copy
-        span.reveal 外国人材の採用と、
+      .sp-badge FOREIGNERS HUMAN SOLUTION EXPERT
+      h1.sp-copy 
+        span.reveal 日本の企業のグローバル人材化推進
         br
-        span.reveal 日本で働く人の情報
-      p.sp-lead
-        | 登録 3,000人。毎月 約500人が新たに登録。
+        span.reveal 永住ビザ特化型外国人プラットフォーム
+      p.sp-lead 
+        | 少子高齢化が進む日本社会に、圧倒的な人材量を生かして即時人材提供。
         br
-        | 企業の採用と、外国人本人の仕事・暮らしを同じ場所でつなぎます。
+        | 永住権という導入しやすさを基盤に、人材難を過去のものに。
       .sp-cta-wrap
-        = link_to "人材を採用したい", "/pages/human", class: "sp-btn-primary", data: { turbolinks: false }
-        = link_to "仕事を探している", "https://lin.ee/8pGADE1", class: "sp-btn-ghost", target: "_blank", rel: "noopener"
+        a.sp-btn-primary href="/contracts/new" お問い合わせ
+
 
   .sp-content-container
-    ul.sp-stats
-      li
-        strong 3,000
-        span 登録外国人材
-      li
-        strong 500
-        span 毎月の新規登録（約）
-      li
-        strong 全国
-        span 配送・現場を中心に対応
 
-    section.sp-doors
+    / 3. Solutions：以前の洗練されたタイルデザイン
+    .sp-solutions
       .sp-section-header
-        h2 まず、目的を選ぶ
-        p 3つの入口
-      .sp-door-grid
-        = link_to "/pages/human", class: "sp-door", data: { turbolinks: false } do
-          p.sp-door-kicker 企業の方
-          h3 外国人材を採用する
-          p 条件に合う人数を先に把握できます。Amazon配送を含む現場人材、特定技能の相談もこちらです。
-          span.sp-door-go 人材紹介を見る
-        = link_to "https://lin.ee/8pGADE1", class: "sp-door", target: "_blank", rel: "noopener" do
-          p.sp-door-kicker 働きたい方
-          h3 仕事を探す
-          p 求人情報はLINEで受け取れます。来日後の手続きや相談窓口の記事もあります。
-          span.sp-door-go LINEで応募する
-        = link_to "/contracts/new", class: "sp-door", data: { turbolinks: false } do
-          p.sp-door-kicker 支援団体の方
-          h3 掲載・連携の相談
-          p 団体プロフィールやイベント告知はこれから拡充します。まずはご連絡ください。
-          span.sp-door-go 問い合わせる
-
-    section.sp-solutions
-      .sp-section-header
-        h2 企業向け
-        p 採用・請負のご相談
+        h2 Our Solutions
+        p 各事業紹介
+      
       .sp-grid
         .sp-card
           .sp-card-image
-            img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80" alt="外国人材の採用"
+            img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80" alt="Executive"
           .sp-card-body
             .sp-card-num 01
-            h3 外国人材の紹介
-            p 永住・就労可能な人材を中心に、企業の条件に合わせて紹介します。
+            h3 Foreign talent recruitment
+            p 企業の属性に合わせた永住ビザを取得した外国人人材を紹介します。
             a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/human" data-turbolinks="false"
-              | 詳細を見る
+             | View Detail
+        
         .sp-card
           .sp-card-image
-            = image_tag "cargo-image.png", alt: "Amazon配送の外国人材"
+            =image_tag "cargo-image.png"
           .sp-card-body
             .sp-card-num 02
-            h3 Amazon外国人配送
-            p ドライバー確保・業務請負。外国人材の供給に特化した現場支援です。
+            h3 Cargo delivery
+            p 軽貨物事業及びフードデリバリー事業で日本の枯渇する物流に貢献します。
             a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/cargo" data-turbolinks="false"
-              | 詳細を見る
+              | View Detail
 
-      p.sp-industry-note
-        | その他の現場（清掃・イベント・物流）も対応しています。
-        = link_to "清掃", "/pages/cleaning", data: { turbolinks: false }
-        | ・
-        = link_to "イベント", "/pages/event", data: { turbolinks: false }
-        | ・
-        = link_to "物流", "/pages/logistic", data: { turbolinks: false }
+      .sp-grid
+        .sp-card
+          .sp-card-image
+            =image_tag "cleaning-image.png"
+          .sp-card-body
+            .sp-card-num 03
+            h3 Cleaning 
+            p 日常清掃及び巡回清掃分野における人材確保及び配置を行います。
+            a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/cleaning" data-turbolinks="false"
+             | View Detail
+        
+        .sp-card
+          .sp-card-image
+            =image_tag "event-image.png"
+          .sp-card-body
+            .sp-card-num 04
+            h3 Event 
+            p イベント設営・撤去・誘導におけるスタッフの提供を迅速に行います。
+            a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/event" data-turbolinks="false"
+             | View Detail
 
-    section.sp-solutions
+        .sp-card
+          .sp-card-image
+            =image_tag "event-image.png"
+          .sp-card-body
+            .sp-card-num 05
+            h3 Logistic
+            p 工場組立やLINE作業、倉庫業務等の人材提供を行います。
+            a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/logistic" data-turbolinks="false"
+             | View Detail
+
+
+
+  .sp-content-container
+    / 3. Solutions：以前の洗練されたタイルデザイン
+    .sp-solutions
+      .sp-section-header
+        h2 Our Columns
+        p 各事業掲載Column
+
+    .sp-news-grid
+
+      = link_to "https://okey.work/columns", class: "sp-news-card", target: "_blank", rel: "noopener" do
+        .sp-news-card-body
+          h3 清掃業事業記事一覧
+
+          .sp-news-card-image
+            = image_tag "cleaning-column.webp", alt: "清掃業事業記事一覧"
+
+          p 詳細を見る
+
+        .sp-news-card-arrow
+          i.sp-icon-arrow
+
+      = link_to "/columns", class: "sp-news-card" do
+        .sp-news-card-body
+          h3 運送業事業記事一覧
+
+          .sp-news-card-image
+            = image_tag "transport-column.webp", alt: "運送業事業記事一覧"
+
+          p 詳細を見る
+
+        .sp-news-card-arrow
+          i.sp-icon-arrow
+
+    section.sp-columns-seo
       .sp-section-header
         h2 お役立ち記事
-        p 外国人向けの解説（雇用・生活・求職）
-      .sp-news-grid
-        = link_to "/columns", class: "sp-news-card", data: { turbolinks: false } do
-          .sp-news-card-body
-            h3 記事一覧
-            .sp-news-card-image
-              = image_tag "transport-column.webp", alt: "外国人向け記事一覧"
-            p 雇用、特定技能、生活実務、求職、相談窓口
-          .sp-news-card-arrow
-            i.sp-icon-arrow
+        p 軽貨物・人材に関する解説記事
+      ul.sp-columns-seo__list
+        - featured_columns_for(:top).each do |item|
+          li = link_to item[:title], item[:path]
+      p.sp-columns-seo__more
+        = link_to "記事一覧を見る", "/columns"
 
-      section.sp-columns-seo
-        .sp-section-header
-          h2 注目の記事
-          p 公開中の解説
-        ul.sp-columns-seo__list
-          - featured_columns_for(:top).each do |item|
-            li = link_to item[:title], item[:path]
-        p.sp-columns-seo__more
-          = link_to "記事一覧を見る", "/columns"
-
+          
+    / 4. Company
     .sp-company
       .sp-company-inner
-        h2 会社概要
+        h2 Company
         .sp-table
           .sp-row
             .sp-th 会社名
@@ -122,5 +139,4 @@
           .sp-row
             .sp-th 所在地
             .sp-td 東京都港区浜松町２丁目２番１５号２Ｆ
-
 = render "layouts/footer"

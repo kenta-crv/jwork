@@ -1,16 +1,13 @@
 footer.jw-footer
   .jw-footer__inner
-    p.jw-footer__heading 入口
+    p.jw-footer__heading 弊社サービスページ
     ul.jw-footer__list
-      li = link_to "トップ", "/", data: { turbolinks: false }
-      li = link_to "企業の方（人材紹介）", "/pages/human", data: { turbolinks: false }
-      li = link_to "仕事を探す（LINE）", "https://lin.ee/8pGADE1", target: "_blank", rel: "noopener"
+      li = link_to "トップページ", "/", data: { turbolinks: false }
       li = link_to "お役立ち記事", "/columns", data: { turbolinks: false }
-      li = link_to "お問い合わせ", "/contracts/new", data: { turbolinks: false }
-    p.jw-footer__heading 業種別
-    ul.jw-footer__list
-      li = link_to "Amazon配送", "/pages/cargo", data: { turbolinks: false }
+      li = link_to "軽貨物", "/pages/cargo", data: { turbolinks: false }
+      li = link_to "人材紹介", "/pages/human", data: { turbolinks: false }
       li = link_to "清掃業", "/pages/cleaning", data: { turbolinks: false }
       li = link_to "イベント", "/pages/event", data: { turbolinks: false }
       li = link_to "物流業", "/pages/logistic", data: { turbolinks: false }
+      li = link_to "お問い合わせ", "/contracts/new", data: { turbolinks: false }
   p.jw-footer__copy &copy; #{Time.current.year} J Work / 株式会社J Work
