@@ -15,7 +15,12 @@ html
           -else
             = link_to "/"
               =image_tag "rogo.webp", width: "220px", class:"header-image"
-        .col-xs-8
+        .col-xs-10
+          nav.jw-gnav
+            = link_to "企業の方", "/pages/human", data: { turbolinks: false }
+            = link_to "仕事を探す", "https://lin.ee/8pGADE1", target: "_blank", rel: "noopener"
+            = link_to "記事", "/columns", data: { turbolinks: false }
+            = link_to "お問い合わせ", "/contracts/new", data: { turbolinks: false }
 
       .row.navi
         .col-xs-12.center

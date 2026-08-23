@@ -47,10 +47,10 @@ module ApplicationHelper
   def default_meta_tags
     {
       site: "外国人専門の人材提供ならJ Work｜株式会社J Work",
-      title: "合同会社ファクトル",
+      title: "外国人材の採用と仕事・暮らしの情報",
       reverse: true,
       separator: '|',
-      description: "",
+      description: "登録3,000人・毎月約500人増。企業の外国人採用と、在留外国人の仕事・暮らしの情報を提供します。",
       canonical: request.original_url,
       charset: "UTF-8",
       icon: [
@@ -107,7 +107,7 @@ module ApplicationHelper
       "legalName" => "株式会社J Work",
       "url" => "https://j-work.jp/",
       "logo" => "https://j-work.jp#{image_path('favicon.ico')}",
-      "description" => "外国人専門の人材提供ならJ Work。軽貨物・配送・清掃など現場人材を支援します。",
+      "description" => "外国人専門の人材プラットフォーム。登録3,000人規模の外国人材と、仕事・暮らしの情報を提供します。",
       "address" => {
         "@type" => "PostalAddress",
         "streetAddress" => "浜松町２丁目２番１５号２Ｆ",
