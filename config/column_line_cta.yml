@@ -1,9 +1,14 @@
 # Column LINE CTA の中ジャンル切り替え設定（jwork のみ）
-# drafity は変更不要。
+# 記事本体・生成用ジャンルは Drafity の cargo（表示名: 外国人）。
 #
 # default_sub_genre:
-#   delivery_partner  → 新規取引相談
-#   driver_recruitment → お仕事の応募
+#   delivery_partner   → Amazon外国人配送（企業）
+#   foreign_hiring     → 外国人雇用（企業）
+#   driver_recruitment → 外国人採用求職者
+#   life_guide         → 生活実務（求職LINE）
+#   specified_skills   → 特定技能・技能実習（企業）
+#   support_orgs       → 支援団体（企業LINE）
+#   labor_help         → 労働トラブル・相談窓口（求職LINE）
 #
 # driver_recruitment_codes:
 #   求職者向けにしたい記事の code（URL の /columns/ここ）を列挙
