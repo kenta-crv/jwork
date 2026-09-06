@@ -1,5 +1,8 @@
-h2 案件編集
-hr
-= render "form"
-.mt-3
-  = link_to "詳細に戻る", recruit_path(@recruit)
+- set_meta_tags title: '案件編集'
+
+.jobs-screen
+  .jobs-brand
+    p.jobs-kicker Job portal
+    h1.jobs-title Edit
+    p.jobs-ja 案件編集
+  = render "form"

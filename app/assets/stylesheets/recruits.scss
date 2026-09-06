@@ -8,8 +8,8 @@
 
 :root {
   /* カラーパレット（高コントラスト） */
-  --job-primary: #0a58ca;
-  --job-primary-hover: #084298;
+  --job-primary: #0058A6;
+  --job-primary-hover: #004a8c;
   --job-success: #146c43;
   --job-warning: #997404;
   --job-danger: #b02a37;
@@ -19,8 +19,8 @@
   --job-text-muted: #1a202c;
   --job-text-light: #2d3748;
   --job-bg-card: #ffffff;
-  --job-bg-body: #f8f9fa;
-  --job-border-color: #a0aec0; /* 枠線も濃くして見やすく */
+  --job-bg-body: #f4f7fb;
+  --job-border-color: #e2e8f0;
   
   --job-highlight-red-bg: #fff5f5;
   --job-highlight-red-text: #c92a2a;
@@ -52,7 +52,7 @@
   padding: 30px 30px 40px 30px;
   max-width: 850px;
   /* 【修正】上部ナビゲーションバー（ヘッダー）の被りを回避する余白を確保 */
-  margin: 90px auto 40px auto;
+  margin: 24px auto 40px auto;
   font-family: system-ui, -apple-system, sans-serif;
   color: var(--job-text-main);
   box-sizing: border-box;
@@ -313,7 +313,7 @@
   .job-detail-card {
     /* 【修正】スマホ画面でもヘッダー被りと見切れを完全に防ぐマージンとパディング設定 */
     padding: 20px 16px 30px 16px;
-    margin: 80px 10px 30px 10px;
+    margin: 16px 10px 30px 10px;
     border-radius: var(--job-radius-md);
   }
 
@@ -381,252 +381,419 @@
 
 
 
-/* ==========================================================================
-   Modern Job Index (List) Design - Compact High-Visibility Edition
-   ========================================================================== */
-
-/* ページタイトル */
-.recruit-index-page-title {
-  font-size: 28px !important; /* 少しコンパクトに */
-  font-weight: 900 !important;
-  color: var(--job-text-main, #000000) !important;
-  margin: 90px auto 20px auto !important;
-  max-width: 1200px !important;
-  padding: 0 15px !important;
-  border-left: 6px solid var(--job-primary, #0a58ca) !important;
-  padding-left: 12px !important;
-  line-height: 1.2 !important;
+.jobs-screen {
+  box-sizing: border-box;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  text-align: left;
 }
-
-/* 管理者ボタンコンテナ */
-.recruit-admin-header-area {
-  max-width: 1200px !important;
-  margin: 0 auto 16px auto !important;
-  padding: 0 15px !important;
+.jobs-screen *,
+.jobs-screen *::before,
+.jobs-screen *::after {
+  box-sizing: border-box;
 }
-.btn-recruit-admin-create {
-  display: inline-block !important;
-  font-size: 16px !important;
-  font-weight: 800 !important;
-  padding: 8px 18px !important;
-  border-radius: var(--job-radius-md, 10px) !important;
-  background-color: var(--job-success, #146c43) !important;
-  color: #ffffff !important;
-  text-decoration: none !important;
+.jobs-brand {
+  margin: 0 0 28px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  position: static;
 }
-
-/* Gridコンテナの隙間を適正化 */
-.recruit-index-custom-grid {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
-  gap: 16px !important; /* 24pxから16pxに狭めて詰める */
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  padding: 0 15px 30px 15px !important;
-  box-sizing: border-box !important;
+body.jobs-body main > .jobs-brand {
+  max-width: 980px;
+  margin: 48px auto 12px;
+  padding: 0 24px;
+  text-align: left;
 }
-
-.recruit-card-grid-item {
-  height: 100% !important;
+.jobs-kicker {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #2f6fe4;
 }
-
-/* ===== 案件カード本体（余白を大幅にスリム化） ===== */
-.recruit-index-main-card {
-  background-color: var(--job-bg-card, #ffffff) !important;
-  border-radius: 12px !important; /* 少しシャープに */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important; /* 軽めの影で圧迫感を減らす */
-  border: 1px solid var(--job-border-color, #a0aec0) !important;
-  padding: 20px !important; /* 30pxから20pxに縮小して内側をすっきり */
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  box-sizing: border-box !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+.jobs-title {
+  margin: 0;
+  font-size: clamp(52px, 8vw, 72px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  color: #111827;
 }
-
-.recruit-index-main-card.recruit-hover-action-card:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12) !important;
-  border-color: var(--job-primary, #0a58ca) !important;
+.jobs-ja {
+  margin: 10px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #4b5563;
 }
-
-/* ヘッダー行 */
-.recruit-card-header-row {
+.jobs-admin {
+  margin: 0 0 16px;
+}
+.jobs-admin__create {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #0058A6;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.jobs-admin__create:hover,
+.jobs-admin__create:focus {
+  color: #fff;
+  text-decoration: none;
+}
+.jobs-search {
   display: flex;
   align-items: center;
-  justify-content:间-between;
-  margin-bottom: 4px;
+  gap: 16px;
+  margin: 0 0 18px;
+  padding: 18px 20px;
+  background: #fff;
+  border: 1px solid #e6ebf2;
+  border-radius: 22px;
 }
-
-/* ポイントバッジ */
-.recruit-index-main-card .badge-pill-warning {
-  display: inline-flex !important;
-  padding: 4px 10px !important;
-  font-size: 14px !important;
-  font-weight: 800 !important;
-  border-radius: 4px !important;
-  background-color: rgba(255, 193, 7, 0.2) !important;
-  color: var(--job-warning, #997404) !important;
+.jobs-search__select {
+  flex: 1;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #d7dee8;
+  border-radius: 12px;
+  background: #fff;
+  color: #6b7280;
+  font-size: 15px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%236b7280' d='M1 1l5 5 5-5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-color: #fff;
 }
-
-/* 案件タイトル */
-.recruit-card-main-title {
-  font-size: 20px !important; /* 26pxから20pxに調整し、一覧性を向上 */
-  font-weight: 800 !important;
-  line-height: 1.4 !important;
-  color: #000000 !important;
-  margin: 6px 0 10px 0 !important;
+.jobs-search__submit {
+  height: 48px;
+  min-width: 108px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 14px;
+  background: #2f6fe4;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
 }
-
-/* 案件説明文 */
-.recruit-card-body-description {
-  font-size: 16px !important; /* 18pxから16pxへ。読みやすさとコンパクトさの両立 */
-  line-height: 1.6 !important;
-  color: #2d3748 !important;
-  margin: 0 0 14px 0 !important;
+.jobs-search__submit:hover,
+.jobs-search__submit:focus {
+  filter: brightness(1.05);
 }
-
-/* 単価（Price）表示ブロック（高さを低くスマートに） */
-.recruit-card-price-block {
-  background-color: #f1f3f5 !important;
-  padding: 8px 14px !important; /* 上下をギュッと詰めました */
-  border-radius: 6px !important;
-  border-left: 4px solid var(--job-primary, #0a58ca) !important;
-  margin-bottom: 14px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
+.jobs-empty {
+  margin: 0;
+  padding: 28px 8px;
+  color: #6b7280;
+  font-size: 15px;
+  background: #fff;
+  border-radius: 22px;
+  text-align: center;
 }
-.recruit-price-meta-label {
-  font-size: 14px !important;
-  color: #4a5568 !important;
-  font-weight: 800 !important;
+.jobs-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 0 0 16px;
+  padding: 28px 28px 24px;
+  background: #fff;
+  border: 1px solid #edf1f6;
+  border-radius: 22px;
 }
-.recruit-price-num-value {
-  font-size: 18px !important; /* 24pxから18pxへ */
-  font-weight: 900 !important;
-  color: var(--job-primary, #0a58ca) !important;
+.jobs-card__main {
+  flex: 1;
+  min-width: 0;
 }
-
-/* タグまとめエリア */
-.recruit-card-tags-container {
+.jobs-card__pickup {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 14px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #e59a2c;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.jobs-card__title {
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #111827;
+}
+.jobs-card__desc {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4b5563;
+}
+.jobs-card__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+.jobs-card__price-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #6b7280;
+}
+.jobs-card__price-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111827;
+}
+.jobs-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.jobs-card__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #2f6fe4;
+  color: #2f6fe4;
+  font-size: 13px;
+  font-weight: 600;
+  background: #fff;
+}
+.jobs-card__tag--recommend {
+  border-color: transparent;
+  background: #f3c56b;
+  color: #3b2a08;
+}
+.jobs-card__aside {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 16px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
-
-/* 各種タグコンテナ */
-.recruit-card-tag-wrapper-box {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 6px !important;
-}
-
-/* エリアタグ */
-.recruit-tag-outline-pill {
-  display: inline-block !important;
-  background-color: #e2e8f0 !important;
-  color: #000000 !important;
-  padding: 4px 10px !important;
-  border-radius: 4px !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  border: 1px solid #cbd5e1 !important;
-}
-
-/* おすすめタグ */
-.recruit-tag-recommend-pill {
-  display: inline-block !important;
-  background-color: var(--job-highlight-red-bg, #fff5f5) !important;
-  color: var(--job-highlight-red-text, #c92a2a) !important;
-  padding: 4px 10px !important;
-  border-radius: 4px !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  border: 1px solid rgba(199, 42, 42, 0.15) !important;
-}
-
-/* フッター・アクションボタン配置用 */
-.recruit-card-bottom-action-bar {
-  margin-top: auto !important;
-  border-top: 1px solid #e2e8f0 !important;
-  padding-top: 14px !important;
-}
-
-/* 詳細（Detail）ボタン */
-.btn-recruit-card-to-detail {
-  display: block !important;
-  text-align: center !important;
-  background-color: var(--job-primary, #0a58ca) !important;
-  color: #ffffff !important;
+.jobs-card__detail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  padding: 0;
+  border-radius: 50%;
+  background: #2f6fe4;
+  color: #fff !important;
+  font-size: 15px;
+  font-weight: 700;
   text-decoration: none !important;
-  padding: 10px 14px !important; /* 縦幅をスマートに */
-  font-size: 16px !important; /* ボタン文字サイズも適正化 */
-  font-weight: 800 !important;
-  border-radius: 6px !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
+  line-height: 1;
 }
-
-/* 管理者操作エリア */
-.recruit-card-admin-control-box {
-  display: flex !important;
-  justify-content: flex-end !important;
-  margin-top: 8px !important;
+.jobs-card__detail:hover,
+.jobs-card__detail:focus {
+  color: #fff !important;
+  filter: brightness(1.05);
 }
-.btn-recruit-admin-edit-sm {
-  background-color: #e9ecef !important;
-  color: #495057 !important;
-  border: 1px solid #ced4da !important;
-  padding: 4px 10px !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  border-radius: 4px !important;
+.jobs-card__edit {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+.jobs-card--detail,
+.jobs-card--stack {
+  display: block;
+  align-items: stretch;
+}
+.jobs-info__row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid #edf1f6;
+}
+.jobs-info__row:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.jobs-info__label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6b7280;
+}
+.jobs-info__value {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #111827;
+}
+.jobs-info__value p {
+  margin: 0 0 6px;
+}
+.jobs-confirm {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 16px 18px;
+  border: 1px solid #e6ebf2;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  cursor: pointer;
+}
+.jobs-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  margin: 0 0 20px;
+  border-radius: 999px;
+  background: #06c755;
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 700;
   text-decoration: none !important;
 }
-
-
-/* ==========================================================================
-   【重要】一覧画面のスマートフォン表示最適化（スクロール量を抑える調整）
-   ========================================================================== */
+.jobs-line:hover,
+.jobs-line:focus {
+  color: #fff !important;
+  filter: brightness(1.05);
+}
+.jobs-detail-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.jobs-detail-nav__admin {
+  display: flex;
+  gap: 8px;
+}
+.jobs-back {
+  color: #2f6fe4;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.jobs-delete {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #fde8ea;
+  color: #b02a37;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+#custom-notice {
+  display: none;
+  position: absolute;
+  z-index: 2147483647;
+  min-width: 220px;
+  max-width: 280px;
+  background-color: #842029;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.4;
+}
+#custom-notice-arrow {
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #842029;
+}
+.jobs-form__field {
+  margin: 0 0 18px;
+}
+.jobs-form__field label {
+  display: block;
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4b5563;
+  text-align: left;
+}
+.jobs-form__input,
+.jobs-form select.jobs-form__input,
+.jobs-form textarea.jobs-form__input {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #d7dee8;
+  border-radius: 12px;
+  background: #fff;
+  color: #111827;
+  font-size: 15px;
+  box-shadow: none;
+}
+.jobs-form textarea.jobs-form__input {
+  min-height: 96px;
+}
+.jobs-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
 @media (max-width: 768px) {
-  .recruit-index-page-title {
-    font-size: 24px !important;
-    margin: 80px auto 16px auto !important;
+  .jobs-screen {
+    padding: 28px 14px 56px;
   }
-
-  .recruit-index-custom-grid {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important; /* スマホではさらにカード間隔を詰めて一覧性を重視 */
-    padding: 0 8px 20px 8px !important;
+  .jobs-title {
+    font-size: 48px;
   }
-
-  .recruit-index-main-card {
-    padding: 16px !important; /* スマホでも1画面に入る量を増やすために引き締め */
+  .jobs-search {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px;
   }
-
-  .recruit-card-main-title {
-    font-size: 18px !important;
+  .jobs-search__select,
+  .jobs-search__submit {
+    width: 100%;
+    flex: 1 1 100%;
   }
-
-  .recruit-card-body-description {
-    font-size: 15px !important; /* スマホ一覧として最適なサイズ */
-    margin-bottom: 10px !important;
+  .jobs-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 20px;
   }
-
-  .recruit-price-num-value {
-    font-size: 16px !important;
+  .jobs-card__title {
+    font-size: 22px;
   }
-
-  .recruit-tag-outline-pill,
-  .recruit-tag-recommend-pill {
-    font-size: 13px !important;
-    padding: 3px 8px !important;
+  .jobs-card__aside {
+    align-items: center;
   }
-
-  .btn-recruit-card-to-detail {
-    font-size: 16px !important;
-    padding: 10px !important;
+  .jobs-card__detail {
+    width: 72px;
+    height: 72px;
+  }
+  .jobs-info__row {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 }

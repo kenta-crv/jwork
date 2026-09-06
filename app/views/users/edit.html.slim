@@ -1,286 +1,326 @@
 - set_meta_tags noindex: true
-br/
-br/
-= form_for @user do |f|
- .tops-wrapper
-  h2.headline ステータス
-  - @user.errors.full_messages.each do |message|
-    li = message
-  - if admin_signed_in?
-   table.company
-    tbody
-    col[width="10%"]
-    col[width="40%"]
-    col[width="50%"]
-       tr
-          td
-            strong.label Required
-          td.arrow_box
-            | ステータス
-          td
-            = f.select :status, User.statuses_i18n.invert, { include_blank: "選択してください[Please select]" }
 
- .tops-wrapper
-  h2.headline 求職者入力
-  - @user.errors.full_messages.each do |message|
-    li = message
-  table.company
-    tbody
-    col[width="10%"]
-    col[width="40%"]
-    col[width="50%"]
-     tbody
-       tr
-          td
-            strong.label Required
-          td.arrow_box
-            | おなまえ [full_name]
-          td
-            = f.text_field :name, placeholder:"Taro Yamada"
-       tr
-          td
-            strong.label Required
-          td.arrow_box
-            | せいべつ [gender]
-          td
-            = f.text_field :gender, placeholder:"Male"
-       tr
-          td
-            strong.label Required
-          td.arrow_box
-            | でんわばんごう [Tel]
-          td
-            = f.text_field :tel, placeholder:"080-0000-0000"
-       tr
-          td
-            strong.label Required
-          td.arrow_box
-            | メールアドレス [Mail]
-          td
-            = f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"yamada@abc.com"
-       tr
-          td
-            strong.label Required
-          td.arrow_box
-            | せいねんがっぴ [age]
-          td
-            = f.text_field :age, placeholder:"25才"
-       tr
-          td
-            strong.label Required
-          td.arrow_box
-            | じゅうしょ[Address]
-            .red ※correct address
-          td
-            = f.text_field :address, placeholder:"東京都港区芝5-27-3 MBC・Aー9" 
-       - if admin_signed_in?
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 転居はできますか？[Can I move to a different prefecture?]
-          td
-            = f.text_field :change_the_address
-        tr
+.auth-screen.auth-screen--user.auth-screen--wide
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      p.auth-screen__kicker User portal
+      h1.auth-screen__title User edit
+      p.auth-screen__ja 求職者入力
+    .user-desk.auth-screen__card
+      = form_for @user do |f|
+       .tops-wrapper
+        h2.headline ステータス
+        - @user.errors.full_messages.each do |message|
+          li = message
+        - if admin_signed_in?
+         table.company
+          tbody
+          col[width="10%"]
+          col[width="40%"]
+          col[width="50%"]
+             tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | ステータス
+                td
+                  = f.select :status, User.statuses_i18n.invert, { include_blank: "選択してください[Please select]" }
+
+       .tops-wrapper
+        h2.headline 求職者入力
+        - @user.errors.full_messages.each do |message|
+          li = message
+        table.company
+          tbody
+          col[width="10%"]
+          col[width="40%"]
+          col[width="50%"]
+           tbody
+             tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | おなまえ [full_name]
+                td
+                  = f.text_field :name, placeholder:"Taro Yamada"
+             tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | せいべつ [gender]
+                td
+                  = f.text_field :gender, placeholder:"Male"
+             tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | でんわばんごう [Tel]
+                td
+                  = f.text_field :tel, placeholder:"080-0000-0000"
+             tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | メールアドレス [Mail]
+                td
+                  = f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"yamada@abc.com"
+             tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | せいねんがっぴ [age]
+                td
+                  = f.text_field :age, placeholder:"25才"
+             tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | じゅうしょ[Address]
+                  .red ※correct address
+                td
+                  = f.text_field :address, placeholder:"東京都港区芝5-27-3 MBC・Aー9" 
+             - if admin_signed_in?
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | 転居はできますか？[Can I move to a different prefecture?]
+                td
+                  = f.text_field :change_the_address
+              tr
+                    td
+                      strong.label Required
+                    td.arrow_box
+                      | 車の種類
+                    td
+                      = f.text_field :car
+              tr
+                    td
+                      strong.label Required
+                    td.arrow_box
+                      | 経験則
+                    td
+                      = f.text_field :experience
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | 希望職種
+                td
+                  = f.text_field :hope_work
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
+                td
+                  = f.text_field :past_business  
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
+                td
+                  = f.text_field :work_range
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
+                td
+                  = f.text_field :past_year
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | いつから働けますか？ [Since when can you job?]
+                td
+                  = f.text_field :period
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | 日本語で会話できますか？[Can you speak Japanese conversation?]
+                td
+                  = f.text_field :speak_japanese
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | LINE Account
+                td
+                   = f.text_field :account_name
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | 次回確認日
+                td
+                   = f.date_field :next_call_at
+              tr
+                  td
+                    strong.label Required
+                  td.arrow_box
+                    | 備考
+                  td
+                    = f.text_area :remarks, rows: 10
+
+
+        - if admin_signed_in?
+         h2.headline Work Information
+
+         table.company
+          tbody
+          col[width="10%"]
+          col[width="40%"]
+          col[width="50%"]
+          tbody
+            tr
               td
                 strong.label Required
               td.arrow_box
-                | 車の種類
+                | ほうしゅうじょうけん[Reward Conditions]
               td
-                = f.text_field :car
-        tr
+                = f.text_area :deliver
+            tr
               td
                 strong.label Required
               td.arrow_box
-                | 経験則
+                | しゅっきんじょうけん[Working conditions]
               td
-                = f.text_field :experience
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 希望職種
-          td
-            = f.text_field :hope_work
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
-          td
-            = f.text_field :past_business  
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
-          td
-            = f.text_field :work_range
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
-          td
-            = f.text_field :past_year
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | いつから働けますか？ [Since when can you job?]
-          td
-            = f.text_field :period
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 日本語で会話できますか？[Can you speak Japanese conversation?]
-          td
-            = f.text_field :speak_japanese
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | LINE Account
-          td
-             = f.text_field :account_name
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 次回確認日
-          td
-             = f.date_field :next_call_at
-        tr
-            td
-              strong.label Required
-            td.arrow_box
-              | 備考
-            td
-              = f.text_area :remarks, rows: 10
+                = f.text_area :day_off
 
+        table.company
+          tbody
+          col[width="10%"]
+          col[width="40%"]
+          col[width="50%"]
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | きんきゅうれんらくしゃ[Emergency Contact Person]
+              td
+                = f.text_field :emergency_name, placeholder:"Yoko Yamada"
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | かんれんせい[Relationship]
+              td
+                = f.text_field :emergency_relationships, placeholder:"Mother"
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | きんきゅうれんらくしゃばんごう[Emergency contact number]
+              td
+                = f.text_field :emergency_tel, placeholder:"+818010101010"
 
-  - if admin_signed_in?
-   h2.headline Work Information
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ぎんこうめい[Bank name]
+              td
+                = f.text_field :bank, placeholder:"三井住友銀行"
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | してんめい[Branch]
+              td
+                = f.text_field :branch, placeholder:"東京支店"
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | こうざばんごう[Account number]
+              td
+                = f.text_field :bank_number, placeholder:"0123456"
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | こうざめいぎ[Account name]
+              td
+                = f.text_field :bank_name, placeholder:"ヤマダ　タロウ"
 
-   table.company
-    tbody
-    col[width="10%"]
-    col[width="40%"]
-    col[width="50%"]
-    tbody
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ほうしゅうじょうけん[Reward Conditions]
-        td
-          = f.text_area :deliver
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | しゅっきんじょうけん[Working conditions]
-        td
-          = f.text_area :day_off
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | めんしょしょう（おもて）[Driver's lisense[front]]
+              td
+                .auth-form__drop
+                  = f.file_field :image_1, class: "auth-form__file"
+                  span.auth-form__drop-copy
+                    span.auth-form__drop-action
+                      span.auth-form__en Choose file
+                      span.auth-form__ja ファイルを選択
+                    span.auth-form__drop-name data-empty="No file selected" No file selected
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | めんしょしょう（うら）[Driver's lisense[back]]
+              td
+                .auth-form__drop
+                  = f.file_field :image_2, class: "auth-form__file"
+                  span.auth-form__drop-copy
+                    span.auth-form__drop-action
+                      span.auth-form__en Choose file
+                      span.auth-form__ja ファイルを選択
+                    span.auth-form__drop-name data-empty="No file selected" No file selected
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
+              td
+                .auth-form__drop
+                  = f.file_field :image_3, class: "auth-form__file"
+                  span.auth-form__drop-copy
+                    span.auth-form__drop-action
+                      span.auth-form__en Choose file
+                      span.auth-form__ja ファイルを選択
+                    span.auth-form__drop-name data-empty="No file selected" No file selected
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ざいりゅうきょかしょう（うら）[Residence permit[back]]
+              td
+                .auth-form__drop
+                  = f.file_field :image_4, class: "auth-form__file"
+                  span.auth-form__drop-copy
+                    span.auth-form__drop-action
+                      span.auth-form__en Choose file
+                      span.auth-form__ja ファイルを選択
+                    span.auth-form__drop-name data-empty="No file selected" No file selected
+            - if @user.hope_work = "Food"
+             tr
+              td
+                strong.label Required
+              td.arrow_box
+                | (Car) Photo of a vehicle with a black license plate
+                br
+                | (Scooter) Photo of a scooter including its license plate
+                br/
+                | (Bicycle) Photo of a bicycle with an anti-theft license plate
+              td
+                .auth-form__drop
+                  = f.file_field :image_5, class: "auth-form__file"
+                  span.auth-form__drop-copy
+                    span.auth-form__drop-action
+                      span.auth-form__en Choose file
+                      span.auth-form__ja ファイルを選択
+                    span.auth-form__drop-name data-empty="No file selected" No file selected
 
-  table.company
-    tbody
-    col[width="10%"]
-    col[width="40%"]
-    col[width="50%"]
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | きんきゅうれんらくしゃ[Emergency Contact Person]
-        td
-          = f.text_field :emergency_name, placeholder:"Yoko Yamada"
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | かんれんせい[Relationship]
-        td
-          = f.text_field :emergency_relationships, placeholder:"Mother"
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | きんきゅうれんらくしゃばんごう[Emergency contact number]
-        td
-          = f.text_field :emergency_tel, placeholder:"+818010101010"
-
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ぎんこうめい[Bank name]
-        td
-          = f.text_field :bank, placeholder:"三井住友銀行"
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | してんめい[Branch]
-        td
-          = f.text_field :branch, placeholder:"東京支店"
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | こうざばんごう[Account number]
-        td
-          = f.text_field :bank_number, placeholder:"0123456"
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | こうざめいぎ[Account name]
-        td
-          = f.text_field :bank_name, placeholder:"ヤマダ　タロウ"
-
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | めんしょしょう（おもて）[Driver's lisense[front]]
-        td
-          = f.file_field :image_1
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | めんしょしょう（うら）[Driver's lisense[back]]
-        td
-          = f.file_field :image_2
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
-        td
-          = f.file_field :image_3
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ざいりゅうきょかしょう（うら）[Residence permit[back]]
-        td
-          = f.file_field :image_4
-      - if @user.hope_work = "Food"
-       tr
-        td
-          strong.label Required
-        td.arrow_box
-          | (Car) Photo of a vehicle with a black license plate
-          br
-          | (Scooter) Photo of a scooter including its license plate
-          br/
-          | (Bicycle) Photo of a bicycle with an anti-theft license plate
-        td
-          = f.file_field :image_5
-
-      tr.center
-          td[colspan="3"]
-            = f.submit 'Register'
+            tr.center
+                td[colspan="3"]
+                  = f.submit "Register", class: "btn btn-primary"

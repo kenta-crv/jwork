@@ -1,405 +1,418 @@
 - set_meta_tags title: "#{@user.name}"
-.tops-wrapper
-  - if admin_signed_in?
-   h2.headline ステータス
-   table.company
-    tbody
-    col[width="10%"]
-    col[width="40%"]
-    col[width="50%"]
-    tbody
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ステータス
-        td
-          = @user.status_i18n
 
-  h2.headline 詳細情報
+.auth-screen.auth-screen--user.auth-screen--wide
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      p.auth-screen__kicker User portal
+      h1.auth-screen__title = @user.name
+      p.auth-screen__ja 詳細情報
+    .user-desk.auth-screen__card
+      .tops-wrapper
+        - if admin_signed_in?
+         h2.headline ステータス
+         table.company
+          tbody
+          col[width="10%"]
+          col[width="40%"]
+          col[width="50%"]
+          tbody
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ステータス
+              td
+                = @user.status_i18n
 
-  table.company
-    tbody
-    col[width="10%"]
-    col[width="40%"]
-    col[width="50%"]
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | おなまえ [full_name]
-        td
-          = @user.name
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | せいべつ [gender]
-        td
-          = @user.gender
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | でんわばんごう [Tel]
-        td
-          = @user.tel
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | メールアドレス [Mail]
-        td
-          = @user.email
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | せいねんがっぴ [age]
-        td
-          = @user.age
-      tr
-          td
-            strong.label Required
-          td.arrow_box
-            | じゅうしょ[Address]
-          td
-            = @user.address
+        h2.headline 詳細情報
+
+        table.company
+          tbody
+          col[width="10%"]
+          col[width="40%"]
+          col[width="50%"]
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | おなまえ [full_name]
+              td
+                = @user.name
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | せいべつ [gender]
+              td
+                = @user.gender
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | でんわばんごう [Tel]
+              td
+                = @user.tel
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | メールアドレス [Mail]
+              td
+                = @user.email
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | せいねんがっぴ [age]
+              td
+                = @user.age
+            tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | じゅうしょ[Address]
+                td
+                  = @user.address
+            - if admin_signed_in?
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | 転居はできますか？[Can I move to a different prefecture?]
+                td
+                  = @user.change_the_address
+              tr
+                    td
+                      strong.label Required
+                    td.arrow_box
+                      | 車の種類
+                    td
+                      = @user.car
+              tr
+                    td
+                      strong.label Required
+                    td.arrow_box
+                      | 経験則
+                    td
+                      = @user.experience
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | 希望職種
+                td
+                  = @user.hope_work
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
+                td
+                  = @user.past_business  
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
+                td
+                  = @user.work_range      
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
+                td
+                  = @user.past_year
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | いつから働けますか？ [Since when can you job?]
+                td
+                  = @user.period
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | 日本語で会話できますか？[Can you speak Japanese conversation?]
+                td
+                  = @user.speak_japanese  
+              tr
+                  td
+                    strong.label Required
+                  td.arrow_box
+                    | 備考
+                  td
+                    = @user.remarks
+              tr
+                td
+                  strong.label Required
+                td.arrow_box
+                  | LINE Account
+                td
+                   = @user.account_name
+
+        h2.headline Other
+
+        table.company
+          tbody
+          col[width="10%"]
+          col[width="40%"]
+          col[width="50%"]
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | きんきゅうれんらくしゃ[Emergency Contact Person]
+              td
+                = @user.emergency_name
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | かんれんせい[Relationship]
+              td
+                = @user.emergency_relationships
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | きんきゅうれんらくしゃばんごう[Emergency contact number]
+              td
+                = @user.tel
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ほうしゅうじょうけん[Reward Conditions]
+              td
+                = @user.deliver
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | しゅっきんじょうけん[Working conditions]
+              td
+                = @user.day_off
+
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ぎんこうめい[Bank name]
+              td
+                = @user.bank
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | してんめい[Branch]
+              td
+                = @user.branch
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | こうざばんごう[Account number]
+              td
+                = @user.bank_number
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | こうざめいぎ[Account name]
+              td
+                = @user.bank_name
+
+
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | めんしょしょう（おもて）[Driver's lisense[front]]
+              td
+                - if @user.image_1.present? && @user.image_1.respond_to?(:thumb)
+                  = image_tag @user.image_1.thumb.url
+                  br
+                  = link_to 'Download', @user.image_1.url, download: true
+                - else
+                  | 画像がありません
+      
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | めんしょしょう（うら）[Driver's lisense[back]]
+              td
+                - if @user.image_2.present? && @user.image_2.respond_to?(:thumb)
+                  = image_tag @user.image_2.thumb.url
+                  br
+                  = link_to 'Download', @user.image_2.url, download: true
+                - else
+                  | 画像がありません
+      
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
+              td
+                - if @user.image_3.present? && @user.image_3.respond_to?(:thumb)
+                  = image_tag @user.image_3.thumb.url
+                  br
+                  = link_to 'Download', @user.image_3.url, download: true
+                - else
+                  | 画像がありません
+      
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ざいりゅうきょかしょう（うら）[Residence permit[back]]
+              td
+                - if @user.image_4.present? && @user.image_4.respond_to?(:thumb)
+                  = image_tag @user.image_4.thumb.url
+                  br
+                  = link_to 'Download', @user.image_4.url, download: true
+                - else
+                  | 画像がありません
+      
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ぎんこうかーど（おもて）[Bank card[front]]
+              td
+                - if @user.image_5.present? && @user.image_5.respond_to?(:thumb)
+                  = image_tag @user.image_5.thumb.url
+                  br
+                  = link_to 'Download', @user.image_5.url, download: true
+                - else
+                  | 画像がありません
+      
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | ぎんこうかーど（うら）[Bank card[back]]
+              td
+                - if @user.image_6.present? && @user.image_6.respond_to?(:thumb)
+                  = image_tag @user.image_6.thumb.url
+                  br
+                  = link_to 'Download', @user.image_6.url, download: true
+                - else
+                  | 画像がありません
+
+        h2.headline Contract information
+
+        table.company
+          tbody
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 当社（とうしゃ）は外国人（がいこくじん）が働（はたら）きやすい環境（かんきょう）を作（つく）ることを重要視（じゅうようし）している。そのため、各（かく）業務委託者（ぎょうむいたくしゃ）には、日本（にほん）のマナーや節度（せつど）、挨拶（あいさつ）、礼儀（れいぎ）をしっかりと行（おこな）うものとする。 [Our company values creating a comfortable environment for foreign workers, and therefore requires all userors to properly observe Japanese manners, propriety, greetings, and courtesy.]
+              td
+                = @user.check_1
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 乙（おつ）は連絡（れんらく）もなく欠勤（けっきん）をしたり、勤務時間（きんむじかん）に遅刻（ちこく）することなく、稼働（かどう）を遂行（すいこう）する。 [Party B shall perform duties without absence or tardiness and without failing to make contact.]
+              td
+                = @user.check_2
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 退職（たいしょく）を行（おこな）う場合（ばあい）、必（かなら）ず退職（たいしょく）の2ヶ月前（にかげつまえ）に甲（こう）に通知（つうち）を行（おこな）うものとする。 [In the event of resignation, Party B shall notify Party A at least two months in advance.]
+              td
+                = @user.check_3
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 佐川急便（さがわきゅうびん）の場合（ばあい）、1日（いちにち）の平均配送（へいきんはいそう）は120個（ひゃくにじゅっこ）を下回（したまわ）らないよう、効率的（こうりつてき）に稼働（かどう）を行（おこな）うものとする。その他（そのた）の業務（ぎょうむ）の場合（ばあい）、発注元（はっちゅうもと）からの指定（してい）個数（こすう）を下回（したまわ）らないものとする。 [In the case of Sagawa Express, the useror shall work efficiently so that the average daily delivery does not fall below 120 parcels. For other tasks, the number delivered shall not be less than the quantity designated by the ordering party.]
+              td
+                = @user.check_4
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | その他（そのた）契約約款（けいやくやっかん）に同意（どうい）します。 [I agree to the other terms and conditions of the user.]
+              td
+                = @user.agree
+            tr
+              td
+                strong.label Required
+              td.arrow_box
+                | 契約日（けいやくび） [Contract date]
+              td
+                = @user.contract_date
+
+      .actions_container
+        = link_to "Proceed to user", info_user_path(@user), class: "btn btn-primary"
+        = link_to "Log out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to log out?" }, class: "btn btn-primary"
+        - if admin_signed_in?
+          = link_to "Edit", edit_user_path(@user), class: "btn btn-warning"
+          = link_to "Delete", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this?" }
+          = link_to "Back to list", users_path, class: "btn btn-default"
+
+      br/
+      br/
       - if admin_signed_in?
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 転居はできますか？[Can I move to a different prefecture?]
-          td
-            = @user.change_the_address
-        tr
+       = form_for [@user, @user.comments.build] do |f|
+        table.company[width="100%"]
+          col[width="25%"]
+          col[width="25%"]
+          col[width="25%"]
+          tbody
+            tr
+                th
+                  | ステータス
+                th
+                  | 次回営業日
+                th
+                  | コメント
+
+            tr
+                td
+                  = f.select(:status, [\
+                  ["Absense","Absense"],\
+                  ["Busy","Busy"],\
+                  ["LINE","LINE"],\
+                  ["HIRE","HIRE"],\
+                  ["NG","NG"]],include_blank: "選択してください")     
+                td
+                  = f.datetime_field :next
+                td
+                  = f.text_area :body
+            tr
+              th[colspan="3"]
+               .center
+                = f.submit "Register", class:"btn btn-primary"
+       small 商談ステータスを入れる場合は商談日を入力。　不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
+       table.company[width="100%"]
+        - if @user.comments.any?
+          tbody
+           - @user.comments.each do |comment|
+             tr
               td
-                strong.label Required
-              td.arrow_box
-                | 車の種類
+                = comment.status
               td
-                = @user.car
-        tr
+                = comment.next
               td
-                strong.label Required
-              td.arrow_box
-                | 経験則
+                = comment.body
               td
-                = @user.experience
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 希望職種
-          td
-            = @user.hope_work
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
-          td
-            = @user.past_business  
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
-          td
-            = @user.work_range      
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
-          td
-            = @user.past_year
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | いつから働けますか？ [Since when can you job?]
-          td
-            = @user.period
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | 日本語で会話できますか？[Can you speak Japanese conversation?]
-          td
-            = @user.speak_japanese  
-        tr
-            td
-              strong.label Required
-            td.arrow_box
-              | 備考
-            td
-              = @user.remarks
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | LINE Account
-          td
-             = @user.account_name
-
-  h2.headline Other
-
-  table.company
-    tbody
-    col[width="10%"]
-    col[width="40%"]
-    col[width="50%"]
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | きんきゅうれんらくしゃ[Emergency Contact Person]
-        td
-          = @user.emergency_name
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | かんれんせい[Relationship]
-        td
-          = @user.emergency_relationships
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | きんきゅうれんらくしゃばんごう[Emergency contact number]
-        td
-          = @user.tel
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ほうしゅうじょうけん[Reward Conditions]
-        td
-          = @user.deliver
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | しゅっきんじょうけん[Working conditions]
-        td
-          = @user.day_off
-
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ぎんこうめい[Bank name]
-        td
-          = @user.bank
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | してんめい[Branch]
-        td
-          = @user.branch
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | こうざばんごう[Account number]
-        td
-          = @user.bank_number
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | こうざめいぎ[Account name]
-        td
-          = @user.bank_name
-
-
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | めんしょしょう（おもて）[Driver's lisense[front]]
-        td
-          - if @user.image_1.present? && @user.image_1.respond_to?(:thumb)
-            = image_tag @user.image_1.thumb.url
-            br
-            = link_to 'Download', @user.image_1.url, download: true
-          - else
-            | 画像がありません
-      
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | めんしょしょう（うら）[Driver's lisense[back]]
-        td
-          - if @user.image_2.present? && @user.image_2.respond_to?(:thumb)
-            = image_tag @user.image_2.thumb.url
-            br
-            = link_to 'Download', @user.image_2.url, download: true
-          - else
-            | 画像がありません
-      
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
-        td
-          - if @user.image_3.present? && @user.image_3.respond_to?(:thumb)
-            = image_tag @user.image_3.thumb.url
-            br
-            = link_to 'Download', @user.image_3.url, download: true
-          - else
-            | 画像がありません
-      
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ざいりゅうきょかしょう（うら）[Residence permit[back]]
-        td
-          - if @user.image_4.present? && @user.image_4.respond_to?(:thumb)
-            = image_tag @user.image_4.thumb.url
-            br
-            = link_to 'Download', @user.image_4.url, download: true
-          - else
-            | 画像がありません
-      
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ぎんこうかーど（おもて）[Bank card[front]]
-        td
-          - if @user.image_5.present? && @user.image_5.respond_to?(:thumb)
-            = image_tag @user.image_5.thumb.url
-            br
-            = link_to 'Download', @user.image_5.url, download: true
-          - else
-            | 画像がありません
-      
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | ぎんこうかーど（うら）[Bank card[back]]
-        td
-          - if @user.image_6.present? && @user.image_6.respond_to?(:thumb)
-            = image_tag @user.image_6.thumb.url
-            br
-            = link_to 'Download', @user.image_6.url, download: true
-          - else
-            | 画像がありません
-
-  h2.headline Contract information
-
-  table.company
-    tbody
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 当社（とうしゃ）は外国人（がいこくじん）が働（はたら）きやすい環境（かんきょう）を作（つく）ることを重要視（じゅうようし）している。そのため、各（かく）業務委託者（ぎょうむいたくしゃ）には、日本（にほん）のマナーや節度（せつど）、挨拶（あいさつ）、礼儀（れいぎ）をしっかりと行（おこな）うものとする。 [Our company values creating a comfortable environment for foreign workers, and therefore requires all userors to properly observe Japanese manners, propriety, greetings, and courtesy.]
-        td
-          = @user.check_1
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 乙（おつ）は連絡（れんらく）もなく欠勤（けっきん）をしたり、勤務時間（きんむじかん）に遅刻（ちこく）することなく、稼働（かどう）を遂行（すいこう）する。 [Party B shall perform duties without absence or tardiness and without failing to make contact.]
-        td
-          = @user.check_2
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 退職（たいしょく）を行（おこな）う場合（ばあい）、必（かなら）ず退職（たいしょく）の2ヶ月前（にかげつまえ）に甲（こう）に通知（つうち）を行（おこな）うものとする。 [In the event of resignation, Party B shall notify Party A at least two months in advance.]
-        td
-          = @user.check_3
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 佐川急便（さがわきゅうびん）の場合（ばあい）、1日（いちにち）の平均配送（へいきんはいそう）は120個（ひゃくにじゅっこ）を下回（したまわ）らないよう、効率的（こうりつてき）に稼働（かどう）を行（おこな）うものとする。その他（そのた）の業務（ぎょうむ）の場合（ばあい）、発注元（はっちゅうもと）からの指定（してい）個数（こすう）を下回（したまわ）らないものとする。 [In the case of Sagawa Express, the useror shall work efficiently so that the average daily delivery does not fall below 120 parcels. For other tasks, the number delivered shall not be less than the quantity designated by the ordering party.]
-        td
-          = @user.check_4
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | その他（そのた）契約約款（けいやくやっかん）に同意（どうい）します。 [I agree to the other terms and conditions of the user.]
-        td
-          = @user.agree
-      tr
-        td
-          strong.label Required
-        td.arrow_box
-          | 契約日（けいやくび） [Contract date]
-        td
-          = @user.contract_date
-
-.actions_container style="text-align: center; margin-bottom: 30px;"
-  = link_to "Proceed to user", info_user_path(@user), class: "btn btn-primary"
-  = link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "本当にログアウトしますか？" }, class: "btn btn-primary"
-  - if admin_signed_in?
-   = link_to "削除する", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか？' }, style: "margin-left: 10px;"
-   = link_to "一覧に戻る", users_path, class: "btn btn-default"
-
-br/
-br/
-- if admin_signed_in?
- = form_for [@user, @user.comments.build] do |f|
-  table.company[width="100%"]
-    col[width="25%"]
-    col[width="25%"]
-    col[width="25%"]
-    tbody
-      tr
-          th
-            | ステータス
-          th
-            | 次回営業日
-          th
-            | コメント
-
-      tr
-          td
-            = f.select(:status, [\
-            ["Absense","Absense"],\
-            ["Busy","Busy"],\
-            ["LINE","LINE"],\
-            ["HIRE","HIRE"],\
-            ["NG","NG"]],include_blank: "選択してください")     
-          td
-            = f.datetime_field :next
-          td
-            = f.text_area :body
-      tr
-        th[colspan="3"]
-         .center
-          = f.submit "登録する", class:"btn btn-primary"
- small 商談ステータスを入れる場合は商談日を入力。　不在の場合、ステータスは以前のステータスにし、不在にチェックを入れる
- table.company[width="100%"]
-  - if @user.comments.any?
-    tbody
-     - @user.comments.each do |comment|
-       tr
-        td
-          = comment.status
-        td
-          = comment.next
-        td
-          = comment.body
-        td
-         - if comment.id.present?
-           = link_to "編集", edit_user_comment_path(@user, comment)
-           = link_to "削除", user_comment_path(@user, comment), method: :delete, data: { confirm: "本当に削除しますか？" }
-         - else
-           = "コメントが見つかりません"
+               - if comment.id.present?
+                 = link_to "Edit", edit_user_comment_path(@user, comment)
+                 = link_to "Delete", user_comment_path(@user, comment), method: :delete, data: { confirm: "Are you sure you want to delete this?" }
+               - else
+                 = "コメントが見つかりません"
 
 
 

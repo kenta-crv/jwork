@@ -7,6 +7,11 @@
   | Before applying via LINE, please be sure to check the job details and recruitment area.
   span#custom-notice-arrow style="position:absolute; bottom:-7px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:7px solid transparent; border-right:7px solid transparent; border-top:7px solid #842029;"
 
+.jobs-brand
+  p.jobs-kicker Job portal
+  h1.jobs-title Job
+  p.jobs-ja 求人詳細
+
 .job-detail-card
   / ===== ヘッダーセクション =====
   .job-header
@@ -97,7 +102,7 @@
 
   / ===== フッター =====
   .job-footer
-    = link_to "← Back to List", recruits_path, class: "btn-back"
+    = link_to "← Back to List", recruits_path, class: "btn-back", data: { turbolinks: false }
 
     - if admin_signed_in?
       .job-admin-actions

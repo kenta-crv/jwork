@@ -1,201 +1,197 @@
 - set_meta_tags title: 'ユーザー一覧'
 
-= search_form_for @q, url: users_path, method: :get do |f|
-  table.list
-    thead
-      tr
-        td
-          = f.label :name_cont, "名前 [Name]"
-          = f.text_field :name_cont, class: "form-control", placeholder: "名前を入力 [Enter name]"
-        td
-          = f.label :tel_cont, "電話番号 [Tel]"
-          = f.text_field :tel_cont, class: "form-control", placeholder: "電話番号を入力 [Enter tel]"
-        td
-          = f.label :account_name_cont, "LINEアカウント"
-          = f.text_field :account_name_cont, class: "form-control", placeholder: "LINEアカウントを入力"
-        td
-          = f.label :email_cont, "メールアドレス [Mail]"
-          = f.text_field :email_cont, class: "form-control", placeholder: "メールアドレスを入力 [Enter Mail]"
-        td
-          = f.label :status_eq, "ステータス"
-          / User.statuses_i18n を使うことで、ja.yml の日本語が自動で反映されます
-          = f.select :status_eq, User.statuses_i18n.invert, { include_blank: "選択してください[Please select]" }, class: "form-control"
-        td
-          = f.label :hope_work_eq, "業種"
-          = f.select :hope_work_eq, [\
-              ["Cleaner", "Cleaner"],\
-              ["Driver", "Driver"],\
-          ], { include_blank: "選択してください[Please select]" }, class: "form-control"
-        td
-          = f.label :agree_eq, "契約同意"
-          = f.select :agree_eq, [\
-              ["Agree", "Agree"]\
-            ], { include_blank: "指定なし" }, class: "form-control"
-        td
-          = f.submit "検索", class: "btn btn-primary"
+.auth-screen.auth-screen--user.auth-screen--wide
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      p.auth-screen__kicker User portal
+      h1.auth-screen__title Users
+      p.auth-screen__ja ユーザー一覧
+    .user-desk.auth-screen__card
+      = search_form_for @q, url: users_path, method: :get do |f|
+        table.list
+          thead
+            tr
+              td
+                = f.label :name_cont, "名前 [Name]"
+                = f.text_field :name_cont, class: "form-control", placeholder: "名前を入力 [Enter name]"
+              td
+                = f.label :tel_cont, "電話番号 [Tel]"
+                = f.text_field :tel_cont, class: "form-control", placeholder: "電話番号を入力 [Enter tel]"
+              td
+                = f.label :account_name_cont, "LINEアカウント"
+                = f.text_field :account_name_cont, class: "form-control", placeholder: "LINEアカウントを入力"
+              td
+                = f.label :email_cont, "メールアドレス [Mail]"
+                = f.text_field :email_cont, class: "form-control", placeholder: "メールアドレスを入力 [Enter Mail]"
+              td
+                = f.label :status_eq, "ステータス"
+                / User.statuses_i18n を使うことで、ja.yml の日本語が自動で反映されます
+                = f.select :status_eq, User.statuses_i18n.invert, { include_blank: "選択してください[Please select]" }, class: "form-control"
+              td
+                = f.label :hope_work_eq, "業種"
+                = f.select :hope_work_eq, [\
+                    ["Cleaner", "Cleaner"],\
+                    ["Driver", "Driver"],\
+                ], { include_blank: "選択してください[Please select]" }, class: "form-control"
+              td
+                = f.label :agree_eq, "契約同意"
+                = f.select :agree_eq, [\
+                    ["Agree", "Agree"]\
+                  ], { include_blank: "指定なし" }, class: "form-control"
+              td
+                = f.submit "Search", class: "btn btn-primary"
 
-br/
-br/
+      = form_with url: bulk_sms_users_path, method: :post, local: true, id: "bulk_sms_form" do |f|
+        = f.submit "Send SMS to selected users",
+                   class: "btn btn-warning",
+                   data: { confirm: "Send SMS to the selected users. Are you sure?" }
 
-= form_with url: bulk_sms_users_path, method: :post, local: true, id: "bulk_sms_form" do |f|
-  = f.submit "選択ユーザーにSMS送信", 
-             class: "btn btn-warning", 
-             data: { confirm: "選択したユーザーにSMS送信します。よろしいですか？" }
+      - if @users.present?
+        - total_count = @users.respond_to?(:total_count) ? @users.total_count : @users.count
+        .bulk-action-area
+          strong 対象人数: #{total_count}名（全ページ合計）
+          = link_to "Bulk IVR call to all #{total_count} matching users",
+                    bulk_call_ivr_users_path(q: params[:q]&.to_unsafe_h),
+                    method: :post,
+                    data: { confirm: "This will call all #{total_count} users across all pages in sequence. Are you sure?" },
+                    class: "btn btn-danger"
 
-- if @users.present?
-  - total_count = @users.respond_to?(:total_count) ? @users.total_count : @users.count
-  .bulk-action-area style="margin-bottom: 20px; padding: 15px; background: #fff5f5; border: 2px solid #ffcccc; border-radius: 5px;"
-    strong 対象人数: #{total_count}名（全ページ合計）
-    = link_to "この条件に合う全 #{total_count} 名にIVRを一括発信", 
-              bulk_call_ivr_users_path(q: params[:q]&.to_unsafe_h), 
-              method: :post, 
-              data: { confirm: "全ページ合計 #{total_count} 名全員に順次電話をかけます。本当によろしいですか？" }, 
-              class: "btn btn-danger", 
-              style: "margin-left: 15px;"
+      - if @status_interviewed
+        = render partial: "status_interview", locals: { users: @users }
+      - elsif @status_sms_partial
+        = render partial: "status_sms", locals: { users: @users }
+      - else
+        .table-responsive
+          table.list
+            colgroup
+              col style="width: 14%;"
+              col style="width: 14%;"
+              col style="width: 14%;"
+              col style="width: 14%;"
+              col style="width: 14%;"
+              col style="width: 14%;"
+              col style="width: 16%;"
+            thead
+              tr
+                th = check_box_tag "select_all", "", false, id: "select_all"
+                th User_name
+                th Phone_number
+                th Status
+                th account_name
+                th select
+                th Register_date(Updated_at)
+                th
+            tbody
+              - @users.each do |user|
+                tr
+                  td= check_box_tag "user_ids[]", user.id, false, class: "user-checkbox"
+                  td= link_to user.name, user_path(user)
+                  td= user.tel
+                  td
+                    / options_for_select に User.statuses_i18n.invert を渡すことで
+                    / 手動の map ループを削除し、日本語表示を適用しています
+                    = select_tag :status,
+                                 options_for_select(User.statuses_i18n.invert, user.status),
+                                 class: 'form-control update-status',
+                                 data: { user_id: user.id },
+                                 style: 'width: 120px;'
+                  td
+                    = text_field_tag :account_name, user.account_name,
+                      class: "form-control account-name-input",
+                      data: { user_id: user.id },
+                      placeholder: "LINE ID入力",
+                      style: "width: 150px;"
+                  td= user&.hope_work
+                  td
+                    = user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+                    br/
+                    |(
+                    = user.updated_at ? user.updated_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
+                    |)
+                  td
+                    .action-flex
+                      span.copy-btn data-clipboard-text=user.interview_request_text
+                        = image_tag("icon_information.png", width: 20)
+                      span.copy-btn data-clipboard-text=user.contract_request_text
+                        = image_tag("icon_copy.png", width: 20)
+                      - if user.account_name.present?
+                        = link_to user.account_name, target: "_blank" do
+                          = image_tag("icon_line.png", width: 20)
+                      = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
+                        = image_tag("icon_sms.png", width: 20)
+                      = link_to call_ivr_user_path(user), method: :post, data: { confirm: "本当にIVRを発信しますか？" } do
+                        = image_tag("icon_phone.png", width: 20)
+                      = link_to edit_user_path(user) do
+                        = image_tag("icon_edit.png", width: 20)
+                      = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
+                        = image_tag("icon_trash.png", width: 20)
 
-- if @status_interviewed
-  = render partial: "status_interview", locals: { users: @users }
-- elsif @status_sms_partial
-  = render partial: "status_sms", locals: { users: @users }
+      = paginate @users
 
-- else
-  .table-responsive
-    table.list
-      colgroup
-        col style="width: 14%;"
-        col style="width: 14%;"
-        col style="width: 14%;"
-        col style="width: 14%;"
-        col style="width: 14%;"
-        col style="width: 14%;"
-        col style="width: 16%;"
-      thead
-        tr
-          th = check_box_tag "select_all", "", false, id: "select_all"
-          th User_name
-          th Phone_number
-          th Status
-          th account_name
-          th select
-          th Register_date(Updated_at)
-          th
-      tbody
-        - @users.each do |user|
-          tr
-            td= check_box_tag "user_ids[]", user.id, false, class: "user-checkbox"
-            td= link_to user.name, user_path(user)
-            td= user.tel
+      script
+        | document.addEventListener("DOMContentLoaded", function() {
+        |   // ステータス更新用の処理（update-status クラスを持つ select にイベント付与）
+        |   document.querySelectorAll(".update-status").forEach(function(select) {
+        |     select.addEventListener("change", function() {
+        |       const userId = this.dataset.userId;
+        |       const value = this.value;
+        |       fetch(`/users/${userId}`, {
+        |         method: "PATCH",
+        |         headers: {
+        |           "Content-Type": "application/json",
+        |           "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+        |         },
+        |         body: JSON.stringify({ user: { status: value } })
+        |       });
+        |     });
+        |   });
+        |
+        |   // LINEアカウント名の更新処理
+        |   document.querySelectorAll(".account-name-input").forEach(function(input) {
+        |     input.addEventListener("blur", function() {
+        |       const userId = this.dataset.userId;
+        |       const value = this.value;
+        |       fetch(`/users/${userId}`, {
+        |         method: "PATCH",
+        |         headers: {
+        |           "Content-Type": "application/json",
+        |           "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+        |         },
+        |         body: JSON.stringify({ user: { account_name: value } })
+        |       });
+        |     });
+        |   });
+        | });
 
-            td
-              / options_for_select に User.statuses_i18n.invert を渡すことで
-              / 手動の map ループを削除し、日本語表示を適用しています
-              = select_tag :status, 
-                           options_for_select(User.statuses_i18n.invert, user.status),
-                           class: 'form-control update-status',
-                           data: { user_id: user.id },
-                           style: 'width: 120px;'
-
-            td
-              = text_field_tag :account_name, user.account_name,
-                class: "form-control account-name-input",
-                data: { user_id: user.id },
-                placeholder: "LINE ID入力",
-                style: "width: 150px;"
-
-            td= user&.hope_work
-
-            td
-              = user.created_at ? user.created_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
-              br/
-              |(
-              = user.updated_at ? user.updated_at.strftime("%Y年%m月%d日 %H時%M分") : "―"
-              |)
-
-            td
-              .action-flex
-                span.copy-btn data-clipboard-text=user.interview_request_text
-                  = image_tag("icon_information.png", width: 20)
-                span.copy-btn data-clipboard-text=user.contract_request_text
-                  = image_tag("icon_copy.png", width: 20)
-
-                - if user.account_name.present?
-                  = link_to user.account_name, target: "_blank" do
-                    = image_tag("icon_line.png", width: 20)
-
-                = link_to send_sms_user_path(user), method: :post, data: { confirm: "本当に送信しますか？" } do
-                  = image_tag("icon_sms.png", width: 20)
-
-                = link_to call_ivr_user_path(user), method: :post, data: { confirm: "本当にIVRを発信しますか？" } do
-                  = image_tag("icon_phone.png", width: 20)
-
-                = link_to edit_user_path(user) do
-                  = image_tag("icon_edit.png", width: 20)
-
-                = link_to user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } do
-                  = image_tag("icon_trash.png", width: 20)
-
-= paginate @users
-
-script
-  | document.addEventListener("DOMContentLoaded", function() {
-  |   // ステータス更新用の処理（update-status クラスを持つ select にイベント付与）
-  |   document.querySelectorAll(".update-status").forEach(function(select) {
-  |     select.addEventListener("change", function() {
-  |       const userId = this.dataset.userId;
-  |       const value = this.value;
-  |       fetch(`/users/${userId}`, {
-  |         method: "PATCH",
-  |         headers: {
-  |           "Content-Type": "application/json",
-  |           "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
-  |         },
-  |         body: JSON.stringify({ user: { status: value } })
-  |       });
-  |     });
-  |   });
-  |
-  |   // LINEアカウント名の更新処理
-  |   document.querySelectorAll(".account-name-input").forEach(function(input) {
-  |     input.addEventListener("blur", function() {
-  |       const userId = this.dataset.userId;
-  |       const value = this.value;
-  |       fetch(`/users/${userId}`, {
-  |         method: "PATCH",
-  |         headers: {
-  |           "Content-Type": "application/json",
-  |           "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
-  |         },
-  |         body: JSON.stringify({ user: { account_name: value } })
-  |       });
-  |     });
-  |   });
-  | });
-
-script
-  | document.addEventListener("DOMContentLoaded", function() {
-  |   const form = document.getElementById("bulk_sms_form");
-  |
-  |   form.addEventListener("submit", function(e) {
-  |     const checked = document.querySelectorAll(".user-checkbox:checked");
-  |
-  |     if (checked.length === 0) {
-  |       e.preventDefault();
-  |       alert("ユーザーを選択してください");
-  |       return;
-  |     }
-  |
-  |     checked.forEach(cb => {
-  |       const input = document.createElement("input");
-  |       input.type = "hidden";
-  |       input.name = "user_ids[]";
-  |       input.value = cb.value;
-  |       form.appendChild(input);
-  |     });
-  |   });
-  |
-  |   document.getElementById("select_all").addEventListener("change", function() {
-  |     document.querySelectorAll(".user-checkbox").forEach(cb => {
-  |       cb.checked = this.checked;
-  |     });
-  |   });
-  | });
+      script
+        | document.addEventListener("DOMContentLoaded", function() {
+        |   const form = document.getElementById("bulk_sms_form");
+        |
+        |   form.addEventListener("submit", function(e) {
+        |     const checked = document.querySelectorAll(".user-checkbox:checked");
+        |
+        |     if (checked.length === 0) {
+        |       e.preventDefault();
+        |       alert("ユーザーを選択してください");
+        |       return;
+        |     }
+        |
+        |     checked.forEach(cb => {
+        |       const input = document.createElement("input");
+        |       input.type = "hidden";
+        |       input.name = "user_ids[]";
+        |       input.value = cb.value;
+        |       form.appendChild(input);
+        |     });
+        |   });
+        |
+        |   document.getElementById("select_all").addEventListener("change", function() {
+        |     document.querySelectorAll(".user-checkbox").forEach(cb => {
+        |       cb.checked = this.checked;
+        |     });
+        |   });
+        | });

@@ -1,6 +1,11 @@
 class RecruitsController < ApplicationController
   def index
-    @recruits = Recruit.where.not(point: "0").order(updated_at: :desc)
+    scope = Recruit.where.not(point: "0")
+    @areas = scope.where.not(area: [nil, ""]).distinct.order(:area).pluck(:area)
+    @genres = scope.where.not(genre: [nil, ""]).distinct.order(:genre).pluck(:genre)
+    scope = scope.where(area: params[:area]) if params[:area].present?
+    scope = scope.where(genre: params[:genre]) if params[:genre].present?
+    @recruits = scope.order(updated_at: :desc)
   end
 
   def new

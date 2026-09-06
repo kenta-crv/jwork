@@ -140,3 +140,21 @@ document.addEventListener('turbolinks:load', () => {
     toggleButton();
   }
 });
+
+document.addEventListener("turbolinks:load", function() {
+  document.querySelectorAll(".auth-form__drop").forEach(function(drop) {
+    var input = drop.querySelector(".auth-form__file");
+    var name = drop.querySelector(".auth-form__drop-name");
+    if (!input || !name) return;
+    var empty = name.getAttribute("data-empty") || "No file selected";
+    input.addEventListener("change", function() {
+      if (input.files && input.files[0]) {
+        name.textContent = input.files[0].name;
+        drop.classList.add("is-filled");
+      } else {
+        name.textContent = empty;
+        drop.classList.remove("is-filled");
+      }
+    });
+  });
+});

@@ -1,30 +1,45 @@
+- desk_page = controller_name == "users" && %w[index show edit].include?(action_name)
+- jobs_page = controller_name == "recruits" && %w[index show new edit].include?(action_name)
+- html_class = []
+- html_class << "auth-html" if desk_page
+- html_class << "jobs-html" if jobs_page
+- body_class = []
+- body_class << "auth-body" if desk_page
+- body_class << "jobs-body" if jobs_page
 doctype html
-html
+html class=html_class.join(" ")
   head
     = render 'layouts/head'
-  body
+  body class=body_class.join(" ")
     header
-      .row
-        .col-xs-2
-          -if request.path == "/zero"
-            = link_to "/zero"
-              =image_tag "rogo2.webp", width: "220px", class:"header-image", alt:"株式会社Ri-Plus『アポ匠ロゴ』"
-          -elsif request.path == "/free"
-            = link_to "/feee"
-              =image_tag "rogo3.webp", width: "220px", class:"header-image", alt:"株式会社Ri-Plus『アポ匠ロゴ』"
-          -else
-            = link_to "/"
-              =image_tag "rogo.webp", width: "220px", class:"header-image"
-        .col-xs-8
+      - unless desk_page || jobs_page
+        .row
+          .col-xs-2
+            -if request.path == "/zero"
+              = link_to "/zero"
+                =image_tag "rogo2.webp", width: "220px", class:"header-image", alt:"株式会社Ri-Plus『アポ匠ロゴ』"
+            -elsif request.path == "/free"
+              = link_to "/feee"
+                =image_tag "rogo3.webp", width: "220px", class:"header-image", alt:"株式会社Ri-Plus『アポ匠ロゴ』"
+            -else
+              = link_to "/"
+                =image_tag "rogo.webp", width: "220px", class:"header-image"
+          .col-xs-8
 
-      .row.navi
-        .col-xs-12.center
-          br/
-          br/
-          p.notice
-            = notice
-          p.alert
-            = alert
+      - unless jobs_page
+        .row.navi
+          .col-xs-12.center
+            br/
+            br/
+            p.notice
+              = notice
+            p.alert
+              = alert
+    - if jobs_page
+      - if notice.present?
+        p.jobs-flash.jobs-flash--notice = notice
+      - if alert.present?
+        p.jobs-flash.jobs-flash--alert = alert
     main
       .bread
         = render_breadcrumbs separator: ' > '

@@ -1,5 +1,8 @@
-h2 新規案件登録
-hr
-= render "form"
-.mt-3
-  = link_to "一覧に戻る", recruits_path
+- set_meta_tags title: '新規案件登録'
+
+.jobs-screen
+  .jobs-brand
+    p.jobs-kicker Job portal
+    h1.jobs-title New
+    p.jobs-ja 新規案件登録
+  = render "form"

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_admin!, only: [:edit]
+
 def index
   base_q = params[:q]&.to_unsafe_h || {}
 
