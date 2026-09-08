@@ -1,4 +1,6 @@
 class ContractsController < ApplicationController
+  LINE_CONSULT_URL = 'https://lin.ee/NZBWRrsD'
+
   protect_from_forgery with: :null_session, only: [:create]
   before_action :authenticate_admin!, except: [:new, :create]
     def index
@@ -15,11 +17,21 @@ class ContractsController < ApplicationController
   # 送信元のURLを特定（j-work.jp/xxx などの元のページ）
   # 取得できない場合は自サイトのrootへ
   origin_url = request.referer || root_path
+  via = params[:contact_via].to_s
+  if via == 'line' || via == 'mail'
+    prefix = via == 'line' ? '依頼経路: LINE' : '依頼経路: メール'
+    @contract.message = [prefix, @contract.message.presence].compact.join("\n")
+  end
 
   if @contract.save
     # メール送信
     ContractMailer.received_email(@contract).deliver_now
     ContractMailer.send_email(@contract).deliver_now
+
+    if via == 'line'
+      redirect_to LINE_CONSULT_URL, allow_other_host: true
+      return
+    end
 
     # 成功：元のページに「sent=1」を付けて戻す
     separator = origin_url.include?('?') ? '&' : '?'

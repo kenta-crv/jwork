@@ -10,6 +10,9 @@ SitemapGenerator::Sitemap.create do
     add "/pages/#{page}", changefreq: 'monthly', priority: 0.7
   end
 
+  add "/foreign-staffing", changefreq: 'monthly', priority: 0.7
+  add "/foreign-jobs", changefreq: 'monthly', priority: 0.7
+
   add "/columns", changefreq: 'daily', priority: 0.6
 
   column_codes = []

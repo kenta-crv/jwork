@@ -81,6 +81,9 @@ Rails.application.routes.draw do
   get '/pages/event',    to: 'pages#event'
   get '/pages/cleaning', to: 'pages#cleaning'
   get '/pages/logistic', to: 'pages#logistics'
+  get '/foreign-staffing', to: 'pages#foreign_staffing'
+  get '/foregin-staffing', to: 'pages#foreign_staffing'
+  get '/foreign-jobs', to: 'pages#foreign_jobs'
 
   resources :contracts
 end
