@@ -256,53 +256,29 @@
               td.arrow_box
                 | めんしょしょう（おもて）[Driver's lisense[front]]
               td
-                .auth-form__drop
-                  = f.file_field :image_1, class: "auth-form__file"
-                  span.auth-form__drop-copy
-                    span.auth-form__drop-action
-                      span.auth-form__en Choose file
-                      span.auth-form__ja ファイルを選択
-                    span.auth-form__drop-name data-empty="No file selected" No file selected
+                = f.file_field :image_1
             tr
               td
                 strong.label Required
               td.arrow_box
                 | めんしょしょう（うら）[Driver's lisense[back]]
               td
-                .auth-form__drop
-                  = f.file_field :image_2, class: "auth-form__file"
-                  span.auth-form__drop-copy
-                    span.auth-form__drop-action
-                      span.auth-form__en Choose file
-                      span.auth-form__ja ファイルを選択
-                    span.auth-form__drop-name data-empty="No file selected" No file selected
+                = f.file_field :image_2
             tr
               td
                 strong.label Required
               td.arrow_box
                 | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
               td
-                .auth-form__drop
-                  = f.file_field :image_3, class: "auth-form__file"
-                  span.auth-form__drop-copy
-                    span.auth-form__drop-action
-                      span.auth-form__en Choose file
-                      span.auth-form__ja ファイルを選択
-                    span.auth-form__drop-name data-empty="No file selected" No file selected
+                = f.file_field :image_3
             tr
               td
                 strong.label Required
               td.arrow_box
                 | ざいりゅうきょかしょう（うら）[Residence permit[back]]
               td
-                .auth-form__drop
-                  = f.file_field :image_4, class: "auth-form__file"
-                  span.auth-form__drop-copy
-                    span.auth-form__drop-action
-                      span.auth-form__en Choose file
-                      span.auth-form__ja ファイルを選択
-                    span.auth-form__drop-name data-empty="No file selected" No file selected
-            - if @user.hope_work = "Food"
+                = f.file_field :image_4
+            - if @user.hope_work == "Food"
              tr
               td
                 strong.label Required
@@ -313,13 +289,7 @@
                 br/
                 | (Bicycle) Photo of a bicycle with an anti-theft license plate
               td
-                .auth-form__drop
-                  = f.file_field :image_5, class: "auth-form__file"
-                  span.auth-form__drop-copy
-                    span.auth-form__drop-action
-                      span.auth-form__en Choose file
-                      span.auth-form__ja ファイルを選択
-                    span.auth-form__drop-name data-empty="No file selected" No file selected
+                = f.file_field :image_5
 
             tr.center
                 td[colspan="3"]

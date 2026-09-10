@@ -8,7 +8,8 @@ private
    when User
     user_path(resource)
    when Client
-    client_path(resource.id)
+    stored_location_for(resource)
+    client_mypage_path
    else
      super
    end

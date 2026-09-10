@@ -18,6 +18,12 @@ Rails.application.routes.draw do
   resources :admins, only: [:show]
 
 
+  devise_for :clients, path: "client", controllers: {
+    registrations: "clients/registrations",
+    sessions: "clients/sessions",
+    passwords: "clients/passwords"
+  }
+  get "/client/mypage", to: "clients#mypage", as: :client_mypage
   resources :clients do
     resources :situations
     resources :jobs 
@@ -69,7 +75,11 @@ Rails.application.routes.draw do
    end
   end
 
-  resources :recruits
+  resources :recruits do
+    collection do
+      post :import
+    end
+  end
   #get 'columns',         to: 'top#columns'
 
   # Column 記事は nginx → drafity。導線だけ jwork が JSON で返す

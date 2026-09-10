@@ -13,6 +13,7 @@ html.jflp-page body {
   color: #071c43;
   font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
   text-align: left;
+  overflow-x: hidden;
 }
 .jflp-main {
   margin: 0;
@@ -1850,4 +1851,3 @@ html.jflp-page .alert-danger { background: #b91c1c; }
   border: 1px solid #d7e2ee;
 }
 .jw-foreign-lp .jf-form__optional { display: none; }
-

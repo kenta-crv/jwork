@@ -1,0 +1,74 @@
+- set_meta_tags title: "マイページ", noindex: true
+
+.auth-screen.auth-screen--client.auth-screen--wide
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      = link_to "/", class: "auth-screen__logo" do
+        = image_tag "rogo.webp", alt: "J Work", class: "auth-screen__logo-img"
+      p.auth-screen__kicker Client portal
+      h1.auth-screen__title My page
+      p.auth-screen__ja マイページ
+      p.auth-screen__lead
+        | Manage your company profile and job listings.
+      p.auth-screen__ja 会社情報と求人を管理します
+      p.auth-screen__ja = @client.company
+    section.auth-screen__card
+      - if notice.present?
+        p.auth-screen__flash.auth-screen__flash--notice = notice
+      - if alert.present?
+        p.auth-screen__flash.auth-screen__flash--alert = alert
+
+      h2.auth-screen__card-title Jobs
+      p.auth-screen__card-sub
+        | Your job listings
+        span.auth-screen__ja 登録中の求人
+      .auth-form
+        = link_to new_recruit_path, class: "auth-form__submit" do
+          span.auth-form__en Create job
+          span.auth-form__ja 求人を新規作成
+        - if @recruits.present?
+          - @recruits.each do |recruit|
+            .auth-form__item
+              = link_to recruit_path(recruit), class: "auth-form__link" do
+                span.auth-form__en = recruit.title.presence || "Untitled"
+                span.auth-form__ja = recruit.title.presence || "無題"
+              = link_to edit_recruit_path(recruit), class: "auth-form__link" do
+                span.auth-form__en Edit
+                span.auth-form__ja 編集
+        - else
+          p.auth-screen__card-sub
+            | No jobs yet
+            span.auth-screen__ja まだ求人が登録されていません
+
+      h2.auth-screen__card-title Profile
+      p.auth-screen__card-sub
+        | Company information
+        span.auth-screen__ja 基本情報
+      .auth-form
+        .auth-form__item
+          .auth-form__item-label
+            span.auth-form__en Company
+            span.auth-form__ja 会社名
+          p.auth-form__input = @client.company
+        .auth-form__item
+          .auth-form__item-label
+            span.auth-form__en Contact
+            span.auth-form__ja 担当者
+          p.auth-form__input = @client.person
+        .auth-form__item
+          .auth-form__item-label
+            span.auth-form__en Email
+            span.auth-form__ja メールアドレス
+          p.auth-form__input = @client.email
+        .auth-form__item
+          .auth-form__item-label
+            span.auth-form__en Tel
+            span.auth-form__ja 電話番号
+          p.auth-form__input = @client.tel
+        = link_to destroy_client_session_path, method: :delete, class: "auth-form__link" do
+          span.auth-form__en Sign out
+          span.auth-form__ja ログアウト

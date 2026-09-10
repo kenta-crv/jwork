@@ -1,43 +1,60 @@
 - set_meta_tags noindex: true
-.tops-wrapper
-  h2.headline クライアント新規登録
-  p 登録するID/PASSを入力して下さい。
 
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = render "admins/shared/error_messages", resource: resource
-    table.list
-      colgroup
-        col width="40%"
-        col width="60%"
-      tr
-        th ユーザーネーム
-          span.label.label-blue 必須
-          br
-          small 山田太郎
-        td = f.text_field :user_name
-      tr
-        th ログインアドレス
-          span.label.label-blue 必須
-          br
-          small aaa@crold-valieat.jp
-        td = f.email_field :email, autofocus: true, autocomplete: "email"
-      tr
-        th パスワード
-          span.label.label-blue 必須
-          br
-          small *******
-        td
+.auth-screen.auth-screen--admin
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      = link_to "/", class: "auth-screen__logo" do
+        = image_tag "rogo.webp", alt: "J Work", class: "auth-screen__logo-img"
+      p.auth-screen__kicker Admin portal
+      h1.auth-screen__title Admin sign up
+      p.auth-screen__ja クライアント新規登録
+      p.auth-screen__lead
+        | Enter the ID and password to register.
+      p.auth-screen__ja 登録するID/PASSを入力して下さい。
+    section.auth-screen__card
+      - if notice.present?
+        p.auth-screen__flash.auth-screen__flash--notice = notice
+      - if alert.present?
+        p.auth-screen__flash.auth-screen__flash--alert = alert
+      h2.auth-screen__card-title Sign up
+      p.auth-screen__card-sub
+        | Create an admin account
+        span.auth-screen__ja 管理者アカウントを作成
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f|
+        = render "admins/shared/error_messages", resource: resource
+        .auth-form__item
+          = f.label :user_name, class: "auth-form__item-label" do
+            span.auth-form__en Username
+            span.auth-form__ja ユーザーネーム
+            span.auth-form__req Required
+          = f.text_field :user_name, class: "auth-form__input", placeholder: "山田太郎"
+        .auth-form__item
+          = f.label :email, class: "auth-form__item-label" do
+            span.auth-form__en Email
+            span.auth-form__ja ログインアドレス
+            span.auth-form__req Required
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-form__input", placeholder: "aaa@crold-valieat.jp"
+        .auth-form__item
+          = f.label :password, class: "auth-form__item-label" do
+            span.auth-form__en Password
+            span.auth-form__ja パスワード
+            span.auth-form__req Required
           - if @minimum_password_length
-            em = "(#{@minimum_password_length} characters minimum)"
-          = f.password_field :password, autocomplete: "off"
-      tr
-        th パスワード
-          span.label.label-blue 必須
-          br
-          small ******
-        td = f.password_field :password_confirmation, autocomplete: "off"
-      tr
-        td.center colspan="2" = f.submit "同意して登録"
-  br
-  .center
-    = render "admins/shared/links"
+            p.auth-form__hint = "(#{@minimum_password_length} characters minimum)"
+          = f.password_field :password, autocomplete: "new-password", class: "auth-form__input"
+        .auth-form__item
+          = f.label :password_confirmation, class: "auth-form__item-label" do
+            span.auth-form__en Confirm password
+            span.auth-form__ja パスワード
+            span.auth-form__req Required
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "auth-form__input"
+        = f.button class: "auth-form__submit", type: "submit" do
+          span.auth-form__en Sign up
+          span.auth-form__ja 同意して登録
+        = link_to new_session_path(resource_name), class: "auth-form__link auth-form__link--center" do
+          span.auth-form__en Sign in
+          span.auth-form__ja ログイン

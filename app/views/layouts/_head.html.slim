@@ -9,6 +9,8 @@ meta[name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-f
 = stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'
 - if (controller_name == "users" && %w[index show edit].include?(action_name)) || (controller_name == "recruits" && %w[index show new edit].include?(action_name))
   link[href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet"]
+- if controller_name == "sessions" || (controller_name == "registrations" && action_name == "new") || controller_name == "passwords" || (controller_name == "clients" && action_name == "mypage")
+  link[href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet"]
 
 script[src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"]
 = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'

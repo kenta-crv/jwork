@@ -1,40 +1,51 @@
 - set_meta_tags noindex: true
 
-.tops-wrapper
-  br/
-  br/
-  h2.headline
-   | 取引先ログイン
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    table.company
-      colgroup
-      tbody
-      tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | ログインアドレス
-        td.responsive-cell
-         .input-container
-          = f.email_field :email, autocomplete: "email"
-      tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | パスワード
-        td.responsive-cell
-         .input-container
-          - if @minimum_password_length
-            em
-              | (
-              = @minimum_password_length
-              |  characters minimum)
-          = f.password_field :password, autocomplete: "off"
-      tr
-        td[colspan="3"]
-          = f.submit "ログイン", class: "btn btn-primary", data: { confirm: "送信してもよろしいですか？" }
-
-    
-  br
-  .center
-    = render "clients/shared/links"
+.auth-screen.auth-screen--client
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      = link_to "/", class: "auth-screen__logo" do
+        = image_tag "rogo.webp", alt: "J Work", class: "auth-screen__logo-img"
+      p.auth-screen__kicker Client portal
+      h1.auth-screen__title Client sign in
+      p.auth-screen__ja 取引先ログイン
+      p.auth-screen__lead
+        | Review jobs and talent with a calmer, clearer start.
+      p.auth-screen__ja 案件の確認と人材のご案内を安心して進めます
+    section.auth-screen__card
+      - if notice.present?
+        p.auth-screen__flash.auth-screen__flash--notice = notice
+      - if alert.present?
+        p.auth-screen__flash.auth-screen__flash--alert = alert
+      h2.auth-screen__card-title Sign in
+      p.auth-screen__card-sub
+        | Continue with your registered email
+        span.auth-screen__ja 登録済みのメールアドレスで続行
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f|
+        .auth-form__field
+          = f.email_field :email, autocomplete: "email", class: "auth-form__input", placeholder: " "
+          = f.label :email, class: "auth-form__label" do
+            span.auth-form__en Email
+            span.auth-form__ja ログインアドレス
+        .auth-form__field
+          = f.password_field :password, autocomplete: "current-password", class: "auth-form__input", placeholder: " "
+          = f.label :password, class: "auth-form__label" do
+            span.auth-form__en Password
+            span.auth-form__ja パスワード
+        .auth-form__row
+          - if devise_mapping.respond_to?(:rememberable?) && devise_mapping.rememberable?
+            label.auth-form__check
+              = f.check_box :remember_me
+              span.auth-form__check-text
+                span.auth-form__en Remember me
+                span.auth-form__ja ログイン状態を保持
+          - if devise_mapping.respond_to?(:recoverable?) && devise_mapping.recoverable?
+            = link_to new_password_path(resource_name), class: "auth-form__link" do
+              span.auth-form__en Forgot password?
+              span.auth-form__ja パスワードをお忘れの方
+        = f.button class: "auth-form__submit", type: "submit" do
+          span.auth-form__en Sign in
+          span.auth-form__ja ログイン

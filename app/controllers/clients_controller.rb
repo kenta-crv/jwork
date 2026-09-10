@@ -1,8 +1,15 @@
 class ClientsController < ApplicationController
-  #before_action :authenticate_admin!, only: [:index, :destroy]  
+  before_action :authenticate_client!, only: [:mypage]
+  before_action :redirect_client_to_mypage, only: [:show]
+  #before_action :authenticate_admin!, only: [:index, :destroy]
   #before_action :authenticate_any!, only: [:show]
   def index
     @clients = Client.all
+  end
+
+  def mypage
+    @client = current_client
+    @recruits = @client.recruits.order(updated_at: :desc)
   end
 
   def disclose
@@ -20,21 +27,21 @@ class ClientsController < ApplicationController
     @client = Client.new
   end
 
-def create
-  @client = Client.new(client_params)
+  def create
+    @client = Client.new(client_params)
+    @client.skip_password_validation = true
 
-  if @client.save
-    if params[:commit] == '登録＋商談メール送信'
-      ClientMailer.teleapo_send_email(@client).deliver_now
-      ClientMailer.teleapo_reply_email(@client).deliver_now
+    if @client.save
+      if params[:commit] == '登録＋商談メール送信'
+        ClientMailer.teleapo_send_email(@client).deliver_now
+        ClientMailer.teleapo_reply_email(@client).deliver_now
+      end
+      redirect_to clients_path, notice: "クライアントを登録しました"
+    else
+      flash.now[:alert] = @client.errors.full_messages.join(", ")
+      render :new
     end
-    redirect_to clients_path, notice: "クライアントを登録しました"
-  else
-    flash.now[:alert] = @client.errors.full_messages.join(", ")
-    render :new
   end
-end
-
 
   def show
     @client = Client.find(params[:id])
@@ -48,7 +55,7 @@ end
 
   def update
     @client = Client.find(params[:id])
-  
+
     if @client.update(client_params)
       # conclusion.html.slimからの送信で、かつ同意が得られた場合
       #if @client.agree == "同意しました"
@@ -93,7 +100,12 @@ end
   end
 
   private
-    # client または admin のどちらかでログインしていればOK
+
+  def redirect_client_to_mypage
+    redirect_to client_mypage_path if client_signed_in? && !admin_signed_in?
+  end
+
+  # client または admin のどちらかでログインしていればOK
   def authenticate_any!
     unless client_signed_in? || admin_signed_in?
       redirect_to new_client_session_path, alert: "ログインが必要です"

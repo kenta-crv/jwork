@@ -1,238 +1,178 @@
 - set_meta_tags noindex: true
-.tops-wrapper
 
-  h2.headline
-    | 求人申込フォーム
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = devise_error_messages!
-    table.company
-      colgroup
+.auth-screen.auth-screen--client.auth-screen--wide
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      = link_to "/", class: "auth-screen__logo" do
+        = image_tag "rogo.webp", alt: "J Work", class: "auth-screen__logo-img"
+      p.auth-screen__kicker Client portal
+      h1.auth-screen__title Job application
+      p.auth-screen__ja 求人申込フォーム
+    section.auth-screen__card
+      - if notice.present?
+        p.auth-screen__flash.auth-screen__flash--notice = notice
+      - if alert.present?
+        p.auth-screen__flash.auth-screen__flash--alert = alert
+      h2.auth-screen__card-title Sign up
+      p.auth-screen__card-sub
+        | Company and job details
+        span.auth-screen__ja 会社情報と求人内容
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f|
+        = devise_error_messages!
 
-      tbody
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 会社名
-          td.responsive-cell
-            .input-container
-              = f.text_field :company, placeholder: "株式会社ABC"
-
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 代表取締役
-          td.responsive-cell
-            .input-container
-              = f.text_field :post_title, placeholder: "代表取締役"
-
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 代表者
-          td.responsive-cell
-            .input-container
-              = f.text_field :representative_name, placeholder: "山田　太郎"
-
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 担当者（同一の場合入力不要）
-          td.responsive-cell
-            .input-container
-              = f.text_field :contact_name, placeholder: "鈴木　次郎"
-
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 携帯番号
-          td.responsive-cell
-            .input-container
-              = f.text_field :tel, placeholder: "080-0000-0000"
-
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 勤務所在地
-          td.responsive-cell
-            .input-container
-              = f.text_field :address, placeholder: "東京都東京市東京町1-1-1"
-
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 企業URL
-          td.responsive-cell
-            .input-container
-              = f.text_field :url, placeholder: "https://abc.com"
-
-      tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | ログインアドレス
-        td.responsive-cell
-         .input-container
-          = f.email_field :email, autocomplete: "email"
-      tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | パスワード
-        td.responsive-cell
-         .input-container
+        .auth-form__item
+          = f.label :company, class: "auth-form__item-label" do
+            span.auth-form__en Company name
+            span.auth-form__ja 会社名
+            span.auth-form__req Required
+          = f.text_field :company, placeholder: "株式会社ABC", class: "auth-form__input"
+        .auth-form__item
+          = f.label :post_title, class: "auth-form__item-label" do
+            span.auth-form__en Representative title
+            span.auth-form__ja 代表取締役
+            span.auth-form__req Required
+          = f.text_field :post_title, placeholder: "代表取締役", class: "auth-form__input"
+        .auth-form__item
+          = f.label :representative_name, class: "auth-form__item-label" do
+            span.auth-form__en Representative
+            span.auth-form__ja 代表者
+            span.auth-form__req Required
+          = f.text_field :representative_name, placeholder: "山田　太郎", class: "auth-form__input"
+        .auth-form__item
+          = f.label :contact_name, class: "auth-form__item-label" do
+            span.auth-form__en Contact person (skip if the same)
+            span.auth-form__ja 担当者（同一の場合入力不要）
+            span.auth-form__req Required
+          = f.text_field :contact_name, placeholder: "鈴木　次郎", class: "auth-form__input"
+        .auth-form__item
+          = f.label :tel, class: "auth-form__item-label" do
+            span.auth-form__en Mobile number
+            span.auth-form__ja 携帯番号
+            span.auth-form__req Required
+          = f.text_field :tel, placeholder: "080-0000-0000", class: "auth-form__input"
+        .auth-form__item
+          = f.label :address, class: "auth-form__item-label" do
+            span.auth-form__en Work location
+            span.auth-form__ja 勤務所在地
+            span.auth-form__req Required
+          = f.text_field :address, placeholder: "東京都東京市東京町1-1-1", class: "auth-form__input"
+        .auth-form__item
+          = f.label :url, class: "auth-form__item-label" do
+            span.auth-form__en Company URL
+            span.auth-form__ja 企業URL
+            span.auth-form__req Required
+          = f.text_field :url, placeholder: "https://abc.com", class: "auth-form__input"
+        .auth-form__item
+          = f.label :email, class: "auth-form__item-label" do
+            span.auth-form__en Email
+            span.auth-form__ja ログインアドレス
+            span.auth-form__req Required
+          = f.email_field :email, autocomplete: "email", class: "auth-form__input"
+        .auth-form__item
+          = f.label :password, class: "auth-form__item-label" do
+            span.auth-form__en Password
+            span.auth-form__ja パスワード
+            span.auth-form__req Required
           - if @minimum_password_length
-            em
+            p.auth-form__hint
               | (
               = @minimum_password_length
               |  characters minimum)
-          = f.password_field :password, autocomplete: "off"
-      tr
-        td.label-cell
-          strong.label 必須
-        td.arrow-box-cell
-          | パスワード
-        td.responsive-cell
-         .input-container
-          = f.password_field :password_confirmation, autocomplete: "off"
+          = f.password_field :password, autocomplete: "new-password", class: "auth-form__input"
+        .auth-form__item
+          = f.label :password_confirmation, class: "auth-form__item-label" do
+            span.auth-form__en Confirm password
+            span.auth-form__ja パスワード
+            span.auth-form__req Required
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "auth-form__input"
 
+        h3.auth-form__section Job application
+        p.auth-screen__ja 求人申込フォーム
+        .auth-form__item
+          = f.label :recruit_url, class: "auth-form__item-label" do
+            span.auth-form__en Job URL
+            span.auth-form__ja 求人URL
+            span.auth-form__req Required
+          = f.text_field :recruit_url, placeholder: "https://abc.com/recruit", class: "auth-form__input"
+        .auth-form__item
+          = f.label :visa, class: "auth-form__item-label" do
+            span.auth-form__en Visa types you want to hire
+            span.auth-form__ja 採用したいビザの種類
+            span.auth-form__req Required
+          = f.select :visa, ['特定技能ビザ', '永住ビザ', '技術人文国際ビザ'], {}, { multiple: true, class: "auth-form__input" }
+        .auth-form__item
+          = f.label :message, class: "auth-form__item-label" do
+            span.auth-form__en Have you applied to accept specified skilled workers?
+            span.auth-form__ja 特定技能外国人受け入れ申請を行ったことはありますか？
+            span.auth-form__req Required
+          = f.select :message, ['はい', 'いいえ'], { prompt: '選択してください' }, class: "auth-form__input"
+        .auth-form__item
+          = f.label :number, class: "auth-form__item-label" do
+            span.auth-form__en Number of hires
+            span.auth-form__ja 採用人数
+            span.auth-form__req Required
+          = f.text_field :number, class: "auth-form__input"
+        .auth-form__item
+          = f.label :house_support, class: "auth-form__item-label" do
+            span.auth-form__en Housing support
+            span.auth-form__ja 住居サポート内容
+            span.auth-form__req Required
+          = f.text_area :house_support, placeholder: "外国人の場合、物件によっては住所契約ができない場合があるため必ず記載してください。ない場合『なし』と記載してください。", rows: "4", class: "auth-form__input auth-form__input--area"
+        .auth-form__item
+          = f.label :house_agents, class: "auth-form__item-label" do
+            span.auth-form__en Can you follow up on housing for job seekers?
+            span.auth-form__ja 求職者の住居のフォロー可能ですか？
+            span.auth-form__req Required
+          = f.select :house_agents, ['はい', 'いいえ'], { prompt: '選択してください' }, class: "auth-form__input"
 
-    h2.headline
-     | 求人申込フォーム
-    table.company
-      colgroup
-        / 自社入力
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 求人URL
-          td.responsive-cell
-            .input-container
-              = f.text_field :recruit_url, placeholder: "https://abc.com/recruit"
+        h3.auth-form__section Fill in below if there is no job URL
+        p.auth-screen__ja 以下は求人URLがない場合に記載してください。
+        .auth-form__item
+          = f.label :business, class: "auth-form__item-label" do
+            span.auth-form__en Industry
+            span.auth-form__ja 募集業種
+            span.auth-form__opt Optional
+          = f.text_field :business, class: "auth-form__input"
+        .auth-form__item
+          = f.label :genre, class: "auth-form__item-label" do
+            span.auth-form__en Job type
+            span.auth-form__ja 募集職種
+            span.auth-form__opt Optional
+          = f.text_field :genre, class: "auth-form__input"
+        .auth-form__item
+          = f.label :salary, class: "auth-form__item-label" do
+            span.auth-form__en Salary
+            span.auth-form__ja 給料条件
+            span.auth-form__opt Optional
+          = f.text_area :salary, class: "auth-form__input auth-form__input--area"
+        .auth-form__item
+          = f.label :work_time, class: "auth-form__item-label" do
+            span.auth-form__en Working hours
+            span.auth-form__ja 勤務時間
+            span.auth-form__opt Optional
+          = f.text_area :work_time, class: "auth-form__input auth-form__input--area"
+        .auth-form__item
+          = f.label :day_off, class: "auth-form__item-label" do
+            span.auth-form__en Days off
+            span.auth-form__ja 休日
+            span.auth-form__opt Optional
+          = f.text_area :day_off, class: "auth-form__input auth-form__input--area"
+        .auth-form__item
+          = f.label :work_contents, class: "auth-form__item-label" do
+            span.auth-form__en Job description
+            span.auth-form__ja 業務内容
+            span.auth-form__opt Optional
+          = f.text_area :work_contents, class: "auth-form__input auth-form__input--area"
 
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 採用したいビザの種類
-          td.responsive-cell
-            .input-container
-              = f.select :visa, ['特定技能ビザ', '永住ビザ', '技術人文国際ビザ'], {}, { multiple: true, class: 'form-control' }
+        h3.auth-form__section Other notes for this job
+        p.auth-screen__ja その他求人における特記事項がある場合、必ず事前に記載してください。
+        .auth-form__item
+          = f.text_area :remarks, rows: "5", class: "auth-form__input auth-form__input--area"
 
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 特定技能外国人受け入れ申請を行ったことはありますか？
-          td.responsive-cell
-            .input-container
-              = f.select :message, ['はい', 'いいえ'], { prompt: '選択してください' }, class: 'form-control'
-
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 採用人数
-          td.responsive-cell
-            .input-container
-              = f.text_field :number
-
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 住居サポート内容
-          td.responsive-cell
-            .input-container
-              = f.text_area :house_support, placeholder: "外国人の場合、物件によっては住所契約ができない場合があるため必ず記載してください。ない場合『なし』と記載してください。", rows:"4"
-
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | 求職者の住居のフォロー可能ですか？
-          td.responsive-cell
-            .input-container
-              = f.select :house_agents, ['はい', 'いいえ'], { prompt: '選択してください' }, class: 'form-control'
-
-
-    h2.headline
-     | 以下は求人URLがない場合に記載してください。
-    
-    table.company
-      colgroup
-
-        tr
-          td.label-cell
-            strong.label.label-blue 任意
-          td.arrow-box-cell
-            | 募集業種
-          td.responsive-cell
-            .input-container
-              = f.text_field :business
-
-        tr
-          td.label-cell
-            strong.label.label-blue 任意
-          td.arrow-box-cell
-            | 募集職種
-          td.responsive-cell
-            .input-container
-              = f.text_field :genre
-
-        tr
-          td.label-cell
-            strong.label.label-blue 任意
-          td.arrow-box-cell
-            | 給料条件
-          td.responsive-cell
-            .input-container
-              = f.text_area :salary
-
-        tr
-          td.label-cell
-            strong.label.label-blue 任意
-          td.arrow-box-cell
-            | 勤務時間
-          td.responsive-cell
-            .input-container
-              = f.text_area :work_time
-
-        tr
-          td.label-cell
-            strong.label.label-blue 任意
-          td.arrow-box-cell
-            | 休日
-          td.responsive-cell
-            .input-container
-              = f.text_area :day_off
-
-        tr
-          td.label-cell
-            strong.label.label-blue 任意
-          td.arrow-box-cell
-            | 業務内容
-          td.responsive-cell
-            .input-container
-              = f.text_area :work_contents
-
-    h2.headline
-     | その他求人における特記事項がある場合、必ず事前に記載してください。
-    
-    table.company
-        tr 
-          td.responsive-cell
-            .input-container
-              = f.text_area :remarks, rows:"5"
-    table.company
-      tr
-        td[colspan="3"]
-          = f.submit "登録", class: "btn btn-primary", data: { confirm: "送信してもよろしいですか？" }
-
+        = f.button class: "auth-form__submit", type: "submit", data: { confirm: "送信してもよろしいですか？" } do
+          span.auth-form__en Sign up
+          span.auth-form__ja 登録

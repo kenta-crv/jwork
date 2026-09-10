@@ -22,7 +22,8 @@
          = link_to "Conclusion of contract", conclusion_user_path(@user)
         p You will enter into a business outsourcing contract with us.
     
-    .process-step
+    - if @user.hope_work == "Driver"
+     .process-step
       .num 03
       .content
         h3 Car rental 
@@ -50,7 +51,7 @@
 
 
 
-    .process-step
+     .process-step
       .num 04
       .content
         h3 駐車場
@@ -63,7 +64,7 @@
          .col-xs-4
           = link_to "TimesParking", "https://times-info.net/", class:"btn btn-process", target: "_blank"
 
-    .process-step
+     .process-step
       .num 05
       .content
         h3 保険加入

@@ -1,34 +1,51 @@
 - set_meta_tags noindex: true
 
-.tops-wrapper
-  br/
-  br/
-  h2.headline
-   取引先ログイン
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    table.list
-      colgroup
-        col(width="40%")
-        col(width="60%")
-      tr
-        th
-          | ログインアドレス
-        td
-          = f.email_field :email, autofocus: true, autocomplete: "email"
-      tr
-        th
-          | パスワード
-        td
-          = f.password_field :password, autocomplete: "off"
-      tr
-        td(colspan="2")
+.auth-screen.auth-screen--user
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      = link_to "/", class: "auth-screen__logo" do
+        = image_tag "rogo.webp", alt: "J Work", class: "auth-screen__logo-img"
+      p.auth-screen__kicker User portal
+      h1.auth-screen__title User sign in
+      p.auth-screen__ja 求職者ログイン
+      p.auth-screen__lead
+        | Sign in to manage your profile and job updates.
+      p.auth-screen__ja プロフィールとお仕事のご案内を確認します
+    section.auth-screen__card
+      - if notice.present?
+        p.auth-screen__flash.auth-screen__flash--notice = notice
+      - if alert.present?
+        p.auth-screen__flash.auth-screen__flash--alert = alert
+      h2.auth-screen__card-title Sign in
+      p.auth-screen__card-sub
+        | Continue with your registered email
+        span.auth-screen__ja 登録済みのメールアドレスで続行
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f|
+        .auth-form__field
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-form__input", placeholder: " "
+          = f.label :email, class: "auth-form__label" do
+            span.auth-form__en Email
+            span.auth-form__ja ログインアドレス
+        .auth-form__field
+          = f.password_field :password, autocomplete: "current-password", class: "auth-form__input", placeholder: " "
+          = f.label :password, class: "auth-form__label" do
+            span.auth-form__en Password
+            span.auth-form__ja パスワード
+        .auth-form__row
           - if devise_mapping.rememberable?
-            = f.check_box :remember_me
-            = f.label :remember_me
-      tr
-        th(colspan="2")
-          = f.submit "ログイン"
-    
-  br
-  .center
-    = render "users/shared/links"
+            label.auth-form__check
+              = f.check_box :remember_me
+              span.auth-form__check-text
+                span.auth-form__en Remember me
+                span.auth-form__ja ログイン状態を保持
+          - if devise_mapping.recoverable?
+            = link_to new_password_path(resource_name), class: "auth-form__link" do
+              span.auth-form__en Forgot password?
+              span.auth-form__ja パスワードをお忘れの方
+        = f.button class: "auth-form__submit", type: "submit" do
+          span.auth-form__en Sign in
+          span.auth-form__ja ログイン

@@ -1,278 +1,287 @@
 - set_meta_tags noindex: true
-.tops-wrapper
-  h2.headline 日本語で情報を入力してください。[Please enter the information in Japanese.]
 
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = render "users/shared/error_messages", resource: resource
+.auth-screen.auth-screen--user.auth-screen--wide
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      = link_to "/", class: "auth-screen__logo" do
+        = image_tag "rogo.webp", alt: "J Work", class: "auth-screen__logo-img"
+      p.auth-screen__kicker User portal
+      h1.auth-screen__title User sign up
+      p.auth-screen__ja 求職者入力
+      p.auth-screen__lead
+        | Please enter the information in Japanese.
+      p.auth-screen__ja 日本語で情報を入力してください。
+    section.auth-screen__card
+      - if notice.present?
+        p.auth-screen__flash.auth-screen__flash--notice = notice
+      - if alert.present?
+        p.auth-screen__flash.auth-screen__flash--alert = alert
+      h2.auth-screen__card-title Sign up
+      p.auth-screen__card-sub
+        | Create a user account
+        span.auth-screen__ja 求職者アカウントを作成
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f|
+        = render "users/shared/error_messages", resource: resource
+        - @user.errors.full_messages.each do |message|
+          p.auth-screen__flash.auth-screen__flash--alert = message
 
-    table.company
-      tbody
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | ステータス
-          td
-            = f.select :status, User.statuses_i18n.invert, { include_blank: "選択してください[Please select]" }
+        .auth-form__item
+          = f.label :status, class: "auth-form__item-label" do
+            span.auth-form__en Status
+            span.auth-form__ja ステータス
+            span.auth-form__req Required
+          = f.select :status, User.statuses_i18n.invert, { include_blank: "選択してください[Please select]" }, class: "auth-form__input"
 
-    .tops-wrapper
-      h2.headline 求職者入力
-      - @user.errors.full_messages.each do |message|
-        li = message
+        .auth-form__item
+          = f.label :name, class: "auth-form__item-label" do
+            span.auth-form__en Full name
+            span.auth-form__ja おなまえ
+            span.auth-form__req Required
+          = f.text_field :name, placeholder: "Taro Yamada", class: "auth-form__input"
+        .auth-form__item
+          = f.label :gender, class: "auth-form__item-label" do
+            span.auth-form__en Gender
+            span.auth-form__ja せいべつ
+            span.auth-form__req Required
+          = f.text_field :gender, placeholder: "Male", class: "auth-form__input"
+        .auth-form__item
+          = f.label :tel, class: "auth-form__item-label" do
+            span.auth-form__en Tel
+            span.auth-form__ja でんわばんごう
+            span.auth-form__req Required
+          = f.text_field :tel, placeholder: "080-0000-0000", class: "auth-form__input"
+        .auth-form__item
+          = f.label :email, class: "auth-form__item-label" do
+            span.auth-form__en Email
+            span.auth-form__ja メールアドレス
+            span.auth-form__req Required
+          = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "yamada@abc.com", class: "auth-form__input"
+        .auth-form__item
+          = f.label :age, class: "auth-form__item-label" do
+            span.auth-form__en Age
+            span.auth-form__ja せいねんがっぴ
+            span.auth-form__req Required
+          = f.text_field :age, placeholder: "25才", class: "auth-form__input"
+        .auth-form__item
+          = f.label :address, class: "auth-form__item-label" do
+            span.auth-form__en Address
+            span.auth-form__ja じゅうしょ
+            span.auth-form__req Required
+          = f.text_field :address, placeholder: "東京都港区芝5-27-3 MBC・Aー9", class: "auth-form__input"
 
-      table.company
-        tbody
-          tr
-            td
-              strong.label Required
-            td.arrow_box
-              | おなまえ [full_name]
-            td
-              = f.text_field :name, placeholder:"Taro Yamada"
-          tr
-            td
-              strong.label Required
-            td.arrow_box
-              | せいべつ [gender]
-            td
-              = f.text_field :gender, placeholder:"Male"
-          tr
-            td
-              strong.label Required
-            td.arrow_box
-              | でんわばんごう [Tel]
-            td
-              = f.text_field :tel, placeholder:"080-0000-0000"
-          tr
-            td
-              strong.label Required
-            td.arrow_box
-              | メールアドレス [Mail]
-            td
-              = f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"yamada@abc.com"
-          tr
-            td
-              strong.label Required
-            td.arrow_box
-              | せいねんがっぴ [age]
-            td
-              = f.text_field :age, placeholder:"25才"
-          tr
-            td
-              strong.label Required
-            td.arrow_box
-              | じゅうしょ[Address]
-            td
-              = f.text_field :address, placeholder:"東京都港区芝5-27-3 MBC・Aー9"
+        - if admin_signed_in?
+          .auth-form__item
+            = f.label :change_the_address, class: "auth-form__item-label" do
+              span.auth-form__en Can I move to a different prefecture?
+              span.auth-form__ja 転居はできますか？
+              span.auth-form__req Required
+            = f.text_field :change_the_address, class: "auth-form__input"
+          .auth-form__item
+            = f.label :car, class: "auth-form__item-label" do
+              span.auth-form__en Car type
+              span.auth-form__ja 車の種類
+              span.auth-form__req Required
+            = f.text_field :car, class: "auth-form__input"
+          .auth-form__item
+            = f.label :experience, class: "auth-form__item-label" do
+              span.auth-form__en Experience
+              span.auth-form__ja 経験則
+              span.auth-form__req Required
+            = f.text_field :experience, class: "auth-form__input"
+          .auth-form__item
+            = f.label :hope_work, class: "auth-form__item-label" do
+              span.auth-form__en Desired job
+              span.auth-form__ja 希望職種
+              span.auth-form__req Required
+            = f.text_field :hope_work, class: "auth-form__input"
+          .auth-form__item
+            = f.label :past_business, class: "auth-form__item-label" do
+              span.auth-form__en What job are you currently doing?
+              span.auth-form__ja あなたはげんざいなんのしごとをしていますか？
+              span.auth-form__req Required
+            = f.text_field :past_business, class: "auth-form__input"
+          .auth-form__item
+            = f.label :work_range, class: "auth-form__item-label" do
+              span.auth-form__en Please tell me your status of residence
+              span.auth-form__ja visaのしゅるいをおしえてください
+              span.auth-form__req Required
+            = f.text_field :work_range, class: "auth-form__input"
+          .auth-form__item
+            = f.label :past_year, class: "auth-form__item-label" do
+              span.auth-form__en How many years have you lived in Japan?
+              span.auth-form__ja 日本に来て何年経ちますか？
+              span.auth-form__req Required
+            = f.text_field :past_year, class: "auth-form__input"
+          .auth-form__item
+            = f.label :period, class: "auth-form__item-label" do
+              span.auth-form__en Since when can you job?
+              span.auth-form__ja いつから働けますか？
+              span.auth-form__req Required
+            = f.text_field :period, class: "auth-form__input"
+          .auth-form__item
+            = f.label :speak_japanese, class: "auth-form__item-label" do
+              span.auth-form__en Can you speak Japanese conversation?
+              span.auth-form__ja 日本語で会話できますか？
+              span.auth-form__req Required
+            = f.text_field :speak_japanese, class: "auth-form__input"
+          .auth-form__item
+            = f.label :remarks, class: "auth-form__item-label" do
+              span.auth-form__en Notes
+              span.auth-form__ja 備考
+              span.auth-form__req Required
+            = f.text_area :remarks, class: "auth-form__input auth-form__input--area"
+          .auth-form__item
+            = f.label :account_name, class: "auth-form__item-label" do
+              span.auth-form__en LINE Account
+              span.auth-form__ja LINE Account
+              span.auth-form__req Required
+            = f.text_field :account_name, class: "auth-form__input"
 
-          - if admin_signed_in?
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | 転居はできますか？[Can I move to a different prefecture?]
-              td
-                = f.text_field :change_the_address
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | 車の種類
-              td
-                = f.text_field :car
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | 経験則
-              td
-                = f.text_field :experience
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | 希望職種
-              td
-                = f.text_field :hope_work
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | あなたはげんざいなんのしごとをしていますか？ [what_job_are_you_currently_doing?]
-              td
-                = f.text_field :past_business  
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | visaのしゅるいをおしえてください [please_tell_me_your_status_of_residence]
-              td
-                = f.text_field :work_range
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | 日本に来て何年経ちますか？[How many years have you lived in Japan?]
-              td
-                = f.text_field :past_year
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | いつから働けますか？ [Since when can you job?]
-              td
-                = f.text_field :period
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | 日本語で会話できますか？[Can you speak Japanese conversation?]
-              td
-                = f.text_field :speak_japanese
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | 備考
-              td
-                = f.text_area :remarks
-            tr
-              td
-                strong.label Required
-              td.arrow_box
-                | LINE Account
-              td
-                = f.text_field :account_name
+          h3.auth-form__section Work Information
+          p.auth-screen__ja 勤務情報
+          .auth-form__item
+            = f.label :deliver, class: "auth-form__item-label" do
+              span.auth-form__en Reward conditions
+              span.auth-form__ja ほうしゅうじょうけん
+              span.auth-form__req Required
+            = f.text_area :deliver, class: "auth-form__input auth-form__input--area"
+          .auth-form__item
+            = f.label :day_off, class: "auth-form__item-label" do
+              span.auth-form__en Working conditions
+              span.auth-form__ja しゅっきんじょうけん
+              span.auth-form__req Required
+            = f.text_area :day_off, class: "auth-form__input auth-form__input--area"
 
-            
-    - if admin_signed_in?
-      h2.headline Work Information
-      table.company
-        colgroup
-          col width="20%"
-          col width="20%"
-          col width="60%"
-        tbody
-          tr
-            td
-              strong.label Required
-            td.arrow_box
-              | ほうしゅうじょうけん[Reward Conditions]
-            td
-              = f.text_area :deliver
-          tr
-            td
-              strong.label Required
-            td.arrow_box
-              | しゅっきんじょうけん[Working conditions]
-            td
-              = f.text_area :day_off
+        .auth-form__item
+          = f.label :emergency_name, class: "auth-form__item-label" do
+            span.auth-form__en Emergency contact person
+            span.auth-form__ja きんきゅうれんらくしゃ
+            span.auth-form__req Required
+          = f.text_field :emergency_name, placeholder: "Yoko Yamada", class: "auth-form__input"
+        .auth-form__item
+          = f.label :emergency_relationships, class: "auth-form__item-label" do
+            span.auth-form__en Relationship
+            span.auth-form__ja かんれんせい
+            span.auth-form__req Required
+          = f.text_field :emergency_relationships, placeholder: "Mother", class: "auth-form__input"
+        .auth-form__item
+          = f.label :emergency_tel, class: "auth-form__item-label" do
+            span.auth-form__en Emergency contact number
+            span.auth-form__ja きんきゅうれんらくしゃばんごう
+            span.auth-form__req Required
+          = f.text_field :emergency_tel, placeholder: "+818010101010", class: "auth-form__input"
+        .auth-form__item
+          = f.label :bank, class: "auth-form__item-label" do
+            span.auth-form__en Bank name
+            span.auth-form__ja ぎんこうめい
+            span.auth-form__req Required
+          = f.text_field :bank, placeholder: "三井住友銀行", class: "auth-form__input"
+        .auth-form__item
+          = f.label :branch, class: "auth-form__item-label" do
+            span.auth-form__en Branch
+            span.auth-form__ja してんめい
+            span.auth-form__req Required
+          = f.text_field :branch, placeholder: "東京支店", class: "auth-form__input"
+        .auth-form__item
+          = f.label :bank_number, class: "auth-form__item-label" do
+            span.auth-form__en Account number
+            span.auth-form__ja こうざばんごう
+            span.auth-form__req Required
+          = f.text_field :bank_number, placeholder: "0123456", class: "auth-form__input"
+        .auth-form__item
+          = f.label :bank_name, class: "auth-form__item-label" do
+            span.auth-form__en Account name
+            span.auth-form__ja こうざめいぎ
+            span.auth-form__req Required
+          = f.text_field :bank_name, placeholder: "ヤマダ　タロウ", class: "auth-form__input"
+        .auth-form__item
+          = f.label :image_1, class: "auth-form__item-label" do
+            span.auth-form__en Driver's license (front)
+            span.auth-form__ja めんしょしょう（おもて）
+            span.auth-form__req Required
+          .auth-form__drop
+            = f.file_field :image_1, class: "auth-form__file"
+            span.auth-form__drop-copy
+              span.auth-form__drop-action
+                span.auth-form__en Choose file
+                span.auth-form__ja ファイルを選択
+              span.auth-form__drop-name data-empty="No file selected" No file selected
+        .auth-form__item
+          = f.label :image_2, class: "auth-form__item-label" do
+            span.auth-form__en Driver's license (back)
+            span.auth-form__ja めんしょしょう（うら）
+            span.auth-form__req Required
+          .auth-form__drop
+            = f.file_field :image_2, class: "auth-form__file"
+            span.auth-form__drop-copy
+              span.auth-form__drop-action
+                span.auth-form__en Choose file
+                span.auth-form__ja ファイルを選択
+              span.auth-form__drop-name data-empty="No file selected" No file selected
+        .auth-form__item
+          = f.label :image_3, class: "auth-form__item-label" do
+            span.auth-form__en Residence permit (front)
+            span.auth-form__ja ざいりゅうきょかしょう（おもて）
+            span.auth-form__req Required
+          .auth-form__drop
+            = f.file_field :image_3, class: "auth-form__file"
+            span.auth-form__drop-copy
+              span.auth-form__drop-action
+                span.auth-form__en Choose file
+                span.auth-form__ja ファイルを選択
+              span.auth-form__drop-name data-empty="No file selected" No file selected
+        .auth-form__item
+          = f.label :image_4, class: "auth-form__item-label" do
+            span.auth-form__en Residence permit (back)
+            span.auth-form__ja ざいりゅうきょかしょう（うら）
+            span.auth-form__req Required
+          .auth-form__drop
+            = f.file_field :image_4, class: "auth-form__file"
+            span.auth-form__drop-copy
+              span.auth-form__drop-action
+                span.auth-form__en Choose file
+                span.auth-form__ja ファイルを選択
+              span.auth-form__drop-name data-empty="No file selected" No file selected
+        .auth-form__item
+          = f.label :image_5, class: "auth-form__item-label" do
+            span.auth-form__en Bank card (front)
+            span.auth-form__ja ぎんこうかーど（おもて）
+            span.auth-form__req Required
+          .auth-form__drop
+            = f.file_field :image_5, class: "auth-form__file"
+            span.auth-form__drop-copy
+              span.auth-form__drop-action
+                span.auth-form__en Choose file
+                span.auth-form__ja ファイルを選択
+              span.auth-form__drop-name data-empty="No file selected" No file selected
+        .auth-form__item
+          = f.label :image_6, class: "auth-form__item-label" do
+            span.auth-form__en Bank card (back)
+            span.auth-form__ja ぎんこうかーど（うら）
+            span.auth-form__req Required
+          .auth-form__drop
+            = f.file_field :image_6, class: "auth-form__file"
+            span.auth-form__drop-copy
+              span.auth-form__drop-action
+                span.auth-form__en Choose file
+                span.auth-form__ja ファイルを選択
+              span.auth-form__drop-name data-empty="No file selected" No file selected
+        .auth-form__item
+          = f.label :password, class: "auth-form__item-label" do
+            span.auth-form__en Password
+            span.auth-form__ja パスワード
+            span.auth-form__req Required
+          - if @minimum_password_length
+            p.auth-form__hint = "(#{@minimum_password_length} characters minimum)"
+          = f.password_field :password, autocomplete: "new-password", class: "auth-form__input"
 
-    table.company
-      tbody
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | きんきゅうれんらくしゃ[Emergency Contact Person]
-          td
-            = f.text_field :emergency_name, placeholder:"Yoko Yamada"
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | かんれんせい[Relationship]
-          td
-            = f.text_field :emergency_relationships, placeholder:"Mother"
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | きんきゅうれんらくしゃばんごう[Emergency contact number]
-          td
-            = f.text_field :emergency_tel, placeholder:"+818010101010"
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | ぎんこうめい[Bank name]
-          td
-            = f.text_field :bank, placeholder:"三井住友銀行"
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | してんめい[Branch]
-          td
-            = f.text_field :branch, placeholder:"東京支店"
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | こうざばんごう[Account number]
-          td
-            = f.text_field :bank_number, placeholder:"0123456"
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | こうざめいぎ[Account name]
-          td
-            = f.text_field :bank_name, placeholder:"ヤマダ　タロウ"
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | めんしょしょう（おもて）[Driver's lisense[front]]
-          td
-            = f.file_field :image_1
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | めんしょしょう（うら）[Driver's lisense[back]]
-          td
-            = f.file_field :image_2
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | ざいりゅうきょかしょう（おもて）[Residence permit[front]]
-          td
-            = f.file_field :image_3
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | ざいりゅうきょかしょう（うら）[Residence permit[back]]
-          td
-            = f.file_field :image_4
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | ぎんこうかーど（おもて）[Bank card[front]]
-          td
-            = f.file_field :image_5
-        tr
-          td
-            strong.label Required
-          td.arrow_box
-            | ぎんこうかーど（うら）[Bank card[back]]
-          td
-            = f.file_field :image_6
-        tr
-          td
-            strong.label 必須
-          td.arrow_box
-            | パスワード[Password]
-          td
-            - if @minimum_password_length
-              em = "(#{@minimum_password_length} characters minimum)"
-            = f.password_field :password, autocomplete: "off"
-        tr
-          td.center colspan="3" = f.submit "同意して登録"
-
-  br
-  .center
-    = render "users/shared/links"
+        = f.button class: "auth-form__submit", type: "submit" do
+          span.auth-form__en Sign up
+          span.auth-form__ja 同意して登録
+        = link_to new_session_path(resource_name), class: "auth-form__link auth-form__link--center" do
+          span.auth-form__en Sign in
+          span.auth-form__ja ログイン
