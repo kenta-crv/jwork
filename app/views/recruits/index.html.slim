@@ -6,6 +6,8 @@
       p.jobs-kicker Job portal
       h1.jobs-title Jobs
       p.jobs-ja 求人一覧
+    .jobs-nav
+      = link_to "保存した求人", saved_recruits_path, class: "jobs-nav__link", data: { turbolinks: false }
     - if admin_signed_in?
       .jobs-admin
         = link_to "新規案件登録", new_recruit_path, class: "jobs-admin__create"
@@ -25,12 +27,15 @@
             .jobs-card__price
               span.jobs-card__price-label Price
               span.jobs-card__price-value = recruit.unit_price
+            = recruit_metric_row(recruit)
             .jobs-card__tags
               - if recruit.area.present?
                 - recruit.area.to_s.split(/[・,、]/).reject(&:blank?).each do |a|
                   span.jobs-card__tag = a.strip
               - if recruit.recommend.present?
                 span.jobs-card__tag.jobs-card__tag--recommend おすすめ
+              - if @saved_recruit_ids&.include?(recruit.id)
+                span.jobs-card__tag.jobs-card__tag--saved Saved
           .jobs-card__aside
             = link_to "Detail", recruit_path(recruit), class: "jobs-card__detail", data: { turbolinks: false }
             - if admin_signed_in?

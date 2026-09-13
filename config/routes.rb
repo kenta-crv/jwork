@@ -78,6 +78,11 @@ Rails.application.routes.draw do
   resources :recruits do
     collection do
       post :import
+      get :saved
+    end
+    member do
+      post :apply
+      post :toggle_save
     end
   end
   #get 'columns',         to: 'top#columns'

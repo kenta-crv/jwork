@@ -1,7 +1,10 @@
 class RecruitsController < ApplicationController
-  before_action :authenticate_recruit_editor!, except: [:index, :show]
-  before_action :set_recruit, only: [:show, :edit, :update, :destroy]
+  include RecruitVisitor
+
+  before_action :authenticate_recruit_editor!, except: [:index, :show, :saved, :apply, :toggle_save]
+  before_action :set_recruit, only: [:show, :edit, :update, :destroy, :apply, :toggle_save]
   before_action :authorize_recruit_owner!, only: [:edit, :update, :destroy]
+  before_action :recruit_visitor_token, only: [:index, :show, :saved, :toggle_save]
 
   def index
     scope = Recruit.where.not(point: "0")
@@ -10,6 +13,12 @@ class RecruitsController < ApplicationController
     scope = scope.where(area: params[:area]) if params[:area].present?
     scope = scope.where(genre: params[:genre]) if params[:genre].present?
     @recruits = scope.order(updated_at: :desc)
+    @saved_recruit_ids = saved_recruit_ids_for_visitor
+  end
+
+  def saved
+    @saved_recruit_ids = saved_recruit_ids_for_visitor
+    @recruits = Recruit.where(id: @saved_recruit_ids).order(updated_at: :desc)
   end
 
   def new
@@ -44,6 +53,8 @@ class RecruitsController < ApplicationController
   end
 
   def show
+    track_recruit_view!
+    @saved = @recruit.saved_by?(recruit_visitor_token)
   end
 
   def edit
@@ -60,6 +71,29 @@ class RecruitsController < ApplicationController
   def destroy
     @recruit.destroy
     redirect_to after_recruit_save_path, notice: '案件が削除されました。'
+  end
+
+  def apply
+    @recruit.increment!(:applications_count)
+    render json: { applications_count: @recruit.applications_count }
+  end
+
+  def toggle_save
+    existing = @recruit.recruit_saves.find_by(visitor_token: recruit_visitor_token)
+
+    if existing
+      existing.destroy!
+      saved = false
+    else
+      @recruit.recruit_saves.create!(visitor_token: recruit_visitor_token)
+      saved = true
+    end
+
+    @recruit.reload
+    render json: {
+      saved: saved,
+      saves_count: @recruit.saves_count
+    }
   end
 
   private
@@ -93,6 +127,18 @@ class RecruitsController < ApplicationController
     else
       recruits_path
     end
+  end
+
+  def track_recruit_view!
+    viewed = Array(session[:recruit_viewed_ids]).map(&:to_i)
+    return if viewed.include?(@recruit.id)
+
+    @recruit.increment!(:views_count)
+    session[:recruit_viewed_ids] = (viewed + [@recruit.id]).last(200)
+  end
+
+  def saved_recruit_ids_for_visitor
+    RecruitSave.where(visitor_token: recruit_visitor_token).pluck(:recruit_id)
   end
 
   def recruit_params

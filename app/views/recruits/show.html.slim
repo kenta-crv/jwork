@@ -25,6 +25,14 @@
     .job-description
       = simple_format(@recruit.description)
 
+    .job-metrics-row
+      = recruit_metric_row(@recruit, labels: true)
+      button.job-save-btn type="button" id="recruit-save-btn" data-url=toggle_save_recruit_path(@recruit) data-saved=(@saved ? "true" : "false") aria-pressed=(@saved ? "true" : "false")
+        span.job-save-btn__icon aria-hidden="true"
+          svg viewBox="0 0 24 24" width="18" height="18" focusable="false"
+            path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41 1 4.22 2.44C11.09 5 12.76 4 14.5 4 17 4 19 6 19 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+        span.job-save-btn__label = @saved ? "Saved" : "Save"
+
   / ===== 単価（ハイライト） =====
   .job-price-section
     .job-price-label Base Pay / Unit Price
@@ -93,7 +101,7 @@
 
   / ===== LINEボタン =====
   .job-apply-area
-    = link_to line_url, class: "btn-line-apply action-link", data: { recruit_id: @recruit.id }, target: "_blank", rel: "noopener" do
+    = link_to line_url, class: "btn-line-apply action-link", data: { recruit_id: @recruit.id, apply_url: apply_recruit_path(@recruit) }, target: "_blank", rel: "noopener" do
       span.btn-line-icon
         / LINE icon SVG
         svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"
@@ -103,6 +111,7 @@
   / ===== フッター =====
   .job-footer
     = link_to "← Back to List", recruits_path, class: "btn-back", data: { turbolinks: false }
+    = link_to "Saved jobs", saved_recruits_path, class: "btn-back", data: { turbolinks: false }
 
     - if admin_signed_in?
       .job-admin-actions
@@ -112,18 +121,44 @@
           data: { confirm: "Are you sure you want to delete this job post?" },
           class: "btn-admin-delete"
 
-/ LINE応募確認・チェック連動スクリプト
+/ LINE応募確認・チェック連動・保存スクリプト
 javascript:
   (() => {
+    const csrfToken = () => {
+      const meta = document.querySelector('meta[name="csrf-token"]');
+      return meta ? meta.getAttribute('content') : '';
+    };
+
+    const postJson = (url) => {
+      return fetch(url, {
+        method: 'POST',
+        headers: {
+          'X-CSRF-Token': csrfToken(),
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        credentials: 'same-origin'
+      }).then((res) => {
+        if (!res.ok) throw new Error('request failed');
+        return res.json();
+      });
+    };
+
+    const updateMetricCount = (kind, value) => {
+      document.querySelectorAll('[data-metric="' + kind + '"]').forEach((el) => {
+        el.textContent = value;
+      });
+    };
+
     const initRecruitShow = () => {
       const actionLinks = document.querySelectorAll('.action-link');
       const checkboxes = document.querySelectorAll('[data-group="recruit-check"]');
       const noticeBanner = document.getElementById('custom-notice');
       const noticeArrow = document.getElementById('custom-notice-arrow');
-      
-      // この画面に必要な主要要素がない場合は処理をスキップ（他画面でのエラー巻き込み防止）
-      if (actionLinks.length === 0 && checkboxes.length === 0) return;
-      
+      const saveBtn = document.getElementById('recruit-save-btn');
+
+      if (actionLinks.length === 0 && checkboxes.length === 0 && !saveBtn) return;
+
       let hideTimer;
 
       function showNoticeNear(targetEl) {
@@ -194,17 +229,60 @@ javascript:
       });
 
       actionLinks.forEach(link => {
+        if (link.dataset.recruitBound) return;
+        link.dataset.recruitBound = '1';
         link.addEventListener('click', (e) => {
           const isChecked = checkboxes.length > 0 && Array.from(checkboxes).some(cb => cb.checked);
           if (!isChecked) {
             e.preventDefault();
             showNoticeNear(link);
             shakeCheckbox();
+            return;
           }
+
+          const applyUrl = link.dataset.applyUrl;
+          if (!applyUrl || link.dataset.applySent === '1') return;
+          link.dataset.applySent = '1';
+          postJson(applyUrl)
+            .then((data) => {
+              if (data && typeof data.applications_count !== 'undefined') {
+                updateMetricCount('apply', data.applications_count);
+              }
+            })
+            .catch(() => {})
+            .finally(() => {
+              setTimeout(() => { link.dataset.applySent = '0'; }, 1500);
+            });
         });
       });
 
-      // スクロール時にツールチップを消す安全処理
+      if (saveBtn && !saveBtn.dataset.recruitBound) {
+        saveBtn.dataset.recruitBound = '1';
+        saveBtn.addEventListener('click', () => {
+          if (saveBtn.disabled) return;
+          saveBtn.disabled = true;
+          postJson(saveBtn.dataset.url)
+            .then((data) => {
+              const saved = !!data.saved;
+              saveBtn.dataset.saved = saved ? 'true' : 'false';
+              saveBtn.setAttribute('aria-pressed', saved ? 'true' : 'false');
+              saveBtn.classList.toggle('is-saved', saved);
+              const label = saveBtn.querySelector('.job-save-btn__label');
+              if (label) label.textContent = saved ? 'Saved' : 'Save';
+              if (typeof data.saves_count !== 'undefined') {
+                updateMetricCount('save', data.saves_count);
+              }
+            })
+            .catch(() => {})
+            .finally(() => {
+              saveBtn.disabled = false;
+            });
+        });
+        if (saveBtn.dataset.saved === 'true') {
+          saveBtn.classList.add('is-saved');
+        }
+      }
+
       const handleScroll = () => {
         if (noticeBanner && noticeBanner.style.display === 'block') {
           noticeBanner.style.display = 'none';
@@ -215,7 +293,6 @@ javascript:
       window.addEventListener('scroll', handleScroll, { passive: true });
     };
 
-    // Turbo / Turbolinks / 通常ロードのすべてに対応
     document.addEventListener('DOMContentLoaded', initRecruitShow);
     document.addEventListener('turbo:load', initRecruitShow);
     document.addEventListener('turbolinks:load', initRecruitShow);

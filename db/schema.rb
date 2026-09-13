@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_07_04_095252) do
+ActiveRecord::Schema.define(version: 2026_09_10_101306) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -58,6 +58,11 @@ ActiveRecord::Schema.define(version: 2026_07_04_095252) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "industry"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
   create_table "comments", force: :cascade do |t|
@@ -173,6 +178,16 @@ ActiveRecord::Schema.define(version: 2026_07_04_095252) do
     t.index ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
   end
 
+  create_table "recruit_saves", force: :cascade do |t|
+    t.integer "recruit_id", null: false
+    t.string "visitor_token", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recruit_id"], name: "index_recruit_saves_on_recruit_id"
+    t.index ["visitor_token", "recruit_id"], name: "index_recruit_saves_on_visitor_token_and_recruit_id", unique: true
+    t.index ["visitor_token"], name: "index_recruit_saves_on_visitor_token"
+  end
+
   create_table "recruits", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -193,6 +208,59 @@ ActiveRecord::Schema.define(version: 2026_07_04_095252) do
     t.integer "point"
     t.string "genre"
     t.string "visa"
+    t.text "title_en"
+    t.text "description_en"
+    t.text "unit_price_en"
+    t.text "reward_en"
+    t.text "working_hours_en"
+    t.text "working_days_en"
+    t.text "area_en"
+    t.text "payment_en"
+    t.text "japanese_skill_en"
+    t.text "require_en"
+    t.text "contract_type_en"
+    t.text "car_details_en"
+    t.text "remarks_en"
+    t.text "recommend_en"
+    t.text "visa_en"
+    t.integer "client_id"
+    t.integer "views_count", default: 0, null: false
+    t.integer "applications_count", default: 0, null: false
+    t.integer "saves_count", default: 0, null: false
+    t.index ["client_id"], name: "index_recruits_on_client_id"
+  end
+
+  create_table "resumes", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name_sei"
+    t.string "name_mei"
+    t.string "name_sei_kana"
+    t.string "name_mei_kana"
+    t.date "birth_date"
+    t.string "gender"
+    t.string "postal_code"
+    t.string "address"
+    t.string "address_kana"
+    t.string "phone"
+    t.string "email"
+    t.string "contact_postal_code"
+    t.string "contact_address"
+    t.string "contact_address_kana"
+    t.string "contact_phone"
+    t.text "histories"
+    t.text "licenses"
+    t.text "motivation"
+    t.integer "commute_hours", default: 0
+    t.integer "commute_minutes", default: 0
+    t.integer "dependents_count", default: 0
+    t.string "spouse"
+    t.string "spouse_support"
+    t.text "request"
+    t.date "filled_on"
+    t.string "photo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_resumes_on_user_id"
   end
 
   create_table "situations", force: :cascade do |t|
@@ -298,6 +366,9 @@ ActiveRecord::Schema.define(version: 2026_07_04_095252) do
   add_foreign_key "inspections", "users"
   add_foreign_key "jobs", "clients"
   add_foreign_key "journals", "users"
+  add_foreign_key "recruit_saves", "recruits"
+  add_foreign_key "recruits", "clients"
+  add_foreign_key "resumes", "users"
   add_foreign_key "situations", "clients"
   add_foreign_key "user_step_mails", "users"
 end

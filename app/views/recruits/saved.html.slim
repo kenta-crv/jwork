@@ -1,0 +1,32 @@
+- set_meta_tags title: '保存した求人'
+
+.jobs-screen
+  .jobs-screen__inner
+    .jobs-brand
+      p.jobs-kicker Job portal
+      h1.jobs-title Saved
+      p.jobs-ja 保存した求人
+    .jobs-nav
+      = link_to "← 求人一覧へ", recruits_path, class: "jobs-nav__link", data: { turbolinks: false }
+    - if @recruits.present?
+      - @recruits.each do |recruit|
+        article.jobs-card
+          .jobs-card__main
+            - if recruit.point.present?
+              span.jobs-card__pickup PICK UP
+            h2.jobs-card__title = recruit.title
+            - if recruit.description.present?
+              p.jobs-card__desc = truncate(recruit.description, length: 90)
+            .jobs-card__price
+              span.jobs-card__price-label Price
+              span.jobs-card__price-value = recruit.unit_price
+            = recruit_metric_row(recruit)
+            .jobs-card__tags
+              - if recruit.area.present?
+                - recruit.area.to_s.split(/[・,、]/).reject(&:blank?).each do |a|
+                  span.jobs-card__tag = a.strip
+              span.jobs-card__tag.jobs-card__tag--saved Saved
+          .jobs-card__aside
+            = link_to "Detail", recruit_path(recruit), class: "jobs-card__detail", data: { turbolinks: false }
+    - else
+      p.jobs-empty 保存した求人はまだありません。求人詳細の「Save」から追加できます。

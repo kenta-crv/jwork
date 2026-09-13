@@ -1,142 +1,85 @@
-/ --- 統制されたデザインパッケージ ---
-.sp-corp-wrapper
-  / 1. HERO：ここだけ画面横いっぱいに広がる
-  .sp-hero-fullwide
-    .sp-hero-container
-      .sp-badge FOREIGNERS HUMAN SOLUTION EXPERT
-      h1.sp-copy 
-        span.reveal 日本の企業のグローバル人材化推進
-        br
-        span.reveal 永住ビザ特化型外国人プラットフォーム
-      p.sp-lead 
-        | 少子高齢化が進む日本社会に、圧倒的な人材量を生かして即時人材提供。
-        br
-        | 永住権という導入しやすさを基盤に、人材難を過去のものに。
-      .sp-cta-wrap
-        a.sp-btn-primary href="/contracts/new" お問い合わせ
+.jw-gateway
+  .jw-gateway__brand aria-label="J Work"
+    = image_tag 'rogo.webp', alt: 'J Work', class: 'jw-gateway__brand-logo'
 
+  p.jw-gateway__tagline
+    | 国境をこえて、はたらく未来をつくる
+    span.jw-gateway__tagline-line aria-hidden="true"
 
-  .sp-content-container
+  .jw-gateway__intro
+    h1.jw-gateway__title あなたはどちらですか？
+    span.jw-gateway__title-accent aria-hidden="true"
+    p.jw-gateway__lead PEOPLE CONNECT A BRIGHTER TOMORROW
 
-    / 3. Solutions：以前の洗練されたタイルデザイン
-    .sp-solutions
-      .sp-section-header
-        h2 Our Solutions
-        p 各事業紹介
-      
-      .sp-grid
-        .sp-card
-          .sp-card-image
-            img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80" alt="Executive"
-          .sp-card-body
-            .sp-card-num 01
-            h3 Foreign talent recruitment
-            p 企業の属性に合わせた永住ビザを取得した外国人人材を紹介します。
-            a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/human" data-turbolinks="false"
-             | View Detail
-        
-        .sp-card
-          .sp-card-image
-            =image_tag "cargo-image.png"
-          .sp-card-body
-            .sp-card-num 02
-            h3 Cargo delivery
-            p 軽貨物事業及びフードデリバリー事業で日本の枯渇する物流に貢献します。
-            a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/cargo" data-turbolinks="false"
-              | View Detail
+  = image_tag 'jwork-city-skyline.png', class: 'jw-gateway__city', alt: '', aria: { hidden: true }
 
-      .sp-grid
-        .sp-card
-          .sp-card-image
-            =image_tag "cleaning-image.png"
-          .sp-card-body
-            .sp-card-num 03
-            h3 Cleaning 
-            p 日常清掃及び巡回清掃分野における人材確保及び配置を行います。
-            a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/cleaning" data-turbolinks="false"
-             | View Detail
-        
-        .sp-card
-          .sp-card-image
-            =image_tag "event-image.png"
-          .sp-card-body
-            .sp-card-num 04
-            h3 Event 
-            p イベント設営・撤去・誘導におけるスタッフの提供を迅速に行います。
-            a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/event" data-turbolinks="false"
-             | View Detail
+  .jw-gateway__floor aria-hidden="true"
 
-        .sp-card
-          .sp-card-image
-            =image_tag "event-image.png"
-          .sp-card-body
-            .sp-card-num 05
-            h3 Logistic
-            p 工場組立やLINE作業、倉庫業務等の人材提供を行います。
-            a.btn.btn-primary.btn-block.mt-3.sp-btn-modern href="/pages/logistic" data-turbolinks="false"
-             | View Detail
+  svg.jw-gateway__word-shadow.jw-gateway__word-shadow--cast viewBox="0 0 1672 590" preserveAspectRatio="none" aria-hidden="true" focusable="false"
+    defs
+      linearGradient id="jw-ground-shadow-gradient" x1="0%" y1="100%" x2="0%" y2="0%"
+        stop offset="0%" stop-color="#123558" stop-opacity="0.30"
+        stop offset="40%" stop-color="#426b91" stop-opacity="0.12"
+        stop offset="100%" stop-color="#6d97b6" stop-opacity="0"
+    g transform="translate(0 590) scale(1 -1)"
+      text x="0" y="570" textLength="1672" lengthAdjust="spacingAndGlyphs" fill="url(#jw-ground-shadow-gradient)" JWORK
 
+  svg.jw-gateway__word-shadow.jw-gateway__word-shadow--contact viewBox="0 0 1672 590" preserveAspectRatio="none" aria-hidden="true" focusable="false"
+    g transform="translate(0 590) scale(1 -1)"
+      text x="0" y="570" textLength="1672" lengthAdjust="spacingAndGlyphs" JWORK
 
+  svg.jw-gateway__wordmark viewBox="0 0 1672 590" preserveAspectRatio="none" aria-hidden="true" focusable="false"
+    defs
+      linearGradient id="jw-letter-surface-gradient" x1="0%" y1="0%" x2="100%" y2="100%"
+        stop offset="0%" stop-color="#0b2c53"
+        stop offset="45%" stop-color="#062344"
+        stop offset="78%" stop-color="#041c35"
+        stop offset="100%" stop-color="#021329"
+    text x="0" y="570" textLength="1672" lengthAdjust="spacingAndGlyphs" fill="url(#jw-letter-surface-gradient)" JWORK
 
-  .sp-content-container
-    / 3. Solutions：以前の洗練されたタイルデザイン
-    .sp-solutions
-      .sp-section-header
-        h2 Our Columns
-        p 各事業掲載Column
+  .jw-gateway__cast.jw-gateway__cast--left aria-hidden="true"
+  .jw-gateway__cast.jw-gateway__cast--right aria-hidden="true"
+  .jw-gateway__cast.jw-gateway__cast--people-left aria-hidden="true"
+  .jw-gateway__cast.jw-gateway__cast--people-right aria-hidden="true"
 
-    .sp-news-grid
+  section.jw-gateway__portal.jw-gateway__portal--jobseekers aria-labelledby="jw-jobseekers-title"
+    = image_tag 'jwork-portal-left.png', class: 'jw-gateway__portal-image', alt: ''
 
-      = link_to "https://okey.work/columns", class: "sp-news-card", target: "_blank", rel: "noopener" do
-        .sp-news-card-body
-          h3 清掃業事業記事一覧
+    = image_tag 'jwork-jobseekers.png', class: 'jw-gateway__people jw-gateway__people--jobseekers', alt: '仕事を探している外国人の男女'
 
-          .sp-news-card-image
-            = image_tag "cleaning-column.webp", alt: "清掃業事業記事一覧"
+    .jw-gateway__portal-copy
+      h2.jw-gateway__portal-title id="jw-jobseekers-title"
+        span.jw-gateway__title-line 仕事を探している
+        strong.jw-gateway__title-line 外国人の方
 
-          p 詳細を見る
+      p.jw-gateway__portal-en
+        | FOR FOREIGN JOB SEEKERS
 
-        .sp-news-card-arrow
-          i.sp-icon-arrow
+      = link_to recruits_path, class: 'jw-gateway__button' do
+        span.jw-gateway__button-label 求人を見る
+        span.jw-gateway__button-arrow aria-hidden="true" →
 
-      = link_to "/columns", class: "sp-news-card" do
-        .sp-news-card-body
-          h3 運送業事業記事一覧
+  section.jw-gateway__portal.jw-gateway__portal--business aria-labelledby="jw-business-title"
+    = image_tag 'jwork-portal-right.png', class: 'jw-gateway__portal-image', alt: ''
 
-          .sp-news-card-image
-            = image_tag "transport-column.webp", alt: "運送業事業記事一覧"
+    = image_tag 'jwork-business-team.png', class: 'jw-gateway__people jw-gateway__people--business', alt: '外国人材の採用について話す企業担当者'
 
-          p 詳細を見る
+    .jw-gateway__portal-copy
+      h2.jw-gateway__portal-title id="jw-business-title"
+        span.jw-gateway__title-line 外国人材を探している
+        strong.jw-gateway__title-line 企業の方
 
-        .sp-news-card-arrow
-          i.sp-icon-arrow
+      p.jw-gateway__portal-en
+        | FOR COMPANIES SEEKING GLOBAL TALENT
 
-    section.sp-columns-seo
-      .sp-section-header
-        h2 お役立ち記事
-        p 軽貨物・人材に関する解説記事
-      ul.sp-columns-seo__list
-        - featured_columns_for(:top).each do |item|
-          li = link_to item[:title], item[:path]
-      p.sp-columns-seo__more
-        = link_to "記事一覧を見る", "/columns"
+      = link_to foregin_staffing_path, class: 'jw-gateway__button' do
+        span.jw-gateway__button-label
+          span.jw-gateway__button-label-part 企業向けサービス
+          span.jw-gateway__button-label-part を見る
+        span.jw-gateway__button-arrow aria-hidden="true" →
 
-          
-    / 4. Company
-    .sp-company
-      .sp-company-inner
-        h2 Company
-        .sp-table
-          .sp-row
-            .sp-th 会社名
-            .sp-td 株式会社J Work
-          .sp-row
-            .sp-th 代表取締役
-            .sp-td 奥山　健太
-          .sp-row
-            .sp-th 資本金
-            .sp-td 5,000,000円
-          .sp-row
-            .sp-th 所在地
-            .sp-td 東京都港区浜松町２丁目２番１５号２Ｆ
-= render "layouts/footer"
+  p.jw-gateway__side-copy
+    | ともに、
+    br
+    | もっと広い世界へ
+    span.jw-gateway__side-line aria-hidden="true"

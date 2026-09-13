@@ -1,0 +1,636 @@
+.jw-gateway {
+  --jw-word-top: 22%;
+  --jw-word-height: 61.7844%;
+  --jw-ground-top: 81.69%;
+
+  /* 中央の共通寸法 */
+  --jw-copy-top: 19%;
+  --jw-copy-width: 15cqw;
+  --jw-people-height: 54%;
+  --jw-people-bottom: 1.5%;
+
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 100;
+  container-type: size;
+  background: #fff;
+  color: #062858;
+  font-family:
+    "Noto Sans JP",
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    sans-serif;
+}
+
+.jw-gateway,
+.jw-gateway *,
+.jw-gateway *::before,
+.jw-gateway *::after {
+  box-sizing: border-box;
+}
+
+/* ロゴ */
+
+.jw-gateway .jw-gateway__brand {
+  position: absolute;
+  top: 1.6%;
+  left: 3.2%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.jw-gateway .jw-gateway__brand-logo {
+  display: block;
+  width: 13.5cqw;
+  height: auto;
+  max-height: 7cqh;
+  object-fit: contain;
+}
+
+/* 右上コピー */
+
+.jw-gateway .jw-gateway__tagline {
+  position: absolute;
+  top: 4.4%;
+  right: 3.8%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+  margin: 0;
+  font-size: .8cqw;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.jw-gateway .jw-gateway__tagline-line {
+  display: block;
+  width: 2.2cqw;
+  height: 1px;
+  background: #4066ad;
+}
+
+/* 見出し */
+
+.jw-gateway .jw-gateway__intro {
+  position: absolute;
+  top: 7.4%;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+}
+
+.jw-gateway .jw-gateway__title {
+  margin: 0;
+  color: #062858;
+  font-size: min(3.35cqw, 6cqh);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: .03em;
+}
+
+.jw-gateway .jw-gateway__title-accent {
+  display: block;
+  width: 2.7cqw;
+  height: .55cqh;
+  margin: 1.8cqh auto 1.9cqh;
+  background: linear-gradient(
+    90deg,
+    #0074ff 50%,
+    #05bbff 50%
+  );
+}
+
+.jw-gateway .jw-gateway__lead {
+  margin: 0;
+  color: #4569b1;
+  font-size: .7cqw;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: .4em;
+}
+
+/* 背景の街並み */
+
+.jw-gateway .jw-gateway__city {
+  position: absolute;
+  z-index: 1;
+  top: 12%;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 46%;
+  max-width: none;
+  object-fit: fill;
+  opacity: .78;
+  transform: none;
+  pointer-events: none;
+}
+
+/* 白い地面 */
+
+.jw-gateway .jw-gateway__floor {
+  position: absolute;
+  z-index: 2;
+  inset: var(--jw-ground-top) 0 0;
+  background: linear-gradient(
+    180deg,
+    #fff 0%,
+    #fbfdff 45%,
+    #edf7ff 100%
+  );
+  pointer-events: none;
+}
+
+/* 背景文字 */
+
+.jw-gateway .jw-gateway__wordmark {
+  position: absolute;
+  z-index: 4;
+  top: var(--jw-word-top);
+  left: 1%;
+  display: block;
+  width: 98%;
+  height: var(--jw-word-height);
+  max-width: none;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.jw-gateway .jw-gateway__wordmark text,
+.jw-gateway .jw-gateway__word-shadow text {
+  font-family: "Arial Black", "DejaVu Sans", sans-serif;
+  font-size: 780px;
+  font-weight: 900;
+  letter-spacing: normal;
+}
+
+/* 背景文字の接地影 */
+
+.jw-gateway .jw-gateway__word-shadow {
+  position: absolute;
+  z-index: 3;
+  left: 1%;
+  display: block;
+  width: 98%;
+  max-width: none;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.jw-gateway .jw-gateway__word-shadow--cast {
+  top: calc(var(--jw-ground-top) - .25%);
+  height: 7.4%;
+  filter: blur(.48cqw);
+}
+
+.jw-gateway .jw-gateway__word-shadow--contact {
+  top: calc(var(--jw-ground-top) - .05%);
+  height: 1.35%;
+  opacity: .3;
+  filter: blur(.16cqw);
+}
+
+.jw-gateway .jw-gateway__word-shadow--contact text {
+  fill: #0a2541;
+}
+
+/* 前方へ伸びる影 */
+
+.jw-gateway .jw-gateway__cast {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  filter: blur(.45cqw);
+  pointer-events: none;
+}
+
+.jw-gateway .jw-gateway__cast::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 78%,
+    rgba(15, 83, 151, .38) 87%,
+    rgba(37, 126, 193, .22) 100%
+  );
+}
+
+.jw-gateway .jw-gateway__cast--left::before {
+  clip-path: polygon(
+    20.3% 88.3%,
+    37.5% 81.7%,
+    27% 100%,
+    1% 100%
+  );
+}
+
+.jw-gateway .jw-gateway__cast--right::before {
+  clip-path: polygon(
+    62.7% 81.5%,
+    79.5% 89%,
+    100% 100%,
+    79% 100%
+  );
+}
+
+.jw-gateway .jw-gateway__cast--people-left::before {
+  clip-path: polygon(
+    33% 87.5%,
+    45% 87.5%,
+    50% 100%,
+    25% 100%
+  );
+  opacity: .6;
+}
+
+.jw-gateway .jw-gateway__cast--people-right::before {
+  clip-path: polygon(
+    50% 88%,
+    65% 88%,
+    77% 100%,
+    55% 100%
+  );
+  opacity: .6;
+}
+
+/* 中央：青い壁 */
+
+.jw-gateway .jw-gateway__portal {
+  position: absolute;
+  z-index: 5;
+  top: 27%;
+  height: 62%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+.jw-gateway .jw-gateway__portal--jobseekers {
+  left: 20.3%;
+  right: auto;
+  width: 27.2%;
+}
+
+.jw-gateway .jw-gateway__portal--business {
+  left: 48.2%;
+  right: auto;
+  width: 31.3%;
+}
+
+.jw-gateway .jw-gateway__portal-image {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+/* 左素材の余分な右面だけを除外 */
+
+.jw-gateway
+.jw-gateway__portal--jobseekers
+.jw-gateway__portal-image {
+  width: 157.36%;
+  clip-path: inset(0 36.45% 0 0);
+}
+
+/* 人物：左右共通の高さ・足元。画像の縦横比を維持 */
+
+.jw-gateway .jw-gateway__people {
+  position: absolute;
+  z-index: 2;
+  bottom: var(--jw-people-bottom);
+  display: block;
+  width: auto;
+  height: var(--jw-people-height);
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  transform: none;
+  filter: drop-shadow(
+    0 .45cqh .28cqw rgba(0, 40, 74, .24)
+  );
+  pointer-events: none;
+}
+
+/* 左の筆記体を避け、人物を開口部側へ */
+
+.jw-gateway .jw-gateway__people--jobseekers {
+  left: auto;
+  right: 5%;
+}
+
+/* 右の装飾文字を避け、人物をガラス側へ */
+
+.jw-gateway .jw-gateway__people--business {
+  left: 3%;
+  right: auto;
+}
+
+/* コピー：左右の上端と横幅を統一 */
+
+.jw-gateway .jw-gateway__portal-copy {
+  position: absolute;
+  z-index: 3;
+  top: var(--jw-copy-top);
+  left: 11%;
+  width: var(--jw-copy-width);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  text-align: left;
+}
+
+/* 斜めの上端とガラス面を避ける */
+
+.jw-gateway
+.jw-gateway__portal--business
+.jw-gateway__portal-copy {
+  left: auto;
+  right: 5%;
+}
+
+.jw-gateway .jw-gateway__portal-title {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: min(1.32cqw, 2.35cqh);
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0;
+  overflow: visible;
+  text-shadow: 0 1px 2px rgba(0, 53, 135, .12);
+}
+
+.jw-gateway .jw-gateway__title-line {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.jw-gateway .jw-gateway__portal-en {
+  margin: .7cqh 0 1.35cqh;
+  padding: 0;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: min(.62cqw, 1.1cqh);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0;
+  white-space: normal;
+  overflow-wrap: normal;
+}
+
+/* CTA：ラベルと矢印の領域を分離 */
+
+.jw-gateway .jw-gateway__button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .45cqw;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: 5.8cqh;
+  margin: 0;
+  padding: .45cqh .4cqw .45cqh 1cqw;
+  border: 0;
+  border-radius: 999px;
+  color: #0075ee;
+  background: #fff;
+  box-shadow: 0 .6cqh .85cqw rgba(0, 47, 131, .16);
+  font-family: inherit;
+  font-size: min(.88cqw, 1.6cqh);
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+}
+
+.jw-gateway .jw-gateway__button-label {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+
+.jw-gateway .jw-gateway__button-label-part {
+  display: inline-block;
+}
+
+.jw-gateway .jw-gateway__button-arrow {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 4.7cqh;
+  height: 4.7cqh;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, #05bbff, #006ef4);
+  font-family: Arial, sans-serif;
+  font-size: 2.8cqh;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.jw-gateway .jw-gateway__button:hover {
+  color: #0075ee;
+  background: #edf8ff;
+}
+
+.jw-gateway .jw-gateway__button:focus-visible {
+  outline: 3px solid #00cfff;
+  outline-offset: 3px;
+}
+
+/* 右下コピー */
+
+.jw-gateway .jw-gateway__side-copy {
+  position: absolute;
+  z-index: 6;
+  right: 3%;
+  bottom: 8%;
+  margin: 0;
+  color: #062858;
+  font-size: .8cqw;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.jw-gateway .jw-gateway__side-line {
+  display: block;
+  width: 1.8cqw;
+  height: 1px;
+  margin-top: 1cqh;
+  background: #4066ad;
+}
+
+/* 縦画面 */
+
+@media (max-aspect-ratio: 1/1) {
+  .jw-gateway {
+    --jw-word-top: 25%;
+    --jw-word-height: 56.9402%;
+    --jw-ground-top: 80.01%;
+    --jw-copy-top: 25%;
+    --jw-copy-width: 36cqw;
+  }
+
+  .jw-gateway .jw-gateway__brand-logo {
+    width: 28cqw;
+    max-height: 6cqh;
+  }
+
+  .jw-gateway .jw-gateway__tagline,
+  .jw-gateway .jw-gateway__side-copy {
+    display: none;
+  }
+
+  .jw-gateway .jw-gateway__intro {
+    top: 11%;
+  }
+
+  .jw-gateway .jw-gateway__title {
+    font-size: 6.5cqw;
+  }
+
+  .jw-gateway .jw-gateway__lead {
+    font-size: 1.65cqw;
+    letter-spacing: .17em;
+  }
+
+  .jw-gateway .jw-gateway__city {
+    top: 23%;
+    height: 40%;
+    opacity: .65;
+  }
+
+  .jw-gateway .jw-gateway__portal {
+    top: 32%;
+    width: 43%;
+    height: 55%;
+  }
+
+  .jw-gateway .jw-gateway__portal--jobseekers {
+    left: 4%;
+    right: auto;
+  }
+
+  .jw-gateway .jw-gateway__portal--business {
+    left: auto;
+    right: 4%;
+  }
+
+  .jw-gateway .jw-gateway__portal-copy,
+  .jw-gateway
+  .jw-gateway__portal--business
+  .jw-gateway__portal-copy {
+    top: var(--jw-copy-top);
+    left: 8%;
+    right: auto;
+    width: var(--jw-copy-width);
+  }
+
+  .jw-gateway .jw-gateway__portal-title {
+    font-size: 2.75cqw;
+    line-height: 1.4;
+  }
+
+  .jw-gateway .jw-gateway__portal-en {
+    min-height: 2.6em;
+    margin: .6cqh 0 1cqh;
+    font-size: 1.45cqw;
+    line-height: 1.3;
+  }
+
+  .jw-gateway .jw-gateway__button {
+    height: 4.8cqh;
+    gap: 1cqw;
+    padding: .4cqh 1cqw .4cqh 2cqw;
+    font-size: 2.3cqw;
+  }
+
+  .jw-gateway .jw-gateway__button-arrow {
+    width: 5.5cqw;
+    height: 5.5cqw;
+    font-size: 4cqw;
+  }
+
+  .jw-gateway .jw-gateway__people {
+    width: auto;
+    height: min(32cqw, 34%);
+    bottom: 2%;
+  }
+
+  .jw-gateway .jw-gateway__people--jobseekers {
+    left: auto;
+    right: 3%;
+  }
+
+  .jw-gateway .jw-gateway__people--business {
+    left: 2%;
+    right: auto;
+  }
+
+  .jw-gateway .jw-gateway__cast--left::before {
+    clip-path: polygon(
+      4% 87%,
+      31% 80%,
+      23% 100%,
+      0 100%
+    );
+  }
+
+  .jw-gateway .jw-gateway__cast--right::before {
+    clip-path: polygon(
+      73% 80%,
+      96% 87%,
+      100% 100%,
+      82% 100%
+    );
+  }
+
+  .jw-gateway .jw-gateway__cast--people-left::before {
+    clip-path: polygon(
+      28% 83%,
+      44% 83%,
+      48% 100%,
+      18% 100%
+    );
+  }
+
+  .jw-gateway .jw-gateway__cast--people-right::before {
+    clip-path: polygon(
+      54% 84%,
+      78% 84%,
+      91% 100%,
+      59% 100%
+    );
+  }
+}

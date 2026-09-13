@@ -1,5 +1,6 @@
 class Recruit < ApplicationRecord
   belongs_to :client, optional: true
+  has_many :recruit_saves, class_name: "RecruitSave", dependent: :destroy, inverse_of: :recruit
 
   serialize :visa, Array
   serialize :visa_en, Array
@@ -12,6 +13,12 @@ class Recruit < ApplicationRecord
 
   def visa_for_display
     Array(visa_en.presence || visa)
+  end
+
+  def saved_by?(visitor_token)
+    return false if visitor_token.blank?
+
+    recruit_saves.exists?(visitor_token: visitor_token)
   end
 
   private

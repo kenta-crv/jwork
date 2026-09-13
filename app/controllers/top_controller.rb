@@ -1,4 +1,6 @@
 class TopController < ApplicationController
+  layout :resolve_layout
+
   def index
   end
 
@@ -53,4 +55,10 @@ class TopController < ApplicationController
     HTML
   end
 =end
+
+  private
+
+  def resolve_layout
+    action_name == "index" ? "pages" : "application"
+  end
 end
