@@ -92,21 +92,13 @@
         = link_to 'ご利用の流れ', '#flow', class: 'jf-nav__link'
         = link_to 'よくあるご質問', '#faq', class: 'jf-nav__link'
 
-      .jf-split-cta
-        button.jf-split-cta__mail type="button" data-open-contact="true"
-          span.jf-contact-button__icon aria-hidden="true"
-            svg.jf-ico
-              use href="#jf-i-mail"
-          span.jf-contact-button__copy
-            strong メールで依頼する
-            small 情報を入力
-        = link_to line_consult_url, class: 'jf-split-cta__line', target: '_blank', rel: 'noopener noreferrer' do
-          span.jf-contact-button__icon aria-hidden="true"
-            svg.jf-ico.jf-ico--solid
-              use href="#jf-i-line"
-          span.jf-contact-button__copy
-            strong LINEで相談する
-            small 友だち追加はこちら
+      button.jf-contact-button.jf-contact-button--header type="button" data-open-contact="true"
+        span.jf-contact-button__icon aria-hidden="true"
+          svg.jf-ico
+            use href="#jf-i-mail"
+        span.jf-contact-button__copy
+          strong メールで依頼する
+          small 情報を入力
 
   main
     section#top.jf-hero
@@ -742,68 +734,98 @@
       .jf-modal__panel
         button.jf-modal__close type="button" data-close-contact="true" aria-label="閉じる" ×
         p.jf-modal__kicker JOB
-        h2.jf-modal__title 求人登録
-        p.jf-modal__lead まずはお気軽に求人登録。当社で審査したあと、通過したものだけ公開します。お支払いは審査通過後にご案内します。
-        - if params[:sent] == '1'
-          p.jf-form-success 求人を受け付けました。審査のうえ、担当よりご連絡します。
+        header.jf-modal__head
+          - if params[:sent] == '1'
+            h2.jf-modal__title 送信が完了しました
+            p.jf-modal__lead 内容を info@j-work.jp に通知しました。
+          - else
+            h2.jf-modal__title 求人登録
+            p.jf-modal__lead ヒアリングは無料です。必須項目を入れるとメールとLINEから依頼できます。
+          ol.jf-quote-steps
+            li.jf-quote-steps__item class=(params[:sent] == '1' ? 'is-done' : 'is-current')
+              span 1
+              | 条件を入力
+            li.jf-quote-steps__item class=('is-done' if params[:sent] == '1')
+              span 2
+              | 内容を確認
+            li.jf-quote-steps__item class=(params[:sent] == '1' ? 'is-current' : nil)
+              span 3
+              | メール／LINEで依頼
         - if params[:error] == '1'
           p.jf-form-error 送信に失敗しました。入力内容をご確認のうえ、再度お試しください。
-        = form_with model: @contract, url: contracts_path, local: true, html: { class: 'jf-form', id: 'foreign-jobs-contact' } do |f|
-          = f.hidden_field :origin, value: request.path
-          .jf-form__grid
-            .jf-form__field
-              label.jf-form__label
-                | 会社名
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.text_field :company, class: 'jf-form__input', placeholder: '株式会社〇〇〇〇', required: true
-            .jf-form__field
-              label.jf-form__label
-                | ご担当者様名
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.text_field :name, class: 'jf-form__input', placeholder: '山田太郎', required: true
-            .jf-form__field
-              label.jf-form__label
-                | 電話番号
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.telephone_field :tel, class: 'jf-form__input', placeholder: '050-1234-5678', required: true
-            .jf-form__field
-              label.jf-form__label
-                | メールアドレス
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.email_field :email, class: 'jf-form__input', placeholder: 'test@example.com', required: true
-            .jf-form__field
-              label.jf-form__label
-                | 住所
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.text_field :address, class: 'jf-form__input', placeholder: '東京都港区浜松町２丁目２番１５号２Ｆ', required: true
-            .jf-form__field
-              label.jf-form__label
-                | URL
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.url_field :url, class: 'jf-form__input', placeholder: 'https://example.com/', required: true
-            .jf-form__field
-              label.jf-form__label
-                | 職種
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.text_field :period, class: 'jf-form__input', placeholder: '例：ホールスタッフ', required: true
-            .jf-form__field
-              label.jf-form__label
-                | 勤務地
-                span.jf-form__badge.jf-form__badge--required 必須
-              input.jf-form__input type="text" name="job_place" placeholder="例：東京都港区" required="required" data-job-field="勤務地"
-            .jf-form__field
-              label.jf-form__label
-                | 給与
-                span.jf-form__badge.jf-form__badge--required 必須
-              input.jf-form__input type="text" name="job_pay" placeholder="例：時給1,200円〜" required="required" data-job-field="給与"
-            input type="hidden" name="job_plan" value="成果報酬プラン" data-job-field="課金プラン"
-            .jf-form__field.jf-form__field--full
-              label.jf-form__label
-                | 求人内容
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.text_area :message, class: 'jf-form__input jf-form__input--area', placeholder: '勤務時間、仕事内容、応募条件、人数など', required: true
-          .jf-form__actions
-            = f.submit '求人を登録する', class: 'jf-form__submit'
+        - if params[:sent] == '1'
+          .jf-form-success
+            p.jf-form-success__title 担当者へ通知済みです
+            p.jf-form-success__body
+              | ご入力内容を
+              a href="mailto:info@j-work.jp" info@j-work.jp
+              | に通知しました。
+              - if params[:via] == 'line'
+                | 続いて公式LINEの友だち追加へ進みます。
+            - if params[:via] == 'line'
+              = link_to line_consult_url, class: 'jf-contact-button jf-contact-button--line', data: { turbolinks: false } do
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico.jf-ico--solid
+                    use href="#jf-i-line"
+                span.jf-contact-button__copy
+                  strong LINEで友だち追加
+                  small 通知済みの内容でご案内します
+        - else
+          = form_with model: @contract, url: contracts_path, local: true, html: { class: 'jf-form', id: 'foreign-jobs-contact' } do |f|
+            = f.hidden_field :origin, value: request.path
+            .jf-form__grid
+              .jf-form__field
+                label.jf-form__label
+                  | 会社名
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.text_field :company, class: 'jf-form__input', placeholder: '株式会社〇〇〇〇', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | ご担当者様名
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.text_field :name, class: 'jf-form__input', placeholder: '山田太郎', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | 電話番号
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.telephone_field :tel, class: 'jf-form__input', placeholder: '050-1234-5678', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | メールアドレス
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.email_field :email, class: 'jf-form__input', placeholder: 'test@example.com', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | 住所
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.text_field :address, class: 'jf-form__input', placeholder: '東京都港区浜松町２丁目２番１５号２Ｆ', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | 求人URL
+                  span.jf-form__badge.jf-form__badge--optional 任意
+                = f.url_field :url, class: 'jf-form__input', placeholder: 'https://example.com/'
+              .jf-form__field.jf-form__field--full
+                label.jf-form__label
+                  | 備考・要望
+                  span.jf-form__badge.jf-form__badge--optional 任意
+                = f.text_area :message, class: 'jf-form__input jf-form__input--area', placeholder: '職種・勤務地・給与・人数など', rows: '3'
+            .jf-form__actions
+              button#jf-form-mail.jf-contact-button.jf-form__submit.is-disabled type="submit" name="contact_via" value="mail" disabled="disabled" aria-disabled="true"
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico
+                    use href="#jf-i-mail"
+                span.jf-contact-button__copy
+                  strong メールで依頼する
+                  small 情報を入力
+              button#jf-form-line.jf-contact-button.jf-contact-button--line.jf-form__line.is-disabled type="submit" name="contact_via" value="line" disabled="disabled" aria-disabled="true"
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico.jf-ico--solid
+                    use href="#jf-i-line"
+                span.jf-contact-button__copy
+                  strong LINEで依頼する
+                  small 情報を入力
+              p#jf-form-submit-hint.jf-form__submit-hint 必須項目を入力すると送信できます。
+              p.jf-form__line-note 送信すると内容を保存し、info@j-work.jp へ通知します。LINEの場合は完了後に友だち追加へ進みます。
 
     section#contact.jf-cta
       .jf-container.jf-cta__inner
@@ -820,13 +842,13 @@
                 span.jf-contact-button__copy
                   strong メールで依頼する
                   small 情報を入力
-              = link_to line_consult_url, class: 'jf-split-cta__line', target: '_blank', rel: 'noopener noreferrer' do
+              button.jf-split-cta__line type="button" data-open-contact="true"
                 span.jf-contact-button__icon aria-hidden="true"
                   svg.jf-ico.jf-ico--solid
                     use href="#jf-i-line"
                 span.jf-contact-button__copy
-                  strong LINEで相談する
-                  small 友だち追加はこちら
+                  strong LINEで依頼する
+                  small 情報を入力
         ul.jf-cta__benefits
           li
             span.jf-cta__benefit-icon aria-hidden="true"
@@ -890,12 +912,23 @@
       if (!modal) return;
       function openModal(e) {
         if (e) e.preventDefault();
-        if (typeof modal.showModal === 'function') modal.showModal();
-        else modal.setAttribute('open', '');
+        try {
+          if (typeof modal.showModal === 'function') {
+            if (!modal.open) modal.showModal();
+          } else {
+            modal.setAttribute('open', '');
+          }
+        } catch (err) {
+          modal.setAttribute('open', '');
+        }
       }
       function closeModal() {
-        if (typeof modal.close === 'function') modal.close();
-        else modal.removeAttribute('open');
+        try {
+          if (typeof modal.close === 'function' && modal.open) modal.close();
+          else modal.removeAttribute('open');
+        } catch (err) {
+          modal.removeAttribute('open');
+        }
       }
       document.querySelectorAll('[data-open-contact]').forEach(function (el) {
         el.addEventListener('click', openModal);
@@ -906,19 +939,31 @@
         if (e.target === modal) closeModal();
       });
       if (#{(params[:error].to_s == '1' || params[:sent].to_s == '1').to_json}) openModal();
-      var form = document.getElementById('foreign-jobs-contact');
-      if (form) {
-        form.addEventListener('submit', function () {
-          var extras = [];
-          var period = form.querySelector('[name="contract[period]"]');
-          if (period && period.value) extras.push('職種: ' + period.value);
-          form.querySelectorAll('[data-job-field]').forEach(function (el) {
-            if (el.value) extras.push(el.getAttribute('data-job-field') + ': ' + el.value);
-          });
-          var msg = form.querySelector('[name="contract[message]"]');
-          if (msg && extras.length) {
-            msg.value = extras.join('\n') + (msg.value ? '\n' + msg.value : '');
-          }
+      var contactForm = document.getElementById('foreign-jobs-contact');
+      var mailBtn = document.getElementById('jf-form-mail');
+      var lineBtn = document.getElementById('jf-form-line');
+      var submitHint = document.getElementById('jf-form-submit-hint');
+      function setSubmitEnabled(on) {
+        [mailBtn, lineBtn].forEach(function (btn) {
+          if (!btn) return;
+          btn.disabled = !on;
+          btn.setAttribute('aria-disabled', on ? 'false' : 'true');
+          btn.classList.toggle('is-disabled', !on);
         });
+        if (submitHint) submitHint.hidden = !!on;
       }
+      function updateSubmitState() {
+        if (!contactForm) return;
+        var names = ['contract[company]', 'contract[name]', 'contract[tel]', 'contract[email]', 'contract[address]'];
+        var ready = names.every(function (name) {
+          var el = contactForm.elements[name];
+          return el && String(el.value || '').trim();
+        });
+        setSubmitEnabled(ready);
+      }
+      if (contactForm) {
+        contactForm.addEventListener('input', updateSubmitState);
+        contactForm.addEventListener('change', updateSubmitState);
+      }
+      updateSubmitState();
     })();

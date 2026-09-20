@@ -405,6 +405,14 @@
   overflow-wrap: normal;
 }
 
+.jw-gateway .jw-gateway__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: .7cqh;
+  width: 100%;
+  min-width: 0;
+}
+
 /* CTA：ラベルと矢印の領域を分離 */
 
 .jw-gateway .jw-gateway__button {

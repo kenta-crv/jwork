@@ -1,5 +1,6 @@
 - set_meta_tags title: '外国人材の斡旋ならJ Work｜企業向け人材手配'
 - set_meta_tags description: '外国人材をお探しの企業様へ。登録者約4,000名の人材力で、全国へ継続して斡旋。単発のみは対象外。無料見積もりで最短ご案内します。'
+- line_consult_url = 'https://lin.ee/NZBWRrsD'
 
 .jw-foreign-lp
   svg.jf-icon-sprite xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
@@ -809,155 +810,188 @@
       .jf-modal__panel
         button.jf-modal__close type="button" data-close-contact="true" aria-label="閉じる" ×
         p.jf-modal__kicker REQUEST
-        h2.jf-modal__title 無料ご依頼
-        p.jf-modal__lead ご依頼は無料です。人数や条件はLINEまたはメールでお伺いします。内容が決まりましたら、担当からお支払いをご案内します。
-        - if params[:sent] == '1'
-          p.jf-form-success ご依頼を受け付けました。担当よりご連絡します。
+        header.jf-modal__head
+          - if params[:sent] == '1'
+            h2.jf-modal__title 送信が完了しました
+            p.jf-modal__lead 内容を info@j-work.jp に通知しました。
+          - else
+            h2.jf-modal__title 無料ご依頼
+            p.jf-modal__lead ヒアリング・お見積りは無料です。必須項目を入れるとメールとLINEから依頼できます。
+          ol.jf-quote-steps
+            li.jf-quote-steps__item class=(params[:sent] == '1' ? 'is-done' : 'is-current')
+              span 1
+              | 条件を入力
+            li.jf-quote-steps__item class=('is-done' if params[:sent] == '1')
+              span 2
+              | 内容を確認
+            li.jf-quote-steps__item class=(params[:sent] == '1' ? 'is-current' : nil)
+              span 3
+              | メール／LINEで依頼
         - if params[:error] == '1'
           p.jf-form-error 送信に失敗しました。入力内容をご確認のうえ、再度お試しください。
-        = form_with model: @contract, url: contracts_path, local: true, html: { class: 'jf-form', id: 'foreign-staffing-contact' } do |f|
-          = f.hidden_field :origin, value: request.path
-          .jf-form__grid
-            .jf-form__field
-              label.jf-form__label
-                | 会社名
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.text_field :company, class: 'jf-form__input', placeholder: '株式会社〇〇〇〇', required: true
-            .jf-form__field
-              label.jf-form__label
-                | ご担当者様名
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.text_field :name, class: 'jf-form__input', placeholder: '山田太郎', required: true
-            .jf-form__field
-              label.jf-form__label
-                | 電話番号
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.telephone_field :tel, class: 'jf-form__input', placeholder: '050-1234-5678', required: true
-            .jf-form__field
-              label.jf-form__label
-                | メールアドレス
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.email_field :email, class: 'jf-form__input', placeholder: 'test@example.com', required: true
-            .jf-form__field
-              label.jf-form__label
-                | 住所
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.text_field :address, class: 'jf-form__input', placeholder: '東京都港区浜松町２丁目２番１５号２Ｆ', required: true
-            .jf-form__field
-              label.jf-form__label
-                | URL
-                span.jf-form__badge.jf-form__badge--required 必須
-              = f.url_field :url, class: 'jf-form__input', placeholder: 'https://example.com/', required: true
-            .jf-form__field
-              label.jf-form__label
-                | 希望人数
-                span.jf-form__badge.jf-form__badge--required 必須
-              select#jf-wish-people.jf-form__input name="wish_people" required="required" data-staff-field="希望人数"
-                option value="" 選択してください
-                option value="1名" 1名
-                option value="2名" 2名
-                option value="3名" 3名
-                option value="4名" 4名
-                option value="5名" 5名
-                option value="6名" 6名
-                option value="7名" 7名
-                option value="8名" 8名
-                option value="9名" 9名
-                option value="10名" 10名
-            .jf-form__field
-              label.jf-form__label
-                | 希望週日数
-                span.jf-form__badge.jf-form__badge--required 必須
-              .jf-pick
-                input#jf-wish-days type="hidden" name="wish_days" required="required" data-staff-field="希望週日数" value=""
-                button.jf-pick__btn type="button" aria-haspopup="listbox"
-                  span.jf-pick__value 選択してください
-                ul.jf-pick__list role="listbox"
-                  li.jf-pick__item.jf-pick__item--off
-                    | 週1日
-                    span.jf-pick__tip 短期の対応は行なっておりません。
-                  li.jf-pick__item data-value="2" 週2日
-                  li.jf-pick__item data-value="3" 週3日
-                  li.jf-pick__item data-value="4" 週4日
-                  li.jf-pick__item data-value="5" 週5日
-                  li.jf-pick__item data-value="6" 週6日
-                  li.jf-pick__item data-value="7" 週7日
-            .jf-form__field
-              label.jf-form__label
-                | 希望時間
-                span.jf-form__badge.jf-form__badge--required 必須
-              .jf-pick
-                input#jf-wish-hours type="hidden" name="wish_hours" required="required" data-staff-field="希望時間" value=""
-                button.jf-pick__btn type="button" aria-haspopup="listbox"
-                  span.jf-pick__value 選択してください
-                ul.jf-pick__list role="listbox"
-                  li.jf-pick__item.jf-pick__item--off
-                    | 1日1時間
-                    span.jf-pick__tip 短期の対応は行なっておりません。
-                  li.jf-pick__item.jf-pick__item--off
-                    | 1日2時間
-                    span.jf-pick__tip 短期の対応は行なっておりません。
-                  li.jf-pick__item.jf-pick__item--off
-                    | 1日3時間
-                    span.jf-pick__tip 短期の対応は行なっておりません。
-                  li.jf-pick__item data-value="4" 1日4時間
-                  li.jf-pick__item data-value="5" 1日5時間
-                  li.jf-pick__item data-value="6" 1日6時間
-                  li.jf-pick__item data-value="7" 1日7時間
-                  li.jf-pick__item data-value="8" 1日8時間
-            .jf-form__field.jf-form__field--full
-              label.jf-form__label
-                | 希望期間
-                span.jf-form__badge.jf-form__badge--required 必須
-              .jf-pick
-                input#jf-wish-term type="hidden" name="wish_term" required="required" data-staff-field="希望期間" value=""
-                button.jf-pick__btn type="button" aria-haspopup="listbox"
-                  span.jf-pick__value 選択してください
-                ul.jf-pick__list role="listbox"
-                  li.jf-pick__item.jf-pick__item--off
-                    | 1日
-                    span.jf-pick__tip 短期の対応は行なっておりません。
-                  li.jf-pick__item.jf-pick__item--off
-                    | 1ヶ月
-                    span.jf-pick__tip 短期の対応は行なっておりません。
-                  li.jf-pick__item data-value="3ヶ月" 3ヶ月
-                  li.jf-pick__item data-value="長期" 長期（6ヶ月以降）
-            #jf-form-quote.jf-form-quote hidden="hidden"
-              p.jf-form-quote__label ご希望条件の料金目安
-              label.jf-form__label for="jf-form-pref"
-                span 都道府県
-              select#jf-form-pref.jf-form__input
-                option value="" 全国（最安値）
-              p.jf-price__base
-                span.jf-price__campaign キャンペーン価格
-                span.jf-price__base-copy
-                  | ベースは最安値で
-                  s#jf-form-price-list —
-                  strong#jf-form-price-amount —
-                  | 円〜／時間
-                small#jf-form-price-note （全国）
-            p#jf-form-quote-note.jf-form-quote-note hidden="hidden"
-              | 週2日以下・1日4時間以下の場合は料金目安を表示します。それ以外は内容確認のうえお見積りします。
-            .jf-form__field.jf-form__field--full
-              label.jf-form__label
-                | 備考・要望
-                span.jf-form__badge.jf-form__badge--optional 任意
-              = f.text_area :message, class: 'jf-form__input jf-form__input--area', placeholder: 'ご希望の人数・業種・エリアなど'
-          .jf-form__actions
-            button.jf-contact-button.jf-form__submit type="submit" name="contact_via" value="mail"
-              span.jf-contact-button__icon aria-hidden="true"
-                svg.jf-ico
-                  use href="#jf-i-mail"
-              span.jf-contact-button__copy
-                strong メールで依頼する
-                small 情報を入力
-            button.jf-contact-button.jf-contact-button--line.jf-form__line type="submit" name="contact_via" value="line"
-              span.jf-contact-button__icon aria-hidden="true"
-                svg.jf-ico.jf-ico--solid
-                  use href="#jf-i-line"
-              span.jf-contact-button__copy
-                strong LINEで依頼する
-                small 情報を入力
+        - if params[:sent] == '1'
+          .jf-form-success
+            p.jf-form-success__title 担当者へ通知済みです
+            p.jf-form-success__body
+              | ご入力内容を
+              a href="mailto:info@j-work.jp" info@j-work.jp
+              | に通知しました。
+              - if params[:via] == 'line'
+                | 続いて公式LINEの友だち追加へ進みます。
+            - if params[:via] == 'line'
+              = link_to line_consult_url, class: 'jf-contact-button jf-contact-button--line', data: { turbolinks: false } do
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico.jf-ico--solid
+                    use href="#jf-i-line"
+                span.jf-contact-button__copy
+                  strong LINEで友だち追加
+                  small 通知済みの内容でご案内します
+        - else
+          = form_with model: @contract, url: contracts_path, local: true, html: { class: 'jf-form', id: 'foreign-staffing-contact' } do |f|
+            = f.hidden_field :origin, value: request.path
+            .jf-form__grid
+              .jf-form__field
+                label.jf-form__label
+                  | 会社名
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.text_field :company, class: 'jf-form__input', placeholder: '株式会社〇〇〇〇', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | ご担当者様名
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.text_field :name, class: 'jf-form__input', placeholder: '山田太郎', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | 電話番号
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.telephone_field :tel, class: 'jf-form__input', placeholder: '050-1234-5678', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | メールアドレス
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.email_field :email, class: 'jf-form__input', placeholder: 'test@example.com', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | 住所
+                  span.jf-form__badge.jf-form__badge--required 必須
+                = f.text_field :address, class: 'jf-form__input', placeholder: '東京都港区浜松町２丁目２番１５号２Ｆ', required: true
+              .jf-form__field
+                label.jf-form__label
+                  | 求人URL
+                  span.jf-form__badge.jf-form__badge--optional 任意
+                = f.url_field :url, class: 'jf-form__input', placeholder: 'https://example.com/'
+              .jf-form__field
+                label.jf-form__label
+                  | 希望人数
+                  span.jf-form__badge.jf-form__badge--required 必須
+                select#jf-wish-people.jf-form__input name="wish_people" required="required" data-staff-field="希望人数"
+                  option value="" 選択してください
+                  option value="1名" 1名
+                  option value="2名" 2名
+                  option value="3名" 3名
+                  option value="4名" 4名
+                  option value="5名" 5名
+                  option value="6名" 6名
+                  option value="7名" 7名
+                  option value="8名" 8名
+                  option value="9名" 9名
+                  option value="10名" 10名
+              .jf-form__field
+                label.jf-form__label
+                  | 希望週日数
+                  span.jf-form__badge.jf-form__badge--required 必須
+                .jf-pick
+                  input#jf-wish-days type="hidden" name="wish_days" required="required" data-staff-field="希望週日数" value=""
+                  button.jf-pick__btn type="button" aria-haspopup="listbox"
+                    span.jf-pick__value 選択してください
+                  ul.jf-pick__list role="listbox"
+                    li.jf-pick__item.jf-pick__item--off
+                      | 週1日
+                      span.jf-pick__tip 短期の対応は行なっておりません。
+                    li.jf-pick__item data-value="2" 週2日
+                    li.jf-pick__item data-value="3" 週3日
+                    li.jf-pick__item data-value="4" 週4日
+                    li.jf-pick__item data-value="5" 週5日
+                    li.jf-pick__item data-value="6" 週6日
+                    li.jf-pick__item data-value="7" 週7日
+              .jf-form__field
+                label.jf-form__label
+                  | 希望時間
+                  span.jf-form__badge.jf-form__badge--required 必須
+                .jf-pick
+                  input#jf-wish-hours type="hidden" name="wish_hours" required="required" data-staff-field="希望時間" value=""
+                  button.jf-pick__btn type="button" aria-haspopup="listbox"
+                    span.jf-pick__value 選択してください
+                  ul.jf-pick__list role="listbox"
+                    li.jf-pick__item.jf-pick__item--off
+                      | 1日1時間
+                      span.jf-pick__tip 短期の対応は行なっておりません。
+                    li.jf-pick__item.jf-pick__item--off
+                      | 1日2時間
+                      span.jf-pick__tip 短期の対応は行なっておりません。
+                    li.jf-pick__item.jf-pick__item--off
+                      | 1日3時間
+                      span.jf-pick__tip 短期の対応は行なっておりません。
+                    li.jf-pick__item data-value="4" 1日4時間
+                    li.jf-pick__item data-value="5" 1日5時間
+                    li.jf-pick__item data-value="6" 1日6時間
+                    li.jf-pick__item data-value="7" 1日7時間
+                    li.jf-pick__item data-value="8" 1日8時間
+              .jf-form__field.jf-form__field--full
+                label.jf-form__label
+                  | 希望期間
+                  span.jf-form__badge.jf-form__badge--required 必須
+                .jf-pick
+                  input#jf-wish-term type="hidden" name="wish_term" required="required" data-staff-field="希望期間" value=""
+                  button.jf-pick__btn type="button" aria-haspopup="listbox"
+                    span.jf-pick__value 選択してください
+                  ul.jf-pick__list role="listbox"
+                    li.jf-pick__item.jf-pick__item--off
+                      | 1日
+                      span.jf-pick__tip 短期の対応は行なっておりません。
+                    li.jf-pick__item.jf-pick__item--off
+                      | 1ヶ月
+                      span.jf-pick__tip 短期の対応は行なっておりません。
+                    li.jf-pick__item data-value="3ヶ月" 3ヶ月
+                    li.jf-pick__item data-value="長期" 長期（6ヶ月以降）
+              #jf-form-quote.jf-form-quote
+                p.jf-form-quote__label ご希望条件の料金目安
+                label.jf-form__label for="jf-form-pref"
+                  span 都道府県
+                select#jf-form-pref.jf-form__input
+                  option value="" 全国（最安値）
+                p.jf-price__base
+                  span.jf-price__campaign キャンペーン価格
+                  span.jf-price__base-copy
+                    | ベースは最安値で
+                    s#jf-form-price-list —
+                    strong#jf-form-price-amount —
+                    | 円〜／時間
+                  small#jf-form-price-note （全国）
+              p#jf-form-quote-note.jf-form-quote-note hidden="hidden"
+                | 週日数と希望時間を選ぶと、料金目安を表示します。
+              .jf-form__field.jf-form__field--full
+                label.jf-form__label
+                  | 備考・要望
+                  span.jf-form__badge.jf-form__badge--optional 任意
+                = f.text_area :message, class: 'jf-form__input jf-form__input--area', placeholder: 'ご希望の人数・業種・エリアなど', rows: '3'
+            .jf-form__actions
+              button#jf-form-mail.jf-contact-button.jf-form__submit.is-disabled type="submit" name="contact_via" value="mail" disabled="disabled" aria-disabled="true"
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico
+                    use href="#jf-i-mail"
+                span.jf-contact-button__copy
+                  strong メールで依頼する
+                  small 情報を入力
+              button#jf-form-line.jf-contact-button.jf-contact-button--line.jf-form__line.is-disabled type="submit" name="contact_via" value="line" disabled="disabled" aria-disabled="true"
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico.jf-ico--solid
+                    use href="#jf-i-line"
+                span.jf-contact-button__copy
+                  strong LINEで依頼する
+                  small 情報を入力
+              p#jf-form-submit-hint.jf-form__submit-hint 必須項目を入力すると送信できます。
+              p.jf-form__line-note 送信すると内容を保存し、info@j-work.jp へ通知します。LINEの場合は完了後に友だち追加へ進みます。
 
     section#contact.jf-cta
       .jf-container.jf-cta__inner
@@ -1091,11 +1125,34 @@
           pick.classList.remove('is-open');
         });
       });
-      var form = document.getElementById('foreign-staffing-contact');
-      if (form) {
-        form.addEventListener('submit', function () {
+      var contactForm = document.getElementById('foreign-staffing-contact');
+      var mailBtn = document.getElementById('jf-form-mail');
+      var lineBtn = document.getElementById('jf-form-line');
+      var submitHint = document.getElementById('jf-form-submit-hint');
+      function setSubmitEnabled(on) {
+        [mailBtn, lineBtn].forEach(function (btn) {
+          if (!btn) return;
+          btn.disabled = !on;
+          btn.setAttribute('aria-disabled', on ? 'false' : 'true');
+          btn.classList.toggle('is-disabled', !on);
+        });
+        if (submitHint) submitHint.hidden = !!on;
+      }
+      function updateSubmitState() {
+        if (!contactForm) return;
+        var names = ['contract[company]', 'contract[name]', 'contract[tel]', 'contract[email]', 'contract[address]', 'wish_people', 'wish_days', 'wish_hours', 'wish_term'];
+        var ready = names.every(function (name) {
+          var el = contactForm.elements[name];
+          return el && String(el.value || '').trim();
+        });
+        setSubmitEnabled(ready);
+      }
+      if (contactForm) {
+        contactForm.addEventListener('input', updateSubmitState);
+        contactForm.addEventListener('change', updateSubmitState);
+        contactForm.addEventListener('submit', function () {
           var extras = [];
-          form.querySelectorAll('[data-staff-field]').forEach(function (el) {
+          contactForm.querySelectorAll('[data-staff-field]').forEach(function (el) {
             var label = el.getAttribute('data-staff-field');
             var text = el.value;
             if (el.tagName === 'SELECT' && el.selectedIndex >= 0) {
@@ -1113,12 +1170,13 @@
           if (quoteEl && !quoteEl.hidden && formAmount && formAmount.textContent && formAmount.textContent !== '—') {
             extras.push('料金目安: ' + formAmount.textContent + '円〜／時間');
           }
-          var msg = form.querySelector('[name="contract[message]"]');
+          var msg = contactForm.querySelector('[name="contract[message]"]');
           if (msg && extras.length) {
             msg.value = extras.join('\n') + (msg.value ? '\n' + msg.value : '');
           }
         });
       }
+      updateSubmitState();
     })();
 
     (function () {
@@ -1261,28 +1319,25 @@
           formPref.appendChild(opt);
         });
       }
+      function planFromWish(days, hours) {
+        if (days >= 5 && hours >= 8) return 'fulltime';
+        if (days >= 3 && hours >= 5) return 'standard';
+        if (days >= 2 && hours >= 4) return 'light';
+        return null;
+      }
       function updateFormQuote() {
-        if (!daysEl || !hoursEl || !quoteEl || !quoteNote) return;
-        var days = parseInt(daysEl.value, 10);
-        var hours = parseInt(hoursEl.value, 10);
-        if (!days || !hours) {
-          quoteEl.hidden = true;
-          quoteNote.hidden = true;
-          return;
-        }
-        if (days <= 2 && hours <= 4) {
-          quoteEl.hidden = false;
-          quoteNote.hidden = true;
-          var wage = formPref && formPref.value ? parseInt(formPref.value, 10) : minWage();
-          var label = formPref && formPref.value ? formPref.options[formPref.selectedIndex].textContent : '全国';
-          var price = calcHourly(wage, 'light');
-          if (formList) formList.textContent = formatYen(price + PRICE_MARKUP);
-          if (formAmount) formAmount.textContent = formatYen(price);
-          if (formPrefNote) formPrefNote.textContent = '（' + label + '）';
-        } else {
-          quoteEl.hidden = true;
-          quoteNote.hidden = false;
-        }
+        if (!quoteEl || !formAmount) return;
+        var days = parseInt(daysEl && daysEl.value, 10);
+        var hours = parseInt(hoursEl && hoursEl.value, 10);
+        var wage = formPref && formPref.value ? parseInt(formPref.value, 10) : minWage();
+        var label = formPref && formPref.value ? formPref.options[formPref.selectedIndex].textContent : '全国';
+        var plan = planFromWish(days, hours) || 'light';
+        var price = calcHourly(wage, plan);
+        quoteEl.hidden = false;
+        if (quoteNote) quoteNote.hidden = true;
+        if (formList) formList.textContent = formatYen(price + PRICE_MARKUP);
+        formAmount.textContent = formatYen(price);
+        if (formPrefNote) formPrefNote.textContent = '（' + label + '）';
       }
       if (daysEl) daysEl.addEventListener('change', updateFormQuote);
       if (hoursEl) hoursEl.addEventListener('change', updateFormQuote);

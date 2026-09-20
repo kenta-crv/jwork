@@ -72,11 +72,17 @@
       p.jw-gateway__portal-en
         | FOR COMPANIES SEEKING GLOBAL TALENT
 
-      = link_to foregin_staffing_path, class: 'jw-gateway__button' do
-        span.jw-gateway__button-label
-          span.jw-gateway__button-label-part 企業向けサービス
-          span.jw-gateway__button-label-part を見る
-        span.jw-gateway__button-arrow aria-hidden="true" →
+      .jw-gateway__buttons
+        = link_to foregin_staffing_path, class: 'jw-gateway__button' do
+          span.jw-gateway__button-label
+            span.jw-gateway__button-label-part 企業向けサービス
+            span.jw-gateway__button-label-part を見る
+          span.jw-gateway__button-arrow aria-hidden="true" →
+        = link_to foreign_jobs_path, class: 'jw-gateway__button' do
+          span.jw-gateway__button-label
+            span.jw-gateway__button-label-part 求人掲載
+            span.jw-gateway__button-label-part を見る
+          span.jw-gateway__button-arrow aria-hidden="true" →
 
   p.jw-gateway__side-copy
     | ともに、
