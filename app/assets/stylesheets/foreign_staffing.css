@@ -2194,13 +2194,23 @@ html.jflp-page body {
   border-radius: 12px;
   background: #f8fbff;
 }
+.jw-foreign-lp .jf-form-quote[hidden],
+.jw-foreign-lp .jf-form-quote-note[hidden] {
+  display: none !important;
+}
 .jw-foreign-lp .jf-form-quote__label {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   color: var(--jf-navy);
   font-size: 14px;
   font-weight: 800;
 }
-.jw-foreign-lp .jf-form-quote .jf-price__base { margin: 12px 0 0; }
+.jw-foreign-lp .jf-form-quote__plan {
+  margin: 0 0 10px;
+  color: var(--jf-blue);
+  font-size: 13px;
+  font-weight: 800;
+}
+.jw-foreign-lp .jf-form-quote .jf-price__base { margin: 0; }
 .jw-foreign-lp .jf-form-quote-note {
   grid-column: 1 / -1;
   margin: 0;

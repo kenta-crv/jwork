@@ -954,12 +954,9 @@
                       span.jf-pick__tip 短期の対応は行なっておりません。
                     li.jf-pick__item data-value="3ヶ月" 3ヶ月
                     li.jf-pick__item data-value="長期" 長期（6ヶ月以降）
-              #jf-form-quote.jf-form-quote
+              #jf-form-quote.jf-form-quote hidden="hidden"
                 p.jf-form-quote__label ご希望条件の料金目安
-                label.jf-form__label for="jf-form-pref"
-                  span 都道府県
-                select#jf-form-pref.jf-form__input
-                  option value="" 全国（最安値）
+                p#jf-form-plan-name.jf-form-quote__plan
                 p.jf-price__base
                   span.jf-price__campaign キャンペーン価格
                   span.jf-price__base-copy
@@ -968,8 +965,8 @@
                     strong#jf-form-price-amount —
                     | 円〜／時間
                   small#jf-form-price-note （全国）
-              p#jf-form-quote-note.jf-form-quote-note hidden="hidden"
-                | 週日数と希望時間を選ぶと、料金目安を表示します。
+              p#jf-form-quote-note.jf-form-quote-note
+                | 都道府県が分かる住所と、週日数・希望時間を入れると、料金目安を表示します。
               .jf-form__field.jf-form__field--full
                 label.jf-form__label
                   | 備考・要望
@@ -1163,10 +1160,12 @@
             }
             if (el.value) extras.push(label + ': ' + text);
           });
-          var formPref = document.getElementById('jf-form-pref');
           var formAmount = document.getElementById('jf-form-price-amount');
+          var formPrefNote = document.getElementById('jf-form-price-note');
           var quoteEl = document.getElementById('jf-form-quote');
-          if (formPref && formPref.value) extras.push('都道府県: ' + formPref.options[formPref.selectedIndex].textContent);
+          if (quoteEl && !quoteEl.hidden && formPrefNote) {
+            extras.push('都道府県: ' + formPrefNote.textContent.replace(/[（）]/g, ''));
+          }
           if (quoteEl && !quoteEl.hidden && formAmount && formAmount.textContent && formAmount.textContent !== '—') {
             extras.push('料金目安: ' + formAmount.textContent + '円〜／時間');
           }
@@ -1239,7 +1238,6 @@
       var baseAmount = document.getElementById('jf-price-base-amount');
       var baseNote = document.getElementById('jf-price-base-note');
       var cards = document.querySelectorAll('#jf-price-grid [data-plan]');
-      if (!select || !baseAmount || !cards.length) return;
 
       function roundUpWage(wage) {
         return Math.ceil(wage / 200) * 200;
@@ -1272,8 +1270,8 @@
       function render(wage, label) {
         var cheapest = calcHourly(wage, 'fulltime');
         if (baseList) baseList.textContent = formatYen(cheapest + PRICE_MARKUP);
-        baseAmount.textContent = formatYen(cheapest);
-        baseNote.textContent = '（' + label + '）';
+        if (baseAmount) baseAmount.textContent = formatYen(cheapest);
+        if (baseNote) baseNote.textContent = '（' + label + '）';
         cards.forEach(function (card) {
           var plan = card.getAttribute('data-plan');
           var price = calcHourly(wage, plan);
@@ -1285,62 +1283,91 @@
         });
       }
 
-      PREF_WAGES.forEach(function (pref) {
-        var opt = document.createElement('option');
-        opt.value = String(pref.wage);
-        opt.textContent = pref.name;
-        opt.setAttribute('data-name', pref.name);
-        select.appendChild(opt);
-      });
-
-      render(minWage(), '全国');
-
-      select.addEventListener('change', function () {
-        var selected = select.options[select.selectedIndex];
-        var wage = select.value ? parseInt(select.value, 10) : minWage();
-        var label = select.value ? selected.textContent : '全国';
-        render(wage, label);
-        trackPrefSwitch(select.value ? selected.textContent : '');
-      });
-
-      var daysEl = document.getElementById('jf-wish-days');
-      var hoursEl = document.getElementById('jf-wish-hours');
-      var quoteEl = document.getElementById('jf-form-quote');
-      var quoteNote = document.getElementById('jf-form-quote-note');
-      var formPref = document.getElementById('jf-form-pref');
-      var formList = document.getElementById('jf-form-price-list');
-      var formAmount = document.getElementById('jf-form-price-amount');
-      var formPrefNote = document.getElementById('jf-form-price-note');
-      if (formPref) {
+      if (select) {
         PREF_WAGES.forEach(function (pref) {
           var opt = document.createElement('option');
           opt.value = String(pref.wage);
           opt.textContent = pref.name;
-          formPref.appendChild(opt);
+          opt.setAttribute('data-name', pref.name);
+          select.appendChild(opt);
+        });
+        render(minWage(), '全国');
+        select.addEventListener('change', function () {
+          var selected = select.options[select.selectedIndex];
+          var wage = select.value ? parseInt(select.value, 10) : minWage();
+          var label = select.value ? selected.textContent : '全国';
+          render(wage, label);
+          trackPrefSwitch(select.value ? selected.textContent : '');
         });
       }
-      function planFromWish(days, hours) {
-        if (days >= 5 && hours >= 8) return 'fulltime';
-        if (days >= 3 && hours >= 5) return 'standard';
-        if (days >= 2 && hours >= 4) return 'light';
+
+      var PLAN_NAMES = { light: 'お手軽プラン', standard: 'スタンダードプラン', fulltime: 'フルタイムプラン' };
+      var daysEl = document.getElementById('jf-wish-days');
+      var hoursEl = document.getElementById('jf-wish-hours');
+      var quoteEl = document.getElementById('jf-form-quote');
+      var quoteNote = document.getElementById('jf-form-quote-note');
+      var formList = document.getElementById('jf-form-price-list');
+      var formAmount = document.getElementById('jf-form-price-amount');
+      var formPrefNote = document.getElementById('jf-form-price-note');
+      var formPlanName = document.getElementById('jf-form-plan-name');
+      var addressEl = document.querySelector('#foreign-staffing-contact [name="contract[address]"]');
+      function prefFromAddress(text) {
+        var raw = String(text || '');
+        if (!raw) return null;
+        var i;
+        var p;
+        var shortName;
+        for (i = 0; i < PREF_WAGES.length; i++) {
+          if (raw.indexOf(PREF_WAGES[i].name) !== -1) return PREF_WAGES[i];
+        }
+        for (i = 0; i < PREF_WAGES.length; i++) {
+          p = PREF_WAGES[i];
+          shortName = p.name.replace(/[都道府県]$/, '');
+          if (shortName.length < 2 || raw.indexOf(shortName) === -1) continue;
+          if (shortName === '京都' && raw.indexOf('東京') !== -1) continue;
+          return p;
+        }
         return null;
+      }
+      function planFromWish(days, hours) {
+        if (!(days >= 2 && hours >= 4)) return null;
+        if (days >= 5 || hours >= 8) return 'fulltime';
+        if (days >= 3 || hours >= 5) return 'standard';
+        return 'light';
       }
       function updateFormQuote() {
         if (!quoteEl || !formAmount) return;
         var days = parseInt(daysEl && daysEl.value, 10);
         var hours = parseInt(hoursEl && hoursEl.value, 10);
-        var wage = formPref && formPref.value ? parseInt(formPref.value, 10) : minWage();
-        var label = formPref && formPref.value ? formPref.options[formPref.selectedIndex].textContent : '全国';
-        var plan = planFromWish(days, hours) || 'light';
-        var price = calcHourly(wage, plan);
+        var plan = planFromWish(days, hours);
+        var pref = prefFromAddress(addressEl && addressEl.value);
+        if (!plan || !pref) {
+          quoteEl.hidden = true;
+          if (quoteNote) quoteNote.hidden = false;
+          return;
+        }
+        var price = calcHourly(pref.wage, plan);
         quoteEl.hidden = false;
         if (quoteNote) quoteNote.hidden = true;
+        if (formPlanName) formPlanName.textContent = PLAN_NAMES[plan] || '';
         if (formList) formList.textContent = formatYen(price + PRICE_MARKUP);
         formAmount.textContent = formatYen(price);
-        if (formPrefNote) formPrefNote.textContent = '（' + label + '）';
+        if (formPrefNote) formPrefNote.textContent = '（' + pref.name + '）';
       }
       if (daysEl) daysEl.addEventListener('change', updateFormQuote);
       if (hoursEl) hoursEl.addEventListener('change', updateFormQuote);
-      if (formPref) formPref.addEventListener('change', updateFormQuote);
+      if (addressEl) {
+        addressEl.addEventListener('input', updateFormQuote);
+        addressEl.addEventListener('change', updateFormQuote);
+      }
+      document.querySelectorAll('#jf-wish-days, #jf-wish-hours').forEach(function (input) {
+        var pick = input.closest('.jf-pick');
+        if (!pick) return;
+        pick.querySelectorAll('.jf-pick__item').forEach(function (item) {
+          item.addEventListener('click', function () {
+            setTimeout(updateFormQuote, 0);
+          });
+        });
+      });
       updateFormQuote();
     })();
