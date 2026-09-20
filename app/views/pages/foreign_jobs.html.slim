@@ -1,5 +1,6 @@
 - set_meta_tags title: '掲載料無料の求人ならJ Work外国人｜外国人材プラットフォーム'
-- set_meta_tags description: '外国人材をお探しの企業様へ。J Work外国人へ掲載料無料で求人登録。登録者約4,000名。自社審査のうえ公開。応募課金・成果報酬。継続採用向け。'
+- set_meta_tags description: '企業様へ。J Work外国人へ求人登録。登録者約4,000名。自社審査のうえ公開。成果報酬。継続採用向け。'
+- line_consult_url = 'https://lin.ee/NZBWRrsD'
 
 .jw-foreign-lp
   svg.jf-icon-sprite xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
@@ -91,34 +92,45 @@
         = link_to 'ご利用の流れ', '#flow', class: 'jf-nav__link'
         = link_to 'よくあるご質問', '#faq', class: 'jf-nav__link'
 
-      button.jf-contact-button.jf-contact-button--header type="button" data-open-contact="true"
-        span.jf-contact-button__icon aria-hidden="true"
-          svg.jf-ico
-            use href="#jf-i-mail"
-        span.jf-contact-button__copy
-          strong 求人を登録する
-          small 審査のうえ公開
+      .jf-split-cta
+        button.jf-split-cta__mail type="button" data-open-contact="true"
+          span.jf-contact-button__icon aria-hidden="true"
+            svg.jf-ico
+              use href="#jf-i-mail"
+          span.jf-contact-button__copy
+            strong メールで依頼する
+            small 情報を入力
+        = link_to line_consult_url, class: 'jf-split-cta__line', target: '_blank', rel: 'noopener noreferrer' do
+          span.jf-contact-button__icon aria-hidden="true"
+            svg.jf-ico.jf-ico--solid
+              use href="#jf-i-line"
+          span.jf-contact-button__copy
+            strong LINEで相談する
+            small 友だち追加はこちら
 
   main
     section#top.jf-hero
       .jf-hero__image aria-hidden="true" style="--jf-hero-image: url(#{asset_path('hero-foreign-workers.jpg')})"
       .jf-container.jf-hero__inner
         .jf-hero__content
-          p.jf-hero__eyebrow J Work外国人｜掲載料無料の継続採用
+          p.jf-hero__eyebrow J Work外国人｜角度の高い人材採用
           h1.jf-hero__title
             | 外国人材の求人なら
             br
             | J Work外国人に
             em お任せ！
-          p.jf-hero__lead 登録者約4,000名のJ Work外国人へ、掲載料無料で継続採用の求人を届けます。
+          p.jf-hero__lead
+            | J Workならアクティブ登録者常時約4,000名以上
+            br
+            | 掲載料無料で御社の採用を徹底アシストします。
 
           ul.jf-hero__points
             li.jf-round-point
               span.jf-line-icon aria-hidden="true"
                 svg.jf-ico
-                  use href="#jf-i-calc"
-              strong 掲載料
-              b 無料
+                  use href="#jf-i-people"
+              strong 一次面接まで
+              b 当社で対応
             li.jf-round-point
               span.jf-line-icon aria-hidden="true"
                 svg.jf-ico
@@ -129,8 +141,8 @@
               span.jf-line-icon aria-hidden="true"
                 svg.jf-ico
                   use href="#jf-i-heart-person"
-              strong 応募・採用時
-              b だけ課金
+              strong 採用時の
+              b 成果報酬のみ
 
     section#service.jf-concerns.jf-section
       .jf-container
@@ -147,7 +159,7 @@
             p
               | 求人を出しても
               br
-              | 外国人材の応募が来ない
+              | 応募が来ない
           article.jf-concern-card
             span.jf-concern-card__icon aria-hidden="true"
               svg.jf-ico
@@ -161,7 +173,7 @@
               svg.jf-ico
                 use href="#jf-i-building"
             p
-              | 外国人への届け方が
+              | どこに出せばいいか
               br
               | わからず手が止まる
           article.jf-concern-card
@@ -171,7 +183,7 @@
             p
               | 応募が来ても条件が合わず
               br
-              | 定着まで進まない
+              | 採用まで進まない
 
         span.jf-concerns__arrow aria-hidden="true"
 
@@ -179,7 +191,7 @@
           .jf-concerns__content
             .jf-concerns__headline
               span.jf-concerns__lead そのお悩み、
-              span.jf-concerns__badge 掲載料無料の求人
+              span.jf-concerns__badge 掲載料無料・完全成功報酬モデル求人
             .jf-concerns__brand-row
               span.jf-concerns__mark aria-hidden="true"
                 svg.jf-ico
@@ -203,12 +215,90 @@
                 line x1="12" y1="20" x2="12" y2="4"
                 line x1="6" y1="20" x2="6" y2="14"
 
+    section#scope.jf-scope
+      .jf-scope__people.jf-scope__people--left
+        = image_tag 'jf-scope-people-left.png', alt: '', class: 'jf-scope__people-img'
+
+      .jf-scope__people.jf-scope__people--right
+        = image_tag 'jf-scope-people-right.png', alt: '', class: 'jf-scope__people-img'
+
+      p.jf-scope__hand.jf-scope__hand--left 多様な人材が現場の力になります。
+
+      p.jf-scope__hand.jf-scope__hand--right-top
+        | はたらく
+        br
+        | を、つなぐ。
+
+      p.jf-scope__hand.jf-scope__hand--right-mid
+        | 国籍をこえて
+        br
+        | ともに働く
+        br
+        | 明るい職場を。
+
+      p.jf-scope__hand.jf-scope__hand--right-bottom
+        | 人がつながり、
+        br
+        | 現場が動き出す。
+
+      .jf-container.jf-scope__inner
+        p.jf-scope__brand
+          span.jf-scope__brand-rule —
+          | J WORK
+          span.jf-scope__brand-rule —
+
+        p.jf-scope__tag つながると、広がる未来へ
+
+        h2.jf-scope__title 受付可能範囲
+
+        p.jf-scope__lead 日本語で会話ができる外国人材向けの求人を、現場業務を中心に掲載。
+
+        .jf-scope__card
+          .jf-scope__cols
+            article.jf-scope__col
+              h3.jf-scope__col-head.jf-scope__col-head--ok
+                span.jf-scope__col-mark aria-hidden="true" ✓
+                | 対応する求人
+
+              ul.jf-scope__list
+                li
+                  span.jf-scope__icon-wrap
+                    = image_tag 'jf-scope-warehouse.png', alt: '', class: 'jf-scope__icon'
+                  span 漢字の読み書きを必須としない業務
+                li
+                  span.jf-scope__icon-wrap
+                    = image_tag 'jf-scope-talk.png', alt: '', class: 'jf-scope__icon'
+                  span 日本語での会話を中心に進められるブルーワーク業務
+
+            article.jf-scope__col
+              h3.jf-scope__col-head.jf-scope__col-head--ng
+                span.jf-scope__col-mark aria-hidden="true" ×
+                | 対象外の条件
+
+              ul.jf-scope__list
+                li
+                  span.jf-scope__icon-wrap
+                    = image_tag 'jf-scope-kanji.png', alt: '', class: 'jf-scope__icon'
+                  span 日本人レベルの漢字能力を求める求人
+                li
+                  span.jf-scope__icon-wrap
+                    = image_tag 'jf-scope-office.png', alt: '', class: 'jf-scope__icon'
+                  span ビジネス日本語を使うホワイトカラー求人
+
+          .jf-scope__note
+            span.jf-scope__note-icon aria-hidden="true"
+            p
+              | 採用率が低い案件、最終面接が2回以上の選考、単発のみの求人はお受付できません。
+
+        p.jf-scope__foot
+          | J WORK
+          span ともに、はたらく社会をつくる
+
     section#features.jf-features.jf-section
       .jf-container
         p.jf-section-kicker 外国人材に、直接届く。
         h2.jf-heading
           | J Work外国人が
-          br
           em 選ばれる
           | 理由
         p.jf-heading-lead 掲載料無料で、J Work外国人へ継続採用の求人を出せます。
@@ -241,8 +331,8 @@
                   svg.jf-ico
                     use href="#jf-i-shield"
                 span.jf-feature-card__number 03
-              h3 応募課金か成果報酬
-              p 収益化は応募課金、または採用が決まったときの成果報酬から選べます。掲載中に動かなければ掲載料は発生しません。
+              h3 成果報酬
+              p 採用が決まったときだけ課金です。掲載そのものに費用はかかりません。
             = image_tag 'feature-training.jpg', class: 'jf-feature-card__image', alt: '現場で働くスタッフ', loading: 'lazy'
 
         p.jf-features__note
@@ -254,85 +344,19 @@
         h2.jf-heading
           em 料金
           | のご案内
-        p.jf-heading-lead 掲載は無料です。単発のみの求人は対象外です。
+        p.jf-heading-lead 採用が決まったときの成果報酬です。単発のみの求人は対象外です。
 
-        h3.jf-subheading 掲載プラン
         .jf-price__jobs
           article.jf-price-row.jf-price-row--featured
-            span.jf-price-card__badge 掲載料無料
-            header.jf-price-row__header
-              h4 求人掲載プラン
-              p J Work外国人へ、継続採用の求人を掲載したい企業様向け
-            .jf-price-row__price
-              span.jf-price-card__frequency 掲載そのものは
-              p.jf-price-card__amount
-                strong 無料
-              small 初期費用 0円
-            ul.jf-price-card__specs.jf-price-row__specs
-              li
-                span.jf-spec-ico aria-hidden="true"
-                  svg.jf-ico
-                    use href="#jf-i-clock"
-                b 掲載料
-                span 0円
-              li
-                span.jf-spec-ico aria-hidden="true"
-                  svg.jf-ico
-                    use href="#jf-i-people"
-                b 初期費用
-                span 0円
-              li
-                span.jf-spec-ico aria-hidden="true"
-                  svg.jf-ico
-                    use href="#jf-i-building"
-                b おすすめ
-                span 継続採用を始めたい企業
-            button.jf-outline-button.jf-outline-button--filled type="button" data-open-contact="true" 求人を登録する
-
-        h3.jf-subheading 課金プラン
-        .jf-price__jobs
-          article.jf-price-row.jf-price-row--featured
-            span.jf-price-card__badge 人気No.1
-            header.jf-price-row__header
-              h4 求人応募課金プラン
-              p 応募課金で、継続採用の費用を抑えたい企業様向け
-            .jf-price-row__price
-              span.jf-price-card__frequency 応募があったときだけ
-              p.jf-price-card__amount
-                strong 5,980
-                span 円〜／応募
-              small （税込 6,578円〜）
-            ul.jf-price-card__specs.jf-price-row__specs
-              li
-                span.jf-spec-ico aria-hidden="true"
-                  svg.jf-ico
-                    use href="#jf-i-clock"
-                b 課金
-                span 1応募あたり
-              li
-                span.jf-spec-ico aria-hidden="true"
-                  svg.jf-ico
-                    use href="#jf-i-people"
-                b 初期費用
-                span 0円
-              li
-                span.jf-spec-ico aria-hidden="true"
-                  svg.jf-ico
-                    use href="#jf-i-building"
-                b おすすめ
-                span 応募課金で継続採用したい企業
-            button.jf-outline-button.jf-outline-button--filled type="button" data-open-contact="true" 求人を登録する
-
-          article.jf-price-row
+            span.jf-price-card__badge 成果報酬
             header.jf-price-row__header
               h4 求人成果報酬プラン
-              p 成果報酬で、継続採用したい企業様
+              p 採用が決まったときだけ発生する料金です
             .jf-price-row__price
               span.jf-price-card__frequency 採用が決まったとき
               p.jf-price-card__amount
-                strong 198,000
+                strong 298,000
                 span 円〜／1名
-              small （税込 217,800円〜）
             ul.jf-price-card__specs.jf-price-row__specs
               li
                 span.jf-spec-ico aria-hidden="true"
@@ -352,10 +376,10 @@
                     use href="#jf-i-building"
                 b おすすめ
                 span 成果報酬で継続採用したい企業
-            button.jf-outline-button type="button" data-open-contact="true" 求人を登録する
+            button.jf-outline-button.jf-outline-button--filled type="button" data-open-contact="true" 求人を登録する
 
         p.jf-price__note
-          | ※掲載料は無料です。収益化は応募課金、または成果報酬です。
+          | ※料金は採用1名あたりの成果報酬です。掲載そのものに費用はかかりません。
           br
           | ※1日限り・単発のみの求人は対象外です。継続的な勤務・採用の求人が対象です。
           br
@@ -369,7 +393,7 @@
         h2.jf-heading
           | 採用手段との
           em 比較
-        p.jf-heading-lead 掲載無料のあと、応募課金または成果報酬で継続採用できます。
+        p.jf-heading-lead 成果報酬で継続採用できます。
 
         .jf-compare
           table.jf-compare__table
@@ -377,14 +401,14 @@
               tr
                 th 比較
                 th
-                  span.jf-compare__col-name マイナビ転職
-                  small 大手求人媒体
+                  span.jf-compare__col-name 大手求人媒体
+                  small 掲載課金
                 th
-                  span.jf-compare__col-name WORK JAPAN
-                  small GaijinPot など
+                  span.jf-compare__col-name 専門求人媒体
+                  small 掲載課金
                 th
-                  span.jf-compare__col-name 人材紹介会社
-                  small 成功報酬型
+                  span.jf-compare__col-name 人材紹介
+                  small 成果報酬
                 th.jf-compare__ours-head
                   span.jf-compare__name J Work外国人
                   span.jf-compare__badge 掲載無料
@@ -398,7 +422,7 @@
                   small 税別・企画により変動
                 td.jf-compare__vs
                   span.jf-compare__price 4.5万円〜／4週間
-                  small GaijinPotは月15万円〜
+                  small 媒体・企画により変動
                 td.jf-compare__vs
                   span.jf-compare__price 掲載無料
                   small 採用が決まるまで0円
@@ -413,7 +437,7 @@
                   small 応募がなくても発生
                 td.jf-compare__vs
                   span.jf-compare__price 0円
-                  small WORK JAPAN公式の案内
+                  small 媒体により0円〜
                 td.jf-compare__vs
                   span.jf-compare__price 原則0円
                   small リテイナー型は着手金あり
@@ -428,26 +452,26 @@
                   small 応募がなくても発生
                 td.jf-compare__vs
                   span.jf-compare__price 掲載開始時
-                  small 成功報酬は0円
+                  small 成果報酬は0円
                 td.jf-compare__vs
                   span.jf-compare__price 採用決定時
-                  small 成功報酬が基本
+                  small 成果報酬が基本
                 td.jf-compare__ours
-                  strong.jf-compare__rate 応募課金・成果報酬
-                  small 掲載中は0円
+                  strong.jf-compare__rate 成果報酬
+                  small 採用決定時
               tr
                 th scope="row"
                   span.jf-compare__num 04
-                  span.jf-compare__label 外国人材へのリーチ
+                  span.jf-compare__label 人材への届け方
                 td.jf-compare__vs
-                  span.jf-compare__price 日本人中心
-                  small 外国人材は集まりにくい
+                  span.jf-compare__price 広く公開
+                  small 応募が来にくいことがある
                 td.jf-compare__vs
-                  span.jf-compare__price 在日外国人特化
-                  small WORK JAPANの登録者へ届く
+                  span.jf-compare__price 媒体の登録者へ
+                  small 媒体の集客に左右される
                 td.jf-compare__vs
                   span.jf-compare__price 紹介会社次第
-                  small 候補者の在留資格による
+                  small 紹介できる人材による
                 td.jf-compare__ours
                   strong.jf-compare__rate 約4,000名
                   small J Work外国人へ直接
@@ -463,37 +487,9 @@
                   small 何名採用しても掲載費のみ
                 td.jf-compare__vs
                   span.jf-compare__price 年収の30〜35%
-                  small 特定技能は20〜80万円／1名
                 td.jf-compare__ours
-                  strong.jf-compare__rate 198,000円〜
-                  small 成果報酬／1名。応募課金は5,980円〜
-              tr
-                th scope="row"
-                  span.jf-compare__num 06
-                  span.jf-compare__label 単発のみ
-                td.jf-compare__vs
-                  span.jf-compare__price 単発求人も掲載可
-                  small 1日限りの募集も多い
-                td.jf-compare__vs
-                  span.jf-compare__price 単発求人も掲載可
-                  small スポット募集も多い
-                td.jf-compare__vs
-                  span.jf-compare__price 1名紹介で終了
-                  small 継続採用ではない
-                td.jf-compare__ours
-                  strong.jf-compare__rate お受けしません
-                  small 継続採用の求人が対象
-
-        p.jf-compare__note
-          | ※マイナビ転職は4週間・税別20〜120万円（2026年の代理店公開目安）。
-          br
-          | ※WORK JAPANは公式で初期費用0円・成功報酬0円、4週間4.5万円〜。GaijinPotは代理店資料で月15万円〜（税別）。
-          br
-          | ※人材紹介は理論年収の30〜35%が標準。特定技能は1名あたり20〜80万円の定額が一般的です。
-          br
-          | ※条件・職種・エリアにより異なります。応募課金は5,980円〜／応募、成果報酬は198,000円〜／1名です。
-          br
-          | ※1日限り・単発のみの求人は対象外です。
+                  strong.jf-compare__rate 298,000円〜
+                  small 成果報酬／1名
 
     section#reviews.jf-reviews.jf-section
       .jf-container
@@ -507,66 +503,31 @@
             h3 採用担当者様
             p.jf-review-card__stars aria-label="評価5"
               | ★★★★★
-            p.jf-review-card__quote 「媒体では来なかった外国人材の応募が届きました。」
-            p 大手求人に出しても外国人材の応募がほぼありませんでした。掲載料無料で出せるとのことで試し、登録者向けに求人が届き応募が来るようになりました。
+            p.jf-review-card__quote 「媒体では来なかった応募が届きました。」
+            p 大手求人に出しても応募がほぼありませんでした。登録者向けに求人が届き、応募が来るようになりました。
           article.jf-review-card
             p.jf-review-card__tag 飲食店
             h3 店舗責任者様
             p.jf-review-card__stars aria-label="評価5"
               | ★★★★★
-            p.jf-review-card__quote 「掲載料を気にせず、まず出せたのが助かりました。」
-            p 掲載費が高くて求人を控えていました。無料でJ Work外国人に出せるので、ホール・キッチンの募集をすぐに開始できました。
+            p.jf-review-card__quote 「成果報酬なので、まず出せたのが助かりました。」
+            p 掲載費が高くて求人を控えていました。採用が決まったときだけの成果報酬なので、ホール・キッチンの募集をすぐに開始できました。
           article.jf-review-card
             p.jf-review-card__tag 物流倉庫
             h3 現場責任者様
             p.jf-review-card__stars aria-label="評価5"
               | ★★★★★
-            p.jf-review-card__quote 「掲載料がなく、応募課金で継続採用できました。」
-            p 年間の掲載費が負担でした。掲載無料のうえ応募課金なので、ホール・キッチンの継続採用を始められました。
+            p.jf-review-card__quote 「成果報酬で継続採用できました。」
+            p 年間の掲載費が負担でした。成果報酬なので、ホール・キッチンの継続採用を始められました。
           article.jf-review-card
             p.jf-review-card__tag ホテル
             h3 支配人様
             p.jf-review-card__stars aria-label="評価5"
               | ★★★★★
-            p.jf-review-card__quote 「外国人材への届け先がはっきりして安心でした。」
-            p どこに出せば外国人材に届くかわからず止まっていました。J Work外国人へ継続採用の求人を掲載でき、採用まで進められました。
+            p.jf-review-card__quote 「届け先がはっきりして安心でした。」
+            p どこに出せば応募が届くかわからず止まっていました。J Work外国人へ継続採用の求人を掲載でき、採用まで進められました。
 
         p.jf-reviews__note ※ご利用企業・ご担当者の感想であり、効果を保証するものではありません。
-
-    section#flow.jf-flow.jf-section
-      .jf-container
-        p.jf-section-kicker はじめての方でもカンタン！
-        h2.jf-heading ご利用の#{content_tag(:em, '流れ')}
-        p.jf-heading-lead 求人登録から公開まで、#{content_tag(:strong, '3ステップ')}で完了します。
-
-        ol.jf-flow__list
-          li.jf-flow-card
-            span.jf-flow-card__number 01
-            .jf-flow-card__icon aria-hidden="true"
-              svg.jf-ico
-                use href="#jf-i-mail"
-            .jf-flow-card__copy
-              h3 求人を登録
-              p 求人登録フォームに、職種・勤務地・給与・募集内容をご入力ください。この時点では公開されません。
-            = image_tag 'flow-consultation.jpg', class: 'jf-flow-card__image', alt: '求人登録', loading: 'lazy'
-          li.jf-flow-card
-            span.jf-flow-card__number 02
-            .jf-flow-card__icon aria-hidden="true"
-              svg.jf-ico
-                use href="#jf-i-quote"
-            .jf-flow-card__copy
-              h3 自社審査
-              p 登録内容を当社で確認します。継続採用であること、単発のみでないことなどを審査します。通過後、担当から支払いリンクをご案内します。
-            = image_tag 'flow-candidate-proposal.jpg', class: 'jf-flow-card__image', alt: '求人の審査', loading: 'lazy'
-          li.jf-flow-card
-            span.jf-flow-card__number 03
-            .jf-flow-card__icon aria-hidden="true"
-              svg.jf-ico
-                use href="#jf-i-people"
-            .jf-flow-card__copy
-              h3 公開・応募受付
-              p 審査通過後にJ Work外国人へ公開します。応募が届き次第ご案内します。面接・採用の判断はお客様にてお願いしています。
-            = image_tag 'flow-work-start.jpg', class: 'jf-flow-card__image', alt: '公開後の応募受付', loading: 'lazy'
 
     section#faq.jf-faq.jf-section
       .jf-container
@@ -576,8 +537,20 @@
 
         .jf-faq__list
           details.jf-faq__item
+            summary どのようなサービスですか？
+            p クローズドな成果報酬の求人媒体です。自社で常時約4,000名を構える独自のプラットフォームへアプローチし、一次面接は当社で行ったうえで応募者をお届けします。そのため、採用精度が高くなります。
+          details.jf-faq__item
+            summary 採用率が低い求人でも掲載できますか？
+            p お受けできません。採用率の低い案件は受付不可です。
+          details.jf-faq__item
+            summary 日本人と同じ漢字の能力が必要です。掲載できますか？
+            p お受けできません。日本人レベルの漢字能力を求める求人は対象外です。
+          details.jf-faq__item
+            summary 最終面接を2回以上行う求人は掲載できますか？
+            p お受けできません。最終面接が2回以上ある選考は受付不可です。
+          details.jf-faq__item
             summary 本当に掲載料は無料ですか？
-            p はい。求人の掲載そのものに費用はかかりません。収益化は応募課金、または採用が決まったときの成果報酬です。
+            p はい。求人の掲載そのものに費用はかかりません。料金は採用1名が決まったときの成果報酬です。
           details.jf-faq__item
             summary 単発や1日限りの求人は掲載できますか？
             p 1日限り・単発のみの求人は対象外です。継続的な勤務・採用の求人が対象です。
@@ -592,7 +565,7 @@
             p 求人内容や報酬条件によって大きく左右されます。条件が合う場合は、掲載後すぐに応募が届くこともあります。
           details.jf-faq__item
             summary 課金はいつ発生しますか？
-            p 応募課金プランは応募1件ごと（5,980円〜）、成果報酬プランは採用1名が決まったとき（198,000円〜）に発生します。審査通過後に登録したクレジットカードから引き落とします。掲載中に応募・採用がなければ掲載料は発生しません。
+            p 成果報酬プランは、採用1名が決まったとき（298,000円〜）に発生します。審査通過後に登録したクレジットカードから引き落とします。採用がなければ料金は発生しません。
           details.jf-faq__item
             summary 支払いはどうなりますか？
             p このページから決済にはつながりません。自社審査の通過後、担当から支払いリンクをお送りします。クレジットカード登録が基本です。請求書払いをご希望の場合は審査のうえ対応します。
@@ -602,6 +575,86 @@
           details.jf-faq__item
             summary 応募者の国籍について教えてください
             p 永住ビザの場合、国籍は非常に様々です。学生や特定技能外国人を含める場合、アジアの人材が多数を占めます。
+
+    section#flow.jf-scope.jf-scope--flow
+      .jf-scope__people.jf-scope__people--left
+        = image_tag 'jf-scope-people-left.png', alt: '', class: 'jf-scope__people-img'
+      .jf-scope__people.jf-scope__people--right
+        = image_tag 'jf-scope-people-right.png', alt: '', class: 'jf-scope__people-img'
+      .jf-container.jf-scope__inner
+        p.jf-scope__brand
+          span.jf-scope__brand-rule —
+          | J WORK
+          span.jf-scope__brand-rule —
+        p.jf-scope__tag つながると、広がる未来へ
+        h2.jf-scope__title 採用フロー
+        p.jf-scope__lead 掲載料無料で求人登録。一次面接後の応募者をお届けします。
+        .jf-scope__card
+          ol.jf-scope__steps
+            li.jf-scope__step
+              p.jf-scope__step-badge STEP 01
+              span.jf-scope__step-icon aria-hidden="true"
+                svg viewBox="0 0 80 80" fill="none"
+                  rect x="8" y="18" width="18" height="24" rx="3" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.6"
+                  circle cx="17" cy="26" r="3.2" fill="#1b6fe0"
+                  path d="M12.2 36.2c.6-2.2 2.2-3.4 4.8-3.4s4.2 1.2 4.8 3.4" stroke="#1b6fe0" stroke-width="1.5" stroke-linecap="round"
+                  rect x="24" y="12" width="22" height="30" rx="3.2" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8"
+                  circle cx="35" cy="23" r="4.2" fill="#1b6fe0"
+                  path d="M28.4 35.6c.8-2.8 2.9-4.3 6.6-4.3s5.8 1.5 6.6 4.3" stroke="#1b6fe0" stroke-width="1.6" stroke-linecap="round"
+                  rect x="44" y="20" width="18" height="24" rx="3" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.6"
+                  circle cx="53" cy="28" r="3.2" fill="#1b6fe0"
+                  path d="M48.2 38.2c.6-2.2 2.2-3.4 4.8-3.4s4.2 1.2 4.8 3.4" stroke="#1b6fe0" stroke-width="1.5" stroke-linecap="round"
+                  circle cx="56" cy="56" r="12" fill="#fff" stroke="#1b6fe0" stroke-width="2.4"
+                  circle cx="56" cy="56" r="6.2" stroke="#1b6fe0" stroke-width="2"
+                  path d="M64.6 64.8l8.2 8.2" stroke="#1b6fe0" stroke-width="2.6" stroke-linecap="round"
+              h3
+                | 求人を登録し、
+                br
+                | 約4,000名へ届ける
+              p 掲載料無料で求人を登録。審査通過後、独自ネットワークの登録者へ求人を届けます。
+            li.jf-scope__step-arrow aria-hidden="true"
+            li.jf-scope__step
+              p.jf-scope__step-badge STEP 02
+              span.jf-scope__step-icon aria-hidden="true"
+                svg viewBox="0 0 80 80" fill="none"
+                  circle cx="24" cy="24" r="7" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M12 48c1.2-8 5.6-12.2 12-12.2S46.8 40 48 48" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round"
+                  circle cx="46" cy="22" r="6.2" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M36.4 45c1-6.6 4.6-10 9.6-10s8.6 3.4 9.6 10" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round"
+                  path d="M28 18c4.2-8.5 16-8.2 18.8.6" fill="#fff" stroke="#1b6fe0" stroke-width="1.6" stroke-linejoin="round"
+                  path d="M37.2 10.4v4.2" stroke="#1b6fe0" stroke-width="1.6" stroke-linecap="round"
+                  rect x="50" y="40" width="20" height="26" rx="3" fill="#fff" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M56 38.4h8v4h-8z" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.4"
+                  path d="M55.2 50.6l2.4 2.4 5.2-5.4M55.2 58.2l2.4 2.4 5.2-5.4" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+              h3
+                | 一次面接を当社で実施し
+                br
+                | 最適な応募者を確保
+              p 日本語での会話力や就業条件を確認し、御社に合う応募者だけをお届けします。
+            li.jf-scope__step-arrow aria-hidden="true"
+            li.jf-scope__step
+              p.jf-scope__step-badge STEP 03
+              span.jf-scope__step-icon aria-hidden="true"
+                svg viewBox="0 0 80 80" fill="none"
+                  circle cx="24" cy="22" r="6.4" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M13.2 42c1-7.2 4.8-11 10.8-11s9.8 3.8 10.8 11" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round"
+                  circle cx="54" cy="22" r="6.4" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M43.2 42c1-7.2 4.8-11 10.8-11s9.8 3.8 10.8 11" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round"
+                  path d="M12 48h56v6H12z" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.6"
+                  path d="M16 54h48v4H16z" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.4"
+                  circle cx="58" cy="58" r="12" fill="#fff" stroke="#1b6fe0" stroke-width="2.2"
+                  path d="M52.4 58.2l4.2 4.2 8.2-9.2" stroke="#1b6fe0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
+              h3
+                | 最終面接を御社で実施し
+                br
+                | 採用可否を決定
+              p 実務との相性を最終確認いただき、問題がなければ採用へ進みます。
+          .jf-scope__note
+            span.jf-scope__note-icon aria-hidden="true"
+            p 一次面接・条件確認は当社で実施するため、企業様は最終確認に集中できます。
+        p.jf-scope__foot
+          | J WORK
+          span ともに、はたらく社会をつくる
 
     section#company.jf-company.jf-section
       .jf-container
@@ -628,7 +681,7 @@
                     use href="#jf-i-building"
                 span 企業の採用活動を支えます。
             p.jf-company__desc
-              | J Work外国人は、外国人材が集まる求人プラットフォームです。求人登録後に自社審査し、通過した継続採用の求人を掲載料無料で届けます。応募課金または成果報酬で採用活動を支えます。単発のみの求人は対象外です。
+              | J Work外国人は、外国人材が集まる求人プラットフォームです。求人登録後に自社審査し、通過した継続採用の求人を届けます。料金は採用が決まったときの成果報酬です。単発のみの求人は対象外です。
             ul.jf-company__stats
               li
                 strong 掲載料無料
@@ -667,13 +720,30 @@
                   br
                   | 清掃業務請負
 
-    - line_consult_url = 'https://lin.ee/NZBWRrsD'
+    section#other.jf-cross.jf-section
+      .jf-container
+        h2.jf-heading
+          | 外国人材の斡旋なら
+          br
+          em J Work
+        p.jf-heading-lead 必要な外国人材を、全国の現場へ継続して斡旋します。
+        article.jf-cross__card
+          .jf-cross__copy
+            h3 J Workの外国人材斡旋
+            p 週2回からの継続契約が前提です。単発のみは対象外です。1日4時間・週2回からご利用いただけます。
+            ul
+              li 登録者約4,000名・毎月約500名登録
+              li 全国対応・深夜・早朝も手配
+              li 1日4時間・週2回から
+          = link_to '/foreign-staffing', class: 'jf-outline-button jf-outline-button--filled' do
+            | 人材斡旋の詳細を見る
+
     dialog#contact-modal.jf-modal
       .jf-modal__panel
         button.jf-modal__close type="button" data-close-contact="true" aria-label="閉じる" ×
         p.jf-modal__kicker JOB
         h2.jf-modal__title 求人登録
-        p.jf-modal__lead 求人を登録してください。当社で審査したあと、通過したものだけ公開します。お支払いは審査通過後にご案内します。
+        p.jf-modal__lead まずはお気軽に求人登録。当社で審査したあと、通過したものだけ公開します。お支払いは審査通過後にご案内します。
         - if params[:sent] == '1'
           p.jf-form-success 求人を受け付けました。審査のうえ、担当よりご連絡します。
         - if params[:error] == '1'
@@ -726,14 +796,7 @@
                 | 給与
                 span.jf-form__badge.jf-form__badge--required 必須
               input.jf-form__input type="text" name="job_pay" placeholder="例：時給1,200円〜" required="required" data-job-field="給与"
-            .jf-form__field
-              label.jf-form__label
-                | 課金プラン
-                span.jf-form__badge.jf-form__badge--required 必須
-              select.jf-form__input name="job_plan" required="required" data-job-field="課金プラン"
-                option value="" 選択してください
-                option value="応募課金プラン" 応募課金プラン
-                option value="成果報酬プラン" 成果報酬プラン
+            input type="hidden" name="job_plan" value="成果報酬プラン" data-job-field="課金プラン"
             .jf-form__field.jf-form__field--full
               label.jf-form__label
                 | 求人内容
@@ -746,23 +809,24 @@
       .jf-container.jf-cta__inner
         = image_tag 'cta-foreign-worker.png', class: 'jf-cta__staff', alt: '案内するスタッフ'
         .jf-cta__content
-          h2 求人を#{content_tag(:em, '登録してください')}
+          h2 まずはお気軽に#{content_tag(:em, '求人登録')}
           p 登録後、当社で審査します。通過した求人だけ公開します。
           .jf-cta__actions
-            button.jf-contact-button.jf-contact-button--large type="button" data-open-contact="true"
-              span.jf-contact-button__icon aria-hidden="true"
-                svg.jf-ico
-                  use href="#jf-i-mail"
-              span.jf-contact-button__copy
-                strong 求人を登録する
-                small 審査のうえ公開
-            = link_to line_consult_url, class: 'jf-contact-button jf-contact-button--large jf-contact-button--line', target: '_blank', rel: 'noopener noreferrer' do
-              span.jf-contact-button__icon aria-hidden="true"
-                svg.jf-ico.jf-ico--solid
-                  use href="#jf-i-line"
-              span.jf-contact-button__copy
-                strong LINEで相談する
-                small 友だち追加はこちら
+            .jf-split-cta
+              button.jf-split-cta__mail type="button" data-open-contact="true"
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico
+                    use href="#jf-i-mail"
+                span.jf-contact-button__copy
+                  strong メールで依頼する
+                  small 情報を入力
+              = link_to line_consult_url, class: 'jf-split-cta__line', target: '_blank', rel: 'noopener noreferrer' do
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico.jf-ico--solid
+                    use href="#jf-i-line"
+                span.jf-contact-button__copy
+                  strong LINEで相談する
+                  small 友だち追加はこちら
         ul.jf-cta__benefits
           li
             span.jf-cta__benefit-icon aria-hidden="true"

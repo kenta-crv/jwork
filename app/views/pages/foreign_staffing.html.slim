@@ -91,8 +91,8 @@
         = link_to 'お悩み', '#service', class: 'jf-nav__link'
         = link_to '選ばれる理由', '#features', class: 'jf-nav__link'
         = link_to '料金の目安', '#price', class: 'jf-nav__link'
-        = link_to 'ご利用の流れ', '#flow', class: 'jf-nav__link'
         = link_to 'よくあるご質問', '#faq', class: 'jf-nav__link'
+        = link_to 'ご利用の流れ', '#flow', class: 'jf-nav__link'
 
       button.jf-contact-button.jf-contact-button--header type="button" data-open-contact="true"
         span.jf-contact-button__icon aria-hidden="true"
@@ -206,15 +206,98 @@
                 line x1="12" y1="20" x2="12" y2="4"
                 line x1="6" y1="20" x2="6" y2="14"
 
+
+
+    section#scope.jf-scope
+      .jf-scope__people.jf-scope__people--left
+        = image_tag 'jf-scope-people-left.png', alt: '', class: 'jf-scope__people-img'
+    
+      .jf-scope__people.jf-scope__people--right
+        = image_tag 'jf-scope-people-right.png', alt: '', class: 'jf-scope__people-img'
+    
+      p.jf-scope__hand.jf-scope__hand--left 多様な人材が現場の力になります。
+    
+      p.jf-scope__hand.jf-scope__hand--right-top
+        | はたらく
+        br    
+        | を、つなぐ。
+    
+      p.jf-scope__hand.jf-scope__hand--right-mid
+        | 国籍をこえて
+        br
+        | ともに働く
+        br
+        | 明るい職場を。
+    
+      p.jf-scope__hand.jf-scope__hand--right-bottom
+        | 人がつながり、
+        br
+        | 現場が動き出す。
+    
+      .jf-container.jf-scope__inner
+        p.jf-scope__brand
+          span.jf-scope__brand-rule —
+          | J WORK
+          span.jf-scope__brand-rule —
+    
+        p.jf-scope__tag つながると、広がる未来へ
+    
+        h2.jf-scope__title 受付可能範囲
+    
+        p.jf-scope__lead 日本語で会話ができる外国人材を、現場業務を中心にご紹介。
+    
+        .jf-scope__card
+          .jf-scope__cols
+            article.jf-scope__col
+              h3.jf-scope__col-head.jf-scope__col-head--ok
+                span.jf-scope__col-mark aria-hidden="true" ✓
+                | 対応する業務
+    
+              ul.jf-scope__list
+                li
+                  span.jf-scope__icon-wrap
+                    = image_tag 'jf-scope-warehouse.png', alt: '', class: 'jf-scope__icon'
+                  span 漢字の読み書きを必須としない業務
+                li
+                  span.jf-scope__icon-wrap
+                    = image_tag 'jf-scope-talk.png', alt: '', class: 'jf-scope__icon'
+                  span 日本語での会話を中心に進められるブルーワーク業務
+
+            article.jf-scope__col
+              h3.jf-scope__col-head.jf-scope__col-head--ng
+                span.jf-scope__col-mark aria-hidden="true" ×
+                | 対象外の条件
+    
+              ul.jf-scope__list
+                li
+                  span.jf-scope__icon-wrap
+                    = image_tag 'jf-scope-kanji.png', alt: '', class: 'jf-scope__icon'
+                  span 日本人レベルの漢字能力を求める業務
+    
+                li
+                  span.jf-scope__icon-wrap
+                    = image_tag 'jf-scope-office.png', alt: '', class: 'jf-scope__icon'
+                  span ビジネス日本語を使うホワイトカラー業務
+    
+          .jf-scope__note
+            span.jf-scope__note-icon aria-hidden="true"
+            p
+              | 採用率が低い案件、最終面接が2回以上の選考のお受付は承っておりません。
+    
+        p.jf-scope__foot
+          | J WORK
+          span ともに、はたらく社会をつくる
+
+
+
     section#features.jf-features.jf-section
       .jf-container
         p.jf-section-kicker 人材力で、現場を支える。
         h2.jf-heading
           | J Workが
-          br
           em 選ばれる
           | 理由
-        p.jf-heading-lead 約4,000名の人材力で、全国の現場へ継続して斡旋します。
+        p.jf-heading-lead 常時約4,000名の人材力で、全国の現場へ継続して斡旋します。
 
         .jf-features__grid
           article.jf-feature-card
@@ -234,9 +317,9 @@
                   svg.jf-ico
                     use href="#jf-i-team"
                 span.jf-feature-card__number 02
-              h3 スピード手配
-              p 継続契約のうえ、早期に人材を確保したい企業様にも迅速に斡旋します。欠員補充もご依頼いただけます。
-            = image_tag 'feature-matching.jpg', class: 'jf-feature-card__image', alt: '配置表を見ながら迅速に手配', loading: 'lazy'
+              h3 精度の高い人材手配
+              p 外国人材はビザのミスマッチを防ぐため、当社で一次面接を済ませた人材をご紹介します。
+            = image_tag 'feature-matching.jpg', class: 'jf-feature-card__image', alt: '一次面接で人材を確認', loading: 'lazy'
           article.jf-feature-card
             .jf-feature-card__body
               .jf-feature-card__meta
@@ -248,16 +331,13 @@
               p 全国の現場に対応。早朝・深夜の勤務も、速やかに人材を斡旋できます。
             = image_tag 'feature-training.jpg', class: 'jf-feature-card__image', alt: '深夜帯の現場で作業するスタッフ', loading: 'lazy'
 
-        p.jf-features__note
-          | 当社の役割は人材の斡旋・提供です。現場での作業指示・管理はお客様にお願いしています。
-
     section#price.jf-price.jf-section
       .jf-container
         p.jf-section-kicker わかりやすく、安心の料金プラン
         h2.jf-heading
           em 料金
           | のご案内
-        p.jf-heading-lead 1日3時間・週2回からサービスをご利用いただけます
+        p.jf-heading-lead 1日4時間・週2回からサービスをご利用いただけます
 
         h3.jf-subheading 選べる3つの料金プラン
         .jf-price__controls
@@ -276,24 +356,23 @@
 
         #jf-price-plans
           .jf-price__grid#jf-price-grid
-            article.jf-price-card data-plan="light" data-plan-extra="1000"
+            article.jf-price-card data-plan="light" data-plan-extra="1400"
               header.jf-price-card__header
                 h4 お手軽プラン
                 p まずは短時間から、継続して人材を手配したい方へ
               .jf-price-card__body
-                span.jf-price-card__frequency 1日3時間・週2回から
+                span.jf-price-card__frequency 1日4時間・週2回から
                 p.jf-price-card__amount
                   s data-price-list="true" —
                   strong.jf-price-card__sale data-price-amount="true" —
                   span 円〜／時間
-                small data-price-tax="true" —
                 ul.jf-price-card__specs
                   li
                     span.jf-spec-ico aria-hidden="true"
                       svg.jf-ico
                         use href="#jf-i-clock"
                     b 稼働目安
-                    span 1日3時間・週2回から
+                    span 1日4時間・週2回から
                   li
                     span.jf-spec-ico aria-hidden="true"
                       svg.jf-ico
@@ -318,27 +397,26 @@
                         use href="#jf-i-quote"
                     b お支払い
                     span 請求書払い（カード可）
-                button.jf-outline-button type="button" data-open-contact="true" プラン内容を詳しく見る
+                button.jf-outline-button type="button" data-open-contact="true" このプランで依頼する
 
-            article.jf-price-card.jf-price-card--featured data-plan="standard" data-plan-extra="900"
+            article.jf-price-card.jf-price-card--featured data-plan="standard" data-plan-extra="1000"
               span.jf-price-card__badge 人気No.1
               header.jf-price-card__header
                 h4 スタンダードプラン
                 p 定期的に人材を確保したい方へ
               .jf-price-card__body
-                span.jf-price-card__frequency 1日4時間・週3回から
+                span.jf-price-card__frequency 1日5時間・週3回から
                 p.jf-price-card__amount
                   s data-price-list="true" —
                   strong.jf-price-card__sale data-price-amount="true" —
                   span 円〜／時間
-                small data-price-tax="true" —
                 ul.jf-price-card__specs
                   li
                     span.jf-spec-ico aria-hidden="true"
                       svg.jf-ico
                         use href="#jf-i-clock"
                     b 稼働目安
-                    span 1日4時間・週3回から
+                    span 1日5時間・週3回から
                   li
                     span.jf-spec-ico aria-hidden="true"
                       svg.jf-ico
@@ -363,26 +441,25 @@
                         use href="#jf-i-quote"
                     b お支払い
                     span 請求書払い（カード可）
-                button.jf-outline-button.jf-outline-button--filled type="button" data-open-contact="true" プラン内容を詳しく見る
+                button.jf-outline-button.jf-outline-button--filled type="button" data-open-contact="true" このプランで依頼する
 
             article.jf-price-card data-plan="fulltime" data-plan-extra="800"
               header.jf-price-card__header
                 h4 フルタイムプラン
                 p 正社員と同様にフルタイム人材を提供
               .jf-price-card__body
-                span.jf-price-card__frequency 1日7時間・週5回から
+                span.jf-price-card__frequency 1日8時間・週5回から
                 p.jf-price-card__amount
                   s data-price-list="true" —
                   strong.jf-price-card__sale data-price-amount="true" —
                   span 円〜／時間
-                small data-price-tax="true" —
                 ul.jf-price-card__specs
                   li
                     span.jf-spec-ico aria-hidden="true"
                       svg.jf-ico
                         use href="#jf-i-clock"
                     b 稼働目安
-                    span 1日7時間・週5回から
+                    span 1日8時間・週5回から
                   li
                     span.jf-spec-ico aria-hidden="true"
                       svg.jf-ico
@@ -407,7 +484,7 @@
                         use href="#jf-i-quote"
                     b お支払い
                     span 請求書払い（カード可）
-                button.jf-outline-button type="button" data-open-contact="true" プラン内容を詳しく見る
+                button.jf-outline-button type="button" data-open-contact="true" このプランで依頼する
 
     section#compare.jf-compare-section.jf-section
       .jf-container
@@ -432,7 +509,7 @@
               tr
                 th scope="row"
                   span.jf-compare__num 01
-                  span.jf-compare__label 出向サービス
+                  span.jf-compare__label 出向/受託サービス
                 td.jf-compare__vs
                   span.jf-compare__price 時給 2,500〜3,500円
                   small マージン込み
@@ -456,7 +533,6 @@
                   small 1名紹介で完結しがち
                 td.jf-compare__ours
                   strong.jf-compare__rate 継続して斡旋
-                  small 単発のみは対象外
               tr
                 th scope="row"
                   span.jf-compare__num 03
@@ -514,50 +590,6 @@
 
         p.jf-reviews__note ※ご利用企業・ご担当者の感想であり、効果を保証するものではありません。
 
-    section#flow.jf-flow.jf-section
-      .jf-container
-        p.jf-section-kicker はじめての方でもカンタン！
-        h2.jf-heading ご利用の#{content_tag(:em, '流れ')}
-        p.jf-heading-lead 簡単4ステップで完了します。
-
-        ol.jf-flow__list
-          li.jf-flow-card
-            span.jf-flow-card__number 01
-            .jf-flow-card__icon aria-hidden="true"
-              svg.jf-ico
-                use href="#jf-i-quote"
-            .jf-flow-card__copy
-              h3 求人無料掲載開始
-              p 求人を無料で掲載し、募集を開始します。
-            = image_tag 'flow-consultation.jpg', class: 'jf-flow-card__image', alt: '求人の無料掲載', loading: 'lazy'
-          li.jf-flow-card
-            span.jf-flow-card__number 02
-            .jf-flow-card__icon aria-hidden="true"
-              svg.jf-ico
-                use href="#jf-i-people"
-            .jf-flow-card__copy
-              h3 J Workで一次面接
-              p 一次面接で求人への意思を確認します。
-            = image_tag 'flow-candidate-proposal.jpg', class: 'jf-flow-card__image', alt: 'J Workでの一次面接', loading: 'lazy'
-          li.jf-flow-card
-            span.jf-flow-card__number 03
-            .jf-flow-card__icon aria-hidden="true"
-              svg.jf-ico
-                use href="#jf-i-mail"
-            .jf-flow-card__copy
-              h3 最終面接希望を企業へ通知
-              p 本人が最終面接を希望する場合、企業様へご連絡します。
-            = image_tag 'flow-contact.jpg', class: 'jf-flow-card__image', alt: '最終面接希望の企業への通知', loading: 'lazy'
-          li.jf-flow-card
-            span.jf-flow-card__number 04
-            .jf-flow-card__icon aria-hidden="true"
-              svg.jf-ico
-                use href="#jf-i-sparkle"
-            .jf-flow-card__copy
-              h3 採用決定・稼働開始
-              p 採用が決まり次第、現場での稼働を開始します。
-            = image_tag 'flow-work-start.jpg', class: 'jf-flow-card__image', alt: '採用決定後の稼働開始', loading: 'lazy'
-
     section#faq.jf-faq.jf-section
       .jf-container
         p.jf-section-kicker FAQ
@@ -565,6 +597,18 @@
         p.jf-heading-lead よくいただくご質問にお答えします。
 
         .jf-faq__list
+          details.jf-faq__item
+            summary どのようなサービスですか？
+            p クローズドな成果報酬の求人媒体です。自社で常時約4,000名を構える独自のプラットフォームへアプローチし、一次面接は当社で行ったうえで応募者をお届けします。そのため、採用精度が高くなります。
+          details.jf-faq__item
+            summary 採用率が低い案件でも依頼できますか？
+            p お受けできません。採用率の低い案件は受付不可です。
+          details.jf-faq__item
+            summary 日本人と同じ漢字の能力が必要です。依頼できますか？
+            p お受けできません。日本人レベルの漢字能力を求めるご依頼は対象外です。
+          details.jf-faq__item
+            summary 最終面接を2回以上行うことはできますか？
+            p お受けできません。最終面接が2回以上ある選考は受付不可です。
           details.jf-faq__item
             summary どの地域まで対応可能ですか？
             p 全国で対応可能です。東京・神奈川・千葉・埼玉・名古屋・大阪・福岡を中心に、豊富な人材力で各地の現場へ斡旋しています。
@@ -590,6 +634,85 @@
             summary 支払いはどうなりますか？
             p 内容が決まったあと、担当から支払いリンクをお送りします。請求書払いが基本です。クレジットカードでのご請求にも対応します。このページから決済にはつながりません。
 
+    section#flow.jf-scope.jf-scope--flow
+      .jf-scope__people.jf-scope__people--left
+        = image_tag 'jf-scope-people-left.png', alt: '', class: 'jf-scope__people-img'
+      .jf-scope__people.jf-scope__people--right
+        = image_tag 'jf-scope-people-right.png', alt: '', class: 'jf-scope__people-img'
+      .jf-container.jf-scope__inner
+        p.jf-scope__brand
+          span.jf-scope__brand-rule —
+          | J WORK
+          span.jf-scope__brand-rule —
+        p.jf-scope__tag つながると、広がる未来へ
+        h2.jf-scope__title 採用フロー
+        p.jf-scope__lead 弊社登録の外国人材へアプローチし、一次面接後の人材を提供
+        .jf-scope__card
+          ol.jf-scope__steps
+            li.jf-scope__step
+              p.jf-scope__step-badge STEP 01
+              span.jf-scope__step-icon aria-hidden="true"
+                svg viewBox="0 0 80 80" fill="none"
+                  rect x="8" y="18" width="18" height="24" rx="3" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.6"
+                  circle cx="17" cy="26" r="3.2" fill="#1b6fe0"
+                  path d="M12.2 36.2c.6-2.2 2.2-3.4 4.8-3.4s4.2 1.2 4.8 3.4" stroke="#1b6fe0" stroke-width="1.5" stroke-linecap="round"
+                  rect x="24" y="12" width="22" height="30" rx="3.2" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8"
+                  circle cx="35" cy="23" r="4.2" fill="#1b6fe0"
+                  path d="M28.4 35.6c.8-2.8 2.9-4.3 6.6-4.3s5.8 1.5 6.6 4.3" stroke="#1b6fe0" stroke-width="1.6" stroke-linecap="round"
+                  rect x="44" y="20" width="18" height="24" rx="3" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.6"
+                  circle cx="53" cy="28" r="3.2" fill="#1b6fe0"
+                  path d="M48.2 38.2c.6-2.2 2.2-3.4 4.8-3.4s4.2 1.2 4.8 3.4" stroke="#1b6fe0" stroke-width="1.5" stroke-linecap="round"
+                  circle cx="56" cy="56" r="12" fill="#fff" stroke="#1b6fe0" stroke-width="2.4"
+                  circle cx="56" cy="56" r="6.2" stroke="#1b6fe0" stroke-width="2"
+                  path d="M64.6 64.8l8.2 8.2" stroke="#1b6fe0" stroke-width="2.6" stroke-linecap="round"
+              h3
+                | 常時4000人以上の
+                br
+                | アクティブ人材にアプローチ
+              p 独自ネットワークに登録する人材へ継続的にアプローチし、募集条件に合う候補者を素早く確保します。
+            li.jf-scope__step-arrow aria-hidden="true"
+            li.jf-scope__step
+              p.jf-scope__step-badge STEP 02
+              span.jf-scope__step-icon aria-hidden="true"
+                svg viewBox="0 0 80 80" fill="none"
+                  circle cx="24" cy="24" r="7" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M12 48c1.2-8 5.6-12.2 12-12.2S46.8 40 48 48" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round"
+                  circle cx="46" cy="22" r="6.2" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M36.4 45c1-6.6 4.6-10 9.6-10s8.6 3.4 9.6 10" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round"
+                  path d="M28 18c4.2-8.5 16-8.2 18.8.6" fill="#fff" stroke="#1b6fe0" stroke-width="1.6" stroke-linejoin="round"
+                  path d="M37.2 10.4v4.2" stroke="#1b6fe0" stroke-width="1.6" stroke-linecap="round"
+                  rect x="50" y="40" width="20" height="26" rx="3" fill="#fff" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M56 38.4h8v4h-8z" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.4"
+                  path d="M55.2 50.6l2.4 2.4 5.2-5.4M55.2 58.2l2.4 2.4 5.2-5.4" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+              h3
+                | 一次面接を当社で実施し
+                br
+                | 最適な人材を確保
+              p 日本語での会話力や就業条件を確認し、御社に合う人材だけを厳選してご紹介します。
+            li.jf-scope__step-arrow aria-hidden="true"
+            li.jf-scope__step
+              p.jf-scope__step-badge STEP 03
+              span.jf-scope__step-icon aria-hidden="true"
+                svg viewBox="0 0 80 80" fill="none"
+                  circle cx="24" cy="22" r="6.4" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M13.2 42c1-7.2 4.8-11 10.8-11s9.8 3.8 10.8 11" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round"
+                  circle cx="54" cy="22" r="6.4" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.8"
+                  path d="M43.2 42c1-7.2 4.8-11 10.8-11s9.8 3.8 10.8 11" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.8" stroke-linecap="round"
+                  path d="M12 48h56v6H12z" fill="#d7e8fb" stroke="#1b6fe0" stroke-width="1.6"
+                  path d="M16 54h48v4H16z" fill="#eef6fd" stroke="#1b6fe0" stroke-width="1.4"
+                  circle cx="58" cy="58" r="12" fill="#fff" stroke="#1b6fe0" stroke-width="2.2"
+                  path d="M52.4 58.2l4.2 4.2 8.2-9.2" stroke="#1b6fe0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
+              h3
+                | 最終面接を御社で実施し
+                br
+                | 採用可否を決定
+              p 実務との相性を最終確認いただき、問題がなければ採用へ進みます。
+          .jf-scope__note
+            span.jf-scope__note-icon aria-hidden="true"
+            p 一次面接・条件確認は当社で実施するため、企業様は最終確認に集中できます。
+        p.jf-scope__foot
+          | J WORK
+          span ともに、はたらく社会をつくる
 
     section#company.jf-company.jf-section
       .jf-container
@@ -663,6 +786,24 @@
                   | 軽貨物・配送業務請負
                   br
                   | 清掃業務請負
+
+    section#other.jf-cross.jf-section
+      .jf-container
+        h2.jf-heading
+          | 掲載料無料の求人なら
+          br
+          em J Work外国人
+        p.jf-heading-lead 自社で継続採用したい企業様向けです。成果報酬で、登録者約4,000名へ求人を届けます。
+        article.jf-cross__card
+          .jf-cross__copy
+            h3 J Work外国人の求人掲載
+            p 求人登録後に自社審査し、通過した継続採用の求人を掲載します。料金は採用が決まったときの成果報酬です。単発のみの求人は対象外です。
+            ul
+              li 一次面接まで当社で対応
+              li 登録者約4,000名へ直接リーチ
+              li 成果報酬 298,000円〜／1名
+          = link_to '/foreign-jobs', class: 'jf-outline-button jf-outline-button--filled' do
+            | 求人掲載の詳細を見る
 
     dialog#contact-modal.jf-modal
       .jf-modal__panel
@@ -756,7 +897,9 @@
                   li.jf-pick__item.jf-pick__item--off
                     | 1日2時間
                     span.jf-pick__tip 短期の対応は行なっておりません。
-                  li.jf-pick__item data-value="3" 1日3時間
+                  li.jf-pick__item.jf-pick__item--off
+                    | 1日3時間
+                    span.jf-pick__tip 短期の対応は行なっておりません。
                   li.jf-pick__item data-value="4" 1日4時間
                   li.jf-pick__item data-value="5" 1日5時間
                   li.jf-pick__item data-value="6" 1日6時間
@@ -793,9 +936,8 @@
                   strong#jf-form-price-amount —
                   | 円〜／時間
                 small#jf-form-price-note （全国）
-              small#jf-form-price-tax.jf-form-quote__tax —
             p#jf-form-quote-note.jf-form-quote-note hidden="hidden"
-              | 週2日以下・1日3時間以下の場合は料金目安を表示します。それ以外は内容確認のうえお見積りします。
+              | 週2日以下・1日4時間以下の場合は料金目安を表示します。それ以外は内容確認のうえお見積りします。
             .jf-form__field.jf-form__field--full
               label.jf-form__label
                 | 備考・要望
@@ -810,7 +952,6 @@
                 strong メールで依頼する
                 small 情報を入力
             button.jf-contact-button.jf-contact-button--line.jf-form__line type="submit" name="contact_via" value="line"
-              span.jf-contact-button__reco おすすめ
               span.jf-contact-button__icon aria-hidden="true"
                 svg.jf-ico.jf-ico--solid
                   use href="#jf-i-line"
@@ -825,21 +966,21 @@
           h2 まずはお気軽に#{content_tag(:em, 'ご依頼ください！')}
           p ヒアリング・お見積りは無料です。内容決定後に、お支払いをご案内します。
           .jf-cta__actions
-            button.jf-contact-button.jf-contact-button--large type="button" data-open-contact="true"
-              span.jf-contact-button__icon aria-hidden="true"
-                svg.jf-ico
-                  use href="#jf-i-mail"
-              span.jf-contact-button__copy
-                strong メールで依頼する
-                small 情報を入力
-            button.jf-contact-button.jf-contact-button--large.jf-contact-button--line type="button" data-open-contact="true"
-              span.jf-contact-button__reco おすすめ
-              span.jf-contact-button__icon aria-hidden="true"
-                svg.jf-ico.jf-ico--solid
-                  use href="#jf-i-line"
-              span.jf-contact-button__copy
-                strong LINEで依頼する
-                small 情報を入力
+            .jf-split-cta
+              button.jf-split-cta__mail type="button" data-open-contact="true"
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico
+                    use href="#jf-i-mail"
+                span.jf-contact-button__copy
+                  strong メールで依頼する
+                  small 情報を入力
+              button.jf-split-cta__line type="button" data-open-contact="true"
+                span.jf-contact-button__icon aria-hidden="true"
+                  svg.jf-ico.jf-ico--solid
+                    use href="#jf-i-line"
+                span.jf-contact-button__copy
+                  strong LINEで依頼する
+                  small 情報を入力
         ul.jf-cta__benefits
           li
             span.jf-cta__benefit-icon aria-hidden="true"
@@ -1031,7 +1172,7 @@
         { name: '沖縄県', wage: 1023 }
       ];
       var COMMON_ADD = 200;
-      var PLAN_EXTRAS = { light: 1000, standard: 900, fulltime: 800 };
+      var PLAN_EXTRAS = { light: 1400, standard: 1000, fulltime: 800 };
       var COUNT_KEY = 'jf_pref_switch_count';
       var PRICE_MARKUP = 100;
 
@@ -1079,13 +1220,10 @@
           var plan = card.getAttribute('data-plan');
           var price = calcHourly(wage, plan);
           var listPrice = price + PRICE_MARKUP;
-          var tax = Math.round(price * 1.1);
           var listEl = card.querySelector('[data-price-list]');
           var amountEl = card.querySelector('[data-price-amount]');
-          var taxEl = card.querySelector('[data-price-tax]');
           if (listEl) listEl.textContent = formatYen(listPrice);
           if (amountEl) amountEl.textContent = formatYen(price);
-          if (taxEl) taxEl.textContent = '（税込 ' + formatYen(tax) + '円〜）';
         });
       }
 
@@ -1114,7 +1252,6 @@
       var formPref = document.getElementById('jf-form-pref');
       var formList = document.getElementById('jf-form-price-list');
       var formAmount = document.getElementById('jf-form-price-amount');
-      var formTax = document.getElementById('jf-form-price-tax');
       var formPrefNote = document.getElementById('jf-form-price-note');
       if (formPref) {
         PREF_WAGES.forEach(function (pref) {
@@ -1133,7 +1270,7 @@
           quoteNote.hidden = true;
           return;
         }
-        if (days <= 2 && hours <= 3) {
+        if (days <= 2 && hours <= 4) {
           quoteEl.hidden = false;
           quoteNote.hidden = true;
           var wage = formPref && formPref.value ? parseInt(formPref.value, 10) : minWage();
@@ -1142,7 +1279,6 @@
           if (formList) formList.textContent = formatYen(price + PRICE_MARKUP);
           if (formAmount) formAmount.textContent = formatYen(price);
           if (formPrefNote) formPrefNote.textContent = '（' + label + '）';
-          if (formTax) formTax.textContent = '（税込 ' + formatYen(Math.round(price * 1.1)) + '円〜）';
         } else {
           quoteEl.hidden = true;
           quoteNote.hidden = false;
