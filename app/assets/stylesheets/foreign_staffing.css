@@ -361,6 +361,15 @@ html.jflp-page body {
   grid-template-columns: 1fr 1fr;
   gap: 36px;
 }
+.jw-foreign-lp .jf-scope__cols--one {
+  grid-template-columns: 1fr;
+}
+.jw-foreign-lp .jf-scope__cols--one::after {
+  display: none;
+}
+.jw-foreign-lp .jf-scope__cols--one .jf-scope__col:last-child {
+  background: linear-gradient(135deg, #eef6fd 0%, #e7f1fb 100%);
+}
 .jw-foreign-lp .jf-scope__cols::after {
   content: "";
   position: absolute;
@@ -438,6 +447,12 @@ html.jflp-page body {
   min-height: 110px;
 }
 .jw-foreign-lp .jf-scope__list li + li { margin-top: 10px; }
+.jw-foreign-lp .jf-scope__list--row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 28px;
+}
+.jw-foreign-lp .jf-scope__list--row li + li { margin-top: 0; }
 .jw-foreign-lp .jf-scope__icon-wrap {
   display: block;
   width: 90px;
