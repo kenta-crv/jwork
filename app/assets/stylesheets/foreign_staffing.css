@@ -1018,6 +1018,17 @@ html.jflp-page body {
   gap: 24px;
   align-items: stretch;
 }
+.jw-foreign-lp .jf-price__seika {
+  display: flex;
+  justify-content: center;
+  margin: 28px 0 0;
+}
+.jw-foreign-lp .jf-price__seika .jf-outline-button {
+  width: min(100%, 360px);
+  padding: 14px 28px;
+  text-align: center;
+  font-size: 16px;
+}
 .jw-foreign-lp .jf-price__jobs {
   display: grid;
   gap: 20px;
@@ -1725,6 +1736,10 @@ html.jflp-page body {
     grid-template-columns: 1fr;
     gap: 28px;
   }
+  .jw-foreign-lp .jf-scope__list--row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
   .jw-foreign-lp .jf-scope__col + .jf-scope__col {
     padding-left: 0;
     border-left: 0;
@@ -2226,7 +2241,8 @@ html.jflp-page body {
   font-weight: 800;
 }
 .jw-foreign-lp .jf-form-quote .jf-price__base { margin: 0; }
-.jw-foreign-lp .jf-form-quote-note {
+.jw-foreign-lp .jf-form-quote-note,
+.jw-foreign-lp .jf-form__condition {
   grid-column: 1 / -1;
   margin: 0;
   padding: 12px 14px;

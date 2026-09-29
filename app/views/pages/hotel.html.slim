@@ -471,6 +471,9 @@
                     span 請求書払い（カード可）
                 button.jf-outline-button type="button" data-open-contact="true" このプランで依頼する
 
+        p.jf-price__seika
+          = link_to '成果報酬でのご依頼はこちら', '/foreign-jobs', class: 'jf-outline-button'
+
     section#compare.jf-compare-section.jf-section
       .jf-container
         p.jf-section-kicker 従来の採用手段と比較
@@ -775,20 +778,20 @@
     section#other.jf-cross.jf-section
       .jf-container
         h2.jf-heading
-          | 業種を問わない外国人材なら
+          | 掲載料無料の求人なら
           br
-          em J Work人材斡旋
-        p.jf-heading-lead ホテル以外の業種でも、継続して外国人材を斡旋します。
+          em J Work外国人
+        p.jf-heading-lead 自社で継続採用したい企業様向けです。成果報酬で、登録者約4,000名へ求人を届けます。
         article.jf-cross__card
           .jf-cross__copy
-            h3 外国人材の斡旋（全業種）
-            p 製造業・飲食・物流など、ホテル以外の現場にも対応します。料金は継続契約の時間単価です。単発のみのご依頼は対象外です。
+            h3 J Work外国人の求人掲載
+            p 求人登録後に自社審査し、通過した継続採用の求人を掲載します。料金は採用が決まったときの成果報酬です。単発のみの求人は対象外です。
             ul
               li 一次面接まで当社で対応
               li 登録者約4,000名へ直接リーチ
-              li 週2回からの継続手配
-          = link_to '/foreign-staffing', class: 'jf-outline-button jf-outline-button--filled' do
-            | 全業種向けページを見る
+              li 成果報酬 298,000円〜／1名
+          = link_to '/foreign-jobs', class: 'jf-outline-button jf-outline-button--filled' do
+            | 求人掲載の詳細を見る
 
     dialog#contact-modal.jf-modal
       .jf-modal__panel
@@ -856,19 +859,20 @@
                 = f.email_field :email, class: 'jf-form__input', placeholder: 'test@example.com', required: true
               .jf-form__field
                 label.jf-form__label
-                  | 住所
+                  | 勤務地の都道府県
                   span.jf-form__badge.jf-form__badge--required 必須
-                = f.text_field :address, class: 'jf-form__input', placeholder: '東京都港区浜松町２丁目２番１５号２Ｆ', required: true
+                = f.select :address, work_prefecture_names, { include_blank: '選択してください' }, class: 'jf-form__input', required: true
               .jf-form__field
                 label.jf-form__label
                   | 求人URL
                   span.jf-form__badge.jf-form__badge--optional 任意
                 = f.url_field :url, class: 'jf-form__input', placeholder: 'https://example.com/'
+              p.jf-form__condition 週2回・1日4時間から。継続利用が前提です。単発は対象外です。
               .jf-form__field
                 label.jf-form__label
                   | 希望人数
-                  span.jf-form__badge.jf-form__badge--required 必須
-                select#jf-wish-people.jf-form__input name="wish_people" required="required" data-staff-field="希望人数"
+                  span.jf-form__badge.jf-form__badge--optional 任意
+                select#jf-wish-people.jf-form__input name="wish_people" data-staff-field="希望人数"
                   option value="" 選択してください
                   option value="1名" 1名
                   option value="2名" 2名
@@ -883,9 +887,9 @@
               .jf-form__field
                 label.jf-form__label
                   | 希望週日数
-                  span.jf-form__badge.jf-form__badge--required 必須
+                  span.jf-form__badge.jf-form__badge--optional 任意
                 .jf-pick
-                  input#jf-wish-days type="hidden" name="wish_days" required="required" data-staff-field="希望週日数" value=""
+                  input#jf-wish-days type="hidden" name="wish_days" data-staff-field="希望週日数" value=""
                   button.jf-pick__btn type="button" aria-haspopup="listbox"
                     span.jf-pick__value 選択してください
                   ul.jf-pick__list role="listbox"
@@ -901,9 +905,9 @@
               .jf-form__field
                 label.jf-form__label
                   | 希望時間
-                  span.jf-form__badge.jf-form__badge--required 必須
+                  span.jf-form__badge.jf-form__badge--optional 任意
                 .jf-pick
-                  input#jf-wish-hours type="hidden" name="wish_hours" required="required" data-staff-field="希望時間" value=""
+                  input#jf-wish-hours type="hidden" name="wish_hours" data-staff-field="希望時間" value=""
                   button.jf-pick__btn type="button" aria-haspopup="listbox"
                     span.jf-pick__value 選択してください
                   ul.jf-pick__list role="listbox"
@@ -924,9 +928,9 @@
               .jf-form__field.jf-form__field--full
                 label.jf-form__label
                   | 希望期間
-                  span.jf-form__badge.jf-form__badge--required 必須
+                  span.jf-form__badge.jf-form__badge--optional 任意
                 .jf-pick
-                  input#jf-wish-term type="hidden" name="wish_term" required="required" data-staff-field="希望期間" value=""
+                  input#jf-wish-term type="hidden" name="wish_term" data-staff-field="希望期間" value=""
                   button.jf-pick__btn type="button" aria-haspopup="listbox"
                     span.jf-pick__value 選択してください
                   ul.jf-pick__list role="listbox"
@@ -950,7 +954,7 @@
                     | 円〜／時間
                   small#jf-form-price-note （全国）
               p#jf-form-quote-note.jf-form-quote-note
-                | 都道府県が分かる住所と、週日数・希望時間を入れると、料金目安を表示します。
+                | 週日数・希望時間を入れると、料金目安を表示します。人数・週日数・時間・期間は未入力でも送信できます。
               .jf-form__field.jf-form__field--full
                 label.jf-form__label
                   | 備考・要望
@@ -1121,7 +1125,7 @@
       }
       function updateSubmitState() {
         if (!contactForm) return;
-        var names = ['contract[company]', 'contract[name]', 'contract[tel]', 'contract[email]', 'contract[address]', 'wish_people', 'wish_days', 'wish_hours', 'wish_term'];
+        var names = ['contract[company]', 'contract[name]', 'contract[tel]', 'contract[email]', 'contract[address]'];
         var ready = names.every(function (name) {
           var el = contactForm.elements[name];
           return el && String(el.value || '').trim();
