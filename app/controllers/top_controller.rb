@@ -10,6 +10,9 @@ class TopController < ApplicationController
   def line
   end
 
+  def line_japan
+  end
+
   #def columns; end
 =begin
    def redirect

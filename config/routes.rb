@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/redirect', to: 'top#redirect'
   get 'users/thanks', to: 'users#thanks'
   get 'line', to: 'top#line'
+  get 'line-japan', to: 'top#line_japan'
 
   # 管理者アカウント
   devise_for :admins, controllers: {
