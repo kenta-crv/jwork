@@ -24,6 +24,8 @@ class ContractsController < ApplicationController
   end
 
   if @contract.save
+    Client.register_from_job_inquiry!(@contract) if @contract.job_listing_inquiry?
+
     # メール送信
     ContractMailer.received_email(@contract).deliver_now
     ContractMailer.send_email(@contract).deliver_now

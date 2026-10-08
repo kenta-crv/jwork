@@ -2,6 +2,7 @@ require 'net/http'
 require 'nokogiri'
 
 SitemapGenerator::Sitemap.default_host = "https://j-work.jp"
+SitemapGenerator::Sitemap.include_root = false
 
 SitemapGenerator::Sitemap.create do
   add root_path, changefreq: 'hourly', priority: 1.0
@@ -12,6 +13,33 @@ SitemapGenerator::Sitemap.create do
 
   add "/foreign-staffing", changefreq: 'monthly', priority: 0.7
   add "/foreign-jobs", changefreq: 'monthly', priority: 0.7
+
+  add recruits_path, changefreq: 'daily', priority: 0.6
+
+  recruit_ids = []
+  begin
+    uri = URI("https://j-work.jp/recruits")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.open_timeout = 10
+    http.read_timeout = 20
+    res = http.request(Net::HTTP::Get.new(uri))
+    if res.is_a?(Net::HTTPSuccess)
+      doc = Nokogiri::HTML(res.body)
+      recruit_ids = doc.css('a[href*="/recruits/"]').map { |a| a['href'].to_s.split('?').first }
+                        .map { |href| href[%r{/recruits/(\d+)/?\z}, 1] }
+                        .compact
+                        .uniq
+    end
+  rescue StandardError => e
+    warn "[sitemap] recruits scrape failed: #{e.class}: #{e.message}"
+  end
+
+  recruit_ids.each do |id|
+    add recruit_path(id),
+        changefreq: 'weekly',
+        priority: 0.5
+  end
 
   add "/columns", changefreq: 'daily', priority: 0.6
 

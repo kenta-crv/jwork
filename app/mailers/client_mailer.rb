@@ -44,6 +44,21 @@ class ClientMailer < ActionMailer::Base
     end
   end
 
+  def password_setup_email(client, token)
+    @client = client
+    @token = token
+    @setup_url = edit_client_password_url(reset_password_token: token)
+    @mypage_url = client_mypage_url
+    @sign_in_url = new_client_session_url
+    mail(
+      to: client.email,
+      from: "info@j-work.jp",
+      subject: "【J Work】マイページ用パスワード設定のご案内"
+    ) do |format|
+      format.text
+    end
+  end
+
   def contract_received_email(client)
     @client = client
     mail to: "info@ri-plus.jp"

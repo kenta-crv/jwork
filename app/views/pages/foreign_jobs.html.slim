@@ -102,7 +102,7 @@
 
   main
     section#top.jf-hero
-      .jf-hero__image aria-hidden="true" style="--jf-hero-image: url(#{asset_path('hero-foreign-workers.jpg')})"
+      .jf-hero__image aria-hidden="true" style="--jf-hero-image: url(#{asset_path('foreign-staffing-hero.jpg')})"
       .jf-container.jf-hero__inner
         .jf-hero__content
           p.jf-hero__eyebrow J Work外国人｜角度の高い人材採用
@@ -194,7 +194,7 @@
               span.jf-concerns__suffix します。
           .jf-concerns__visual
             .jf-concerns__visual-frame
-              = image_tag 'feature-team.jpg', alt: '', class: 'jf-concerns__visual-img'
+              = image_tag 'foreign-staffing-concerns.jpg', alt: '', class: 'jf-concerns__visual-img'
             span.jf-concerns__deco.jf-concerns__deco--sparkle aria-hidden="true"
               svg viewBox="0 0 24 24" fill="currentColor"
                 path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"
@@ -209,10 +209,10 @@
 
     section#scope.jf-scope
       .jf-scope__people.jf-scope__people--left
-        = image_tag 'jf-scope-people-left.png', alt: '', class: 'jf-scope__people-img'
+        = image_tag 'foreign-staffing-scope-left.png', alt: '', class: 'jf-scope__people-img'
 
       .jf-scope__people.jf-scope__people--right
-        = image_tag 'jf-scope-people-right.png', alt: '', class: 'jf-scope__people-img'
+        = image_tag 'foreign-staffing-scope-right.png', alt: '', class: 'jf-scope__people-img'
 
       p.jf-scope__hand.jf-scope__hand--left 多様な人材が現場の力になります。
 
@@ -305,7 +305,7 @@
                 span.jf-feature-card__number 01
               h3 掲載料は無料
               p 求人の掲載自体に費用はかかりません。初期費用ゼロで、継続採用の求人をJ Work外国人へ出せます。
-            = image_tag 'feature-retention.jpg', class: 'jf-feature-card__image', alt: '求人を確認する担当者', loading: 'lazy'
+            = image_tag 'foreign-staffing-team.jpg', class: 'jf-feature-card__image', alt: '求人を確認する担当者', loading: 'lazy'
           article.jf-feature-card
             .jf-feature-card__body
               .jf-feature-card__meta
@@ -315,7 +315,7 @@
                 span.jf-feature-card__number 02
               h3 J Work外国人へリーチ
               p 登録者約4,000名・新規登録毎月約500名。J Work外国人の登録者へ、求人を直接届けられます。
-            = image_tag 'feature-matching.jpg', class: 'jf-feature-card__image', alt: '外国人材と企業のマッチング', loading: 'lazy'
+            = image_tag 'foreign-staffing-interview.jpg', class: 'jf-feature-card__image', alt: '外国人材と企業のマッチング', loading: 'lazy'
           article.jf-feature-card
             .jf-feature-card__body
               .jf-feature-card__meta
@@ -325,7 +325,7 @@
                 span.jf-feature-card__number 03
               h3 成果報酬
               p 採用が決まったときだけ課金です。掲載そのものに費用はかかりません。
-            = image_tag 'feature-training.jpg', class: 'jf-feature-card__image', alt: '現場で働くスタッフ', loading: 'lazy'
+            = image_tag 'foreign-staffing-nightshift.jpg', class: 'jf-feature-card__image', alt: '現場で働くスタッフ', loading: 'lazy'
 
         p.jf-features__note
           | 求人を登録いただいたあと、自社審査のうえ公開します。応募者への面接・採用判断はお客様にてお願いしています。1日限り・単発のみの求人は対象外です。
@@ -521,6 +521,53 @@
 
         p.jf-reviews__note ※ご利用企業・ご担当者の感想であり、効果を保証するものではありません。
 
+    section#industries.jf-industries.jf-section
+      .jf-container
+        h2.jf-heading 様々な業種で#{content_tag(:em, '活躍中')}
+        .jf-industries__marquee aria-hidden="true"
+          .jf-industries__track
+            - 2.times do
+              article.jf-industry-card
+                = image_tag 'english-evening.jpg', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 英語語学教室
+              article.jf-industry-card
+                = image_tag 'language-interview.jpg', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 韓国語語学教室
+              article.jf-industry-card
+                = image_tag 'cargo-image.png', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 軽貨物ドライバー
+              article.jf-industry-card
+                = image_tag 'english-team.jpg', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p ドイツ語語学教室
+              article.jf-industry-card
+                = image_tag 'language-evening.jpg', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 中国語語学教室
+              article.jf-industry-card
+                = image_tag 'factory-night.png', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 物流倉庫
+              article.jf-industry-card
+                = image_tag 'factory-assembly.png', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 食品工場
+              article.jf-industry-card
+                = image_tag 'smiling_uniformed_team_with_clipboard.png', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 自動車整備
+              article.jf-industry-card
+                = image_tag 'hero-foreign-workers.jpg', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 中型大型ドライバー
+              article.jf-industry-card
+                = image_tag 'hotel-feature-multilingual.jpg', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 外資系企業
+              article.jf-industry-card
+                = image_tag 'hotel-housekeeping.png', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p 清掃業
+              article.jf-industry-card
+                = image_tag 'hotel-reception.png', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p マンション管理
+              article.jf-industry-card
+                = image_tag 'feature-quality.jpg', class: 'jf-industry-card__image', alt: '', loading: 'lazy'
+                p ビルメンテナンス
+        p.jf-industries__note 掲載は一部です。ここにない業種も、継続採用の求人はご相談ください。
+
     section#faq.jf-faq.jf-section
       .jf-container
         p.jf-section-kicker FAQ
@@ -570,9 +617,9 @@
 
     section#flow.jf-scope.jf-scope--flow
       .jf-scope__people.jf-scope__people--left
-        = image_tag 'jf-scope-people-left.png', alt: '', class: 'jf-scope__people-img'
+        = image_tag 'foreign-staffing-scope-left.png', alt: '', class: 'jf-scope__people-img'
       .jf-scope__people.jf-scope__people--right
-        = image_tag 'jf-scope-people-right.png', alt: '', class: 'jf-scope__people-img'
+        = image_tag 'foreign-staffing-scope-right.png', alt: '', class: 'jf-scope__people-img'
       .jf-container.jf-scope__inner
         p.jf-scope__brand
           span.jf-scope__brand-rule —
@@ -759,7 +806,7 @@
             p.jf-form-success__body
               | ご入力内容を
               a href="mailto:info@j-work.jp" info@j-work.jp
-              | に通知しました。
+              | に通知し、顧客情報として登録しました。審査が終わるまで求人は公開しません。会社情報の再入力は不要です。
               - if params[:via] == 'line'
                 | 続いて公式LINEの友だち追加へ進みます。
             - if params[:via] == 'line'
@@ -826,11 +873,11 @@
                   strong LINEで依頼する
                   small この内容で送信
               p#jf-form-submit-hint.jf-form__submit-hint 必須項目を入力すると送信できます。
-              p.jf-form__line-note 送信すると内容を保存し、info@j-work.jp へ通知します。LINEの場合は完了後に友だち追加へ進みます。
+              p.jf-form__line-note 送信すると内容を保存し、info@j-work.jp へ通知します。同じ内容を顧客情報として登録し、審査後に公開します。LINEの場合は完了後に友だち追加へ進みます。
 
     section#contact.jf-cta
       .jf-container.jf-cta__inner
-        = image_tag 'cta-foreign-worker.png', class: 'jf-cta__staff', alt: '案内するスタッフ'
+        = image_tag 'foreign-staffing-cta.png', class: 'jf-cta__staff', alt: '案内するスタッフ'
         .jf-cta__content
           h2 まずはお気軽に#{content_tag(:em, '求人登録')}
           p 登録後、当社で審査します。通過した求人だけ公開します。

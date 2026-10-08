@@ -1,0 +1,47 @@
+- set_meta_tags title: "パスワード設定", noindex: true
+
+.auth-screen.auth-screen--client
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      = link_to "/", class: "auth-screen__logo" do
+        = image_tag "rogo.webp", alt: "J Work", class: "auth-screen__logo-img"
+      p.auth-screen__kicker Client portal
+      h1.auth-screen__title Set password
+      p.auth-screen__ja パスワード設定
+      p.auth-screen__lead
+        | Set a password to check your listing status.
+      p.auth-screen__ja 設定後、マイページで求人の審査状況を確認できます
+    section.auth-screen__card
+      - if notice.present?
+        p.auth-screen__flash.auth-screen__flash--notice = notice
+      - if alert.present?
+        p.auth-screen__flash.auth-screen__flash--alert = alert
+      h2.auth-screen__card-title Password
+      p.auth-screen__card-sub
+        | Create your login password
+        span.auth-screen__ja ログイン用パスワードを作成
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "auth-form" }) do |f|
+        - if resource.errors.any?
+          p.auth-screen__flash.auth-screen__flash--alert = resource.errors.full_messages.to_sentence
+        = f.hidden_field :reset_password_token
+        .auth-form__field
+          = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "auth-form__input", placeholder: " "
+          = f.label :password, class: "auth-form__label" do
+            span.auth-form__en New password
+            span.auth-form__ja 新しいパスワード
+        .auth-form__field
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "auth-form__input", placeholder: " "
+          = f.label :password_confirmation, class: "auth-form__label" do
+            span.auth-form__en Confirm password
+            span.auth-form__ja パスワード確認
+        = f.button class: "auth-form__submit", type: "submit" do
+          span.auth-form__en Save password
+          span.auth-form__ja パスワードを保存
+      p.auth-screen__card-sub
+        = link_to new_client_session_path, class: "auth-form__link" do
+          span.auth-form__en Back to sign in
+          span.auth-form__ja ログイン画面へ

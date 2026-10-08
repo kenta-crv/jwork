@@ -1,25 +1,39 @@
-- set_meta_tags noindex: true
+- set_meta_tags title: "パスワード再設定", noindex: true
 
-.tops-wrapper
-  br/
-  br/
-  h2.headline
-    | パスワード再設定
-
-  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-    = devise_error_messages!
-
-    table.company
-      colgroup
-      tbody
-        tr
-          td.label-cell
-            strong.label 必須
-          td.arrow-box-cell
-            | ログインアドレス
-          td.responsive-cell
-            .input-container
-              = f.email_field :email, autocomplete: "email"
-        tr
-          td[colspan="3"]
-            = f.submit "パスワード再設定", class: "btn btn-primary", data: { confirm: "送信してもよろしいですか？" }
+.auth-screen.auth-screen--client
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      = link_to "/", class: "auth-screen__logo" do
+        = image_tag "rogo.webp", alt: "J Work", class: "auth-screen__logo-img"
+      p.auth-screen__kicker Client portal
+      h1.auth-screen__title Reset password
+      p.auth-screen__ja パスワード再設定
+      p.auth-screen__lead
+        | We will email a password setup link.
+      p.auth-screen__ja 登録メールアドレスへ設定用リンクを送ります
+    section.auth-screen__card
+      - if notice.present?
+        p.auth-screen__flash.auth-screen__flash--notice = notice
+      - if alert.present?
+        p.auth-screen__flash.auth-screen__flash--alert = alert
+      h2.auth-screen__card-title Email
+      p.auth-screen__card-sub
+        | Enter your login email
+        span.auth-screen__ja ログインアドレスを入力
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "auth-form" }) do |f|
+        .auth-form__field
+          = f.email_field :email, autocomplete: "email", class: "auth-form__input", placeholder: " "
+          = f.label :email, class: "auth-form__label" do
+            span.auth-form__en Email
+            span.auth-form__ja ログインアドレス
+        = f.button class: "auth-form__submit", type: "submit" do
+          span.auth-form__en Send setup link
+          span.auth-form__ja 設定用リンクを送る
+      p.auth-screen__card-sub
+        = link_to new_client_session_path, class: "auth-form__link" do
+          span.auth-form__en Back to sign in
+          span.auth-form__ja ログイン画面へ

@@ -5,70 +5,57 @@
   .auth-screen__orb.auth-screen__orb--a
   .auth-screen__orb.auth-screen__orb--b
   .auth-screen__grain
-  .auth-screen__layout
-    aside.auth-screen__brand
-      = link_to "/", class: "auth-screen__logo" do
-        = image_tag "rogo.webp", alt: "J Work", class: "auth-screen__logo-img"
-      p.auth-screen__kicker Client portal
-      h1.auth-screen__title My page
-      p.auth-screen__ja マイページ
-      p.auth-screen__lead
-        | Manage your company profile and job listings.
-      p.auth-screen__ja 会社情報と求人を管理します
-      p.auth-screen__ja = @client.company
-    section.auth-screen__card
-      - if notice.present?
-        p.auth-screen__flash.auth-screen__flash--notice = notice
-      - if alert.present?
-        p.auth-screen__flash.auth-screen__flash--alert = alert
+  .client-portal
+    .client-portal__top
+      = link_to "/", class: "client-portal__logo" do
+        = image_tag "rogo.webp", alt: "J Work", class: "client-portal__logo-img"
+      .client-portal__top-copy
+        p.client-portal__kicker 取引先マイページ
+        h1.client-portal__title = @client.company.presence || "マイページ"
+      = link_to "ログアウト", destroy_client_session_path, method: :delete, class: "client-portal__logout"
 
-      h2.auth-screen__card-title Jobs
-      p.auth-screen__card-sub
-        | Your job listings
-        span.auth-screen__ja 登録中の求人
-      .auth-form
-        = link_to new_recruit_path, class: "auth-form__submit" do
-          span.auth-form__en Create job
-          span.auth-form__ja 求人を新規作成
+    - if notice.present?
+      p.client-portal__flash.client-portal__flash--notice = notice
+    - if alert.present?
+      p.client-portal__flash.client-portal__flash--alert = alert
+
+    .client-portal__grid
+      section.client-portal__panel
+        .client-portal__panel-head
+          div
+            h2.client-portal__heading 登録中の求人
+            p.client-portal__lead 審査状況の確認と、内容の修正ができます。
+          = link_to "求人を新規作成", new_recruit_path, class: "client-portal__btn"
         - if @recruits.present?
-          - @recruits.each do |recruit|
-            .auth-form__item
-              = link_to recruit_path(recruit), class: "auth-form__link" do
-                span.auth-form__en = recruit.title.presence || "Untitled"
-                span.auth-form__ja = recruit.title.presence || "無題"
-              = link_to edit_recruit_path(recruit), class: "auth-form__link" do
-                span.auth-form__en Edit
-                span.auth-form__ja 編集
+          ul.client-portal__jobs
+            - @recruits.each do |recruit|
+              li.client-portal__job
+                .client-portal__job-main
+                  p.client-portal__job-title = recruit.title.presence || "無題"
+                  span class=("client-portal__badge client-portal__badge--#{recruit.published? ? "live" : "review"}") = recruit.listing_status
+                  - unless recruit.published?
+                    p.client-portal__job-note 審査が終わるまで、公開一覧には出ません。
+                .client-portal__job-actions
+                  = link_to "内容を確認・編集", edit_recruit_path(recruit), class: "client-portal__text-link"
+                  - if recruit.published?
+                    = link_to "公開ページを見る", recruit_path(recruit), class: "client-portal__text-link"
         - else
-          p.auth-screen__card-sub
-            | No jobs yet
-            span.auth-screen__ja まだ求人が登録されていません
+          .client-portal__empty
+            p.client-portal__empty-title まだ求人はありません
+            p.client-portal__empty-text 「求人を新規作成」から登録できます。審査のあと、公開一覧に出ます。
 
-      h2.auth-screen__card-title Profile
-      p.auth-screen__card-sub
-        | Company information
-        span.auth-screen__ja 基本情報
-      .auth-form
-        .auth-form__item
-          .auth-form__item-label
-            span.auth-form__en Company
-            span.auth-form__ja 会社名
-          p.auth-form__input = @client.company
-        .auth-form__item
-          .auth-form__item-label
-            span.auth-form__en Contact
-            span.auth-form__ja 担当者
-          p.auth-form__input = @client.person
-        .auth-form__item
-          .auth-form__item-label
-            span.auth-form__en Email
-            span.auth-form__ja メールアドレス
-          p.auth-form__input = @client.email
-        .auth-form__item
-          .auth-form__item-label
-            span.auth-form__en Tel
-            span.auth-form__ja 電話番号
-          p.auth-form__input = @client.tel
-        = link_to destroy_client_session_path, method: :delete, class: "auth-form__link" do
-          span.auth-form__en Sign out
-          span.auth-form__ja ログアウト
+      aside.client-portal__panel.client-portal__panel--side
+        h2.client-portal__heading 基本情報
+        dl.client-portal__dl
+          div
+            dt 会社名
+            dd = @client.company.presence || "—"
+          div
+            dt 担当者
+            dd = @client.person.presence || "—"
+          div
+            dt メールアドレス
+            dd = @client.email.presence || "—"
+          div
+            dt 電話番号
+            dd = @client.tel.presence || "—"

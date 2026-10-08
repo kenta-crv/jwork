@@ -1,22 +1,40 @@
-.jobs-card.jobs-card--stack
+.jobs-card.jobs-card--stack.jobs-card--form
+  - unless @recruit.persisted?
+    = form_with url: import_recruits_path, method: :post, local: true, class: "jobs-import" do
+      .jobs-import__head
+        span.jobs-import__prefix 掲載URL
+      .jobs-import__row
+        = text_field_tag :source_url, @source_url, id: "source_url", class: "jobs-import__input", placeholder: "求人ボックスの詳細URLを貼り付け", aria: { label: "掲載URL" }
+        = submit_tag "読み込む", class: "jobs-import__submit"
+      details.jobs-import__remarks
+        summary.jobs-import__remarks-title 備考
+        ul.jobs-import__remarks-list
+          li 読み込みできるもの：求人ボックスの求人詳細URL、および JobPosting（構造化データ）付きの公開求人ページ
+          li 読み込みできないもの：Indeed（ボット対策のため取得不可）、ログイン必須ページ、社内向けURL
+          li IndeedのURLを貼っても取得できません。求人ボックスのURLを使うか、下のフォームへ手入力してください
   = form_with model: @recruit, local: true, class: "jobs-form" do |f|
     .jobs-form__field
       = f.label :title, "案件名"
-      = f.text_field :title, class: "jobs-form__input", placeholder: "例: Bicycle delivery in Edogawa"
+      = f.text_field :title, class: "jobs-form__input", placeholder: "例: 江戸川区 自転車配達"
     .jobs-form__field
       = f.label :description, "案件概要"
       = f.text_area :description, class: "jobs-form__input", rows: 4
+    - if admin_signed_in?
+      .jobs-form__field
+        = f.label :recommend, "おすすめ"
+        = f.text_area :recommend, class: "jobs-form__input", rows: 4
+      .jobs-form__field
+        = f.label :point, "ポイント"
+        = f.select :point, (0..5).to_a, {}, { class: "jobs-form__input" }
+      .jobs-form__field
+        = f.label :genre, "職種"
+        = f.select :genre, [["cleaning", "cleaning"], ["driver", "driver"]], { include_blank: "選択してください" }, { class: "jobs-form__input" }
+    - else
+      = f.hidden_field :recommend
+      = f.hidden_field :point
+      = f.hidden_field :genre
     .jobs-form__field
-      = f.label :recommend, "recommend"
-      = f.text_area :recommend, class: "jobs-form__input", rows: 4
-    .jobs-form__field
-      = f.label :point, "ポイント"
-      = f.select :point, (0..5).to_a, {}, { class: "jobs-form__input" }
-    .jobs-form__field
-      = f.label :genre, "genre"
-      = f.select :genre, [["cleaning", "cleaning"], ["driver", "driver"]], { include_blank: "選択してください" }, { class: "jobs-form__input" }
-    .jobs-form__field
-      = f.label :unit_price, "日給例"
+      = f.label :unit_price, "給料"
       = f.text_field :unit_price, class: "jobs-form__input"
     .jobs-form__field
       = f.label :reward, "報酬例（計算式など）"
@@ -29,29 +47,43 @@
       = f.text_area :working_days, class: "jobs-form__input"
     .jobs-form__field
       = f.label :area, "エリア"
-      = f.text_area :area, class: "jobs-form__input"
+      = f.text_field :area, class: "jobs-form__input"
     .jobs-form__field
       = f.label :payment, "支払い日"
-      = f.text_area :payment, class: "jobs-form__input"
+      = f.text_field :payment, class: "jobs-form__input"
     .jobs-form__field
-      = f.label :japanese_skill, "japanese_skill"
+      = f.label :japanese_skill, "日本語レベル"
       = f.text_area :japanese_skill, class: "jobs-form__input"
     .jobs-form__field
-      = f.label :require, "require"
+      = f.label :require, "応募資格"
       = f.text_area :require, class: "jobs-form__input"
     .jobs-form__field
-      = f.label :contract_type, "contract_type"
-      = f.text_area :contract_type, class: "jobs-form__input"
+      = f.label :contract_type, "雇用形態"
+      = f.text_field :contract_type, class: "jobs-form__input"
     .jobs-form__field
-      = f.label :visa, "visa"
+      = f.label :visa, "ビザ"
       = f.select :visa, ["日本国籍", "永住ビザ", "長期滞在ビザ", "定住ビザ", "難民ビザ", "家族滞在ビザ", "留学ビザ"], {}, class: "jobs-form__input", multiple: true
-    .jobs-form__field
-      = f.label :car_details, "car_details"
-      = f.text_area :car_details, class: "jobs-form__input"
     .jobs-form__field
       = f.label :remarks, "備考・注意事項"
       = f.text_area :remarks, class: "jobs-form__input", rows: 4
+    - if admin_signed_in?
+      .jobs-form__field
+        = f.label :car_details, "車両"
+        = f.text_area :car_details, class: "jobs-form__input"
+      .jobs-form__field
+        = f.label :published, "審査を終えて公開する"
+        = f.check_box :published
+    - else
+      = f.hidden_field :car_details
+    - client_review = client_signed_in? && !admin_signed_in?
+    - if client_review
+      ul.jobs-form__notes
+        li 雇用形態や条件、想定採択率によって設定額の変更を依頼する場合があります。
+        li 応募要件や日本語力等の条件を厳しく設定されますと、受付が出来かねますのでご留意ください。
     .jobs-form__actions
-      = f.submit "この内容で保存する", class: "jobs-search__submit"
-      - back_path = @recruit.persisted? ? recruit_path(@recruit) : recruits_path
+      = f.submit (client_review ? "この内容で審査依頼する" : "この内容で保存する"), class: "jobs-search__submit"
+      - if client_review
+        - back_path = client_mypage_path
+      - else
+        - back_path = @recruit.persisted? ? recruit_path(@recruit) : recruits_path
       = link_to "キャンセルして戻る", back_path, class: "jobs-back", data: { turbolinks: false }

@@ -1,46 +1,46 @@
 module ApplicationHelper
   FEATURED_COLUMNS = {
     cargo: [
-      { title: "Amazon配送の効率化に寄与する外国人ドライバーの事例", path: "/columns/amazon-delivery-foreign-drivers" },
-      { title: "外国人ドライバーが支えるAmazon配送の現場", path: "/columns/foreign-driver-support-amazon-delivery" },
-      { title: "軽貨物業界の2026年におけるサプライチェーンの変革", path: "/columns/transformation-supply-chain-light-cargo-industry-2026" },
-      { title: "2026年の軽貨物業界における物流の効率化事例", path: "/columns/2026-logistics-efficiency-light-cargo-industry" },
-      { title: "軽貨物業界の2026年に向けた新規参入者へのアドバイス", path: "/columns/light-cargo-industry-advice-2026" }
+      { title: "荷主企業向け 軽貨物配送の委託・比較 完全ガイド", path: "/columns/shipper-light-cargo-outsourcing-comparison-guide" },
+      { title: "Amazon配送の人材不足・採用改善 完全ガイド", path: "/columns/amazon-delivery-talent-shortage-complete-guide" },
+      { title: "Amazon配送会社向け人材請負サービス完全ガイド", path: "/columns/amazon-guide-delivery-cargo" },
+      { title: "Amazon配送ドライバー採用の成功パターン完全解説", path: "/columns/amazon-driver-complete-guide-delivery-hiring" },
+      { title: "軽貨物サービスのすべて｜緊急配送・スポット便・定期便の違いを網羅", path: "/columns/light-cargo-delivery" }
     ],
     logistics: [
-      { title: "外国人ドライバーと日本の物流業界の共生", path: "/columns/foreign-driver-logistics-japan" },
-      { title: "2026年の軽貨物業界における物流の効率化事例", path: "/columns/2026-logistics-efficiency-light-cargo-industry" },
-      { title: "軽貨物業界における業務効率化のための最新技術", path: "/columns/latest-technologies-in-light-cargo-industry" },
-      { title: "軽貨物業界の2026年最新動向：データドリブンな運用の重要性", path: "/columns/latest-trends-in-light-cargo-industry-2026" },
-      { title: "軽貨物業界における顧客ニーズの変化と対応策", path: "/columns/customer-needs-in-light-cargo-industry" }
+      { title: "自社配送 vs 軽貨物委託｜企業の物流担当者が知っておくべきメリット・デメリット徹底比較", path: "/columns/in-house-delivery-vs-light-cargo-outsourcing" },
+      { title: "物流DXの第一歩は軽貨物から：企業が取り入れるべき理由と成功事例", path: "/columns/first-step-logistics-dx" },
+      { title: "「必要な時だけ頼む」スポット便活用による物流固定費の変動費化", path: "/columns/spot-delivery-utilization" },
+      { title: "【実例公開】軽貨物配送の導入で物流効率が向上した成功事例5選（BtoB・BtoC別）", path: "/columns/light-cargo-delivery-case-studies" },
+      { title: "軽貨物委託の料金相場ガイド｜距離制・時間制・スポットの選び方", path: "/columns/light-cargo-commission-price-guide" }
     ],
     human: [
-      { title: "Amazon配送における外国人ドライバーの成功事例", path: "/columns/success-stories-of-foreign-drivers-in-amazon-delivery" },
-      { title: "国際的な人材活用がAmazon配送を変える", path: "/columns/international-talent-utilization-amazon-delivery" },
-      { title: "Amazon配送戦略における外国人労働者の重要性", path: "/columns/importance-of-foreign-workers-in-amazon-delivery-strategy" },
-      { title: "Amazon配送における多様な人材活用の現状", path: "/columns/amazon-delivery-diverse-human-resource-utilization" },
-      { title: "2026年の軽貨物業界における人材育成とその課題", path: "/columns/2026-light-cargo-industry-human-resource-development-challenges" }
+      { title: "在留資格別に外国人が働ける仕事｜企業が採用前に確認すること", path: "/columns/work-allowed-by-residence-status-for-employers" },
+      { title: "特定技能で従事できる仕事｜分野・業務区分の範囲", path: "/columns/specified-skilled-worker-work-jobs-field-scope" },
+      { title: "特定技能の採用基準｜試験・日本語・分野該当の確認", path: "/columns/tokutei-gino-hiring-criteria" },
+      { title: "外国人配送ドライバー活用完全ガイド【2026年版】", path: "/columns/foreign-driver-guide-2026" },
+      { title: "外国人ドライバー採用のメリット・注意点まとめ", path: "/columns/hiring-foreign-drivers-amazon-delivery" }
     ],
     event: [
-      { title: "軽貨物業界の2026年に向けたマーケティング戦略の再考", path: "/columns/marketing-strategies-light-cargo-industry-2026" },
-      { title: "2026年の軽貨物業界における顧客体験の向上方法", path: "/columns/customer-experience-improvement-light-cargo-industry-2026" },
-      { title: "軽貨物業界の2026年におけるリスクマネジメントの重要性", path: "/columns/risk-management-light-cargo-industry-2026" },
-      { title: "2026年における軽貨物業界の競争環境と生存戦略", path: "/columns/competition-environment-light-cargo-industry-2026" },
-      { title: "軽貨物業界の2026年に向けた持続可能な運営戦略", path: "/columns/sustainable-strategies-for-light-cargo-industry-2026" }
+      { title: "特定技能と育成就労の現場の違い｜配置・教育・記録の具体例", path: "/columns/tokutei-gino-ikusei-shuro-workplace-examples" },
+      { title: "特定技能の定着支援｜支援義務と現場で企業がやる実務", path: "/columns/tokutei-gino-retention-support-duty" },
+      { title: "育成就労外国人の受け入れ｜責任者・指導員・生活相談員の役割", path: "/columns/ikusei-shuro-staff-roles-acceptance" },
+      { title: "在留資格別に外国人が働ける仕事｜企業が採用前に確認すること", path: "/columns/work-allowed-by-residence-status-for-employers" },
+      { title: "特定技能で従事できる仕事｜分野・業務区分の範囲", path: "/columns/specified-skilled-worker-work-jobs-field-scope" }
     ],
     cleaning: [
-      { title: "清掃業者の選び方: 品質を重視した判断基準", path: "https://okey.work/columns/how-to-choose-cleaning-service-7a0d021f-5b76-4eeb-a114-a88aa45b69e1" },
-      { title: "失敗しない清掃業者の選び方: ケーススタディ", path: "https://okey.work/columns/cleaning-service-selection-bf7841c6-5c44-4746-bd8e-1e617507c62b" },
-      { title: "日常清掃の業者選び：失敗しないためのガイド", path: "https://okey.work/columns/daily-cleaning-service-guide" },
-      { title: "清掃業者選びにおける費用の透明性を確保する方法", path: "https://okey.work/columns/transparency-in-cleaning-service-costs" },
-      { title: "日常清掃業者の選び方：信頼性と専門知識の重要性", path: "https://okey.work/columns/daily-cleaning-service-selection-b810974f-67c9-4117-aff7-4194bfee8785" }
+      { title: "在留資格別に外国人が働ける仕事｜企業が採用前に確認すること", path: "/columns/work-allowed-by-residence-status-for-employers" },
+      { title: "特定技能で従事できる仕事｜分野・業務区分の範囲", path: "/columns/specified-skilled-worker-work-jobs-field-scope" },
+      { title: "特定技能の採用基準｜試験・日本語・分野該当の確認", path: "/columns/tokutei-gino-hiring-criteria" },
+      { title: "育成就労外国人の受け入れ｜責任者・指導員・生活相談員の役割", path: "/columns/ikusei-shuro-staff-roles-acceptance" },
+      { title: "留学生をアルバイトで雇える条件｜許可の有無と週28時間まで", path: "/columns/student-status-part-time-work-permission-28hours" }
     ],
     top: [
-      { title: "Amazon配送の効率化に寄与する外国人ドライバーの事例", path: "/columns/amazon-delivery-foreign-drivers" },
-      { title: "外国人ドライバーが支えるAmazon配送の現場", path: "/columns/foreign-driver-support-amazon-delivery" },
-      { title: "外国人ドライバーと日本の物流業界の共生", path: "/columns/foreign-driver-logistics-japan" },
-      { title: "軽貨物業界の2026年におけるサプライチェーンの変革", path: "/columns/transformation-supply-chain-light-cargo-industry-2026" },
-      { title: "国際的な人材活用がAmazon配送を変える", path: "/columns/international-talent-utilization-amazon-delivery" }
+      { title: "在留資格別に外国人が働ける仕事｜企業が採用前に確認すること", path: "/columns/work-allowed-by-residence-status-for-employers" },
+      { title: "特定技能で従事できる仕事｜分野・業務区分の範囲", path: "/columns/specified-skilled-worker-work-jobs-field-scope" },
+      { title: "荷主企業向け 軽貨物配送の委託・比較 完全ガイド", path: "/columns/shipper-light-cargo-outsourcing-comparison-guide" },
+      { title: "Amazon配送の人材不足・採用改善 完全ガイド", path: "/columns/amazon-delivery-talent-shortage-complete-guide" },
+      { title: "自社配送 vs 軽貨物委託｜企業の物流担当者が知っておくべきメリット・デメリット徹底比較", path: "/columns/in-house-delivery-vs-light-cargo-outsourcing" }
     ]
   }.freeze
 
@@ -71,7 +71,7 @@ module ApplicationHelper
   end
 
   def featured_columns_hub_for(page_key)
-    page_key.to_sym == :cleaning ? "https://okey.work/columns" : "/columns"
+    "/columns"
   end
 
   def breadcrumb_list_json_ld

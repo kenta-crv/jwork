@@ -171,7 +171,7 @@ html.jflp-page body {
   position: absolute;
   inset: 0 0 0 18%;
   z-index: 0;
-  background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0) 28%), var(--jf-hero-image) right center / cover no-repeat;
+  background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0) 28%), var(--jf-hero-image) right 22% / cover no-repeat;
 }
 
 .jw-foreign-lp .jf-hero__inner { position: relative; z-index: 1; padding-top: 72px; }
@@ -1370,6 +1370,72 @@ html.jflp-page body {
 .jw-foreign-lp .jf-review-card p { margin: 0; font-size: 14px; }
 .jw-foreign-lp .jf-reviews__note { margin: 18px 0 0; text-align: center; font-size: 12px; color: #64748b; }
 
+.jw-foreign-lp .jf-industries {
+  background: #fff;
+  padding-top: 72px;
+  padding-bottom: 64px;
+}
+.jw-foreign-lp .jf-industries .jf-heading {
+  margin-bottom: 36px;
+}
+.jw-foreign-lp .jf-industries__marquee {
+  overflow: hidden;
+}
+.jw-foreign-lp .jf-industries__track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  animation: jf-industries-scroll 65s linear infinite;
+}
+.jw-foreign-lp .jf-industries__track:hover {
+  animation-play-state: paused;
+}
+.jw-foreign-lp .jf-industry-card {
+  flex: 0 0 286px;
+  width: 286px;
+  background: #fff;
+  border: 1px solid var(--jf-line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.jw-foreign-lp .jf-industry-card__image {
+  display: block;
+  width: 100%;
+  height: 168px;
+  object-fit: cover;
+}
+.jw-foreign-lp .jf-industry-card p {
+  margin: 0;
+  padding: 14px 16px 16px;
+  color: var(--jf-navy);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+}
+.jw-foreign-lp .jf-industries__note {
+  margin: 28px 0 0;
+  text-align: center;
+  color: var(--jf-navy);
+  font-size: 15px;
+  font-weight: 700;
+}
+@keyframes jf-industries-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jw-foreign-lp .jf-industries__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .jw-foreign-lp .jf-industries__track .jf-industry-card:nth-child(n+14) {
+    display: none;
+  }
+}
+
 .jw-foreign-lp .jf-articles__list {
   list-style: none;
   width: min(720px, 100%);
@@ -1780,6 +1846,13 @@ html.jflp-page body {
   }
   .jw-foreign-lp .jf-options { grid-template-columns: repeat(3, 1fr); }
   .jw-foreign-lp .jf-reviews__grid { grid-template-columns: 1fr; }
+  .jw-foreign-lp .jf-industry-card {
+    flex-basis: 240px;
+    width: 240px;
+  }
+  .jw-foreign-lp .jf-industry-card__image { height: 140px; }
+  .jw-foreign-lp .jf-industry-card p { font-size: 13px; padding: 12px 14px 14px; }
+  .jw-foreign-lp .jf-industries__note { font-size: 14px; }
   .jw-foreign-lp .jf-company__layout { grid-template-columns: 1fr; gap: 20px; }
   .jw-foreign-lp .jf-flow-card {
     grid-template-columns: 1fr;

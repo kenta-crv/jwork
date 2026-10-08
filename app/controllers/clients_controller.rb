@@ -1,10 +1,8 @@
 class ClientsController < ApplicationController
   before_action :authenticate_client!, only: [:mypage]
-  before_action :redirect_client_to_mypage, only: [:show]
-  #before_action :authenticate_admin!, only: [:index, :destroy]
-  #before_action :authenticate_any!, only: [:show]
+  before_action :authorize_client_record!, except: [:mypage]
   def index
-    @clients = Client.all
+    @clients = Client.includes(:recruits, :jobs).order(updated_at: :desc)
   end
 
   def mypage
@@ -44,7 +42,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = Client.find(params[:id])
+    @client = Client.includes(:recruits, :jobs, :situations).find(params[:id])
     @job = Job.new # 新規用
     @situation = Situation.new
   end
@@ -99,10 +97,41 @@ class ClientsController < ApplicationController
     redirect_to info_client_path(@client), notice: "#{@client.company}へ開始日のメール送信を行いました。"
   end
 
+  def send_portal_invite
+    unless admin_signed_in?
+      redirect_to new_admin_session_path, alert: "権限がありません"
+      return
+    end
+
+    @client = Client.find(params[:id])
+    if @client.email.blank?
+      redirect_to client_path(@client), alert: "メールアドレスが未登録です"
+      return
+    end
+
+    @client.send_portal_setup_instructions!
+    redirect_to client_path(@client), notice: "#{@client.company}へ、マイページ用のパスワード設定案内を送信しました"
+  end
+
   private
 
-  def redirect_client_to_mypage
-    redirect_to client_mypage_path if client_signed_in? && !admin_signed_in?
+  def authorize_client_record!
+    return if admin_signed_in?
+
+    if client_signed_in?
+      if action_name == "show" && params[:id].to_i == current_client.id
+        redirect_to client_mypage_path
+      else
+        redirect_to client_mypage_path, alert: "権限がありません"
+      end
+      return
+    end
+
+    if action_name == "show"
+      redirect_to new_client_session_path, alert: "ログインが必要です"
+    else
+      redirect_to new_admin_session_path, alert: "ログインが必要です"
+    end
   end
 
   # client または admin のどちらかでログインしていればOK

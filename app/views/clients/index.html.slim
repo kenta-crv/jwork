@@ -1,71 +1,78 @@
-- set_meta_tags title: "企業一覧"
-h2 顧客一覧
+- set_meta_tags title: "顧客一覧", noindex: true
+- mapping = { "軽貨物業" => "cargo", "警備業" => "security", "清掃業" => "cleaning", "その他" => "other" }
+- filter_labels = [["all", "全表示"], ["cargo", "軽貨物"], ["security", "警備"], ["cleaning", "清掃"], ["other", "その他"]]
 
-/ フィルターボタン（高さを抑え、操作性を向上）
-.mb-3
-  - ["all", "cargo", "security", "cleaning", "other"].each do |t|
-    button.btn.btn-sm.filter-btn[data-target="#{t}" class="#{t=='all' ? 'btn-primary' : 'btn-outline-primary'}" style="margin-right:4px; font-weight:bold;"]
-      = t == 'all' ? '全表示' : (t == 'cargo' ? '軽貨物' : t == 'security' ? '警備' : t == 'cleaning' ? '清掃' : 'その他')
+.auth-screen.auth-screen--admin.auth-screen--wide
+  .auth-screen__mesh
+  .auth-screen__orb.auth-screen__orb--a
+  .auth-screen__orb.auth-screen__orb--b
+  .auth-screen__grain
+  .auth-screen__layout
+    aside.auth-screen__brand
+      p.auth-screen__kicker Client CRM
+      h1.auth-screen__title Clients
+      p.auth-screen__ja 顧客一覧
+    .user-desk.auth-screen__card.client-crm.client-crm--compact
+      - if notice.present?
+        p.auth-screen__flash.auth-screen__flash--notice = notice
+      - if alert.present?
+        p.auth-screen__flash.auth-screen__flash--alert = alert
 
-.client-list style="max-width: 100%; overflow-x: hidden;"
-  - mapping = { "軽貨物業" => "cargo", "警備業" => "security", "清掃業" => "cleaning", "その他" => "other" }
+      .client-crm__toolbar
+        p.client-crm__count
+          | 件数
+          strong = @clients.size
+        .client-crm__filters
+          - filter_labels.each_with_index do |(code, label), i|
+            button.client-crm__filter type="button" data-target=code class=("is-active" if i.zero?) = label
+        = link_to "新規登録", new_client_path, class: "btn btn-primary btn-xs"
 
-  - @clients.each do |client|
-    - industry_code = mapping[client.industry] || ""
-    
-    / 顧客ブロック：外枠をシャープにし、余白を削ぎ落とし
-    .filter-item[data-industry="#{industry_code}" style="margin-bottom: 15px; border: 2px solid #444; background: #fff;"]
-      
-      / --- 会社行：情報を一行に凝縮 ---
-      .client-header style="display: flex; align-items: center; background: #444; color: #fff; padding: 4px 12px; font-size: 0.9rem;"
-        span style="background: #ffc107; color: #000; padding: 0 6px; border-radius: 2px; font-size: 0.75rem; font-weight: bold; margin-right: 10px;" = client.industry
-        strong style="font-size: 1.6rem;" = link_to client.company, client_path(client), style: "color: #fff;"
-        span style="margin-left: auto; font-size: 1.4rem"
-          |  #{client.person} / #{client.tel} / #{client.mobile} / #{client.address} / #{client.email}
-          = link_to ' 編集 ', edit_client_path(client), class: "btn btn-xs btn-success", style: "padding: 0 5px; margin-left: 10px; font-size:1.2rem;"
-          = link_to ' 削除 ', client_path(client), method: :delete, data: { confirm: '削除？' }, class: "btn btn-xs btn-danger", style: "padding: 0 5px; margin-left: 5px; font-size: 1.2rem;"
-
-      / --- 案件台帳：表形式を「案件単位」で作成 ---
-      - if client.jobs.any?
-        table style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 0.85rem;"
-          thead style="background: #f2f2f2; border-bottom: 1px solid #ccc;"
-            tr
-              th style="width: 25%; border-right: 1px solid #ccc; padding: 2px 5px;" 案件内容
-              th style="width: 12%; border-right: 1px solid #ccc; padding: 2px 5px;" 勤務/エリア
-              th style="width: 18%; border-right: 1px solid #ccc; padding: 2px 5px; background: #fff0f0;" 仕入/販売/支払
-              th style="width: 15%; border-right: 1px solid #ccc; padding: 2px 5px;" 配送/レンタル
-              th style="width: 30%; padding: 2px 5px;" 備考
-          tbody
-            - client.jobs.each do |job|
-              tr style="border-bottom: 1px solid #eee;"
-                td style="padding: 5px; border-right: 1px solid #ccc; vertical-align: top; line-height: 1.2;"
-                  strong style="color: #007bff; font-size: 1.5rem;" = job.content
-                td style="padding: 2px 5px; border-right: 1px solid #ccc; vertical-align: top;"
-                  div = job.working_time
-                  div style="color: #000; font-size: 1.2rem;" = job.area
-                td style="font-size: 1.4rem; padding: 2px 5px; border-right: 1px solid #ccc; vertical-align: top; background: #fffcfc;"
-                  div style="color: #d9534f; font-weight: bold;" 仕: #{job.purchase_price}
-                  div style="color: #0275d8; font-weight: bold;" 販: #{job.sales_price}
-                  div style="font-size: 0.75rem; border-top: 1px solid #ffe0e0;" 支: #{job.payment}
-                td style="padding: 2px 5px; border-right: 1px solid #ccc; vertical-align: top; font-size: 1.2rem;"
-                  div 配送: #{job.delivery}
-                  div 貸: #{job.rental}
-                td style="padding: 2px 5px; vertical-align: top; font-size: 0.8rem; color: #444; font-size: 1.2rem;"
-                  = job.remarks
+      - if @clients.blank?
+        p.client-crm__empty 顧客はまだありません。
       - else
-        .no-jobs style="padding: 5px 15px; color: #999; font-size: 0.8rem;" 案件登録なし
+        .client-crm__list
+          - @clients.each do |client|
+            - industry_code = mapping[client.industry].presence || "other"
+            - pending = client.recruits.reject(&:published?)
+            - published = client.recruits.select(&:published?)
+            article.client-crm__card.filter-item data-industry=industry_code
+              .client-crm__row
+                .client-crm__main
+                  .client-crm__badges
+                    - if client.industry.present?
+                      span.client-crm__badge = client.industry
+                    - if pending.any?
+                      span.client-crm__badge.client-crm__badge--review 審査中 #{pending.size}
+                    - if published.any?
+                      span.client-crm__badge.client-crm__badge--live 公開中 #{published.size}
+                  h2.client-crm__company = link_to client.company.presence || "会社名未設定", client_path(client)
+                  p.client-crm__line
+                    = [client.person, client.tel, client.mobile, client.email, client.address].map { |v| v.presence || "—" }.join(" ／ ")
+                  - if client.recruits.any?
+                    p.client-crm__line.client-crm__line--sub
+                      = client.recruits.map { |r| "#{r.title.presence || '無題'}（#{r.listing_status}）" }.join("、 ")
+                  - elsif client.jobs.any?
+                    p.client-crm__line.client-crm__line--sub
+                      = client.jobs.first(2).map { |j| j.content.presence || "案件" }.join("、 ")
+                      - if client.jobs.size > 2
+                        |  ほか#{client.jobs.size - 2}件
+                .client-crm__actions
+                  = link_to "詳細", client_path(client), class: "btn btn-primary btn-xs"
+                  = link_to "編集", edit_client_path(client), class: "btn btn-default btn-xs"
+                  = link_to "削除", client_path(client), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs"
 
 javascript:
   document.addEventListener("turbolinks:load", function() {
-    const buttons = document.querySelectorAll('.filter-btn');
-    const items = document.querySelectorAll('.filter-item');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', function() {
-        buttons.forEach(b => b.classList.replace('btn-primary', 'btn-outline-primary'));
-        this.classList.replace('btn-outline-primary', 'btn-primary');
-        const target = this.dataset.target;
-        items.forEach(item => {
-          item.style.display = (target === 'all' || item.dataset.industry === target) ? 'block' : 'none';
+    var buttons = document.querySelectorAll(".client-crm__filter");
+    var items = document.querySelectorAll(".filter-item");
+    if (!buttons.length) return;
+    buttons.forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        buttons.forEach(function(b) { b.classList.remove("is-active"); });
+        btn.classList.add("is-active");
+        var target = btn.dataset.target;
+        items.forEach(function(item) {
+          item.style.display = (target === "all" || item.dataset.industry === target) ? "" : "none";
         });
       });
     });

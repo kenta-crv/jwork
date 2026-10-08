@@ -2,6 +2,12 @@ class Recruit < ApplicationRecord
   belongs_to :client, optional: true
   has_many :recruit_saves, class_name: "RecruitSave", dependent: :destroy, inverse_of: :recruit
 
+  scope :listed, -> { where(published: true) }
+
+  def listing_status
+    published? ? "公開中" : "審査中"
+  end
+
   serialize :visa, Array
   serialize :visa_en, Array
 

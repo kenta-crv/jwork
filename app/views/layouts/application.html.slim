@@ -1,4 +1,4 @@
-- desk_page = controller_name == "users" && %w[index show edit].include?(action_name)
+- desk_page = (controller_name == "users" && %w[index show edit].include?(action_name)) || (controller_name == "clients" && %w[index show edit new].include?(action_name))
 - auth_page = %w[sessions passwords].include?(controller_name) || (controller_name == "registrations" && action_name == "new") || (controller_name == "clients" && action_name == "mypage")
 - jobs_page = controller_name == "recruits" && %w[index show new edit import].include?(action_name)
 - html_class = []

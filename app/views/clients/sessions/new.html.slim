@@ -23,7 +23,7 @@
       h2.auth-screen__card-title Sign in
       p.auth-screen__card-sub
         | Continue with your registered email
-        span.auth-screen__ja 登録済みのメールアドレスで続行
+        span.auth-screen__ja 担当から届いた案内メールでパスワードを設定した方は、そのアドレスでログインできます
       = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f|
         .auth-form__field
           = f.email_field :email, autocomplete: "email", class: "auth-form__input", placeholder: " "

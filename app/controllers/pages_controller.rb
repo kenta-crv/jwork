@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   layout 'pages'
 
-  before_action :set_breadcrumbs, except: [:foreign_staffing, :foreign_jobs, :hotel, :factory]
+  before_action :set_breadcrumbs, except: [:foreign_staffing, :foreign_jobs, :hotel, :factory, :language, :english]
   before_action :initialize_contract
 
   LP_LABELS = {
@@ -21,6 +21,8 @@ class PagesController < ApplicationController
   def foreign_jobs; end
   def hotel; end
   def factory; end
+  def language; end
+  def english; end
 
   private
 

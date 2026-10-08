@@ -25,7 +25,11 @@ Rails.application.routes.draw do
     passwords: "clients/passwords"
   }
   get "/client/mypage", to: "clients#mypage", as: :client_mypage
-  resources :clients do
+  devise_scope :client do
+    get "/clients/sign_in", to: "clients/sessions#new"
+    post "/clients/sign_in", to: "clients/sessions#create"
+  end
+  resources :clients, constraints: { id: /\d+/ } do
     resources :situations
     resources :jobs 
     collection do
@@ -35,6 +39,7 @@ Rails.application.routes.draw do
     member do
       post :send_mail
       post :send_mail_start
+      post :send_portal_invite
       get "conclusion"
     end
   end
@@ -84,6 +89,7 @@ Rails.application.routes.draw do
     member do
       post :apply
       post :toggle_save
+      post :publish
     end
   end
   #get 'columns',         to: 'top#columns'
@@ -102,6 +108,8 @@ Rails.application.routes.draw do
   get '/foreign-jobs', to: 'pages#foreign_jobs'
   get '/hotel', to: 'pages#hotel'
   get '/factory', to: 'pages#factory'
+  get '/language', to: 'pages#language'
+  get '/english', to: 'pages#english'
 
   resources :contracts
 end

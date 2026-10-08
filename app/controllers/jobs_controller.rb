@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+    before_action :authenticate_admin!
+
     def index
       @jobs = Job.order(created_at: "DESC").page(params[:page])
     end

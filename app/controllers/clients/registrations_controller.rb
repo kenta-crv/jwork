@@ -3,24 +3,12 @@
 class Clients::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def new
+    redirect_to foreign_jobs_path, alert: "求人のご登録は問い合わせから受け付けます。会社情報の再入力は不要です。"
+  end
+
   def create
-    build_resource(mapped_sign_up_params)
-
-    if resource.save
-      if resource.active_for_authentication?
-        set_flash_message! :notice, :signed_up
-        sign_up(resource_name, resource)
-        redirect_to client_mypage_path and return
-      else
-        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
-        expire_data_after_sign_in!
-        redirect_to after_inactive_sign_up_path_for(resource) and return
-      end
-    end
-
-    clean_up_passwords resource
-    set_minimum_password_length
-    render :new
+    redirect_to foreign_jobs_path, alert: "求人のご登録は問い合わせから受け付けます。会社情報の再入力は不要です。"
   end
 
   protected

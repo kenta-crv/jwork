@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_09_10_101306) do
+ActiveRecord::Schema.define(version: 2026_10_06_170000) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "source"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 2026_09_10_101306) do
     t.string "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "client_id"
+    t.index ["client_id"], name: "index_contracts_on_client_id"
   end
 
   create_table "inspections", force: :cascade do |t|
@@ -227,6 +229,7 @@ ActiveRecord::Schema.define(version: 2026_09_10_101306) do
     t.integer "views_count", default: 0, null: false
     t.integer "applications_count", default: 0, null: false
     t.integer "saves_count", default: 0, null: false
+    t.boolean "published", default: false, null: false
     t.index ["client_id"], name: "index_recruits_on_client_id"
   end
 
@@ -363,6 +366,7 @@ ActiveRecord::Schema.define(version: 2026_09_10_101306) do
   end
 
   add_foreign_key "alcohols", "users"
+  add_foreign_key "contracts", "clients", on_delete: :nullify
   add_foreign_key "inspections", "users"
   add_foreign_key "jobs", "clients"
   add_foreign_key "journals", "users"

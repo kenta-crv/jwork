@@ -1,7 +1,7 @@
 class SituationsController < ApplicationController
+    before_action :authenticate_admin!
     before_action :load_client
     before_action :load_situation, only: [:edit,:update,:show,:destroy]
-    #before_action :authenticate_client!
 
     def load_client
       @client = Client.find(params[:client_id])

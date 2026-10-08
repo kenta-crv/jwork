@@ -1,5 +1,5 @@
 - top_hub_page = controller_name == "top" && action_name == "index"
-- foreign_lp_page = controller_name == "pages" && %w[foreign_staffing foreign_jobs hotel factory].include?(action_name)
+- foreign_lp_page = controller_name == "pages" && %w[foreign_staffing foreign_jobs hotel factory language english].include?(action_name)
 - isolated_lp = top_hub_page || foreign_lp_page
 doctype html
 html lang="ja" class=(isolated_lp ? "jflp-page" : nil)

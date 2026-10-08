@@ -2,12 +2,13 @@ class RecruitsController < ApplicationController
   include RecruitVisitor
 
   before_action :authenticate_recruit_editor!, except: [:index, :show, :saved, :apply, :toggle_save]
-  before_action :set_recruit, only: [:show, :edit, :update, :destroy, :apply, :toggle_save]
+  before_action :set_recruit, only: [:show, :edit, :update, :destroy, :apply, :toggle_save, :publish]
+  before_action :hide_unpublished_recruit!, only: [:show, :apply, :toggle_save]
   before_action :authorize_recruit_owner!, only: [:edit, :update, :destroy]
   before_action :recruit_visitor_token, only: [:index, :show, :saved, :toggle_save]
 
   def index
-    scope = Recruit.where.not(point: "0")
+    scope = Recruit.listed
     @areas = scope.where.not(area: [nil, ""]).distinct.order(:area).pluck(:area)
     @genres = scope.where.not(genre: [nil, ""]).distinct.order(:genre).pluck(:genre)
     scope = scope.where(area: params[:area]) if params[:area].present?
@@ -18,7 +19,7 @@ class RecruitsController < ApplicationController
 
   def saved
     @saved_recruit_ids = saved_recruit_ids_for_visitor
-    @recruits = Recruit.where(id: @saved_recruit_ids).order(updated_at: :desc)
+    @recruits = Recruit.listed.where(id: @saved_recruit_ids).order(updated_at: :desc)
   end
 
   def new
@@ -34,7 +35,8 @@ class RecruitsController < ApplicationController
     if result.error.present?
       flash.now[:alert] = result.error
     else
-      flash.now[:notice] = "掲載情報を読み込みました。内容を確認して保存してください。"
+      review_hint = client_signed_in? && !admin_signed_in? ? "内容を確認して審査依頼してください。" : "内容を確認して保存してください。"
+      flash.now[:notice] = "掲載情報を読み込みました。#{review_hint}"
     end
     render :new
   end
@@ -45,7 +47,7 @@ class RecruitsController < ApplicationController
     @source_url = nil
 
     if @recruit.save
-      redirect_to after_recruit_save_path, notice: "案件情報を登録しました"
+      redirect_to after_recruit_save_path, notice: after_recruit_save_notice
     else
       flash.now[:alert] = @recruit.errors.full_messages.join(", ")
       render :new
@@ -62,7 +64,7 @@ class RecruitsController < ApplicationController
 
   def update
     if @recruit.update(recruit_params)
-      redirect_to after_recruit_save_path, notice: "案件情報を登録しました"
+      redirect_to after_recruit_save_path, notice: after_recruit_save_notice
     else
       render :edit
     end
@@ -71,6 +73,17 @@ class RecruitsController < ApplicationController
   def destroy
     @recruit.destroy
     redirect_to after_recruit_save_path, notice: '案件が削除されました。'
+  end
+
+  def publish
+    unless admin_signed_in?
+      redirect_to new_admin_session_path, alert: "権限がありません"
+      return
+    end
+
+    @recruit.update!(published: true)
+    destination = @recruit.client_id.present? ? client_path(@recruit.client) : recruit_path(@recruit)
+    redirect_to destination, notice: "求人を公開しました"
   end
 
   def apply
@@ -119,6 +132,7 @@ class RecruitsController < ApplicationController
     return if admin_signed_in?
 
     recruit.client_id = current_client.id
+    recruit.published = false
   end
 
   def after_recruit_save_path
@@ -126,6 +140,14 @@ class RecruitsController < ApplicationController
       client_mypage_path
     else
       recruits_path
+    end
+  end
+
+  def after_recruit_save_notice
+    if client_signed_in? && !admin_signed_in?
+      "この内容で審査依頼しました"
+    else
+      "案件情報を登録しました"
     end
   end
 
@@ -141,8 +163,16 @@ class RecruitsController < ApplicationController
     RecruitSave.where(visitor_token: recruit_visitor_token).pluck(:recruit_id)
   end
 
+  def hide_unpublished_recruit!
+    return if @recruit.published?
+    return if admin_signed_in?
+    return if client_signed_in? && @recruit.client_id == current_client.id
+
+    raise ActiveRecord::RecordNotFound
+  end
+
   def recruit_params
-    params.require(:recruit).permit(
+    keys = [
       :title,
       :description,
       :unit_price,
@@ -154,12 +184,14 @@ class RecruitsController < ApplicationController
       :japanese_skill,
       :require,
       :contract_type,
-      :car_details,
       :remarks,
       :recommend,
       :point,
       :genre,
-      visa: []
-    )
+      :car_details,
+      { visa: [] }
+    ]
+    keys << :published if admin_signed_in?
+    params.require(:recruit).permit(*keys)
   end
 end
