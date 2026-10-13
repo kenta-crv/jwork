@@ -114,7 +114,10 @@
             br
             | J Workに
             em お任せ！
-          p.jf-hero__lead 英会話・中国語・韓国語など、教室に必要な外国語講師を継続して斡旋します。
+          p.jf-hero__lead
+            | 英会話・中国語・韓国語など、
+            br
+            | 教室に必要な外国語講師を継続して斡旋します。
 
           ul.jf-hero__points
             li.jf-round-point
@@ -239,7 +242,7 @@
     
         h2.jf-scope__title 受付可能範囲
     
-        p.jf-scope__lead 日本語で会話ができる外国人材を、語学講師の業務を中心にご紹介。
+        p.jf-scope__lead 英会話・中国語・韓国語のレッスンを担当できる講師を、教室向けにご紹介。
     
         .jf-scope__card
           .jf-scope__cols.jf-scope__cols--one
@@ -256,7 +259,7 @@
                 li
                   span.jf-scope__icon-wrap
                     = image_tag 'jf-scope-talk.png', alt: '', class: 'jf-scope__icon'
-                  span 子ども向け・大人向けの会話授業
+                  span 子ども向け・大人向けのレッスン
     
           .jf-scope__note
             span.jf-scope__note-icon aria-hidden="true"
@@ -491,45 +494,20 @@
                   span.jf-compare__label 出向/受託サービス
                 td.jf-compare__vs
                   span.jf-compare__price 時給 2,500〜3,500円
-                  small マージン込み
                 td.jf-compare__na ー
                 td.jf-compare__na ー
                 td.jf-compare__ours
-                  strong.jf-compare__rate 時間単価
-                  small 継続契約
+                  strong#jf-compare-hourly.jf-compare__rate 2,200円〜／時間
               tr
                 th scope="row"
                   span.jf-compare__num 02
-                  span.jf-compare__label 人が来るまで
-                td.jf-compare__vs
-                  span.jf-compare__price 候補者待ち
-                  small 単発依頼も多い
-                td.jf-compare__vs
-                  span.jf-compare__price 掲載料 15〜50万円
-                  small 応募が来るまで自社対応
+                  span.jf-compare__label 成果報酬
+                td.jf-compare__na ー
+                td.jf-compare__na ー
                 td.jf-compare__vs
                   span.jf-compare__price 年収の30〜35%
-                  small 1名紹介で完結しがち
                 td.jf-compare__ours
-                  strong.jf-compare__rate 継続して斡旋
-              tr
-                th scope="row"
-                  span.jf-compare__num 03
-                  span.jf-compare__label 単発のみ
-                td.jf-compare__vs
-                  span.jf-compare__price 受けていることが多い
-                  small 1日・スポット中心も可
-                td.jf-compare__vs
-                  span.jf-compare__price 単発求人も掲載可
-                  small 1日限りの募集も多い
-                td.jf-compare__vs
-                  span.jf-compare__price 1名紹介で終了
-                  small 継続手配ではない
-                td.jf-compare__ours
-                  strong.jf-compare__rate お受けしません
-                  small 週2回からの継続が前提
-
-        p.jf-compare__note ※派遣・求人・紹介の料金は公開情報・一般的な相場からの目安です。条件により異なります。
+                  = link_to '298,000円〜', '/foreign-jobs#price', class: 'jf-compare__rate'
 
     section#reviews.jf-reviews.jf-section
       .jf-container
@@ -605,7 +583,7 @@
             p はい。平日夜や土日の授業も、継続契約のうえで速やかに人材の斡旋が可能です。
           details.jf-faq__item
             summary どのくらい早く手配できますか？
-            p 継続契約が前提です。求人内容や報酬条件によっても大きく左右されますが、良い条件の場合、最短１日で人材の確保が可能です。
+            p 条件にもよりますが、条件が最速でマッチする場合、当社で一次面接をしてから最終面接のご提案をさせていただくので最短1週間からとなります。
           details.jf-faq__item
             summary 現場の管理や指導もお願いできますか？
             p 当社は人材の斡旋・提供が役割です。レッスン内容や指導方針のご指示はお客様にお願いしています。担当者が教室を訪問して管理・指導することはありません。
@@ -615,10 +593,6 @@
           details.jf-faq__item
             summary 定期的な契約が基本ですか？
             p はい。週2回からの継続契約が基本です。年単位・月単位など、ご希望のスケジュールに合わせた契約形態で人材を斡旋いたします。
-          details.jf-faq__item
-            summary 支払いはどうなりますか？
-            p 内容が決まったあと、担当から支払いリンクをお送りします。請求書払いが基本です。クレジットカードでのご請求にも対応します。このページから決済にはつながりません。
-
     section#flow.jf-scope.jf-scope--flow
       .jf-container.jf-scope__inner
         p.jf-scope__brand
@@ -1250,6 +1224,8 @@
       }
       function render(wage, label) {
         var cheapest = calcHourly(wage, 'fulltime');
+        var compareHourly = document.getElementById('jf-compare-hourly');
+        if (compareHourly) compareHourly.textContent = formatYen(cheapest) + '円〜／時間';
         if (baseList) baseList.textContent = formatYen(cheapest + PRICE_MARKUP);
         if (baseAmount) baseAmount.textContent = formatYen(cheapest);
         if (baseNote) baseNote.textContent = '（' + label + '）';

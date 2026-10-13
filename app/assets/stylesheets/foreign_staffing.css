@@ -1315,6 +1315,10 @@ html.jflp-page body {
   letter-spacing: -.03em;
   line-height: 1.2;
 }
+.jw-foreign-lp a.jf-compare__rate {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .jw-foreign-lp .jf-compare__ours small {
   color: #64748b;
 }

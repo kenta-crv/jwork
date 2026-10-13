@@ -500,45 +500,20 @@
                   span.jf-compare__label 出向/受託サービス
                 td.jf-compare__vs
                   span.jf-compare__price 時給 2,500〜3,500円
-                  small マージン込み
                 td.jf-compare__na ー
                 td.jf-compare__na ー
                 td.jf-compare__ours
-                  strong.jf-compare__rate 時間単価
-                  small 継続契約
+                  strong#jf-compare-hourly.jf-compare__rate 2,200円〜／時間
               tr
                 th scope="row"
                   span.jf-compare__num 02
-                  span.jf-compare__label 人が来るまで
-                td.jf-compare__vs
-                  span.jf-compare__price 候補者待ち
-                  small 単発依頼も多い
-                td.jf-compare__vs
-                  span.jf-compare__price 掲載料 15〜50万円
-                  small 応募が来るまで自社対応
+                  span.jf-compare__label 成果報酬
+                td.jf-compare__na ー
+                td.jf-compare__na ー
                 td.jf-compare__vs
                   span.jf-compare__price 年収の30〜35%
-                  small 1名紹介で完結しがち
                 td.jf-compare__ours
-                  strong.jf-compare__rate 継続して斡旋
-              tr
-                th scope="row"
-                  span.jf-compare__num 03
-                  span.jf-compare__label 単発のみ
-                td.jf-compare__vs
-                  span.jf-compare__price 受けていることが多い
-                  small 1日・スポット中心も可
-                td.jf-compare__vs
-                  span.jf-compare__price 単発求人も掲載可
-                  small 1日限りの募集も多い
-                td.jf-compare__vs
-                  span.jf-compare__price 1名紹介で終了
-                  small 継続手配ではない
-                td.jf-compare__ours
-                  strong.jf-compare__rate お受けしません
-                  small 週2回からの継続が前提
-
-        p.jf-compare__note ※派遣・求人・紹介の料金は公開情報・一般的な相場からの目安です。条件により異なります。
+                  = link_to '298,000円〜', '/foreign-jobs#price', class: 'jf-compare__rate'
 
     section#reviews.jf-reviews.jf-section
       .jf-container
@@ -592,9 +567,6 @@
             summary 採用率が低い案件でも依頼できますか？
             p お受けできません。採用率の低い案件は受付不可です。
           details.jf-faq__item
-            summary 日本人と同じ漢字の能力が必要です。依頼できますか？
-            p お受けできません。日本人レベルの漢字能力を求めるご依頼は対象外です。
-          details.jf-faq__item
             summary 最終面接を2回以上行うことはできますか？
             p お受けできません。最終面接が2回以上ある選考は受付不可です。
           details.jf-faq__item
@@ -608,7 +580,7 @@
             p はい。早朝の清掃や深夜帯の勤務も、継続契約のうえで速やかに人材の斡旋が可能です。
           details.jf-faq__item
             summary どのくらい早く手配できますか？
-            p 継続契約が前提です。求人内容や報酬条件によっても大きく左右されますが、良い条件の場合、最短１日で人材の確保が可能です。
+            p 条件にもよりますが、条件が最速でマッチする場合、当社で一次面接をしてから最終面接のご提案をさせていただくので最短1週間からとなります。
           details.jf-faq__item
             summary 現場の管理や指導もお願いできますか？
             p 当社は人材の斡旋・提供が役割です。作業内容や指導方針のご指示はお客様にお願いしています。担当者が現場を訪問して管理・指導することはありません。
@@ -618,10 +590,6 @@
           details.jf-faq__item
             summary 定期的な契約が基本ですか？
             p はい。週2回からの継続契約が基本です。年単位・月単位など、ご希望のスケジュールに合わせた契約形態で人材を斡旋いたします。
-          details.jf-faq__item
-            summary 支払いはどうなりますか？
-            p 内容が決まったあと、担当から支払いリンクをお送りします。請求書払いが基本です。クレジットカードでのご請求にも対応します。このページから決済にはつながりません。
-
     section#flow.jf-scope.jf-scope--flow
       .jf-scope__people.jf-scope__people--left
         = image_tag 'hotel-scope-people-left-one.png', alt: '', class: 'jf-scope__people-img'
@@ -780,16 +748,16 @@
         h2.jf-heading
           | 掲載料無料の求人なら
           br
-          em J Work外国人
-        p.jf-heading-lead 自社で継続採用したい企業様向けです。成果報酬で、登録者約4,000名へ求人を届けます。
+          em J Work
+        p.jf-heading-lead 自社で継続採用したい企業様向けです。成功報酬で、登録者約4,000名へ求人を届けます。
         article.jf-cross__card
           .jf-cross__copy
-            h3 J Work外国人の求人掲載
-            p 求人登録後に自社審査し、通過した継続採用の求人を掲載します。料金は採用が決まったときの成果報酬です。単発のみの求人は対象外です。
+            h3 J Workの求人掲載
+            p 求人登録後に自社審査し、通過した継続採用の求人を掲載します。料金は採用が決まったときの成功報酬です。単発のみの求人は対象外です。
             ul
               li 一次面接まで当社で対応
               li 登録者約4,000名へ直接リーチ
-              li 成果報酬 298,000円〜／1名
+              li 成功報酬 298,000円〜／1名
           = link_to '/foreign-jobs', class: 'jf-outline-button jf-outline-button--filled' do
             | 求人掲載の詳細を見る
 
@@ -1257,6 +1225,8 @@
       }
       function render(wage, label) {
         var cheapest = calcHourly(wage, 'fulltime');
+        var compareHourly = document.getElementById('jf-compare-hourly');
+        if (compareHourly) compareHourly.textContent = formatYen(cheapest) + '円〜／時間';
         if (baseList) baseList.textContent = formatYen(cheapest + PRICE_MARKUP);
         if (baseAmount) baseAmount.textContent = formatYen(cheapest);
         if (baseNote) baseNote.textContent = '（' + label + '）';
