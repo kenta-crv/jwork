@@ -3,6 +3,7 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
+  config.hosts << ENV.fetch("RAILS_ALLOWED_HOST", "j-work.jp")
   config.action_mailer.raise_delivery_errors = true
   config.action_controller.default_url_options = { host: 'j-work.jp', protocol: 'https' }
   config.action_mailer.default_url_options = { host: 'j-work.jp', protocol: 'https' }
