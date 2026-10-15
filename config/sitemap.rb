@@ -7,9 +7,7 @@ SitemapGenerator::Sitemap.include_root = false
 SitemapGenerator::Sitemap.create do
   add root_path, changefreq: 'hourly', priority: 1.0
 
-  %w[cargo human event cleaning logistic].each do |page|
-    add "/pages/#{page}", changefreq: 'monthly', priority: 0.7
-  end
+  add "/cargo", changefreq: 'monthly', priority: 0.7
 
   add "/foreign-staffing", changefreq: 'monthly', priority: 0.7
   add "/foreign-jobs", changefreq: 'monthly', priority: 0.7

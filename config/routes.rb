@@ -98,16 +98,15 @@ Rails.application.routes.draw do
   get "/column_line_cta", to: "column_line_ctas#show", defaults: { format: :json }
   get "/column_line_cta.json", to: "column_line_ctas#show"
 
-  get '/pages/cargo',    to: 'pages#cargo'
-  get '/pages/human',    to: 'pages#human'
-  get '/pages/event',    to: 'pages#event'
-  get '/pages/cleaning', to: 'pages#cleaning'
-  get '/pages/logistic', to: 'pages#logistics'
+  get '/cargo', to: 'pages#cargo'
+  get '/pages/cargo', to: redirect('/cargo')
   get '/foreign-staffing', to: 'pages#foreign_staffing'
   get '/foregin-staffing', to: 'pages#foreign_staffing'
   get '/foreign-jobs', to: 'pages#foreign_jobs'
   get '/hotel', to: 'pages#hotel'
   get '/factory', to: 'pages#factory'
+  get '/restaurant', to: 'pages#restaurant'
+  get '/warehouse', to: 'pages#warehouse'
   get '/language', to: 'pages#language'
   get '/english', to: 'pages#english'
 

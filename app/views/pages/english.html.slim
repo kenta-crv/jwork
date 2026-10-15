@@ -92,6 +92,7 @@
         = link_to 'お悩み', '#service', class: 'jf-nav__link'
         = link_to '選ばれる理由', '#features', class: 'jf-nav__link'
         = link_to '料金の目安', '#price', class: 'jf-nav__link'
+        = link_to 'お役立ち記事', '#columns', class: 'jf-nav__link'
         = link_to 'よくあるご質問', '#faq', class: 'jf-nav__link'
         = link_to 'ご利用の流れ', '#flow', class: 'jf-nav__link'
 
@@ -543,6 +544,18 @@
             p 求人広告を出しても集まらず、採用費だけがかさんでいました。依頼後すぐに候補の案内があり、必要な英語講師を確保できました。
 
         p.jf-reviews__note ※ご利用企業・ご担当者の感想であり、効果を保証するものではありません。
+
+    section#columns.jf-articles.jf-section
+      .jf-container
+        p.jf-section-kicker RESOURCES
+        h2.jf-heading お役立ち#{content_tag(:em, '記事')}
+        p.jf-heading-lead 英会話スクールの採用に関する解説記事
+        - english_columns = featured_columns_for(:english)
+        ul.jf-articles__list
+          - english_columns.each do |item|
+            li = link_to item[:title], item[:path]
+        .jf-articles__more
+          = link_to "記事一覧を見る", english_columns.first[:path], class: "jf-outline-button"
 
     section#faq.jf-faq.jf-section
       .jf-container
