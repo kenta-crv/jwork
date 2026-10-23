@@ -1,5 +1,5 @@
-- set_meta_tags title: "外国人専門の人材提供ならJ Work｜日本語の話せる永住ビザ人材"
-- set_meta_tags description: "仕事を探している外国人の方と、外国人材を探している企業の方の入口です。求人の確認と、企業向けの継続斡旋・求人掲載をご案内します。"
+- set_meta_tags title: "外国人材の紹介ならJ Work｜日本語の話せる永住ビザ人材"
+- set_meta_tags description: "外国人材の紹介ならJ Workです。日本語の話せる外国人材を、企業の現場へ継続してご紹介します。求人をお探しの方は求人一覧から確認できます。"
 
 .jw-gateway
   .jw-gateway__brand aria-label="J Work"
@@ -10,9 +10,10 @@
     span.jw-gateway__tagline-line aria-hidden="true"
 
   .jw-gateway__intro
-    h1.jw-gateway__title あなたはどちらですか？
+    h1.jw-gateway__title 外国人材の紹介
     span.jw-gateway__title-accent aria-hidden="true"
-    p.jw-gateway__lead PEOPLE CONNECT A BRIGHTER TOMORROW
+    p.jw-gateway__lead あなたはどちらですか？
+    p.jw-gateway__summary 日本語の話せる外国人材を、企業の現場へ継続してご紹介します。
 
   = image_tag 'jwork-city-skyline.png', class: 'jw-gateway__city', alt: '', aria: { hidden: true }
 
@@ -76,7 +77,7 @@
         | FOR COMPANIES SEEKING GLOBAL TALENT
 
       .jw-gateway__buttons
-        = link_to foregin_staffing_path, class: 'jw-gateway__button' do
+        = link_to foreign_staffing_path, class: 'jw-gateway__button' do
           span.jw-gateway__button-label
             span.jw-gateway__button-label-part 企業向けサービス
             span.jw-gateway__button-label-part を見る
@@ -92,3 +93,5 @@
     br
     | もっと広い世界へ
     span.jw-gateway__side-line aria-hidden="true"
+
+  p.jw-gateway__license 有料職業紹介事業 許可番号 #{employment_agency_license}

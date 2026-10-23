@@ -1,9 +1,21 @@
 footer.jw-footer
   .jw-footer__inner
-    p.jw-footer__heading 弊社サービスページ
+    p.jw-footer__heading ページ
     ul.jw-footer__list
       li = link_to "トップページ", "/", data: { turbolinks: false }
-      li = link_to "お役立ち記事", "/columns", data: { turbolinks: false }
+      li = link_to "求人一覧", recruits_path, data: { turbolinks: false }
+      li = link_to "企業向けサービス", foreign_staffing_path, data: { turbolinks: false }
+      li = link_to "会社概要", "/foreign-staffing#company", data: { turbolinks: false }
+      li = link_to "求人掲載", foreign_jobs_path, data: { turbolinks: false }
+      li = link_to "ホテル", "/hotel", data: { turbolinks: false }
+      li = link_to "工場", "/factory", data: { turbolinks: false }
+      li = link_to "飲食", "/restaurant", data: { turbolinks: false }
+      li = link_to "物流倉庫", "/warehouse", data: { turbolinks: false }
       li = link_to "軽貨物", "/cargo", data: { turbolinks: false }
+      li = link_to "語学", "/language", data: { turbolinks: false }
+      li = link_to "英語", "/english", data: { turbolinks: false }
+      li = link_to "お役立ち記事", "/columns", data: { turbolinks: false }
       li = link_to "お問い合わせ", "/contracts/new", data: { turbolinks: false }
+      li = link_to "プライバシーポリシー", "/privacy", data: { turbolinks: false }
+  p.jw-footer__license 有料職業紹介事業 許可番号 #{employment_agency_license}
   p.jw-footer__copy &copy; #{Time.current.year} J Work / 株式会社J Work

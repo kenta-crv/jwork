@@ -134,6 +134,34 @@ html lang="ja" class=(isolated_lp ? "jflp-page" : nil)
         = yield
     - else
       = yield
-      = render "layouts/footer"
       = javascript_include_tag "pages", "data-turbolinks-track": "reload"
+    = render "layouts/footer"
     = render "layouts/ftkn_stay"
+    - if foreign_lp_page
+      script
+        |
+          (function () {
+            function loopIndustries() {
+              document.querySelectorAll('.jf-industries__track').forEach(function (track) {
+                if (track.dataset.looped === '1') return;
+                var count = track.children.length;
+                if (!count) return;
+                track.dataset.looped = '1';
+                track.insertAdjacentHTML('beforeend', track.innerHTML);
+                Array.prototype.forEach.call(track.children, function (card, index) {
+                  if (index < count) return;
+                  card.setAttribute('aria-hidden', 'true');
+                  card.querySelectorAll('img').forEach(function (img) {
+                    img.alt = '';
+                    img.setAttribute('aria-hidden', 'true');
+                  });
+                });
+                track.classList.add('is-loop');
+              });
+            }
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', loopIndustries);
+            } else {
+              loopIndustries();
+            }
+          })();

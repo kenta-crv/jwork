@@ -2992,6 +2992,7 @@ small {
   color: #7ec8ff;
 }
 
+.jw-footer__license,
 .jw-footer__copy {
   max-width: 920px;
   margin: 20px auto 0;

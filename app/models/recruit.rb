@@ -21,6 +21,17 @@ class Recruit < ApplicationRecord
     Array(visa_en.presence || visa)
   end
 
+  def self.area_parts(area)
+    text = area.to_s.strip
+    return [] if text.blank?
+
+    text.split(/[・,、\/|]+|\s*&\s*|[\r\n]+/).map(&:strip).reject(&:blank?).uniq
+  end
+
+  def area_parts
+    self.class.area_parts(area)
+  end
+
   def saved_by?(visitor_token)
     return false if visitor_token.blank?
 

@@ -1,11 +1,11 @@
-- set_meta_tags title: '保存した求人'
+- set_meta_tags title: "保存した求人", site: "J Work", reverse: true, noindex: true, description: "保存した外国人材向けの求人です。株式会社J Work（有料職業紹介事業 許可番号 #{employment_agency_license}）。"
 
 .jobs-screen
   .jobs-screen__inner
     .jobs-brand
-      p.jobs-kicker Job portal
-      h1.jobs-title Saved
-      p.jobs-ja 保存した求人
+      p.jobs-kicker 求人
+      h1.jobs-title.jobs-title--long 保存した求人
+      p.jobs-ja 保存した外国人材向けの求人です。
     .jobs-nav
       = link_to "← 求人一覧へ", recruits_path, class: "jobs-nav__link", data: { turbolinks: false }
     - if @recruits.present?
@@ -13,20 +13,19 @@
         article.jobs-card
           .jobs-card__main
             - if recruit.point.present?
-              span.jobs-card__pickup PICK UP
+              span.jobs-card__pickup 注目
             h2.jobs-card__title = recruit.title
             - if recruit.description.present?
               p.jobs-card__desc = truncate(recruit.description, length: 90)
             .jobs-card__price
-              span.jobs-card__price-label Price
+              span.jobs-card__price-label 給与
               span.jobs-card__price-value = recruit.unit_price
-            = recruit_metric_row(recruit)
+            = recruit_metric_row(recruit, labels: true)
             .jobs-card__tags
-              - if recruit.area.present?
-                - recruit.area.to_s.split(/[・,、]/).reject(&:blank?).each do |a|
-                  span.jobs-card__tag = a.strip
-              span.jobs-card__tag.jobs-card__tag--saved Saved
+              = recruit_area_tags(recruit.area)
+              span.jobs-card__tag.jobs-card__tag--saved 保存済み
           .jobs-card__aside
-            = link_to "Detail", recruit_path(recruit), class: "jobs-card__detail", data: { turbolinks: false }
+            = link_to "詳細", recruit_path(recruit), class: "jobs-card__detail", data: { turbolinks: false }
     - else
-      p.jobs-empty 保存した求人はまだありません。求人詳細の「Save」から追加できます。
+      p.jobs-empty 保存した求人はまだありません。求人詳細の「保存」から追加できます。
+    p.jobs-license 職業紹介事業者：株式会社J Work（有料職業紹介事業 許可番号 #{employment_agency_license}）

@@ -9,9 +9,11 @@ class RecruitsController < ApplicationController
 
   def index
     scope = Recruit.listed
-    @areas = scope.where.not(area: [nil, ""]).distinct.order(:area).pluck(:area)
+    @areas = scope.where.not(area: [nil, ""]).pluck(:area).flat_map { |area| Recruit.area_parts(area) }.uniq.sort
     @genres = scope.where.not(genre: [nil, ""]).distinct.order(:genre).pluck(:genre)
-    scope = scope.where(area: params[:area]) if params[:area].present?
+    if params[:area].present?
+      scope = scope.where("area LIKE ?", "%#{Recruit.sanitize_sql_like(params[:area])}%")
+    end
     scope = scope.where(genre: params[:genre]) if params[:genre].present?
     @recruits = scope.order(updated_at: :desc)
     @saved_recruit_ids = saved_recruit_ids_for_visitor

@@ -318,7 +318,7 @@ html.jflp-page body {
   margin: 0 0 6px;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: .28em;
+  letter-spacing: .04em;
 }
 .jw-foreign-lp .jf-scope__brand-rule {
   display: inline-block;
@@ -459,6 +459,38 @@ html.jflp-page body {
   gap: 18px 28px;
 }
 .jw-foreign-lp .jf-scope__list--row li + li { margin-top: 0; }
+.jw-foreign-lp .jf-scope__cols--even .jf-scope__col {
+  min-height: 0;
+  padding: 22px 22px 16px;
+}
+.jw-foreign-lp .jf-scope__cols--even .jf-scope__col-head {
+  width: min(100%, 360px);
+  margin-bottom: 16px;
+}
+.jw-foreign-lp .jf-scope__list--even {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.jw-foreign-lp .jf-scope__list--even li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 132px;
+  margin: 0;
+  padding: 16px 22px;
+  background: #fff;
+  border-radius: 16px;
+}
+.jw-foreign-lp .jf-scope__list--even li + li { margin-top: 0; }
+.jw-foreign-lp .jf-scope__list--even .jf-scope__icon-wrap {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+}
+.jw-foreign-lp .jf-scope__list--even li > span:last-child {
+  text-align: left;
+}
 .jw-foreign-lp .jf-scope__icon-wrap {
   display: block;
   width: 90px;
@@ -515,7 +547,7 @@ html.jflp-page body {
   margin: 22px 0 0;
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: .22em;
+  letter-spacing: .04em;
 }
 .jw-foreign-lp .jf-scope__foot::before,
 .jw-foreign-lp .jf-scope__foot::after {
@@ -1202,7 +1234,7 @@ html.jflp-page body {
   z-index: 2;
 }
 .jw-foreign-lp .jf-compare__table thead th:first-child {
-  width: 168px;
+  width: 120px;
   text-align: left;
   padding-left: 20px;
   background: linear-gradient(180deg, #edf8ff, #e3f2ff);
@@ -1326,7 +1358,54 @@ html.jflp-page body {
   text-underline-offset: 3px;
 }
 .jw-foreign-lp .jf-compare__ours small {
+  display: block;
+  margin-top: 6px;
   color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.jw-foreign-lp .jf-compare__inline-link {
+  color: var(--jf-blue);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.jw-foreign-lp .jf-compare__cell {
+  display: block;
+  color: var(--jf-blue);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+.jw-foreign-lp .jf-compare-focus {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px 16px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid var(--jf-line);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(3, 48, 92, .05);
+}
+.jw-foreign-lp .jf-compare-focus__label {
+  margin: 0;
+  color: var(--jf-navy);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+.jw-foreign-lp .jf-compare-focus__text {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.65;
+  color: var(--jf-text);
+}
+.jw-foreign-lp .jf-compare-focus__text strong {
+  color: var(--jf-blue);
 }
 .jw-foreign-lp .jf-compare__note {
   margin: 16px 0 0;
@@ -1395,6 +1474,8 @@ html.jflp-page body {
   display: flex;
   gap: 18px;
   width: max-content;
+}
+.jw-foreign-lp .jf-industries__track.is-loop {
   animation: jf-industries-scroll 65s linear infinite;
 }
 .jw-foreign-lp .jf-industries__track:hover {
@@ -1812,7 +1893,8 @@ html.jflp-page body {
     grid-template-columns: 1fr;
     gap: 28px;
   }
-  .jw-foreign-lp .jf-scope__list--row {
+  .jw-foreign-lp .jf-scope__list--row,
+  .jw-foreign-lp .jf-scope__list--even {
     grid-template-columns: 1fr;
     gap: 10px;
   }
@@ -2123,6 +2205,13 @@ html.jflp-page body {
   .jw-foreign-lp .jf-compare__price { font-size: 13px; }
   .jw-foreign-lp .jf-compare__rate { font-size: 18px; }
   .jw-foreign-lp .jf-compare__ours-head .jf-compare__name { font-size: 16px; }
+  .jw-foreign-lp .jf-compare__cell { font-size: 13px; }
+  .jw-foreign-lp .jf-compare-focus {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 14px 16px;
+  }
+  .jw-foreign-lp .jf-compare-focus__text { font-size: 14px; }
 
   .jw-foreign-lp .jf-options {
     grid-template-columns: 1fr;
@@ -2653,4 +2742,42 @@ html.jflp-page .alert-danger { background: #b91c1c; }
 .jw-foreign-lp .jf-modal[open] ~ .jf-cta {
   visibility: hidden;
   pointer-events: none;
+}
+
+.jw-footer {
+  margin-top: 48px;
+  padding: 32px 24px 24px;
+  background: #111;
+  color: #f5f5f5;
+}
+.jw-footer__inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+.jw-footer__heading {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.jw-footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+.jw-footer__list a {
+  color: #dcecff;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.jw-footer__list a:hover {
+  color: #7ec8ff;
+}
+.jw-footer__license,
+.jw-footer__copy {
+  max-width: 920px;
+  margin: 20px auto 0;
+  font-size: 0.8rem;
+  color: #999;
 }

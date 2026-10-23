@@ -1,6 +1,6 @@
 - desk_page = (controller_name == "users" && %w[index show edit].include?(action_name)) || (controller_name == "clients" && %w[index show edit new].include?(action_name))
 - auth_page = %w[sessions passwords].include?(controller_name) || (controller_name == "registrations" && action_name == "new") || (controller_name == "clients" && action_name == "mypage")
-- jobs_page = controller_name == "recruits" && %w[index show new edit import].include?(action_name)
+- jobs_page = controller_name == "recruits" && %w[index show saved new edit import].include?(action_name)
 - html_class = []
 - html_class << "auth-html" if desk_page || auth_page
 - html_class << "jobs-html" if jobs_page
@@ -8,27 +8,38 @@
 - body_class << "auth-body" if desk_page || auth_page
 - body_class << "jobs-body" if jobs_page
 doctype html
-html class=html_class.join(" ")
+html class=html_class.join(" ") lang=(jobs_page ? "ja" : nil)
   head
     = render 'layouts/head'
   body class=body_class.join(" ")
     - unless auth_page
-      header
-        - unless desk_page || jobs_page
-          .row
-            .col-xs-2
-              -if request.path == "/zero"
-                = link_to "/zero"
-                  =image_tag "rogo2.webp", width: "220px", class:"header-image", alt:"株式会社Ri-Plus『アポ匠ロゴ』"
-              -elsif request.path == "/free"
-                = link_to "/feee"
-                  =image_tag "rogo3.webp", width: "220px", class:"header-image", alt:"株式会社Ri-Plus『アポ匠ロゴ』"
-              -else
-                = link_to "/"
-                  =image_tag "rogo.webp", width: "220px", class:"header-image"
-            .col-xs-8
-
-        - unless jobs_page
+      - if jobs_page
+        header.jobs-site-header
+          = link_to "/", class: "jobs-site-header__brand", data: { turbolinks: false } do
+            = image_tag "rogo.webp", alt: "J Work", class: "jobs-site-header__logo"
+          nav.jobs-site-header__nav aria-label="サイト"
+            = link_to "求人一覧", recruits_path, data: { turbolinks: false }
+            = link_to "企業の方", foreign_staffing_path, data: { turbolinks: false }
+            = link_to "プライバシーポリシー", "/privacy", data: { turbolinks: false }
+        - if notice.present?
+          p.jobs-flash.jobs-flash--notice = notice
+        - if alert.present?
+          p.jobs-flash.jobs-flash--alert = alert
+      - else
+        header
+          - unless desk_page
+            .row
+              .col-xs-2
+                -if request.path == "/zero"
+                  = link_to "/zero"
+                    =image_tag "rogo2.webp", width: "220px", class:"header-image", alt:"株式会社Ri-Plus『アポ匠ロゴ』"
+                -elsif request.path == "/free"
+                  = link_to "/feee"
+                    =image_tag "rogo3.webp", width: "220px", class:"header-image", alt:"株式会社Ri-Plus『アポ匠ロゴ』"
+                -else
+                  = link_to "/"
+                    =image_tag "rogo.webp", width: "220px", class:"header-image"
+              .col-xs-8
           .row.navi
             .col-xs-12.center
               br/
@@ -37,11 +48,6 @@ html class=html_class.join(" ")
                 = notice
               p.alert
                 = alert
-      - if jobs_page
-        - if notice.present?
-          p.jobs-flash.jobs-flash--notice = notice
-        - if alert.present?
-          p.jobs-flash.jobs-flash--alert = alert
     main
       - unless jobs_page || auth_page
         .bread
@@ -49,6 +55,8 @@ html class=html_class.join(" ")
         br/
         br/
       = yield
+    - if jobs_page
+      = render "layouts/footer"
     - unless jobs_page || auth_page
       br/
       br/

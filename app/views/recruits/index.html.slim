@@ -1,11 +1,11 @@
-- set_meta_tags title: '求人一覧'
+- set_meta_tags title: "外国人材の求人一覧", site: "J Work", reverse: true, description: "外国人材向けの求人一覧です。配送、清掃、工場などの勤務地と条件を掲載しています。株式会社J Work（有料職業紹介事業 許可番号 #{employment_agency_license}）。"
 
 .jobs-screen
   .jobs-screen__inner
     .jobs-brand
-      p.jobs-kicker Job portal
-      h1.jobs-title Jobs
-      p.jobs-ja 求人一覧
+      p.jobs-kicker 求人
+      h1.jobs-title.jobs-title--long 外国人材の求人
+      p.jobs-ja 外国人材の紹介求人です。配送、清掃、工場などの勤務地と条件を掲載しています。
     .jobs-nav
       = link_to "保存した求人", saved_recruits_path, class: "jobs-nav__link", data: { turbolinks: false }
     - if admin_signed_in?
@@ -20,25 +20,24 @@
         article.jobs-card
           .jobs-card__main
             - if recruit.point.present?
-              span.jobs-card__pickup PICK UP
+              span.jobs-card__pickup 注目
             h2.jobs-card__title = recruit.title
             - if recruit.description.present?
               p.jobs-card__desc = truncate(recruit.description, length: 90)
             .jobs-card__price
-              span.jobs-card__price-label Price
+              span.jobs-card__price-label 給与
               span.jobs-card__price-value = recruit.unit_price
-            = recruit_metric_row(recruit)
+            = recruit_metric_row(recruit, labels: true)
             .jobs-card__tags
-              - if recruit.area.present?
-                - recruit.area.to_s.split(/[・,、]/).reject(&:blank?).each do |a|
-                  span.jobs-card__tag = a.strip
+              = recruit_area_tags(recruit.area)
               - if recruit.recommend.present?
                 span.jobs-card__tag.jobs-card__tag--recommend おすすめ
               - if @saved_recruit_ids&.include?(recruit.id)
-                span.jobs-card__tag.jobs-card__tag--saved Saved
+                span.jobs-card__tag.jobs-card__tag--saved 保存済み
           .jobs-card__aside
-            = link_to "Detail", recruit_path(recruit), class: "jobs-card__detail", data: { turbolinks: false }
+            = link_to "詳細", recruit_path(recruit), class: "jobs-card__detail", data: { turbolinks: false }
             - if admin_signed_in?
               = link_to "編集", edit_recruit_path(recruit), class: "jobs-card__edit"
     - else
       p.jobs-empty 現在公開中の求人はありません。
+    p.jobs-license 職業紹介事業者：株式会社J Work（有料職業紹介事業 許可番号 #{employment_agency_license}）

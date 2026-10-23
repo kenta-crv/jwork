@@ -153,23 +153,23 @@
               svg.jf-ico
                 use href="#jf-i-worry"
             p
-              | 求人を出しても応募が来ず、
+              | ホール向け求人を出しても応募が来ず、
               br
-              | 営業が回らない
+              | ランチが回らない
           article.jf-concern-card
             span.jf-concern-card__icon aria-hidden="true"
               svg.jf-ico
                 use href="#jf-i-crossed"
             p
-              | 採用しても定着せず、
+              | ディナーのピークに人が足りず、
               br
-              | 人員が安定しない
+              | ホールが回らない
           article.jf-concern-card
             span.jf-concern-card__icon aria-hidden="true"
               svg.jf-ico
                 use href="#jf-i-building"
             p
-              | ホールとキッチンの欠員が続き、
+              | ホールとキッチンの欠員で
               br
               | シフトが安定しない
           article.jf-concern-card
@@ -179,7 +179,7 @@
             p
               | コストを抑えつつ
               br
-              | 継続して人材を確保したい
+              | ホール・キッチンを継続確保したい
 
         span.jf-concerns__arrow aria-hidden="true"
 
@@ -242,7 +242,7 @@
       .jf-container.jf-scope__inner
         p.jf-scope__brand
           span.jf-scope__brand-rule —
-          | J WORK
+          | J Work
           span.jf-scope__brand-rule —
     
         p.jf-scope__tag つながると、広がる未来へ
@@ -290,8 +290,8 @@
               | 採用率が低い案件、最終面接が2回以上の選考のお受付は承っておりません。
     
         p.jf-scope__foot
-          | J WORK
-          span ともに、はたらく社会をつくる
+          | J Work
+          span とともに、はたらく社会をつくる
 
 
 
@@ -302,7 +302,7 @@
           | J Workが
           em 選ばれる
           | 理由
-        p.jf-heading-lead 常時約4,000名の人材力で、全国の飲食店へ継続して斡旋します。
+        p.jf-heading-lead ホール・キッチン向けに、常時約4,000名の人材力で継続して斡旋します。
 
         .jf-features__grid
           article.jf-feature-card
@@ -332,8 +332,8 @@
                   svg.jf-ico
                     use href="#jf-i-shield"
                 span.jf-feature-card__number 03
-              h3 全国対応・深夜にも強い
-              p 全国の飲食店に対応。ランチ・ディナーや深夜帯の勤務も、速やかに人材を斡旋できます。
+              h3 ランチから深夜まで対応
+              p 全国の飲食店に対応。ランチ・ディナー・深夜帯のホールとキッチン欠員にも対応します。
             = image_tag 'restaurant.webp', class: 'jf-feature-card__image', alt: '飲食店のホールで接客するスタッフ', loading: 'lazy'
 
     section#price.jf-price.jf-section
@@ -354,8 +354,8 @@
             span.jf-price__campaign キャンペーン価格
             span.jf-price__base-copy
               | ベースは最安値で
-              s#jf-price-base-list —
-              strong#jf-price-base-amount —
+              s#jf-price-base-list 2,200
+              strong#jf-price-base-amount 2,100
               | 円〜
             small#jf-price-base-note （全国）
 
@@ -363,13 +363,13 @@
           .jf-price__grid#jf-price-grid
             article.jf-price-card data-plan="light" data-plan-extra="1400"
               header.jf-price-card__header
-                h4 お手軽プラン
+                h4 スモールプラン
                 p まずは短時間から、継続して人材を手配したい方へ
               .jf-price-card__body
                 span.jf-price-card__frequency 1日4時間・週2回から
                 p.jf-price-card__amount
-                  s data-price-list="true" —
-                  strong.jf-price-card__sale data-price-amount="true" —
+                  s data-price-list="true" 2,800
+                  strong.jf-price-card__sale data-price-amount="true" 2,700
                   span 円〜／時間
                 ul.jf-price-card__specs
                   li
@@ -404,16 +404,15 @@
                     span 請求書払い（カード可）
                 button.jf-outline-button type="button" data-open-contact="true" このプランで依頼する
 
-            article.jf-price-card.jf-price-card--featured data-plan="standard" data-plan-extra="1000"
-              span.jf-price-card__badge 人気No.1
+            article.jf-price-card data-plan="standard" data-plan-extra="1000"
               header.jf-price-card__header
                 h4 スタンダードプラン
                 p 定期的に人材を確保したい方へ
               .jf-price-card__body
                 span.jf-price-card__frequency 1日5時間・週3回から
                 p.jf-price-card__amount
-                  s data-price-list="true" —
-                  strong.jf-price-card__sale data-price-amount="true" —
+                  s data-price-list="true" 2,400
+                  strong.jf-price-card__sale data-price-amount="true" 2,300
                   span 円〜／時間
                 ul.jf-price-card__specs
                   li
@@ -446,17 +445,18 @@
                         use href="#jf-i-quote"
                     b お支払い
                     span 請求書払い（カード可）
-                button.jf-outline-button.jf-outline-button--filled type="button" data-open-contact="true" このプランで依頼する
+                button.jf-outline-button type="button" data-open-contact="true" このプランで依頼する
 
-            article.jf-price-card data-plan="fulltime" data-plan-extra="800"
+            article.jf-price-card.jf-price-card--featured data-plan="fulltime" data-plan-extra="800"
+              span.jf-price-card__badge 人気No.1
               header.jf-price-card__header
                 h4 フルタイムプラン
                 p 正社員と同様にフルタイム人材を提供
               .jf-price-card__body
                 span.jf-price-card__frequency 1日8時間・週5回から
                 p.jf-price-card__amount
-                  s data-price-list="true" —
-                  strong.jf-price-card__sale data-price-amount="true" —
+                  s data-price-list="true" 2,200
+                  strong.jf-price-card__sale data-price-amount="true" 2,100
                   span 円〜／時間
                 ul.jf-price-card__specs
                   li
@@ -489,7 +489,7 @@
                         use href="#jf-i-quote"
                     b お支払い
                     span 請求書払い（カード可）
-                button.jf-outline-button type="button" data-open-contact="true" このプランで依頼する
+                button.jf-outline-button.jf-outline-button--filled type="button" data-open-contact="true" このプランで依頼する
 
     section#compare.jf-compare-section.jf-section
       .jf-container
@@ -497,40 +497,73 @@
         h2.jf-heading
           | 採用手段との
           em 比較
-        p.jf-heading-lead 派遣・求人掲載・人材紹介と比べて、継続して斡旋します。
+        p.jf-heading-lead よく使われる採用手段とJ Workを、費用と進め方で比べています。
 
         .jf-compare
           table.jf-compare__table
             thead
               tr
-                th 比較
+                th
                 th 派遣会社
-                th 大手求人媒体
-                th 人材紹介会社
+                th 求人媒体
+                th 人材紹介
                 th.jf-compare__ours-head
                   span.jf-compare__name J Work
-                  span.jf-compare__badge 継続斡旋
             tbody
               tr
                 th scope="row"
-                  span.jf-compare__num 01
-                  span.jf-compare__label 出向/受託サービス
+                  span.jf-compare__label 費用
                 td.jf-compare__vs
-                  span.jf-compare__price 時給 2,500〜3,500円
-                td.jf-compare__na ー
-                td.jf-compare__na ー
-                td.jf-compare__ours
-                  strong#jf-compare-hourly.jf-compare__rate 2,200円〜／時間
-              tr
-                th scope="row"
-                  span.jf-compare__num 02
-                  span.jf-compare__label 成果報酬
-                td.jf-compare__na ー
-                td.jf-compare__na ー
+                  span.jf-compare__price 時給 2,500〜3,500円前後
+                td.jf-compare__vs
+                  span.jf-compare__price 20〜120万円／4週間
                 td.jf-compare__vs
                   span.jf-compare__price 年収の30〜35%
                 td.jf-compare__ours
-                  = link_to '298,000円〜', '/foreign-jobs#price', class: 'jf-compare__rate'
+                  strong#jf-compare-hourly.jf-compare__rate 2,100円〜／時間
+                  small
+                    | または#{' '}
+                    = link_to '1名 298,000円〜', '/foreign-jobs#price', class: 'jf-compare__inline-link'
+              tr
+                th scope="row"
+                  span.jf-compare__label 発生時点
+                td.jf-compare__vs
+                  span.jf-compare__price 稼働時間ごと
+                td.jf-compare__vs
+                  span.jf-compare__price 掲載開始時
+                td.jf-compare__vs
+                  span.jf-compare__price 採用決定時
+                td.jf-compare__ours
+                  span.jf-compare__cell 稼働時または採用決定時
+              tr
+                th scope="row"
+                  span.jf-compare__label 候補
+                td.jf-compare__vs
+                  span.jf-compare__price 派遣登録者
+                td.jf-compare__vs
+                  span.jf-compare__price 公開求人への応募
+                td.jf-compare__vs
+                  span.jf-compare__price 紹介会社からの案内
+                td.jf-compare__ours
+                  span.jf-compare__cell 約4,000名・一次面接済み
+              tr
+                th scope="row"
+                  span.jf-compare__label 欠員時
+                td.jf-compare__vs
+                  span.jf-compare__price 契約範囲内で交代
+                td.jf-compare__vs
+                  span.jf-compare__price 掲載のやり直し
+                td.jf-compare__vs
+                  span.jf-compare__price 依頼のやり直し
+                td.jf-compare__ours
+                  span.jf-compare__cell 同じ依頼のまま補充
+
+        .jf-compare-focus
+          p.jf-compare-focus__label 飲食店
+          p.jf-compare-focus__text
+            | ホールとキッチンの人数が、
+            strong ピーク時でも途切れないか
+            | で見てください。
 
     section#reviews.jf-reviews.jf-section
       .jf-container
@@ -544,29 +577,29 @@
             h3 店舗責任者様
             p.jf-review-card__stars aria-label="評価5"
               | ★★★★★
-            p.jf-review-card__quote 「シフトが安定して回るようになりました。」
-            p ホールとキッチンの人員が足りず、シフトが埋まらない状態でした。継続して必要な人数を頼め、営業への影響を抑えられました。
+            p.jf-review-card__quote 「ホールのピークでも人数が足りるようになりました。」
+            p ディナー帯のホールが足りず、接客が遅れていました。継続して必要な人数を頼め、ピークの影響を抑えられました。
           article.jf-review-card
             p.jf-review-card__tag 居酒屋
             h3 店長様
             p.jf-review-card__stars aria-label="評価5"
               | ★★★★★
-            p.jf-review-card__quote 「求人では集まらなかった人員が安定しました。」
-            p 自社求人では外国人材の応募がほぼなく、欠員が続いていました。斡旋に切り替えてから必要な人数を継続して確保でき、夜の営業も安定しています。
+            p.jf-review-card__quote 「夜のキッチン欠員が続かなくなりました。」
+            p 自社求人ではキッチンの応募がほぼなく、欠員が続いていました。斡旋に切り替えてから必要な人数を継続して確保でき、夜の営業も安定しています。
           article.jf-review-card
             p.jf-review-card__tag カフェ
             h3 オーナー様
             p.jf-review-card__stars aria-label="評価5"
               | ★★★★★
-            p.jf-review-card__quote 「繁忙期も人数を維持できました。」
+            p.jf-review-card__quote 「週末ランチも人員を維持できました。」
             p 週末のホール人員が足りず困っていました。継続契約のうえ迅速に外国人材を斡旋いただき、必要な人数を維持できました。
           article.jf-review-card
             p.jf-review-card__tag キッチン
             h3 料理長様
             p.jf-review-card__stars aria-label="評価5"
               | ★★★★★
-            p.jf-review-card__quote 「採用コストを抑えつつ人が集まりました。」
-            p 求人広告を出しても集まらず、採用費だけがかさんでいました。依頼後すぐに候補の案内があり、キッチンの外国人材を確保できました。
+            p.jf-review-card__quote 「洗い場まで人手を確保できました。」
+            p 求人広告を出しても集まらず、採用費だけがかさんでいました。依頼後すぐに候補の案内があり、キッチンと洗い場の外国人材を確保できました。
 
         p.jf-reviews__note ※ご利用企業・ご担当者の感想であり、効果を保証するものではありません。
 
@@ -609,7 +642,7 @@
             p 全国で対応可能です。東京・神奈川・千葉・埼玉・名古屋・大阪・福岡を中心に、豊富な人材力で各地の飲食店へ斡旋しています。
           details.jf-faq__item
             summary 単発やスポットのみの依頼はできますか？
-            p 1日限り・単発のみのご依頼はお受けしておりません。お手軽プランでも週2回からなど、継続的な稼働が対象です。
+            p 1日限り・単発のみのご依頼はお受けしておりません。スモールプランでも週2回からなど、継続的な稼働が対象です。
           details.jf-faq__item
             summary 夜間や早朝の勤務にも対応できますか？
             p はい。ランチ・ディナーや深夜帯の勤務も、継続契約のうえで速やかに人材の斡旋が可能です。
@@ -633,7 +666,7 @@
       .jf-container.jf-scope__inner
         p.jf-scope__brand
           span.jf-scope__brand-rule —
-          | J WORK
+          | J Work
           span.jf-scope__brand-rule —
         p.jf-scope__tag つながると、広がる未来へ
         h2.jf-scope__title 採用フロー
@@ -702,8 +735,8 @@
             span.jf-scope__note-icon aria-hidden="true"
             p 一次面接・条件確認は当社で実施するため、企業様は最終確認に集中できます。
         p.jf-scope__foot
-          | J WORK
-          span ともに、はたらく社会をつくる
+          | J Work
+          span とともに、はたらく社会をつくる
 
     section#company.jf-company.jf-section
       .jf-container
@@ -767,6 +800,9 @@
               div
                 dt 所在地
                 dd 東京都港区浜松町２丁目２番１５号２Ｆ
+              div
+                dt 有料職業紹介事業
+                dd 許可番号 #{employment_agency_license}
               div
                 dt 事業内容
                 dd
@@ -986,7 +1022,7 @@
         = image_tag 'hotel-cta.png', class: 'jf-cta__staff', alt: '案内する飲食店スタッフ'
         .jf-cta__content
           h2 まずはお気軽に#{content_tag(:em, 'ご依頼ください！')}
-          p 飲食店のホール・キッチンのご相談から、ヒアリング・お見積りは無料です。内容決定後に、お支払いをご案内します。
+          p 飲食店のホール・キッチンのご相談から、ヒアリング・お見積りは無料です。
           .jf-cta__actions
             .jf-split-cta
               button.jf-split-cta__mail type="button" data-open-contact="true"
@@ -1294,7 +1330,7 @@
         });
       }
 
-      var PLAN_NAMES = { light: 'お手軽プラン', standard: 'スタンダードプラン', fulltime: 'フルタイムプラン' };
+      var PLAN_NAMES = { light: 'スモールプラン', standard: 'スタンダードプラン', fulltime: 'フルタイムプラン' };
       var daysEl = document.getElementById('jf-wish-days');
       var hoursEl = document.getElementById('jf-wish-hours');
       var quoteEl = document.getElementById('jf-form-quote');

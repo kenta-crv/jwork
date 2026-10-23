@@ -104,6 +104,10 @@ module ApplicationHelper
     ]
   }.freeze
 
+  def employment_agency_license
+    "13-ユ-315910"
+  end
+
   def default_meta_tags
     {
       site: "外国人専門の人材提供ならJ Work｜株式会社J Work",
@@ -166,6 +170,11 @@ module ApplicationHelper
       "name" => "J Work",
       "legalName" => "株式会社J Work",
       "url" => "https://j-work.jp/",
+      "identifier" => {
+        "@type" => "PropertyValue",
+        "propertyID" => "有料職業紹介事業許可番号",
+        "value" => employment_agency_license
+      },
       "logo" => "https://j-work.jp#{image_path('favicon.ico')}",
       "description" => "外国人専門の人材提供ならJ Work。軽貨物・配送・清掃など現場人材を支援します。",
       "address" => {

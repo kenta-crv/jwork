@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: 'top#index'
 
   get "top/policy" => 'top#policy'
+  get "/privacy", to: "top#privacy"
 
   get '/redirect', to: 'top#redirect'
   get 'users/thanks', to: 'users#thanks'
@@ -101,7 +102,7 @@ Rails.application.routes.draw do
   get '/cargo', to: 'pages#cargo'
   get '/pages/cargo', to: redirect('/cargo')
   get '/foreign-staffing', to: 'pages#foreign_staffing'
-  get '/foregin-staffing', to: 'pages#foreign_staffing'
+  get '/foregin-staffing', to: redirect('/foreign-staffing', status: 301)
   get '/foreign-jobs', to: 'pages#foreign_jobs'
   get '/hotel', to: 'pages#hotel'
   get '/factory', to: 'pages#factory'

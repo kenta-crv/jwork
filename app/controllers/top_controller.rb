@@ -7,6 +7,9 @@ class TopController < ApplicationController
   def policy
   end
 
+  def privacy
+  end
+
   def line
   end
 
@@ -62,6 +65,6 @@ class TopController < ApplicationController
   private
 
   def resolve_layout
-    action_name == "index" ? "pages" : "application"
+    %w[index privacy].include?(action_name) ? "pages" : "application"
   end
 end
