@@ -106,10 +106,12 @@ Rails.application.routes.draw do
   get '/foreign-jobs', to: 'pages#foreign_jobs'
   get '/hotel', to: 'pages#hotel'
   get '/factory', to: 'pages#factory'
+  get '/construction', to: 'pages#construction'
   get '/restaurant', to: 'pages#restaurant'
   get '/warehouse', to: 'pages#warehouse'
   get '/language', to: 'pages#language'
   get '/english', to: 'pages#english'
+  get '/sap', to: 'pages#sap'
 
   resources :contracts
 end

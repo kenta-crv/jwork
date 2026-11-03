@@ -8,10 +8,12 @@ class PagesController < ApplicationController
   def foreign_jobs; end
   def hotel; end
   def factory; end
+  def construction; end
   def restaurant; end
   def warehouse; end
   def language; end
   def english; end
+  def sap; end
 
   private
 

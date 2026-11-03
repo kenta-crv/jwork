@@ -1,8 +1,9 @@
 - top_hub_page = controller_name == "top" && action_name == "index"
-- foreign_lp_page = controller_name == "pages" && %w[foreign_staffing foreign_jobs hotel factory restaurant warehouse language english cargo].include?(action_name)
-- isolated_lp = top_hub_page || foreign_lp_page
+- foreign_lp_page = controller_name == "pages" && %w[foreign_staffing foreign_jobs hotel factory construction restaurant warehouse language english cargo].include?(action_name)
+- sap_lp_page = controller_name == "pages" && action_name == "sap"
+- isolated_lp = top_hub_page || foreign_lp_page || sap_lp_page
 doctype html
-html lang="ja" class=(isolated_lp ? "jflp-page" : nil)
+html lang="ja" class=(sap_lp_page ? "jsap-page" : (isolated_lp ? "jflp-page" : nil))
   head
     meta charset="UTF-8"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
@@ -11,6 +12,9 @@ html lang="ja" class=(isolated_lp ? "jflp-page" : nil)
     - if top_hub_page
       link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet"
       = stylesheet_link_tag "top_hub", media: "all", "data-turbolinks-track": "reload"
+    - elsif sap_lp_page
+      link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"
+      = stylesheet_link_tag "sap", media: "all", "data-turbolinks-track": "reload"
     - elsif foreign_lp_page
       link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet"
       = stylesheet_link_tag "foreign_staffing", media: "all", "data-turbolinks-track": "reload"
@@ -135,7 +139,8 @@ html lang="ja" class=(isolated_lp ? "jflp-page" : nil)
     - else
       = yield
       = javascript_include_tag "pages", "data-turbolinks-track": "reload"
-    = render "layouts/footer"
+    - unless sap_lp_page
+      = render "layouts/footer"
     = render "layouts/ftkn_stay"
     - if foreign_lp_page
       script

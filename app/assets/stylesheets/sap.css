@@ -1,0 +1,474 @@
+/*
+ * SAP協力会社LP専用。html.jsap-page のときだけ読み込む。
+ */
+
+html.jsap-page {
+  overflow-x: hidden;
+}
+
+html.jsap-page body {
+  margin: 0;
+  background: #fff;
+  color: #1a2430;
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 16px;
+  line-height: 1.85;
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+
+html.jsap-page .sap {
+  --sap-accent: #0058a6;
+  --sap-accent-dark: #004480;
+  --sap-ink: #1a2430;
+  --sap-muted: #5c6b7a;
+  --sap-line: #e2e8ee;
+  --sap-soft: #f4f7fa;
+  --sap-white: #fff;
+  background: var(--sap-white);
+  color: var(--sap-ink);
+}
+
+html.jsap-page .sap *,
+html.jsap-page .sap *::before,
+html.jsap-page .sap *::after {
+  box-sizing: border-box;
+}
+
+html.jsap-page .sap a {
+  color: var(--sap-accent);
+}
+
+html.jsap-page .sap a:focus-visible,
+html.jsap-page .sap .sap-btn:focus-visible {
+  outline: 3px solid #f0b429;
+  outline-offset: 3px;
+}
+
+html.jsap-page .sap-wrap {
+  width: min(960px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+html.jsap-page .sap-header {
+  border-bottom: 3px solid var(--sap-accent);
+  background: #fff;
+}
+
+html.jsap-page .sap-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 12px 20px;
+  min-height: 56px;
+  padding: 8px 0;
+}
+
+html.jsap-page .sap a.sap-header__brand {
+  color: var(--sap-ink);
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+
+html.jsap-page .sap-header__label {
+  margin: 0;
+  color: var(--sap-muted);
+  font-size: 0.875rem;
+}
+
+html.jsap-page .sap a.sap-header__tel {
+  margin-left: auto;
+  color: var(--sap-ink);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+html.jsap-page .sap-hero {
+  padding: 28px 0 32px;
+}
+
+html.jsap-page .sap-hero__eyebrow {
+  margin: 0 0 10px;
+  color: var(--sap-accent);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+html.jsap-page .sap-hero__title {
+  margin: 0 0 14px;
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+}
+
+html.jsap-page .sap-hero__sub,
+html.jsap-page .sap-hero__note {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+html.jsap-page .sap-hero__sub span {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+html.jsap-page .sap-hero__sub span.sap-hero__modules {
+  white-space: normal;
+}
+
+html.jsap-page .sap-hero__note {
+  margin-bottom: 18px;
+  color: var(--sap-muted);
+}
+
+html.jsap-page .sap a.sap-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 12px 22px;
+  border-radius: 6px;
+  background: var(--sap-accent);
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-decoration: none;
+}
+
+html.jsap-page .sap a.sap-btn:hover {
+  background: var(--sap-accent-dark);
+  color: #fff;
+}
+
+html.jsap-page .sap a.sap-btn--light {
+  background: #fff;
+  color: var(--sap-accent);
+}
+
+html.jsap-page .sap a.sap-btn--light:hover {
+  background: #e8f2fb;
+  color: var(--sap-accent-dark);
+}
+
+html.jsap-page .sap-context {
+  padding: 18px 0;
+  background: var(--sap-soft);
+  border-top: 1px solid var(--sap-line);
+  border-bottom: 1px solid var(--sap-line);
+}
+
+html.jsap-page .sap-context p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+html.jsap-page .sap-section {
+  padding: 48px 0;
+}
+
+html.jsap-page .sap-section--soft {
+  background: var(--sap-soft);
+}
+
+html.jsap-page .sap-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--sap-line);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+}
+
+html.jsap-page .sap-heading::before {
+  content: "";
+  width: 4px;
+  height: 1.2em;
+  border-radius: 2px;
+  background: var(--sap-accent);
+  flex: 0 0 auto;
+}
+
+html.jsap-page .sap-lead {
+  margin: -6px 0 20px;
+  color: var(--sap-muted);
+}
+
+html.jsap-page .sap-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+html.jsap-page .sap-card {
+  padding: 28px 18px 24px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--sap-line);
+  text-align: center;
+}
+
+html.jsap-page .sap-section--soft .sap-card {
+  box-shadow: 0 1px 0 var(--sap-line);
+}
+
+html.jsap-page .sap-ico {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--sap-accent);
+  color: #fff;
+}
+
+html.jsap-page .sap-ico svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+html.jsap-page .sap-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+html.jsap-page .sap-card p {
+  margin: 0;
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+html.jsap-page .sap-faq p {
+  margin: 0;
+}
+
+html.jsap-page .sap-faq dt {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+}
+
+html.jsap-page .sap-ops,
+html.jsap-page .sap-faq,
+html.jsap-page .sap-company {
+  margin: 0;
+}
+
+html.jsap-page .sap-ops > div,
+html.jsap-page .sap-faq > div,
+html.jsap-page .sap-company > div {
+  padding: 16px 0;
+  border-top: 1px solid var(--sap-line);
+}
+
+html.jsap-page .sap-ops > div:first-child,
+html.jsap-page .sap-faq > div:first-child,
+html.jsap-page .sap-company > div:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+html.jsap-page .sap-pending {
+  display: inline-block;
+  margin: 0;
+  padding: 6px 10px;
+  background: #fff4d6;
+  border: 1px dashed #9a6b00;
+  border-radius: 4px;
+  color: #6a4800;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+html.jsap-page .sap-contact {
+  padding: 48px 0;
+  background: var(--sap-accent);
+  color: #fff;
+  text-align: center;
+}
+
+html.jsap-page .sap-contact__title {
+  margin: 0 0 16px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.55;
+  letter-spacing: 0.04em;
+}
+
+html.jsap-page .sap-contact__person {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+}
+
+html.jsap-page .sap a.sap-contact__mail,
+html.jsap-page .sap a.sap-contact__tel {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+html.jsap-page .sap-contact__mail {
+  font-size: 1.35rem;
+  word-break: break-all;
+}
+
+html.jsap-page .sap-contact__tel {
+  margin: 8px 0 20px;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+}
+
+html.jsap-page .sap-contact .sap-btn {
+  margin-top: 4px;
+}
+
+html.jsap-page .sap-company > div {
+  display: grid;
+  gap: 4px;
+}
+
+html.jsap-page .sap-company dt {
+  color: var(--sap-muted);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+html.jsap-page .sap-company dd {
+  margin: 0;
+}
+
+html.jsap-page .jw-footer {
+  margin-top: 0;
+  padding: 32px 24px 24px;
+  background: #111;
+  color: #f5f5f5;
+}
+
+html.jsap-page .jw-footer__inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+html.jsap-page .jw-footer__heading {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+html.jsap-page .jw-footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+html.jsap-page .jw-footer__list a {
+  color: #dcecff;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+html.jsap-page .jw-footer__list a:hover {
+  color: #7ec8ff;
+}
+
+html.jsap-page .jw-footer__license,
+html.jsap-page .jw-footer__copy {
+  max-width: 920px;
+  margin: 20px auto 0;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+@media (max-width: 640px) {
+  html.jsap-page .sap-header__label {
+    display: none;
+  }
+
+  html.jsap-page .sap a.sap-btn {
+    width: 100%;
+  }
+
+  html.jsap-page .sap-contact__tel {
+    font-size: 1.7rem;
+  }
+}
+
+@media (min-width: 768px) {
+  html.jsap-page .sap-hero__break {
+    display: none;
+  }
+
+  html.jsap-page .sap-hero {
+    padding: 64px 0 56px;
+  }
+
+  html.jsap-page .sap-hero__title {
+    max-width: 16em;
+    font-size: 2.5rem;
+  }
+
+  html.jsap-page .sap-hero__sub,
+  html.jsap-page .sap-hero__note {
+    max-width: 40em;
+    font-size: 1rem;
+  }
+
+  html.jsap-page .sap-heading,
+  html.jsap-page .sap-contact__title {
+    font-size: 1.6rem;
+  }
+
+  html.jsap-page .sap-section,
+  html.jsap-page .sap-contact {
+    padding: 72px 0;
+  }
+
+  html.jsap-page .sap-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  html.jsap-page .sap-cards--tiles {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  html.jsap-page .sap-cards--flow {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  html.jsap-page .sap-company > div {
+    grid-template-columns: 180px 1fr;
+    gap: 16px;
+    align-items: baseline;
+  }
+
+  html.jsap-page .sap-contact__mail {
+    font-size: 1.75rem;
+  }
+}
