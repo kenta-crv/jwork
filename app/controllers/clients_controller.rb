@@ -111,13 +111,26 @@ class ClientsController < ApplicationController
 
     sent = 0
     skipped = 0
+    stopped = false
     Client.where(id: ids).find_each do |client|
       if client.email.blank?
         skipped += 1
         next
       end
-      ClientMailer.hiring_followup_email(client).deliver_now
+      begin
+        ClientMailer.hiring_followup_email(client).deliver_now
+      rescue Net::SMTPError, Net::SMTPUnknownError, Net::OpenTimeout, Net::ReadTimeout => e
+        Rails.logger.error("[hiring_followup] client_id=#{client.id} #{e.class}: #{e.message}")
+        stopped = true
+        break
+      end
       sent += 1
+    end
+
+    if stopped
+      alert = sent.positive? ? "#{sent}社まで送りました。残りはメールサーバーの制限で止まっています。時間を空けて、送れていない企業だけ再度選んでください。" : "メールサーバーが送信を拒否しました。時間を空けて再度送ってください。"
+      redirect_to clients_path, alert: alert
+      return
     end
 
     if sent.zero?
