@@ -30,20 +30,19 @@
       - if @clients.blank?
         p.client-crm__empty 顧客はまだありません。
       - else
-        = form_with url: send_hiring_followups_clients_path, method: :post, local: true, id: "hiring-followup-form" do
-          .client-crm__sendbar
-            label.client-crm__select-all
-              = check_box_tag "select_all_clients", "1", false, id: "select_all_clients"
-              | 表示中をすべて選択
-            = submit_tag "選択した企業へ送信", class: "btn btn-primary btn-xs"
-          .client-crm__list
+        = form_with url: send_hiring_followups_clients_path, method: :post, local: true, id: "hiring-followup-form", class: "client-crm__sendbar" do
+          label.client-crm__select-all
+            = check_box_tag "select_all_clients", "1", false, id: "select_all_clients"
+            | 表示中をすべて選択
+          = submit_tag "選択した企業へ送信", class: "btn btn-primary btn-xs"
+        .client-crm__list
             - @clients.each do |client|
               - industry_code = mapping[client.industry].presence || "other"
               - pending = client.recruits.reject(&:published?)
               - published = client.recruits.select(&:published?)
               article.client-crm__card.filter-item data-industry=industry_code
                 .client-crm__row
-                  = check_box_tag "client_ids[]", client.id, false, class: "client-crm__check", disabled: client.email.blank?
+                  = check_box_tag "client_ids[]", client.id, false, class: "client-crm__check", form: "hiring-followup-form", disabled: client.email.blank?
                   .client-crm__main
                     .client-crm__badges
                       - if client.industry.present?

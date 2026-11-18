@@ -14,7 +14,6 @@
  *= stub foreign_staffing
  *= stub top_hub
  *= stub sap
- *= stub driver_lp
  *= require_tree .
  *= require_self
  */
@@ -3900,7 +3899,7 @@ body.auth-body .user-desk .btn.btn-primary {
 }
 .client-crm--compact .client-crm__row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px 12px;
@@ -3964,7 +3963,7 @@ body.auth-body .user-desk .btn.btn-primary {
 .client-crm__actions,
 .client-crm__row-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   align-items: center;
   flex-shrink: 0;
