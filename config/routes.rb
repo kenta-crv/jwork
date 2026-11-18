@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     collection do
       post :confirm
       post :thanks
+      post :send_hiring_followups
     end
     member do
       post :send_mail

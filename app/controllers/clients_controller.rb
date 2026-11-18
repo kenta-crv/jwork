@@ -97,6 +97,39 @@ class ClientsController < ApplicationController
     redirect_to info_client_path(@client), notice: "#{@client.company}へ開始日のメール送信を行いました。"
   end
 
+  def send_hiring_followups
+    unless admin_signed_in?
+      redirect_to new_admin_session_path, alert: "権限がありません"
+      return
+    end
+
+    ids = Array(params[:client_ids]).reject(&:blank?).map(&:to_i).uniq
+    if ids.empty?
+      redirect_to clients_path, alert: "企業を選択してください"
+      return
+    end
+
+    sent = 0
+    skipped = 0
+    Client.where(id: ids).find_each do |client|
+      if client.email.blank?
+        skipped += 1
+        next
+      end
+      ClientMailer.hiring_followup_email(client).deliver_now
+      sent += 1
+    end
+
+    if sent.zero?
+      redirect_to clients_path, alert: "送信できた企業はありません。メールアドレスを確認してください"
+      return
+    end
+
+    notice = "#{sent}社へ、採用状況の確認メールを送信しました。"
+    notice += "メールアドレスがない#{skipped}社は送っていません。" if skipped.positive?
+    redirect_to clients_path, notice: notice
+  end
+
   def send_portal_invite
     unless admin_signed_in?
       redirect_to new_admin_session_path, alert: "権限がありません"

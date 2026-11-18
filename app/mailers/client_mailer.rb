@@ -44,6 +44,18 @@ class ClientMailer < ActionMailer::Base
     end
   end
 
+  def hiring_followup_email(client)
+    @client = client
+    @person = client.person.presence || "ご担当者"
+    mail(
+      to: client.email,
+      from: "info@j-work.jp",
+      subject: "先日は商談の機会をいただきありがとうございました。"
+    ) do |format|
+      format.text
+    end
+  end
+
   def password_setup_email(client, token)
     @client = client
     @token = token

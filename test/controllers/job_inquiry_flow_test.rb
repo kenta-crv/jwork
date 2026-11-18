@@ -161,3 +161,72 @@ class JobInquiryFlowTest < ActionDispatch::IntegrationTest
     }
   end
 end
+
+class ClientHiringFollowupTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  self.fixture_table_names = []
+
+  setup do
+    host! "210.131.214.36"
+    @admin = Admin.create!(
+      email: "admin-followup@example.com",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+    @client = Client.create!(
+      company: "株式会社テスト",
+      person: nil,
+      tel: "0311112222",
+      email: "owner@example.com",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+    @other = Client.create!(
+      company: "株式会社他社",
+      person: "佐藤",
+      tel: "0399998888",
+      email: "other@example.com",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+    @no_email = Client.create!(
+      company: "株式会社無宛先",
+      person: "無宛先",
+      tel: "0300000000",
+      email: "blank-target@example.com",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+    @no_email.update_columns(email: "")
+  end
+
+  test "管理者はチェックした企業へ採用状況の確認メールを送れる" do
+    ActionMailer::Base.deliveries.clear
+    post send_hiring_followups_clients_path, params: { client_ids: [@client.id, @other.id, @no_email.id] }
+    assert_redirected_to new_admin_session_path
+    assert_empty ActionMailer::Base.deliveries
+
+    sign_in @admin
+    get clients_path
+    assert_response :success
+    assert_match "選択した企業へ送信", response.body
+    assert_match "表示中をすべて選択", response.body
+    assert_match 'id="hiring-followup-form"', response.body
+    assert_match "client_ids[]", response.body
+
+    ActionMailer::Base.deliveries.clear
+    post send_hiring_followups_clients_path, params: { client_ids: [@client.id, @no_email.id] }
+    assert_redirected_to clients_path
+    follow_redirect!
+    assert_match "1社へ、採用状況の確認メールを送信しました。", response.body
+    assert_match "メールアドレスがない1社は送っていません。", response.body
+
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal ["owner@example.com"], mail.to
+    assert_equal "先日は商談の機会をいただきありがとうございました。", mail.subject
+    assert_match "株式会社テスト ご担当者様", mail.body.to_s
+    assert_match "現在人材は無事充足しておりますでしょうか？", mail.body.to_s
+    assert_no_match "other@example.com", mail.to.join
+  end
+end
